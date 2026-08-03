@@ -81,6 +81,7 @@ Léelos en este orden. Los tres primeros son para entenderlo; del `05` al `08` s
 | **[07-imprimibles.md](07-imprimibles.md)** | Todos los textos, cartas, cifrados y tarjetas listos para imprimir | Imprime y plastifica |
 | **[08-soluciones.md](08-soluciones.md)** | Hoja maestra del Game Master: todas las respuestas en una página | En el bolsillo durante el juego |
 | **[09-seguridad-y-plan-b.md](09-seguridad-y-plan-b.md)** | Seguridad, plan de lluvia, adaptaciones (más/menos gente, niños, versión neutra) | Antes de decidir la fecha |
+| **[hoja-notario.html](hoja-notario.html)** | La versión de móvil del `08`: códigos siempre a la vista, reloj de partida que calcula la hora real de cada hito, y contador de velas | Ábrelo en el móvil el día de la partida |
 
 ---
 
