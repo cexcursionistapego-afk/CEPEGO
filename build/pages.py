@@ -21,8 +21,11 @@ def build(g):
     for bg,href,tva,tes,pva,pes in acts:
         act_cards+=f'''      <a class="act reveal" href="{href}">
         <div class="act__bg" style="background-image:url('{bg}')"></div>
-        <div class="act__body"><h3><span class="va">{tva}</span><span class="es">{tes}</span></h3>
-          <p><span class="va">{pva}</span><span class="es">{pes}</span></p></div>
+        <div class="act__body">
+          <h3><span class="va">{tva}</span><span class="es">{tes}</span></h3>
+          <p><span class="va">{pva}</span><span class="es">{pes}</span></p>
+          <div class="act__arrow"><span class="va">Descobrir</span><span class="es">Descubrir</span> →</div>
+        </div>
       </a>\n'''
 
     home=header("inici")+f'''
@@ -53,7 +56,8 @@ def build(g):
   </div>
 </section>
 
-<section class="section" style="padding-top:0">
+<hr class="section-rule">
+<section class="section" style="padding-top:clamp(48px,7vw,100px)">
   <div class="wrap">
     <div class="split reveal">
       <div class="prose">
@@ -86,7 +90,7 @@ def build(g):
       <div class="kicker center-k"><span class="va">Què fem</span><span class="es">Qué hacemos</span></div>
       <h2><span class="va">Les nostres activitats</span><span class="es">Nuestras actividades</span></h2>
     </div>
-    <div class="grid cols-3">
+    <div class="act-bento">
 {act_cards}    </div>
   </div>
 </section>
