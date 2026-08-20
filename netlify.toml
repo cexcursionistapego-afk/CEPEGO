@@ -1,9 +1,20 @@
-# Configuració d'alocament a Netlify — lloc estàtic, sense compilació
+# Configuració d'allotjament a Netlify — lloc estàtic + funcions serverless
 [build]
   publish = "."
   command = ""
+  functions = "netlify/functions"
 
-# Cau curt per als índexs de dades editables (perquè els canvis del panell es vegen ràpid)
+# Rutes curtes per a l'API de reserves
+[[redirects]]
+  from = "/api/disponibilitat"
+  to = "/.netlify/functions/disponibilitat"
+  status = 200
+[[redirects]]
+  from = "/api/reserva"
+  to = "/.netlify/functions/reserva"
+  status = 200
+
+# Cau curt per als índexs de dades editables
 [[headers]]
   for = "/data/*"
   [headers.values]

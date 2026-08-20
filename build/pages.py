@@ -30,7 +30,7 @@ def build(g):
   <div class="hero__bg" style="background-image:url('{HERO}')"></div>
   <div class="hero__scrim"></div>
   <div class="wrap hero__inner">
-    <img class="crest" src="{CREST}" alt="Escut CEPEGO">
+    <img class="crest" src="{IMG}favicon.png" alt="Escut CEPEGO">
     <div class="kicker on-photo">Des de 1973</div>
     <h1><span class="va">Vivim la muntanya,<br><em>compartim</em> l'aventura</span><span class="es">Vivimos la montaña,<br><em>compartimos</em> la aventura</span></h1>
     <p><span class="va">El Centre Excursionista de Pego és un club sense ànim de lucre format per gent de totes les edats unida per la natura i els esports de muntanya.</span><span class="es">El Centro Excursionista de Pego es un club sin ánimo de lucro formado por gente de todas las edades unida por la naturaleza y los deportes de montaña.</span></p>
@@ -64,7 +64,7 @@ def build(g):
         <a href="rutes.html" class="link-arrow"><span class="va">Descobreix les activitats</span><span class="es">Descubre las actividades</span></a>
       </div>
       <div class="split__media">
-        <img src="{L1}" alt="Pego i les Valls des de la muntanya">
+        <img src="{IMG}bb9bb0_dd4b5c48aab64d6fa0f2f034dfbaf7e1~mv2.jpeg" alt="El refugi La Figuereta al capvespre">
         <div class="tagpin"><span class="n">540</span><span><span class="va">metres<br>d'altitud</span><span class="es">metros<br>de altitud</span></span></div>
       </div>
     </div>
@@ -202,37 +202,56 @@ def build(g):
     rl="".join(f'      <li><span class="va">{va}</span><span class="es">{es}</span></li>\n' for va,es in rules)
     reservar=header("reservar")+subhero(REFUGI[5],'<span class="va">Refugi La Figuereta</span><span class="es">Refugio La Figuereta</span>',
         "Reservar","Reservar",
-        "Disponibilitat, aportacions i sol·licitud de reserva del refugi.","Disponibilidad, aportaciones y solicitud de reserva del refugio.")+f'''
-<section class="section">
-  <div class="wrap split reveal">
-    <div class="prose">
-      <div class="kicker"><span class="va">Com reservar</span><span class="es">Cómo reservar</span></div>
-      <h2><span class="va">Sol·licita les teues dates</span><span class="es">Solicita tus fechas</span></h2>
-      <p><span class="va">Consulta la disponibilitat al calendari i envia la sol·licitud amb les dates. Una vegada et confirmem, cal ingressar <strong>50 €</strong> al compte del <strong>Banc Sabadell</strong> per a bloquejar la data (no es retornen en cas de cancel·lar, però serveixen per a una altra ocasió). El total es paga una setmana abans d'entrar.</span><span class="es">Consulta la disponibilidad en el calendario y envía la solicitud con las fechas. Una vez te confirmemos, hay que ingresar <strong>50 €</strong> en la cuenta del <strong>Banco Sabadell</strong> para bloquear la fecha (no se devuelven en caso de cancelar, pero sirven para otra ocasión). El total se paga una semana antes de entrar.</span></p>
-      <p><span class="va">IBAN (Banc Sabadell):</span><span class="es">IBAN (Banco Sabadell):</span><br><span class="iban" data-cms="iban">ES88 0081 1028 86 0001004510</span></p>
-      <a class="btn btn-primary" href="{RESERVA}" target="_blank" rel="noopener"><span class="va">Sol·licitar reserva</span><span class="es">Solicitar reserva</span></a>
-    </div>
-    <div>
-      <h3><span class="va">Aportacions al refugi</span><span class="es">Aportaciones al refugio</span></h3>
-      <div class="prices" style="margin-top:14px">
-        <div class="price"><div class="n" data-cms="preu1">190 €</div><div class="l"><span class="va">1 nit</span><span class="es">1 noche</span></div></div>
-        <div class="price"><div class="n" data-cms="preu2">250 €</div><div class="l"><span class="va">2 nits</span><span class="es">2 noches</span></div></div>
-        <div class="price"><div class="n" data-cms="preu3">350 €</div><div class="l"><span class="va">3 nits</span><span class="es">3 noches</span></div></div>
-      </div>
-      <p class="note" style="margin-top:18px"><span class="va">Refugi complet, fins a 21 persones. Entrada i eixida segons horari. Inclou llenya per a la xemeneia.</span><span class="es">Refugio completo, hasta 21 personas. Entrada y salida según horario. Incluye leña para la chimenea.</span></p>
+        "Disponibilitat i sol·licitud de reserva del refugi La Figuereta.","Disponibilidad y solicitud de reserva del refugio La Figuereta.")+f'''
+<section class="section-sm">
+  <div class="wrap narrow center reveal">
+    <div class="kicker center-k"><span class="va">Com funciona</span><span class="es">Cómo funciona</span></div>
+    <h2><span class="va">Tria les dates i envia la sol·licitud</span><span class="es">Elige las fechas y envía la solicitud</span></h2>
+    <p class="lead"><span class="va">Al calendari veus els dies lliures i els ja reservats. Tria les teues dates, envia la sol·licitud i <strong>nosaltres la revisarem</strong>. Et contactarem per confirmar-la i indicar-te el pagament de la senyal (50 €). El total es paga una setmana abans d'entrar.</span><span class="es">En el calendario ves los días libres y los ya reservados. Elige tus fechas, envía la solicitud y <strong>nosotros la revisaremos</strong>. Te contactaremos para confirmarla e indicarte el pago de la señal (50 €). El total se paga una semana antes de entrar.</span></p>
+    <div class="prices" style="max-width:560px;margin:22px auto 0">
+      <div class="price"><div class="n" data-cms="preu1">190 €</div><div class="l"><span class="va">1 nit</span><span class="es">1 noche</span></div></div>
+      <div class="price"><div class="n" data-cms="preu2">250 €</div><div class="l"><span class="va">2 nits</span><span class="es">2 noches</span></div></div>
+      <div class="price"><div class="n" data-cms="preu3">350 €</div><div class="l"><span class="va">3 nits</span><span class="es">3 noches</span></div></div>
     </div>
   </div>
 </section>
 
-<section class="section bg-paper2" id="disponibilitat">
-  <div class="wrap">
-    <div class="narrow center reveal" style="margin-bottom:clamp(26px,3vw,44px)">
-      <div class="kicker center-k"><span class="va">Disponibilitat</span><span class="es">Disponibilidad</span></div>
-      <h2><span class="va">Calendari del refugi</span><span class="es">Calendario del refugio</span></h2>
-      <p class="lead"><span class="va">Els dies ocupats apareixen marcats. Tria les dates lliures i envia la sol·licitud.</span><span class="es">Los días ocupados aparecen marcados. Elige las fechas libres y envía la solicitud.</span></p>
+<section class="section bg-paper2" style="padding-top:clamp(30px,4vw,60px)">
+  <div class="wrap reserva-grid">
+    <div class="reveal">
+      <div class="kicker"><span class="va">Disponibilitat</span><span class="es">Disponibilidad</span></div>
+      <h3 style="margin:6px 0 16px;font-size:1.5rem"><span class="va">Calendari del refugi</span><span class="es">Calendario del refugio</span></h3>
+      <div id="reserva-cal"></div>
     </div>
-    <div class="embed reveal"><iframe src="{GCAL}" height="640" title="Disponibilitat refugi La Figuereta" loading="lazy"></iframe></div>
-    <div class="center" style="margin-top:26px"><a class="btn btn-navy" href="{RESERVA}" target="_blank" rel="noopener"><span class="va">Sol·licitar reserva</span><span class="es">Solicitar reserva</span></a></div>
+    <div class="reveal">
+      <div class="card">
+        <h3 style="font-size:1.4rem"><span class="va">La teua sol·licitud</span><span class="es">Tu solicitud</span></h3>
+        <p id="r-resum"></p>
+        <form id="reserva-form" novalidate>
+          <input type="hidden" id="r-entrada" name="entrada">
+          <input type="hidden" id="r-salida" name="salida">
+          <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+          <div class="select-row">
+            <div class="field"><label><span class="va">Correu</span><span class="es">Correo</span> *</label><input type="email" name="email" required></div>
+            <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+          </div>
+          <div class="select-row">
+            <div class="field"><label><span class="va">Població</span><span class="es">Población</span></label><input name="poblacio"></div>
+            <div class="field"><label><span class="va">Nº persones</span><span class="es">Nº personas</span></label><input type="number" name="persones" min="1" max="21"></div>
+          </div>
+          <div class="select-row">
+            <div class="field"><label><span class="va">Ets soci/a?</span><span class="es">¿Eres soci@?</span></label>
+              <select name="soci"><option value="">—</option><option value="Si">Sí</option><option value="No">No</option></select></div>
+            <div class="field"><label><span class="va">Vols internet?</span><span class="es">¿Quieres internet?</span></label>
+              <select name="internet"><option value="">—</option><option value="Si">Sí</option><option value="No">No</option></select></div>
+          </div>
+          <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span></label><textarea name="missatge"></textarea></div>
+          <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <button type="submit" id="r-submit" class="btn btn-primary" disabled><span class="va">Enviar sol·licitud</span><span class="es">Enviar solicitud</span></button>
+          <div id="r-msg" class="r-msg"></div>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -249,7 +268,7 @@ def build(g):
 </section>
 '''+footer()
     write("reservar.html", doc("Reservar | Refugi La Figuereta — CEPEGO",
-        "Disponibilitat, aportacions, normes i sol·licitud de reserva del refugi La Figuereta.", reservar))
+        "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, extra_js="js/reserves.js"))
 
     # ============================================= METEO
     meteo=header("meteo")+subhero(HERO,'AVAMET',

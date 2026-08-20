@@ -151,7 +151,7 @@ def footer():
   </div>
 </footer>'''
 
-def doc(title, desc, body, identity=False):
+def doc(title, desc, body, identity=False, extra_js=None):
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
     idredirect=('<script>if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(u){if(!u){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}</script>\n' if identity else '')
     return f'''<!DOCTYPE html>
@@ -172,7 +172,7 @@ def doc(title, desc, body, identity=False):
 <div id="avis"></div>
 {body}
 <script src="js/main.js"></script>
-{idredirect}</body>
+{('<script src="'+extra_js+'"></script>'+chr(10)) if extra_js else ''}{idredirect}</body>
 </html>
 '''
 

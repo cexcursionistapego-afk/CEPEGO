@@ -44,7 +44,6 @@ collections:
           - { label: "Telèfon", name: "telefon", widget: "string" }
           - { label: "Adreça", name: "adreca", widget: "string" }
           - { label: "Facebook (enllaç complet)", name: "facebook", widget: "string" }
-          - { label: "IBAN (compte del refugi)", name: "iban", widget: "string" }
           - { label: "Preu 1 nit", name: "preu1", widget: "string" }
           - { label: "Preu 2 nits", name: "preu2", widget: "string" }
           - { label: "Preu 3 nits", name: "preu3", widget: "string" }
