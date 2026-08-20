@@ -1,343 +1,166 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca-valencia" data-lang="va">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CEPEGO — Centre Excursionista de Pego</title>
-<meta name="description" content="Club de montaña sin ánimo de lucro fundado en 1973 en Pego (Alicante). Senderismo, escalada, barranquismo, espeleología y BTT. Refugio La Figuereta en la Vall d'Ebo.">
+<title>Centre Excursionista de Pego | Refugi La Figuereta</title>
+<meta name="description" content="Senderisme, Muntanya, Refugi La Figuereta, Pego, Centre Excursionista de Pego, CEPego. Club de muntanya sense ànim de lucre des de 1973.">
+<link rel="icon" href="img/bb9bb0_42f6ed7c6336433e83f81bfbd39aaf56~mv2.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ==================== HEADER ==================== -->
-<header class="site-header" id="siteHeader">
-  <a href="#top" class="logo">
-    <span class="logo-mark"><span class="waymark"><span></span><span></span></span></span>
-    CEPEGO
-  </a>
-  <nav class="nav-desktop">
-    <a href="#club">El club</a>
-    <a href="#actividades">Actividades</a>
-    <a href="#escalada">Escalada</a>
-    <a href="#refugio">Refugio</a>
-    <a href="#socios">Hazte socio</a>
-    <a href="#contacto">Contacto</a>
-    <a href="#socios" class="btn-hazte-socio">Hazte socio</a>
-  </nav>
-  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="img/bb9bb0_42f6ed7c6336433e83f81bfbd39aaf56~mv2.png" alt="Escut CEPEGO">
+      <span>Centre Excursionista Pego<small>PEGO · 1973</small></span>
+    </a>
+    <nav class="nav" aria-label="Menú principal">
+      <a href="index.html" class="active"><span class="va">Inici</span><span class="es">Inicio</span></a>
+      <a href="refugi.html">La Figuereta</a>
+      <a href="reservar.html">Reservar</a>
+      <a href="meteo.html"><span class="va">El temps</span><span class="es">Meteo</span></a>
+      <a href="rutes.html"><span class="va">Rutes</span><span class="es">Rutas</span></a>
+      <a href="escalada.html">Escalada</a>
+      <a href="espeleo.html">Espeleologia</a>
+      <a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a>
+      <a href="calendari.html"><span class="va">Calendari</span><span class="es">Calendario</span></a>
+      <a href="contacte.html"><span class="va">Contacte</span><span class="es">Contacto</span></a>
+      <button class="lang-btn" data-lang-btn type="button">ES</button>
+    </nav>
+    <button class="nav-toggle" aria-label="Obrir menú" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
 </header>
 
-<nav class="nav-mobile" id="navMobile">
-  <button class="close-mobile" id="navClose" aria-label="Cerrar menú">✕</button>
-  <a href="#club">El club</a>
-  <a href="#actividades">Actividades</a>
-  <a href="#escalada">Escalada</a>
-  <a href="#refugio">Refugio</a>
-  <a href="#socios">Hazte socio</a>
-  <a href="#contacto">Contacto</a>
-</nav>
-
-<!-- ==================== HERO ==================== -->
-<section class="hero" id="top">
-  <div class="ph" data-img="hero-portada" style="width:100%;height:100%;">
-    FOTO PENDIENTE — Portada / imagen de cabecera<br>(paisaje Vall d'Ebo, escalada o grupo del club)
-  </div>
-  <div class="hero-content">
-    <span class="hero-eyebrow"><span class="waymark"><span></span><span></span></span> Desde 1973 · Pego, Alacant</span>
-    <h1>Vivimos la <em>montaña</em>,<br>compartimos la aventura</h1>
-    <p>Centre Excursionista de Pego, un club sin ánimo de lucro formado por gente de todas las edades unida por la montaña. Senderismo, escalada, barranquismo, espeleología y BTT.</p>
-    <div class="hero-actions">
-      <a href="#socios" class="btn btn-primary">Hazte socio</a>
-      <a href="#actividades" class="btn btn-ghost">Descubre las actividades</a>
-    </div>
-  </div>
-  <div class="scroll-cue"><span></span></div>
-</section>
-
-<div class="stripe-divider"></div>
-<div class="stats-strip">
-  <div class="grid">
-    <div><strong>1973</strong><span>Año de fundación</span></div>
-    <div><strong>6</strong><span>Disciplinas de montaña</span></div>
-    <div><strong>21</strong><span>Plazas en el refugio</span></div>
-    <div><strong>13</strong><span>Vías equipadas</span></div>
-  </div>
-</div>
-
-<!-- ==================== EL CLUB ==================== -->
-<section id="club">
-  <div class="container about-grid">
-    <div class="about-media" data-reveal>
-      <div class="ph" data-img="club-grupo">FOTO PENDIENTE — Grupo del club en actividad</div>
-      <div class="ph-tag">
-        <strong>+50</strong>
-        <span>Años de historia</span>
-      </div>
-    </div>
-    <div class="about-text" data-reveal>
-      <span class="eyebrow">El club</span>
-      <h2>Amigos de distintas generaciones unidos por la montaña</h2>
-      <p>El Centre Excursionista de Pego (CEPEGO) nació en <strong>1973</strong> como una entidad sin ánimo de lucro formada por personas de todas las edades con una pasión común: la naturaleza y los deportes de montaña.</p>
-      <p>A lo largo de más de cinco décadas hemos crecido manteniendo el espíritu original: disfrutar del entorno natural de la comarca —y de mucho más allá— con responsabilidad, compañerismo y respeto por el medio.</p>
-      <p>En 2023 recibimos la <strong>Insignia de Oro de la FEMECV</strong> con motivo de nuestro 50º aniversario, un reconocimiento a toda una trayectoria de trabajo por el excursionismo valenciano.</p>
-      <a href="#contacto" class="btn btn-primary">Conócenos</a>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== ACTIVIDADES ==================== -->
-<section id="actividades" class="bg-verde">
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero__bg" style="background-image:url('img/bb9bb0_fa8879e4ce8d4035b0588d0d1be17435~mv2.jpeg')"></div>
   <div class="container">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">Qué hacemos</span>
-      <h2>Actividades del club</h2>
-      <p>Dos grandes grupos de socios: quienes disfrutan del senderismo por la zona y por tierras lejanas aprovechando fines de semana y vacaciones, y quienes se dedican principalmente a la escalada. Además, organizamos salidas de alta montaña, espeleología, barranquismo y BTT.</p>
-    </div>
-    <div class="activities-grid">
-      <article class="activity-card" data-reveal>
-        <div class="ph" data-img="act-senderismo">FOTO PENDIENTE — Senderismo</div>
-        <div class="card-body">
-          <span class="tag">Senderismo</span>
-          <h3>Rutas y montañismo</h3>
-          <p>Salidas periódicas por la comarca y excursiones de varios días por otras sierras, aprovechando fines de semana y periodos vacacionales.</p>
-        </div>
-      </article>
-      <article class="activity-card" data-reveal>
-        <div class="ph" data-img="act-escalada">FOTO PENDIENTE — Escalada</div>
-        <div class="card-body">
-          <span class="tag">Escalada</span>
-          <h3>Deportiva, bloque y clásica</h3>
-          <p>Escuela propia de escalada con dos sectores equipados y sala de entrenamiento con rocódromo para todo el año.</p>
-        </div>
-      </article>
-      <article class="activity-card" data-reveal>
-        <div class="ph" data-img="act-barranquismo">FOTO PENDIENTE — Barranquismo</div>
-        <div class="card-body">
-          <span class="tag">Barranquismo</span>
-          <h3>Barrancos de la comarca</h3>
-          <p>Descenso de barrancos cercanos al refugio y en la Marina Alta, para todos los niveles de experiencia.</p>
-        </div>
-      </article>
-      <article class="activity-card" data-reveal>
-        <div class="ph" data-img="act-espeleologia">FOTO PENDIENTE — Espeleología</div>
-        <div class="card-body">
-          <span class="tag">Espeleología</span>
-          <h3>Exploración de cuevas</h3>
-          <p>Actividad de espeleología en las cavidades del entorno, siempre con la seguridad y técnica adecuadas.</p>
-        </div>
-      </article>
-      <article class="activity-card" data-reveal>
-        <div class="ph" data-img="act-btt">FOTO PENDIENTE — BTT</div>
-        <div class="card-body">
-          <span class="tag">BTT</span>
-          <h3>Bicicleta de montaña</h3>
-          <p>Rutas en bici de montaña por los caminos y senderos de la zona, combinando deporte y naturaleza.</p>
-        </div>
-      </article>
-      <article class="activity-card" data-reveal>
-        <div class="ph" data-img="act-altamontana">FOTO PENDIENTE — Alta montaña</div>
-        <div class="card-body">
-          <span class="tag">Alta montaña</span>
-          <h3>Expediciones y cumbres</h3>
-          <p>Salidas de alta montaña para los socios que quieren llevar la experiencia excursionista un paso más allá.</p>
-        </div>
-      </article>
+    <img class="crest" src="img/bb9bb0_42f6ed7c6336433e83f81bfbd39aaf56~mv2.png" alt="Escut Centre Excursionista de Pego">
+    <div class="eyebrow">Pego · Alacant · Des de 1973</div>
+    <h1>Centre Excursionista de Pego</h1>
+    <p class="va">Amics de diferents generacions, amants de la natura i dels esports d'aventura.</p>
+    <p class="es">Amigos de diferentes generaciones, amantes de la naturaleza y de los deportes de aventura.</p>
+    <div class="btn-row">
+      <a href="contacte.html" class="btn btn--primary"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></a>
+      <a href="refugi.html" class="btn btn--ghost"><span class="va">El refugi</span><span class="es">El refugio</span></a>
     </div>
   </div>
 </section>
 
-<!-- ==================== ESCALADA ==================== -->
-<section id="escalada">
-  <div class="container climb-wrap">
-    <div class="ph" data-img="escalada-sector" data-reveal>FOTO PENDIENTE — Sector de escalada / croquis de vías</div>
-    <div data-reveal>
-      <span class="eyebrow">Escuela de escalada</span>
-      <h2>Dos sectores para todos los niveles</h2>
-      <p>Nuestra escuela de escalada cuenta con dos sectores diferenciados, pensados tanto para quienes empiezan como para escaladores con más experiencia.</p>
-      <div class="sector-list">
-        <div class="sector">
-          <h4>Sector Iniciación <small>IV a 6b+/c</small></h4>
-          <p>13 vías equipadas de unos 12 metros de altura, situado a apenas 20 metros de la zona de aparcamiento. Ideal para iniciarse o para sesiones cortas de entrenamiento.</p>
-        </div>
-        <div class="sector">
-          <h4>Segundo sector <small>Pendiente de detallar</small></h4>
-          <p>FALTA INFORMACIÓN — nombre del sector, grados y número de vías (pendiente de confirmar con la web original).</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== REFUGIO LA FIGUERETA ==================== -->
-<section id="refugio" class="bg-verde refugio">
+<!-- ===== EL CLUB ===== -->
+<section class="section">
   <div class="container">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">Nuestro refugio</span>
-      <h2>Refugi La Figuereta</h2>
-      <p>Ubicado en la Vall d'Ebo, a 540 metros de altitud sobre un macizo calizo, el refugio del CEPEGO está equipado para pasar días en plena naturaleza haciendo senderismo, escalada, barranquismo, espeleología o turismo rural por los pueblos cercanos.</p>
-    </div>
-    <div class="refugio-grid">
-      <div class="ph tall" data-img="refugio-exterior">FOTO PENDIENTE — Exterior del refugio</div>
-      <div class="ph" data-img="refugio-interior-1">FOTO PENDIENTE — Sala / chimenea</div>
-      <div class="ph" data-img="refugio-interior-2">FOTO PENDIENTE — Habitación con literas</div>
-      <div class="ph" data-img="refugio-cocina">FOTO PENDIENTE — Cocina</div>
-      <div class="ph" data-img="refugio-entorno">FOTO PENDIENTE — Entorno / mirador</div>
-    </div>
-    <div class="refugio-info">
-      <div class="item"><strong>21</strong><span>Plazas en dos habitaciones</span></div>
-      <div class="item"><strong>540 m</strong><span>Altitud sobre el nivel del mar</span></div>
-      <div class="item"><strong>2</strong><span>Baños y cocina equipada</span></div>
-      <div class="item"><strong>3</strong><span>Zonas de acampada</span></div>
-    </div>
-    <div style="text-align:center;margin-top:2.5rem;">
-      <a href="#contacto" class="btn btn-primary">Consultar alquiler del refugio</a>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== CUOTAS / SOCIOS ==================== -->
-<section id="socios">
-  <div class="container">
-    <div class="section-head" data-reveal style="margin-left:auto;margin-right:auto;text-align:center;">
-      <span class="eyebrow">Únete</span>
-      <h2>Hazte socio del club</h2>
-      <p>Disfruta de todas las ventajas de pertenecer al Centre Excursionista de Pego durante todo el año.</p>
-    </div>
-    <div class="cuotas-grid">
-      <div class="cuota-card" data-reveal>
-        <span class="eyebrow">Cuota anual</span>
-        <div class="price">35 € <small>/ año</small></div>
-        <ul>
-          <li>Acceso a todas las actividades del club</li>
-          <li>Descuentos en el refugio La Figuereta</li>
-          <li>Seguro de actividades de montaña</li>
-          <li>Participación en salidas organizadas</li>
-        </ul>
-        <a href="#contacto" class="btn btn-primary" style="width:100%;justify-content:center;">Quiero ser socio</a>
-      </div>
-      <div class="cuota-card destacada" data-reveal>
-        <span class="eyebrow">Sala de entrenamiento</span>
-        <div class="price">50 € <small>/ año</small></div>
-        <ul>
-          <li>Acceso al rocódromo del club</li>
-          <li>Entrenamiento para todas las disciplinas de montaña</li>
-          <li>Espacio para conocer gente y hacer equipo</li>
-          <li>Complementaria a la cuota de socio</li>
-        </ul>
-        <a href="#contacto" class="btn btn-primary" style="width:100%;justify-content:center;">Más información</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== GALERÍA ==================== -->
-<section class="bg-verde">
-  <div class="container">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">Galería</span>
-      <h2>Momentos del club</h2>
-    </div>
-    <div class="gallery-grid">
-      <div class="ph" data-img="galeria-1">FOTO PENDIENTE 1</div>
-      <div class="ph" data-img="galeria-2">FOTO PENDIENTE 2</div>
-      <div class="ph" data-img="galeria-3">FOTO PENDIENTE 3</div>
-      <div class="ph" data-img="galeria-4">FOTO PENDIENTE 4</div>
-      <div class="ph" data-img="galeria-5">FOTO PENDIENTE 5</div>
-      <div class="ph" data-img="galeria-6">FOTO PENDIENTE 6</div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== CONTACTO ==================== -->
-<section id="contacto" class="bg-verde">
-  <div class="container contact-wrap">
-    <div class="contact-info" data-reveal>
-      <span class="eyebrow">Contacto</span>
-      <h2 style="margin-bottom:1.8rem;">Hablemos de montaña</h2>
-      <div class="item">
-        <div class="icon"><span class="waymark"><span></span><span></span></span></div>
-        <div><h4>Dirección</h4><p>C/ Llavador, s/n · 03780 Pego (Alacant)</p></div>
-      </div>
-      <div class="item">
-        <div class="icon"><span class="waymark"><span></span><span></span></span></div>
-        <div><h4>Teléfono</h4><p><a href="tel:+34686090511">686 090 511</a></p></div>
-      </div>
-      <div class="item">
-        <div class="icon"><span class="waymark"><span></span><span></span></span></div>
-        <div><h4>Email</h4><p><a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></p></div>
-      </div>
-      <div class="social-row">
-        <a href="https://www.facebook.com/centre.excursionistapego/" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
-        <a href="#" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
-      </div>
-      <div class="map-wrap" style="margin-top:2rem;">
-        <iframe src="https://www.google.com/maps?q=Carrer+Llavador,+Pego,+Alicante&output=embed" loading="lazy" title="Mapa CEPEGO"></iframe>
-      </div>
-    </div>
-    <form class="contact-form" data-reveal>
-      <label for="nombre">Nombre</label>
-      <input type="text" id="nombre" name="nombre" required>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-      <label for="motivo">Motivo</label>
-      <select id="motivo" name="motivo">
-        <option>Hazte socio</option>
-        <option>Alquiler del refugio</option>
-        <option>Información sobre actividades</option>
-        <option>Otro</option>
-      </select>
-      <label for="mensaje">Mensaje</label>
-      <textarea id="mensaje" name="mensaje" required></textarea>
-      <button type="submit">Enviar mensaje</button>
-      <p class="contact-note">FORMULARIO PENDIENTE DE CONECTAR — de momento no envía datos a ningún destino.</p>
-    </form>
-  </div>
-</section>
-
-<!-- ==================== FOOTER ==================== -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
+    <div class="split">
       <div>
-        <a href="#top" class="logo" style="margin-bottom:1rem;">
-          <span class="logo-mark">CE</span>
-          CEPEGO
-        </a>
-        <p style="font-size:.9rem;max-width:280px;">Centre Excursionista de Pego. Club de montaña sin ánimo de lucro desde 1973.</p>
+        <div class="eyebrow"><span class="va">El club</span><span class="es">El club</span></div>
+        <h2><span class="va">Vivim la muntanya</span><span class="es">Vivimos la montaña</span></h2>
+        <p class="va">El CEP està format per amics de diferents generacions, amants de la natura i dels esports d'aventura. Gran part dels membres del CEP som persones de diferents edats, amb gran dedicació en tot allò que fem.</p>
+        <p class="es">El CEP está formado por amigos de diferentes generaciones, amantes de la naturaleza y de los deportes de aventura. Gran parte de los miembros del CEP somos personas de diferentes edades, con gran dedicación en todo lo que hacemos.</p>
+        <p class="va">Actualment, el CEP té dos seccions principals: per una banda aquells que fan senderisme tant per la zona com per terres més llunyanes, aprofitant els caps de setmana i ponts festius. Per una altra banda, existeix un altre grup més dedicat a l'escalada, majoritàriament esportiva, bloc i clàssica.</p>
+        <p class="es">Actualmente, el CEP tiene dos secciones principales: por un lado aquellos que hacen senderismo tanto por la zona como por tierras más lejanas, aprovechando los fines de semana y puentes festivos. Por otro lado, existe otro grupo más dedicado a la escalada, mayoritariamente deportiva, bloque y clásica.</p>
+        <p class="va">A banda d'aquestes activitats, en el CEP també realitzem altres activitats com alta muntanya, espeleologia i barranquisme.</p>
+        <p class="es">Aparte de estas actividades, en el CEP también realizamos otras actividades como bicicleta de montaña, alta montaña, espeleología y barranquismo.</p>
+      </div>
+      <img src="img/bb9bb0_fa8879e4ce8d4035b0588d0d1be17435~mv2.jpeg" alt="Vistes de Pego i les Valls des de la muntanya">
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACTIVITATS ===== -->
+<section class="section section--stone2">
+  <div class="container">
+    <div class="center" style="max-width:720px;margin:0 auto 42px">
+      <div class="eyebrow"><span class="va">Què fem</span><span class="es">Qué hacemos</span></div>
+      <h2><span class="va">Les nostres activitats</span><span class="es">Nuestras actividades</span></h2>
+    </div>
+    <div class="grid grid-3">
+      <a class="card" href="rutes.html"><div class="icon-badge">🥾</div><h3><span class="va">Senderisme</span><span class="es">Senderismo</span></h3><p class="va">Rutes tots els mesos de l'any excepte a l'estiu, per la zona i per terres més llunyanes.</p><p class="es">Rutas todos los meses del año excepto en verano, por la zona y por tierras más lejanas.</p></a>
+      <a class="card" href="escalada.html"><div class="icon-badge">🧗</div><h3>Escalada</h3><p class="va">Escola d'escalada al Calvari amb 28 vies equipades, esportiva, bloc i clàssica.</p><p class="es">Escuela de escalada en el Calvari con 28 vías equipadas, deportiva, bloque y clásica.</p></a>
+      <a class="card" href="espeleo.html"><div class="icon-badge">🕯️</div><h3>Espeleologia</h3><p class="va">Les principals cavitats de la nostra zona i els avencs del massís de la Figuereta.</p><p class="es">Las principales cavidades de nuestra zona y los avencos del macizo de la Figuereta.</p></a>
+      <a class="card" href="barrancs.html"><div class="icon-badge">💧</div><h3><span class="va">Barrancs</span><span class="es">Barrancos</span></h3><p class="va">Descens de barrancs amb material i topografia dels principals de la comarca.</p><p class="es">Descenso de barrancos con material y topografía de los principales de la comarca.</p></a>
+      <a class="card" href="refugi.html"><div class="icon-badge">🏔️</div><h3><span class="va">Alta muntanya</span><span class="es">Alta montaña</span></h3><p class="va">Eixides d'alta muntanya i turisme rural amb base al refugi La Figuereta.</p><p class="es">Salidas de alta montaña y turismo rural con base en el refugio La Figuereta.</p></a>
+      <a class="card" href="meteo.html"><div class="icon-badge">🌦️</div><h3><span class="va">El temps</span><span class="es">Meteo</span></h3><p class="va">Estació meteorològica al refugi connectada a la xarxa AVAMET.</p><p class="es">Estación meteorológica en el refugio conectada a la red AVAMET.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FES-TE SOCI ===== -->
+<section class="section" id="soci">
+  <div class="container">
+    <div class="center" style="max-width:760px;margin:0 auto 36px">
+      <div class="eyebrow"><span class="va">Hazte soci@</span><span class="es">Hazte soci@</span></div>
+      <h2><span class="va">Forma part del club</span><span class="es">Forma parte del club</span></h2>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="price" style="border:0;padding:0;text-align:left;min-width:0"><span class="n">35&nbsp;€</span> <span class="l" style="display:inline">/ <span class="va">any</span><span class="es">año</span></span></div>
+        <p class="va">Per a gaudir dels avantatges de ser soci del centre excursionista, només has d'abonar 35 € a l'any, els quals són necessaris per a dur a terme el nostre manteniment i senyalització de sendes de tot el terme de Pego i les valls, així com per a compensar a eixa gent que dóna el seu temps per a contribuir a que la muntanya estiga neta i agradable.</p>
+        <p class="es">Para disfrutar de las ventajas de ser socio del centro excursionista, sólo debes abonar 35 € al año, los cuales son necesarios para llevar a cabo nuestro mantenimiento y señalización de las sendas de todo Pego y sus valles, así como para compensar a esa gente que da su tiempo para contribuir a que la montaña esté limpia y agradable.</p>
+        <a href="contacte.html" class="btn btn--primary"><span class="va">Alta soci@</span><span class="es">Alta soci@</span></a>
+        <a href="contacte.html" class="btn btn--navy" style="margin-left:8px"><span class="va">Baixa soci@</span><span class="es">Baja soci@</span></a>
+      </div>
+      <div class="card">
+        <div class="price" style="border:0;padding:0;text-align:left;min-width:0"><span class="n">50&nbsp;€</span> <span class="l" style="display:inline">/ <span class="va">any</span><span class="es">año</span></span></div>
+        <h3><span class="va">Sala d'entrenament</span><span class="es">Sala de entrenamiento</span></h3>
+        <p class="va">També podràs accedir a una sala d'entrenament (50 euros a l'any) dedicada a totes les disciplines de muntanya per a poder entrenar i fer amics. A més, gaudiràs de descomptes al nostre refugi exclusiu enmig de la muntanya.</p>
+        <p class="es">También podrás acceder a una sala de entrenamiento (50 euros al año) dedicada a todas las disciplinas de montaña para poder entrenar y hacer amigos. Además, disfrutarás de descuentos en nuestro refugio exclusivo en medio de la montaña.</p>
+        <p class="va"><em>El centre excursionista fa rutes tots els mesos de l'any excepte a l'estiu.</em></p>
+        <p class="es"><em>El centro excursionista hace rutas todos los meses del año excepto en verano.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="brand-f">
+          <img src="img/bb9bb0_adf7f0669ac24f07b323f93d8f79508e~mv2.png" alt="Escut CEPEGO">
+          <b>Centre Excursionista<br>de Pego</b>
+        </div>
+        <p style="color:#cfd3e6"><span class="va">Club de muntanya sense ànim de lucre des de 1973. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña sin ánimo de lucro desde 1973. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
+        <div class="social">
+          <a href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a href="mailto:cexcursionistapego@gmail.com" aria-label="Email">@</a>
+        </div>
       </div>
       <div>
-        <h5>Navegación</h5>
+        <h4><span class="va">Navegació</span><span class="es">Navegación</span></h4>
         <ul>
-          <li><a href="#club">El club</a></li>
-          <li><a href="#actividades">Actividades</a></li>
-          <li><a href="#escalada">Escalada</a></li>
-          <li><a href="#refugio">Refugio</a></li>
+          <li><a href="refugi.html">La Figuereta</a></li>
+          <li><a href="reservar.html"><span class="va">Reservar refugi</span><span class="es">Reservar refugio</span></a></li>
+          <li><a href="rutes.html"><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></a></li>
+          <li><a href="escalada.html">Escalada</a></li>
+          <li><a href="calendari.html"><span class="va">Calendari</span><span class="es">Calendario</span></a></li>
+          <li><a href="contacte.html"><span class="va">Contacte</span><span class="es">Contacto</span></a></li>
         </ul>
       </div>
       <div>
-        <h5>Club</h5>
+        <h4><span class="va">Contacte</span><span class="es">Contacto</span></h4>
         <ul>
-          <li><a href="#socios">Hazte socio</a></li>
-          <li><a href="#contacto">Alquiler refugio</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Contacto</h5>
-        <ul>
-          <li>C/ Llavador, s/n · Pego</li>
-          <li>686 090 511</li>
-          <li>cexcursionistapego@gmail.com</li>
+          <li>📍 Carrer Llavador, s/n<br>03780 Pego (Alacant)</li>
+          <li>✉️ <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></li>
+          <li>📞 686 090 511</li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> CEPEGO — Centre Excursionista de Pego</span>
-      <span>Sitio en construcción · rediseño en curso</span>
+    <div class="partners">
+      <img src="img/bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV">
+      <img src="img/bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego">
+      <img src="img/bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls">
+      <img src="img/bb9bb0_fb25ea68ebd444d79d92311d8dd0561f~mv2.png" alt="Refugi La Figuereta">
     </div>
+    <div class="copyright">Centre Excursionista Pego · 1973–<span data-year></span></div>
   </div>
 </footer>
 
