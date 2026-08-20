@@ -9,12 +9,12 @@ locale: "es"
 media_folder: "img/calendari"
 public_folder: "/img/calendari"
 
-# Missatge dels canvis publicats
 publish_mode: simple
 
 collections:
+  # ---------- CALENDARI ----------
   - name: "calendari"
-    label: "Calendari — cartells i fotos"
+    label: "📅 Calendari — cartells i fotos"
     description: "Afig, reordena o elimina els cartells i fotos del calendari d'activitats."
     files:
       - name: "fotos"
@@ -30,3 +30,36 @@ collections:
             fields:
               - { label: "Imatge", name: "image", widget: "image" }
               - { label: "Text (opcional)", name: "caption", widget: "string", required: false }
+
+  # ---------- AJUSTOS DEL CLUB ----------
+  - name: "ajustos"
+    label: "⚙️ Dades del club (contacte i preus)"
+    description: "Correu, telèfon, adreça, Facebook, IBAN, preus del refugi i quotes de soci. Es canvien en tota la web alhora."
+    files:
+      - name: "site"
+        label: "Dades i preus"
+        file: "data/site.json"
+        fields:
+          - { label: "Correu electrònic", name: "email", widget: "string" }
+          - { label: "Telèfon", name: "telefon", widget: "string" }
+          - { label: "Adreça", name: "adreca", widget: "string" }
+          - { label: "Facebook (enllaç complet)", name: "facebook", widget: "string" }
+          - { label: "IBAN (compte del refugi)", name: "iban", widget: "string" }
+          - { label: "Preu 1 nit", name: "preu1", widget: "string" }
+          - { label: "Preu 2 nits", name: "preu2", widget: "string" }
+          - { label: "Preu 3 nits", name: "preu3", widget: "string" }
+          - { label: "Quota de soci (a l'any)", name: "quota_soci", widget: "string" }
+          - { label: "Quota sala d'entrenament", name: "quota_sala", widget: "string" }
+
+  # ---------- AVÍS / NOVETAT ----------
+  - name: "avis"
+    label: "📢 Avís a la portada"
+    description: "Barra d'avís a dalt de la pàgina d'inici (per exemple: pròxima eixida, assemblea…)."
+    files:
+      - name: "avis"
+        label: "Avís a la portada"
+        file: "data/avis.json"
+        fields:
+          - { label: "Mostrar l'avís?", name: "actiu", widget: "boolean", default: false }
+          - { label: "Text en Valencià", name: "text_va", widget: "string", required: false }
+          - { label: "Text en Español", name: "text_es", widget: "string", required: false }

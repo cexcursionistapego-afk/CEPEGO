@@ -21,13 +21,23 @@
     </a>
     <nav class="nav" aria-label="Menú principal">
       <a href="index.html"><span class="va">Inici</span><span class="es">Inicio</span></a>
-      <a href="refugi.html">La Figuereta</a>
-      <a href="reservar.html">Reservar</a>
-      <a href="meteo.html" class="active"><span class="va">El temps</span><span class="es">Meteo</span></a>
-      <a href="rutes.html"><span class="va">Rutes</span><span class="es">Rutas</span></a>
-      <a href="escalada.html">Escalada</a>
-      <a href="espeleo.html">Espeleologia</a>
-      <a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a>
+      <div class="nav-group">
+        <a href="refugi.html" class="nav-parent active">La Figuereta</a>
+        <div class="nav-sub">
+          <a href="refugi.html">La Figuereta</a>
+          <a href="reservar.html">Reservar</a>
+          <a href="meteo.html" class="active"><span class="va">El temps al refugi</span><span class="es">Meteo al refugio</span></a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <a href="rutes.html" class="nav-parent"><span class="va">Activitats</span><span class="es">Actividades</span></a>
+        <div class="nav-sub">
+          <a href="rutes.html"><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></a>
+          <a href="escalada.html">Escalada</a>
+          <a href="espeleo.html"><span class="va">Espeleologia</span><span class="es">Espeleología</span></a>
+          <a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a>
+        </div>
+      </div>
       <a href="calendari.html"><span class="va">Calendari</span><span class="es">Calendario</span></a>
       <a href="contacte.html"><span class="va">Contacte</span><span class="es">Contacto</span></a>
       <button class="lang-btn" data-lang-btn type="button">ES</button>
@@ -78,8 +88,8 @@
         </div>
         <p style="color:#cfd3e6"><span class="va">Club de muntanya sense ànim de lucre des de 1973. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña sin ánimo de lucro desde 1973. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
         <div class="social">
-          <a href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-          <a href="mailto:cexcursionistapego@gmail.com" aria-label="Email">@</a>
+          <a data-cms-href="facebook" href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com" aria-label="Email">@</a>
         </div>
       </div>
       <div>
@@ -97,8 +107,8 @@
         <h4><span class="va">Contacte</span><span class="es">Contacto</span></h4>
         <ul>
           <li>📍 Carrer Llavador, s/n<br>03780 Pego (Alacant)</li>
-          <li>✉️ <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></li>
-          <li>📞 686 090 511</li>
+          <li>✉️ <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
+          <li>📞 <span data-cms="telefon">686 090 511</span></li>
         </ul>
       </div>
     </div>

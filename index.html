@@ -13,6 +13,7 @@
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+<div id="avis"></div>
 
 <!-- ===== HEADER ===== -->
 <header class="site-header">
@@ -23,13 +24,23 @@
     </a>
     <nav class="nav" aria-label="Menú principal">
       <a href="index.html" class="active"><span class="va">Inici</span><span class="es">Inicio</span></a>
-      <a href="refugi.html">La Figuereta</a>
-      <a href="reservar.html">Reservar</a>
-      <a href="meteo.html"><span class="va">El temps</span><span class="es">Meteo</span></a>
-      <a href="rutes.html"><span class="va">Rutes</span><span class="es">Rutas</span></a>
-      <a href="escalada.html">Escalada</a>
-      <a href="espeleo.html">Espeleologia</a>
-      <a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a>
+      <div class="nav-group">
+        <a href="refugi.html" class="nav-parent">La Figuereta</a>
+        <div class="nav-sub">
+          <a href="refugi.html">La Figuereta</a>
+          <a href="reservar.html">Reservar</a>
+          <a href="meteo.html"><span class="va">El temps al refugi</span><span class="es">Meteo al refugio</span></a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <a href="rutes.html" class="nav-parent"><span class="va">Activitats</span><span class="es">Actividades</span></a>
+        <div class="nav-sub">
+          <a href="rutes.html"><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></a>
+          <a href="escalada.html">Escalada</a>
+          <a href="espeleo.html"><span class="va">Espeleologia</span><span class="es">Espeleología</span></a>
+          <a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a>
+        </div>
+      </div>
       <a href="calendari.html"><span class="va">Calendari</span><span class="es">Calendario</span></a>
       <a href="contacte.html"><span class="va">Contacte</span><span class="es">Contacto</span></a>
       <button class="lang-btn" data-lang-btn type="button">ES</button>
@@ -102,14 +113,14 @@
     </div>
     <div class="grid grid-2">
       <div class="card">
-        <div class="price" style="border:0;padding:0;text-align:left;min-width:0"><span class="n">35&nbsp;€</span> <span class="l" style="display:inline">/ <span class="va">any</span><span class="es">año</span></span></div>
+        <div class="price" style="border:0;padding:0;text-align:left;min-width:0"><span class="n" data-cms="quota_soci">35 €</span> <span class="l" style="display:inline">/ <span class="va">any</span><span class="es">año</span></span></div>
         <p class="va">Per a gaudir dels avantatges de ser soci del centre excursionista, només has d'abonar 35 € a l'any, els quals són necessaris per a dur a terme el nostre manteniment i senyalització de sendes de tot el terme de Pego i les valls, així com per a compensar a eixa gent que dóna el seu temps per a contribuir a que la muntanya estiga neta i agradable.</p>
         <p class="es">Para disfrutar de las ventajas de ser socio del centro excursionista, sólo debes abonar 35 € al año, los cuales son necesarios para llevar a cabo nuestro mantenimiento y señalización de las sendas de todo Pego y sus valles, así como para compensar a esa gente que da su tiempo para contribuir a que la montaña esté limpia y agradable.</p>
         <a href="contacte.html" class="btn btn--primary"><span class="va">Alta soci@</span><span class="es">Alta soci@</span></a>
         <a href="contacte.html" class="btn btn--navy" style="margin-left:8px"><span class="va">Baixa soci@</span><span class="es">Baja soci@</span></a>
       </div>
       <div class="card">
-        <div class="price" style="border:0;padding:0;text-align:left;min-width:0"><span class="n">50&nbsp;€</span> <span class="l" style="display:inline">/ <span class="va">any</span><span class="es">año</span></span></div>
+        <div class="price" style="border:0;padding:0;text-align:left;min-width:0"><span class="n" data-cms="quota_sala">50 €</span> <span class="l" style="display:inline">/ <span class="va">any</span><span class="es">año</span></span></div>
         <h3><span class="va">Sala d'entrenament</span><span class="es">Sala de entrenamiento</span></h3>
         <p class="va">També podràs accedir a una sala d'entrenament (50 euros a l'any) dedicada a totes les disciplines de muntanya per a poder entrenar i fer amics. A més, gaudiràs de descomptes al nostre refugi exclusiu enmig de la muntanya.</p>
         <p class="es">También podrás acceder a una sala de entrenamiento (50 euros al año) dedicada a todas las disciplinas de montaña para poder entrenar y hacer amigos. Además, disfrutarás de descuentos en nuestro refugio exclusivo en medio de la montaña.</p>
@@ -131,8 +142,8 @@
         </div>
         <p style="color:#cfd3e6"><span class="va">Club de muntanya sense ànim de lucre des de 1973. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña sin ánimo de lucro desde 1973. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
         <div class="social">
-          <a href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-          <a href="mailto:cexcursionistapego@gmail.com" aria-label="Email">@</a>
+          <a data-cms-href="facebook" href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com" aria-label="Email">@</a>
         </div>
       </div>
       <div>
@@ -150,8 +161,8 @@
         <h4><span class="va">Contacte</span><span class="es">Contacto</span></h4>
         <ul>
           <li>📍 Carrer Llavador, s/n<br>03780 Pego (Alacant)</li>
-          <li>✉️ <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></li>
-          <li>📞 686 090 511</li>
+          <li>✉️ <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
+          <li>📞 <span data-cms="telefon">686 090 511</span></li>
         </ul>
       </div>
     </div>

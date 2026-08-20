@@ -21,13 +21,23 @@
     </a>
     <nav class="nav" aria-label="Menú principal">
       <a href="index.html"><span class="va">Inici</span><span class="es">Inicio</span></a>
-      <a href="refugi.html">La Figuereta</a>
-      <a href="reservar.html">Reservar</a>
-      <a href="meteo.html"><span class="va">El temps</span><span class="es">Meteo</span></a>
-      <a href="rutes.html"><span class="va">Rutes</span><span class="es">Rutas</span></a>
-      <a href="escalada.html">Escalada</a>
-      <a href="espeleo.html">Espeleologia</a>
-      <a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a>
+      <div class="nav-group">
+        <a href="refugi.html" class="nav-parent">La Figuereta</a>
+        <div class="nav-sub">
+          <a href="refugi.html">La Figuereta</a>
+          <a href="reservar.html">Reservar</a>
+          <a href="meteo.html"><span class="va">El temps al refugi</span><span class="es">Meteo al refugio</span></a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <a href="rutes.html" class="nav-parent"><span class="va">Activitats</span><span class="es">Actividades</span></a>
+        <div class="nav-sub">
+          <a href="rutes.html"><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></a>
+          <a href="escalada.html">Escalada</a>
+          <a href="espeleo.html"><span class="va">Espeleologia</span><span class="es">Espeleología</span></a>
+          <a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a>
+        </div>
+      </div>
       <a href="calendari.html"><span class="va">Calendari</span><span class="es">Calendario</span></a>
       <a href="contacte.html" class="active"><span class="va">Contacte</span><span class="es">Contacto</span></a>
       <button class="lang-btn" data-lang-btn type="button">ES</button>
@@ -56,10 +66,10 @@
         <h2><span class="va">Contacta amb el club</span><span class="es">Contacta con el club</span></h2>
         <p class="va">Vols formar part del club? Vols saber tot el que fem? Vols passar uns dies a La Figuereta? Contacta amb nosaltres.</p>
         <p class="es">¿Quieres formar parte del club? ¿Quieres saber todo lo que hacemos? ¿Quieres pasar unos días en La Figuereta? Contacta con nosotros.</p>
-        <div class="info-line"><span class="ic">✉️</span><div><b><span class="va">Correu</span><span class="es">Correo</span></b><br><a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></div></div>
-        <div class="info-line"><span class="ic">📍</span><div><b><span class="va">Adreça</span><span class="es">Dirección</span></b><br>Carrer Llavador, s/n · 03780 Pego (Alacant)</div></div>
-        <div class="info-line"><span class="ic">📞</span><div><b><span class="va">Telèfon</span><span class="es">Teléfono</span></b><br>686 090 511</div></div>
-        <div class="info-line"><span class="ic">📘</span><div><b>Facebook</b><br><a href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener">centre.excursionistapego</a></div></div>
+        <div class="info-line"><span class="ic">✉️</span><div><b><span class="va">Correu</span><span class="es">Correo</span></b><br><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></div></div>
+        <div class="info-line"><span class="ic">📍</span><div><b><span class="va">Adreça</span><span class="es">Dirección</span></b><br><span data-cms="adreca">Carrer Llavador, s/n · 03780 Pego (Alacant)</span></div></div>
+        <div class="info-line"><span class="ic">📞</span><div><b><span class="va">Telèfon</span><span class="es">Teléfono</span></b><br><span data-cms="telefon">686 090 511</span></div></div>
+        <div class="info-line"><span class="ic">📘</span><div><b>Facebook</b><br><a data-cms-href="facebook" href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener">centre.excursionistapego</a></div></div>
       </div>
       <div>
         <form class="card" onsubmit="var f=this;location.href='mailto:cexcursionistapego@gmail.com?subject='+encodeURIComponent('Web CEPEGO — '+(f.nom.value||''))+'&body='+encodeURIComponent((f.missatge.value||'')+'\n\n'+(f.nom.value||'')+' ('+(f.correu.value||'')+')');return false;">
@@ -86,8 +96,8 @@
         </div>
         <p style="color:#cfd3e6"><span class="va">Club de muntanya sense ànim de lucre des de 1973. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña sin ánimo de lucro desde 1973. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
         <div class="social">
-          <a href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-          <a href="mailto:cexcursionistapego@gmail.com" aria-label="Email">@</a>
+          <a data-cms-href="facebook" href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com" aria-label="Email">@</a>
         </div>
       </div>
       <div>
@@ -105,8 +115,8 @@
         <h4><span class="va">Contacte</span><span class="es">Contacto</span></h4>
         <ul>
           <li>📍 Carrer Llavador, s/n<br>03780 Pego (Alacant)</li>
-          <li>✉️ <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></li>
-          <li>📞 686 090 511</li>
+          <li>✉️ <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
+          <li>📞 <span data-cms="telefon">686 090 511</span></li>
         </ul>
       </div>
     </div>

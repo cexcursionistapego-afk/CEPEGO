@@ -34,6 +34,39 @@
   /* ---------- ANY AL PEU ---------- */
   document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = new Date().getFullYear(); });
 
+  /* ---------- AJUSTOS EDITABLES DEL CLUB (data/site.json) ---------- */
+  fetch('data/site.json', {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(s){
+      if(!s) return;
+      document.querySelectorAll('[data-cms]').forEach(function(el){
+        var k = el.getAttribute('data-cms');
+        if(s[k] != null && s[k] !== '') el.textContent = s[k];
+      });
+      document.querySelectorAll('[data-cms-href]').forEach(function(el){
+        var k = el.getAttribute('data-cms-href'); var v = s[k];
+        if(v == null || v === '') return;
+        if(k === 'email') el.setAttribute('href', 'mailto:'+v);
+        else if(k === 'telefon') el.setAttribute('href', 'tel:'+String(v).replace(/\s+/g,''));
+        else el.setAttribute('href', v);
+      });
+    }).catch(function(){});
+
+  /* ---------- AVÍS / NOVETAT A LA PORTADA (data/avis.json) ---------- */
+  var avisBox = document.getElementById('avis');
+  if(avisBox){
+    fetch('data/avis.json', {cache:'no-store'})
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(a){
+        if(!a || !a.actiu) return;
+        var va = a.text_va || '', es = a.text_es || '';
+        if(!va && !es) return;
+        avisBox.innerHTML = '<div class="avis"><span class="va">'+(va||es)+'</span><span class="es">'+(es||va)+'</span>'+
+          '<button class="avis__x" aria-label="Tancar">&times;</button></div>';
+        avisBox.querySelector('.avis__x').addEventListener('click', function(){ avisBox.style.display='none'; });
+      }).catch(function(){});
+  }
+
   /* ---------- LIGHTBOX ---------- */
   var lb, lbImg, items = [], idx = 0;
   function ensureLightbox(){

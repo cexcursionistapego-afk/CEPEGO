@@ -70,6 +70,19 @@ html[data-lang="es"] .va{display:none}
 .nav a:hover,.nav a.active{color:var(--white);background:var(--navy)}
 .nav a.active{background:var(--red)}
 
+/* submenús desplegables */
+.nav-group{position:relative;display:flex;align-items:center}
+.nav-parent{cursor:pointer}
+.nav-parent::after{content:"▾";font-size:.66em;margin-left:4px;opacity:.65}
+.nav-sub{
+  position:absolute;top:100%;left:0;display:none;flex-direction:column;
+  background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+  padding:7px;min-width:220px;z-index:120;
+}
+.nav-group:hover .nav-sub,.nav-group:focus-within .nav-sub{display:flex}
+.nav-sub a{padding:10px 14px;border-radius:7px;font-size:.82rem;width:100%}
+.nav-sub a:hover,.nav-sub a.active{color:#fff;background:var(--navy)}
+
 .lang-btn{
   font-family:var(--font-head);font-weight:600;text-transform:uppercase;font-size:.8rem;
   border:2px solid var(--navy);color:var(--navy);background:transparent;border-radius:20px;
@@ -89,6 +102,10 @@ html[data-lang="es"] .va{display:none}
   }
   .nav.open{transform:translateY(0)}
   .nav a{width:100%;border-radius:0;padding:13px 24px;font-size:1rem}
+  .nav-group{flex-direction:column;align-items:stretch;width:100%}
+  .nav-parent::after{content:""}
+  .nav-sub{position:static;display:flex;box-shadow:none;border:0;border-radius:0;padding:0;min-width:0;background:var(--stone-2)}
+  .nav-sub a{padding:11px 40px;font-size:.95rem}
   .nav-toggle{display:block}
 }
 
@@ -219,6 +236,12 @@ html[data-lang="es"] .va{display:none}
 .social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
 .social a:hover{background:var(--red)}
 .copyright{text-align:center;padding-top:26px;border-top:1px solid rgba(255,255,255,.15);font-size:.85rem;letter-spacing:1px;font-family:var(--font-head);text-transform:uppercase;color:#9fa6c4}
+
+/* avís / novetat portada */
+#avis:empty{display:none}
+.avis{background:var(--red);color:#fff;text-align:center;padding:11px 44px;position:relative;font-weight:600;font-size:.98rem}
+.avis a{color:#fff;text-decoration:underline}
+.avis__x{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;font-size:1.5rem;line-height:1;cursor:pointer}
 
 /* misc */
 .note{background:#fff;border:1px dashed var(--navy);border-radius:var(--radius);padding:18px 22px;color:var(--ink-soft);font-size:.95rem}
