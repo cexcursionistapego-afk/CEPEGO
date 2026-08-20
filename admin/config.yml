@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: claude/rerun-test-download-site-hjl80a
+
+# Idioma del panell
+locale: "es"
+
+# On es guarden les imatges pujades des del panell
+media_folder: "img/calendari"
+public_folder: "/img/calendari"
+
+# Missatge dels canvis publicats
+publish_mode: simple
+
+collections:
+  - name: "calendari"
+    label: "Calendari — cartells i fotos"
+    description: "Afig, reordena o elimina els cartells i fotos del calendari d'activitats."
+    files:
+      - name: "fotos"
+        label: "Fotos del calendari"
+        file: "data/calendari.json"
+        description: "Puja la imatge del cartell i, opcionalment, un text. Arrossega per reordenar."
+        fields:
+          - label: "Fotos"
+            name: "fotos"
+            label_singular: "Cartell / foto"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - { label: "Imatge", name: "image", widget: "image" }
+              - { label: "Text (opcional)", name: "caption", widget: "string", required: false }

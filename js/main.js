@@ -1,4 +1,4 @@
-/* CEPEGO — navegació, idioma (Valencià/Español) i galeria */
+/* CEPEGO — navegació, idioma (Valencià/Español), calendari dinàmic i galeria */
 (function(){
   var root = document.documentElement;
 
@@ -16,7 +16,6 @@
       b.setAttribute('aria-label', (l === 'va') ? 'Cambiar a Español' : 'Canviar a Valencià');
     });
   }
-
   document.addEventListener('click', function(e){
     var btn = e.target.closest('[data-lang-btn]');
     if(btn){ setLang(root.getAttribute('data-lang') === 'va' ? 'es' : 'va'); }
@@ -35,21 +34,18 @@
   /* ---------- ANY AL PEU ---------- */
   document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = new Date().getFullYear(); });
 
-  /* ---------- GALERIA / LIGHTBOX ---------- */
-  var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery a'));
-  if(imgs.length){
-    var lb = document.createElement('div');
+  /* ---------- LIGHTBOX ---------- */
+  var lb, lbImg, items = [], idx = 0;
+  function ensureLightbox(){
+    if(lb) return;
+    lb = document.createElement('div');
     lb.className = 'lb';
     lb.innerHTML = '<button class="lb__close" aria-label="Tancar">&times;</button>'+
       '<button class="lb__nav lb__prev" aria-label="Anterior">&#8249;</button>'+
       '<img alt="">'+
       '<button class="lb__nav lb__next" aria-label="Següent">&#8250;</button>';
     document.body.appendChild(lb);
-    var lbImg = lb.querySelector('img'); var idx = 0;
-    function show(i){ idx = (i+imgs.length)%imgs.length; lbImg.src = imgs[idx].getAttribute('href'); }
-    function open(i){ show(i); lb.classList.add('open'); }
-    function close(){ lb.classList.remove('open'); }
-    imgs.forEach(function(a,i){ a.addEventListener('click', function(e){ e.preventDefault(); open(i); }); });
+    lbImg = lb.querySelector('img');
     lb.querySelector('.lb__close').addEventListener('click', close);
     lb.querySelector('.lb__prev').addEventListener('click', function(e){ e.stopPropagation(); show(idx-1); });
     lb.querySelector('.lb__next').addEventListener('click', function(e){ e.stopPropagation(); show(idx+1); });
@@ -61,4 +57,45 @@
       if(e.key === 'ArrowRight') show(idx+1);
     });
   }
+  function show(i){ idx = (i+items.length)%items.length; lbImg.src = items[idx].getAttribute('href'); }
+  function close(){ lb.classList.remove('open'); }
+
+  /* Enllaça (o torna a enllaçar) totes les galeries de la pàgina */
+  function initGalleries(){
+    items = Array.prototype.slice.call(document.querySelectorAll('.gallery a'));
+    if(!items.length) return;
+    ensureLightbox();
+    items.forEach(function(a, i){
+      if(a.dataset.lbBound) return;
+      a.dataset.lbBound = '1';
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        items = Array.prototype.slice.call(document.querySelectorAll('.gallery a'));
+        idx = items.indexOf(a);
+        show(idx);
+        lb.classList.add('open');
+      });
+    });
+  }
+
+  /* ---------- CALENDARI DINÀMIC (des de data/calendari.json) ---------- */
+  var calBox = document.getElementById('cal-gallery');
+  if(calBox){
+    fetch('data/calendari.json', {cache:'no-store'})
+      .then(function(r){ return r.ok ? r.json() : {fotos:[]}; })
+      .then(function(d){
+        var fotos = (d && d.fotos) || [];
+        if(!fotos.length){ calBox.innerHTML = '<p class="note">Encara no hi ha cartells publicats.</p>'; return; }
+        calBox.innerHTML = fotos.map(function(f){
+          var src = f.image;
+          var alt = f.caption ? f.caption.replace(/"/g,'&quot;') : '';
+          return '<a href="'+src+'"><img loading="lazy" src="'+src+'" alt="'+alt+'"></a>';
+        }).join('');
+        initGalleries();
+      })
+      .catch(function(){ calBox.innerHTML = '<p class="note">No s\'ha pogut carregar el calendari.</p>'; });
+  }
+
+  /* galeries estàtiques (refugi, escalada, etc.) */
+  initGalleries();
 })();

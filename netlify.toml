@@ -1,0 +1,10 @@
+# Configuració d'alocament a Netlify — lloc estàtic, sense compilació
+[build]
+  publish = "."
+  command = ""
+
+# Cau curt per als índexs de dades editables (perquè els canvis del panell es vegen ràpid)
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=60"
