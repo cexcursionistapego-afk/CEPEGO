@@ -3,125 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EL TEMPS AL REFUGI | Centre Excursionista de Pego</title>
-<meta name="description" content="Estació meteorològica ubicada al nostre refugi connectada a la xarxa AVAMET.">
-<link rel="icon" href="img/bb9bb0_42f6ed7c6336433e83f81bfbd39aaf56~mv2.png">
+<title>El temps al refugi | CEPEGO</title>
+<meta name="description" content="Estació meteorològica del refugi La Figuereta connectada a la xarxa AVAMET.">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<header class="site-header">
-  <div class="container">
+<div id="avis"></div>
+<header class="site-header" id="hdr">
+  <div class="wrap">
     <a class="brand" href="index.html">
-      <img src="img/bb9bb0_42f6ed7c6336433e83f81bfbd39aaf56~mv2.png" alt="Escut CEPEGO">
-      <span>Centre Excursionista Pego<small>PEGO · 1973</small></span>
+      <img src="img/favicon.png" alt="Escut CEPEGO">
+      <span><b>Centre Excursionista</b><small>Pego · 1973</small></span>
     </a>
-    <nav class="nav" aria-label="Menú principal">
-      <a href="index.html"><span class="va">Inici</span><span class="es">Inicio</span></a>
+    <nav class="nav" aria-label="Menú">
+      <a href="index.html" class=""><span class="va">Inici</span><span class="es">Inicio</span></a>
       <div class="nav-group">
-        <a href="refugi.html" class="nav-parent active">La Figuereta</a>
+        <a href="refugi.html" class="nav-parent active">La Figuereta <i class="caret"></i></a>
         <div class="nav-sub">
-          <a href="refugi.html">La Figuereta</a>
-          <a href="reservar.html">Reservar</a>
-          <a href="meteo.html" class="active"><span class="va">El temps al refugi</span><span class="es">Meteo al refugio</span></a>
+          <a href="refugi.html" class=""><b>La Figuereta</b><span class="desc"><span class="va">El refugi de muntanya</span><span class="es">El refugio de montaña</span></span></a>
+          <a href="reservar.html" class=""><b>Reservar</b><span class="desc"><span class="va">Disponibilitat i reserva</span><span class="es">Disponibilidad y reserva</span></span></a>
+          <a href="meteo.html" class="active"><b><span class="va">El temps</span><span class="es">Meteo</span></b><span class="desc"><span class="va">Estació al refugi</span><span class="es">Estación en el refugio</span></span></a>
         </div>
       </div>
       <div class="nav-group">
-        <a href="rutes.html" class="nav-parent"><span class="va">Activitats</span><span class="es">Actividades</span></a>
+        <a href="rutes.html" class="nav-parent"><span class="va">Activitats</span><span class="es">Actividades</span> <i class="caret"></i></a>
         <div class="nav-sub">
-          <a href="rutes.html"><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></a>
-          <a href="escalada.html">Escalada</a>
-          <a href="espeleo.html"><span class="va">Espeleologia</span><span class="es">Espeleología</span></a>
-          <a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a>
+          <a href="rutes.html" class=""><b><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></b><span class="desc"><span class="va">Senderisme per Pego</span><span class="es">Senderismo por Pego</span></span></a>
+          <a href="escalada.html" class=""><b>Escalada</b><span class="desc"><span class="va">Escola del Calvari</span><span class="es">Escuela del Calvari</span></span></a>
+          <a href="espeleo.html" class=""><b>Espeleologia</b><span class="desc"><span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span></span></a>
+          <a href="barrancs.html" class=""><b><span class="va">Barrancs</span><span class="es">Barrancos</span></b><span class="desc"><span class="va">Descens de barrancs</span><span class="es">Descenso de barrancos</span></span></a>
         </div>
       </div>
-      <a href="calendari.html"><span class="va">Calendari</span><span class="es">Calendario</span></a>
-      <a href="contacte.html"><span class="va">Contacte</span><span class="es">Contacto</span></a>
+      <a href="calendari.html" class=""><span class="va">Calendari</span><span class="es">Calendario</span></a>
+      <a href="contacte.html" class=""><span class="va">Contacte</span><span class="es">Contacto</span></a>
       <button class="lang-btn" data-lang-btn type="button">ES</button>
     </nav>
-    <button class="nav-toggle" aria-label="Obrir menú" type="button">
+    <button class="nav-toggle" aria-label="Menú" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
   </div>
-</header>
-
-<section class="hero hero--sm">
-  <div class="hero__bg" style="background-image:url('img/bb9bb0_fa8879e4ce8d4035b0588d0d1be17435~mv2.jpeg')"></div>
-  <div class="container">
-    <div class="eyebrow">El temps</div>
+</header><section class="subhero">
+  <div class="subhero__bg" style="background-image:url('img/bb9bb0_fa8879e4ce8d4035b0588d0d1be17435~mv2.jpeg')"></div>
+  <div class="subhero__scrim"></div>
+  <div class="wrap subhero__inner">
+    <div class="kicker on-photo">AVAMET</div>
     <h1><span class="va">El temps al refugi</span><span class="es">Meteo al refugio</span></h1>
-    <p class="va">Estació meteorològica connectada a la xarxa AVAMET.</p>
-    <p class="es">Estación meteorológica conectada a la red AVAMET.</p>
+    <p><span class="va">Estació meteorològica a La Figuereta, connectada a la xarxa AVAMET.</span><span class="es">Estación meteorológica en La Figuereta, conectada a la red AVAMET.</span></p>
   </div>
 </section>
-
 <section class="section">
-  <div class="container">
-    <div class="center" style="max-width:720px;margin:0 auto 30px">
-      <div class="eyebrow">AVAMET</div>
-      <h2><span class="va">Estació meteorològica del refugi</span><span class="es">Estación meteorológica del refugio</span></h2>
-      <p class="lead va">Estació meteorològica ubicada al nostre refugi La Figuereta, connectada a la xarxa AVAMET (Associació Valenciana de Meteorologia).</p>
-      <p class="lead es">Estación meteorológica ubicada en nuestro refugio La Figuereta, conectada a la red AVAMET (Asociación Valenciana de Meteorología).</p>
-    </div>
-    <div class="embed" style="max-width:900px;margin:0 auto">
-      <iframe src="https://www.avamet.org/mxo.php?id=c03c105e02" height="560" title="AVAMET — La Figuereta / Vall d'Ebo" loading="lazy"></iframe>
+  <div class="wrap">
+    <div class="embed reveal" style="max-width:1000px;margin:0 auto">
+      <iframe src="https://www.avamet.org/mxo_i.php?id=c30m135e02" title="AVAMET — La Figuereta" scrolling="no" style="height:1180px;max-height:82vh"></iframe>
     </div>
     <div class="center" style="margin-top:24px">
-      <a class="btn btn--navy" target="_blank" rel="noopener" href="https://www.avamet.org/">
-        <span class="va">Veure a AVAMET</span><span class="es">Ver en AVAMET</span>
-      </a>
+      <a class="btn btn-outline" target="_blank" rel="noopener" href="https://www.avamet.org/mxo_i.php?id=c30m135e02"><span class="va">Obrir a AVAMET</span><span class="es">Abrir en AVAMET</span></a>
     </div>
-    <p class="note center" style="max-width:760px;margin:26px auto 0"><span class="va">Les dades en directe (temperatura, pluja, vent…) es publiquen a la xarxa AVAMET. Si el giny no es mostra, obri'l directament amb el botó de dalt.</span><span class="es">Los datos en directo (temperatura, lluvia, viento…) se publican en la red AVAMET. Si el widget no se muestra, ábrelo directamente con el botón de arriba.</span></p>
   </div>
 </section>
-
 <footer class="footer">
-  <div class="container">
-    <div class="cols">
+  <div class="footer__top">
+    <div class="wrap footer__grid">
       <div>
-        <div class="brand-f">
-          <img src="img/bb9bb0_adf7f0669ac24f07b323f93d8f79508e~mv2.png" alt="Escut CEPEGO">
-          <b>Centre Excursionista<br>de Pego</b>
+        <div class="footer__brand">
+          <img src="img/crest-white.png" alt="Escut CEPEGO">
+          <span><b>Centre Excursionista<br>de Pego</b><small>Des de 1973</small></span>
         </div>
-        <p style="color:#cfd3e6"><span class="va">Club de muntanya sense ànim de lucre des de 1973. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña sin ánimo de lucro desde 1973. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
+        <p class="footer__desc"><span class="va">Club de muntanya sense ànim de lucre. Senderisme, escalada, barranquisme, espeleologia i alta muntanya, amb base al refugi La Figuereta.</span><span class="es">Club de montaña sin ánimo de lucro. Senderismo, escalada, barranquismo, espeleología y alta montaña, con base en el refugio La Figuereta.</span></p>
         <div class="social">
-          <a data-cms-href="facebook" href="https://www.facebook.com/centre.excursionistapego/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-          <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com" aria-label="Email">@</a>
+          <a href="https://www.instagram.com/refugifiguereta" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2m0 2.16c-3.14 0-3.5.01-4.74.07-.9.04-1.38.2-1.7.32-.43.17-.74.36-1.06.68-.32.32-.51.63-.68 1.06-.12.32-.28.8-.32 1.7-.06 1.24-.07 1.6-.07 4.74s.01 3.5.07 4.74c.04.9.2 1.38.32 1.7.17.43.36.74.68 1.06.32.32.63.51 1.06.68.32.12.8.28 1.7.32 1.24.06 1.6.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.2 1.7-.32.43-.17.74-.36 1.06-.68.32-.32.51-.63.68-1.06.12-.32.28-.8.32-1.7.06-1.24.07-1.6.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.2-1.38-.32-1.7a2.86 2.86 0 0 0-.68-1.06 2.86 2.86 0 0 0-1.06-.68c-.32-.12-.8-.28-1.7-.32-1.24-.06-1.6-.07-4.74-.07m0 3.67a4.97 4.97 0 1 1 0 9.94 4.97 4.97 0 0 1 0-9.94m0 8.2a3.23 3.23 0 1 0 0-6.46 3.23 3.23 0 0 0 0 6.46m6.34-8.42a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0"/></svg></a>
+          <a href="https://www.facebook.com/share/17fdDSFxDx" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.87 11.85v-8.38H7.08V12h3.05V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95H15.8c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12"/></svg></a>
+          <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com" aria-label="Correu"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1m1.4 2 7.6 5.3L19.6 7zM4 8.5V17h16V8.5l-8 5.6z"/></svg></a>
         </div>
       </div>
       <div>
-        <h4><span class="va">Navegació</span><span class="es">Navegación</span></h4>
+        <h4><span class="va">El club</span><span class="es">El club</span></h4>
         <ul>
           <li><a href="refugi.html">La Figuereta</a></li>
-          <li><a href="reservar.html"><span class="va">Reservar refugi</span><span class="es">Reservar refugio</span></a></li>
           <li><a href="rutes.html"><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></a></li>
           <li><a href="escalada.html">Escalada</a></li>
+          <li><a href="espeleo.html">Espeleologia</a></li>
+          <li><a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a></li>
           <li><a href="calendari.html"><span class="va">Calendari</span><span class="es">Calendario</span></a></li>
-          <li><a href="contacte.html"><span class="va">Contacte</span><span class="es">Contacto</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span class="va">El refugi</span><span class="es">El refugio</span></h4>
+        <ul>
+          <li><a href="reservar.html"><span class="va">Disponibilitat</span><span class="es">Disponibilidad</span></a></li>
+          <li><a href="reservar.html"><span class="va">Reservar</span><span class="es">Reservar</span></a></li>
+          <li><a href="meteo.html"><span class="va">El temps al refugi</span><span class="es">Meteo</span></a></li>
+          <li><a href="https://airtable.com/appkuKVxHSMyDElfh/shrZGPPFiEixpHQ62" target="_blank" rel="noopener"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></a></li>
         </ul>
       </div>
       <div>
         <h4><span class="va">Contacte</span><span class="es">Contacto</span></h4>
         <ul>
-          <li>📍 Carrer Llavador, s/n<br>03780 Pego (Alacant)</li>
-          <li>✉️ <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
-          <li>📞 <span data-cms="telefon">686 090 511</span></li>
+          <li><span class="va">Carrer Llavador, s/n</span><span class="es">Calle Llavador, s/n</span><br>03780 Pego</li>
+          <li><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
+          <li><a data-cms-href="telefon" href="tel:686090511"><span data-cms="telefon">686 090 511</span></a></li>
         </ul>
       </div>
     </div>
-    <div class="partners">
-      <img src="img/bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV">
-      <img src="img/bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego">
-      <img src="img/bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls">
+    <div class="wrap footer__partners">
+      <span><span class="va">Amb el suport de</span><span class="es">Con el apoyo de</span></span>
+      <a href="https://www.femecv.com/va" target="_blank" rel="noopener"><img src="img/bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV"></a>
+      <a href="https://www.pego.org/" target="_blank" rel="noopener"><img src="img/bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego"></a>
+      <a href="https://www.pegoilesvalls.es/" target="_blank" rel="noopener"><img src="img/bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls"></a>
       <img src="img/bb9bb0_fb25ea68ebd444d79d92311d8dd0561f~mv2.png" alt="Refugi La Figuereta">
     </div>
-    <div class="copyright">Centre Excursionista Pego · 1973–<span data-year></span></div>
+  </div>
+  <div class="wrap footer__bar">
+    <span>© <span data-year></span> Centre Excursionista de Pego</span>
+    <span><span class="va">Fet amb estima a la muntanya</span><span class="es">Hecho con cariño a la montaña</span></span>
   </div>
 </footer>
-
 <script src="js/main.js"></script>
 </body>
 </html>
