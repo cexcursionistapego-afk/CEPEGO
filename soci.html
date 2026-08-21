@@ -125,27 +125,36 @@
         <div id="alta-msg" class="r-msg"></div>
       </form>
     </div>
+    <div style="text-align:center;margin-top:clamp(24px,3vw,40px);padding-top:clamp(20px,2.5vw,32px);border-top:1px solid var(--hair)">
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px"><span class="va">Ja ets soci/a i vols donar-te de baixa?</span><span class="es">¿Ya eres socio/a y quieres darte de baja?</span></p>
+      <a href="#baixa" class="btn btn-ghost" style="font-size:.88rem"><span class="va">Baixa de soci →</span><span class="es">Baja de socio →</span></a>
+    </div>
   </div>
 </section>
 
 <hr class="section-rule" id="baixa">
-<section class="section">
+<section class="section bg-paper2">
   <div class="wrap narrow">
-    <div class="reveal">
+    <div class="reveal" style="text-align:center;margin-bottom:clamp(24px,3vw,40px)">
       <div class="kicker center-k"><span class="va">Donar-se de baixa</span><span class="es">Darse de baja</span></div>
-      <h2 style="text-align:center"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h2>
-      <p class="lead center" style="text-align:center"><span class="va">Lamentem veure't marxar. Ompli el formulari i processarem la teua baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario y procesaremos tu baja. Te confirmaremos por correo electrónico.</span></p>
+      <h2><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h2>
+      <p class="lead"><span class="va">Lamentem veure't marxar. Omple el formulari amb les teues dades i processarem la baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario con tus datos y procesaremos la baja. Te confirmaremos por correo electrónico.</span></p>
     </div>
-    <div class="card reveal" style="max-width:600px;margin:clamp(24px,3vw,40px) auto 0;border-top:3px solid var(--ember)">
+    <div class="card reveal" style="max-width:580px;margin:0 auto">
       <form id="baixa-form" novalidate>
-        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
         <div class="select-row">
-          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required></div>
-          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+          <div class="field"><label><span class="va">Nom</span><span class="es">Nombre</span> *</label><input name="nom" required autocomplete="given-name"></div>
+          <div class="field"><label><span class="va">Cognoms</span><span class="es">Apellidos</span> *</label><input name="cognoms" required autocomplete="family-name"></div>
         </div>
-        <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="3"></textarea></div>
+        <div class="field"><label>DNI / NIE *</label><input name="dni" required placeholder="12345678A" autocomplete="off"></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required autocomplete="email"></div>
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input type="tel" name="telefon" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label><span class="va">IBAN devolució quota (si escau)</span><span class="es">IBAN devolución cuota (si procede)</span></label><input name="iban" placeholder="ES00 0000 0000 0000 0000 0000"></div>
+        <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="2"></textarea></div>
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button type="submit" id="baixa-submit" class="btn btn-ghost"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
+        <button type="submit" id="baixa-submit" class="btn btn-ghost" style="width:100%;margin-top:4px"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
         <div id="baixa-msg" class="r-msg"></div>
       </form>
     </div>

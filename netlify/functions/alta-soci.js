@@ -57,7 +57,7 @@ exports.handler = async function (event) {
     'EMAIL': email,
     'TELÉFONO': telefon,
     'POBLACIÓN': s(b.poblacio) || s(b.cp) || '',
-    'TIPO DE CONSULTA': 'ALTA DE SOCI',
+    'TIPO DE CONSULTA': 'VULL FORMAR PART DEL CLUB',
     'ESTADO': 'PENDENT GESTIONAR',
     'MENSAJE': lines,
   };

@@ -69,9 +69,12 @@
       var body = {};
       fd.forEach(function (v, k) { body[k] = v; });
 
-      if (!(body.nom || '').trim() || !(body.email || '').trim()) {
-        show(baixaMsg, l === 'es' ? 'Falten camps obligatoris (*).' : 'Falten camps obligatoris (*).', 'err');
-        return;
+      var requiredB = ['nom', 'cognoms', 'dni', 'email'];
+      for (var j = 0; j < requiredB.length; j++) {
+        if (!(body[requiredB[j]] || '').trim()) {
+          show(baixaMsg, l === 'es' ? 'Falten camps obligatoris (*).' : 'Falten camps obligatoris (*).', 'err');
+          return;
+        }
       }
 
       baixaBtn.disabled = true;

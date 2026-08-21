@@ -1,12 +1,13 @@
 // POST /api/baixa-soci
-// Crea una sol·licitud de baixa de soci a la taula CONTACTE d'Airtable.
+// Envia una sol·licitud de baixa a la taula BAIXES CENTRE EXCURSIONISTA PEGO.
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
-const TABLE = process.env.AIRTABLE_TABLE || 'tblAD8ZeIKmNwNRm9';
+const TABLE = 'tblGeQzo49FyjBQJs'; // BAIXES CENTRE EXCURSIONISTA PEGO
 
 function res(code, obj) {
   return { statusCode: code, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) };
 }
+function s(v) { return (v || '').trim(); }
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') return res(405, { ok: false, error: 'method' });
@@ -18,18 +19,23 @@ exports.handler = async function (event) {
 
   if (b.website) return res(200, { ok: true }); // honeypot
 
-  const nom = (b.nom || '').trim();
-  const email = (b.email || '').trim();
-  if (!nom || !email) return res(400, { ok: false, error: 'camps' });
+  const nom     = s(b.nom);
+  const cognoms = s(b.cognoms);
+  const dni     = s(b.dni);
+  const email   = s(b.email);
+
+  if (!nom || !cognoms || !dni || !email)
+    return res(400, { ok: false, error: 'camps', message: 'Falten camps obligatoris.' });
 
   const fields = {
-    'NOMBRE Y APELLIDOS': nom,
-    'EMAIL': email,
-    'TIPO DE CONSULTA': 'BAIXA DE SOCI',
-    'ESTADO': 'PENDENT GESTIONAR',
+    'NOM':     nom,
+    'COGNOMS': cognoms,
+    'DNI':     dni,
+    'EMAIL':   email,
   };
-  if (b.telefon) fields['TELÉFONO'] = String(b.telefon).trim();
-  if (b.missatge) fields['MENSAJE'] = String(b.missatge).trim();
+  if (s(b.telefon)) fields['TELÈFON']        = s(b.telefon);
+  if (s(b.iban))    fields['BANC DEVOLUCIÓ'] = s(b.iban);
+  if (s(b.missatge))fields['NOTAS']          = s(b.missatge);
 
   try {
     const r = await fetch(`https://api.airtable.com/v0/${BASE}/${TABLE}`, {

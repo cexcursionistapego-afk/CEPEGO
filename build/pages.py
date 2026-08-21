@@ -11,17 +11,17 @@ def build(g):
     # ============================================= HOME
     # (href, tva, tes, pva, pes, num)
     acts=[
-     ("rutes.html",    "Senderisme","Senderismo",
+     ("calendari.html","Senderisme","Senderismo",
       "Rutes tot l'any per Pego i les Valls, amb fitxes de track i distàncies.","Rutas todo el año por Pego y sus valles, con fichas de track y distancias.","01"),
-     ("escalada.html", "Escalada","Escalada",
+     ("calendari.html","Escalada","Escalada",
       "Escola del Calvari: 28 vies equipades per a tots els nivells, des d'iniciació fins a dificultat.","Escuela del Calvari: 28 vías equipadas para todos los niveles, desde iniciación hasta dificultad.","02"),
-     ("espeleo.html",  "Espeleologia","Espeleología",
+     ("calendari.html","Espeleologia","Espeleología",
       "Avencs i coves del massís calcari de la Vall d'Ebo. Exploració subterrània en grup.","Avencos y cuevas del macizo calcáreo de la Vall d'Ebo. Exploración subterránea en grupo.","03"),
-     ("barrancs.html", "Barrancs","Barrancos",
+     ("calendari.html","Barrancs","Barrancos",
       "Descens de barrancs per la comarca. Corda, neoprè i aventura entre aiguamolls i cascades.","Descenso de barrancos por la comarca. Cuerda, neopreno y aventura entre parajes y cascadas.","04"),
      ("calendari.html","Alta muntanya","Alta montaña",
       "Eixides als grans cims i itineraris alpins de la temporada hivernal. Material tècnic i experiència.","Salidas a las grandes cimas e itinerarios alpinos de la temporada invernal. Material técnico y experiencia.","05"),
-     ("meteo.html",    "Meteorologia","Meteorología",
+     ("calendari.html","Meteorologia","Meteorología",
       "Estació meteorològica professional al refugi, connectada en temps real a la xarxa AVAMET.","Estación meteorológica profesional en el refugio, conectada en tiempo real a la red AVAMET.","06"),
     ]
     act_cards=""
@@ -41,7 +41,7 @@ def build(g):
   <div class="hero__scrim"></div>
   <div class="wrap hero__inner">
     <img class="crest" src="{IMG}favicon.png" alt="Escut CEPEGO">
-    <div class="kicker on-photo">Des de 1973</div>
+    <div class="kicker on-photo"><span class="va">Pego · Alacant · Des de 1973</span><span class="es">Pego · Alicante · Desde 1973</span></div>
     <h1><span class="va">Vivim la muntanya,<br><em>compartim</em> l'aventura</span><span class="es">Vivimos la montaña,<br><em>compartimos</em> la aventura</span></h1>
     <p><span class="va">El Centre Excursionista de Pego és un club sense ànim de lucre format per gent de totes les edats unida per la natura i els esports de muntanya.</span><span class="es">El Centro Excursionista de Pego es un club sin ánimo de lucro formado por gente de todas las edades unida por la naturaleza y los deportes de montaña.</span></p>
     <div class="hero__actions">
@@ -49,7 +49,6 @@ def build(g):
       <a href="refugi.html" class="btn btn-ghost"><span class="va">El refugi La Figuereta</span><span class="es">El refugio La Figuereta</span></a>
     </div>
   </div>
-  <div class="hero__meta">Vall d'Ebo · Pego</div>
 </section>
 
 <section class="section">
@@ -584,27 +583,36 @@ def build(g):
         <div id="alta-msg" class="r-msg"></div>
       </form>
     </div>
+    <div style="text-align:center;margin-top:clamp(24px,3vw,40px);padding-top:clamp(20px,2.5vw,32px);border-top:1px solid var(--hair)">
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px"><span class="va">Ja ets soci/a i vols donar-te de baixa?</span><span class="es">¿Ya eres socio/a y quieres darte de baja?</span></p>
+      <a href="#baixa" class="btn btn-ghost" style="font-size:.88rem"><span class="va">Baixa de soci →</span><span class="es">Baja de socio →</span></a>
+    </div>
   </div>
 </section>
 
 <hr class="section-rule" id="baixa">
-<section class="section">
+<section class="section bg-paper2">
   <div class="wrap narrow">
-    <div class="reveal">
+    <div class="reveal" style="text-align:center;margin-bottom:clamp(24px,3vw,40px)">
       <div class="kicker center-k"><span class="va">Donar-se de baixa</span><span class="es">Darse de baja</span></div>
-      <h2 style="text-align:center"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h2>
-      <p class="lead center" style="text-align:center"><span class="va">Lamentem veure't marxar. Ompli el formulari i processarem la teua baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario y procesaremos tu baja. Te confirmaremos por correo electrónico.</span></p>
+      <h2><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h2>
+      <p class="lead"><span class="va">Lamentem veure't marxar. Omple el formulari amb les teues dades i processarem la baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario con tus datos y procesaremos la baja. Te confirmaremos por correo electrónico.</span></p>
     </div>
-    <div class="card reveal" style="max-width:600px;margin:clamp(24px,3vw,40px) auto 0;border-top:3px solid var(--ember)">
+    <div class="card reveal" style="max-width:580px;margin:0 auto">
       <form id="baixa-form" novalidate>
-        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
         <div class="select-row">
-          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required></div>
-          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+          <div class="field"><label><span class="va">Nom</span><span class="es">Nombre</span> *</label><input name="nom" required autocomplete="given-name"></div>
+          <div class="field"><label><span class="va">Cognoms</span><span class="es">Apellidos</span> *</label><input name="cognoms" required autocomplete="family-name"></div>
         </div>
-        <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="3"></textarea></div>
+        <div class="field"><label>DNI / NIE *</label><input name="dni" required placeholder="12345678A" autocomplete="off"></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required autocomplete="email"></div>
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input type="tel" name="telefon" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label><span class="va">IBAN devolució quota (si escau)</span><span class="es">IBAN devolución cuota (si procede)</span></label><input name="iban" placeholder="ES00 0000 0000 0000 0000 0000"></div>
+        <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="2"></textarea></div>
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button type="submit" id="baixa-submit" class="btn btn-ghost"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
+        <button type="submit" id="baixa-submit" class="btn btn-ghost" style="width:100%;margin-top:4px"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
         <div id="baixa-msg" class="r-msg"></div>
       </form>
     </div>
