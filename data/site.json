@@ -1,12 +1,12 @@
 {
-  "email": "cexcursionistapego@gmail.com",
-  "telefon": "686 090 511",
-  "adreca": "Carrer Llavador, s/n · 03780 Pego",
-  "facebook": "https://www.facebook.com/centre.excursionistapego/",
-  "iban": "ES88 0081 1028 86 0001004510",
-  "preu1": "190 €",
   "preu2": "250 €",
   "preu3": "350 €",
+  "facebook": "https://www.facebook.com/centre.excursionistapego/",
+  "iban": "ES88 0081 1028 86 0001004510",
   "quota_soci": "35 €",
-  "quota_sala": "50 €"
+  "quota_sala": "50 €",
+  "adreca": "Carrer Llavador, 83 · 03780 Pego",
+  "telefon": "NO",
+  "email": "cexcursionistapego@gmail.com",
+  "preu1": "190 €"
 }
