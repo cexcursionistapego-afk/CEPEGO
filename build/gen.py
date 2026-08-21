@@ -64,7 +64,6 @@ def header(active):
     return f'''<header class="site-header" id="hdr">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <img src="{IMG}favicon.png" alt="Escut CEPEGO">
       <span><b>Centre Excursionista</b><small>Pego · 1973</small></span>
     </a>
     <nav class="nav" aria-label="Menú">
