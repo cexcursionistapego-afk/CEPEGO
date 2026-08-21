@@ -31,6 +31,7 @@ exports.handler = async function (event) {
   if (salida < entrada) return res(400, { ok: false, error: 'dates' });
 
   const persones = parseInt(b.persones, 10);
+  if (!isNaN(persones) && persones > 21) return res(400, { ok: false, error: 'persones', message: 'Màxim 21 persones.' });
   const soci = (b.soci === 'Si' || b.soci === 'No') ? b.soci : undefined;
   const internet = (b.internet === 'Si' || b.internet === 'No') ? b.internet : undefined;
 

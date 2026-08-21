@@ -13,6 +13,14 @@
   from = "/api/reserva"
   to = "/.netlify/functions/reserva"
   status = 200
+[[redirects]]
+  from = "/api/alta-soci"
+  to = "/.netlify/functions/alta-soci"
+  status = 200
+[[redirects]]
+  from = "/api/baixa-soci"
+  to = "/.netlify/functions/baixa-soci"
+  status = 200
 
 # Cau curt per als índexs de dades editables
 [[headers]]

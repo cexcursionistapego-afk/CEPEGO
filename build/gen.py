@@ -49,6 +49,7 @@ ACT_SUB=[("rutes.html",'<span class="va">Rutes i entorn</span><span class="es">R
 def header(active):
     fig_open = active in ("refugi","reservar","meteo")
     act_open = active in ("rutes","escalada","espeleo","barrancs")
+    soci_ac=' active' if active=='soci' else ''
     def sub(items):
         r=""
         for href,label,desc,key in items:
@@ -80,6 +81,7 @@ def header(active):
       </div>
       <a href="calendari.html" class="{cal_ac.strip()}"><span class="va">Calendari</span><span class="es">Calendario</span></a>
       <a href="contacte.html" class="{con_ac.strip()}"><span class="va">Contacte</span><span class="es">Contacto</span></a>
+      <a href="soci.html" class="soci-link{soci_ac}"><span class="va">Racó del soci</span><span class="es">Área del socio</span></a>
       <button class="lang-btn" data-lang-btn type="button">ES</button>
     </nav>
     <button class="nav-toggle" aria-label="Menú" type="button">
@@ -93,61 +95,79 @@ FB_SVG='<svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.87 11.85v-8.38H7
 MAIL_SVG='<svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1m1.4 2 7.6 5.3L19.6 7zM4 8.5V17h16V8.5l-8 5.6z"/></svg>'
 
 def footer():
-    return f'''<footer class="footer">
-  <div class="footer__top">
-    <div class="wrap footer__grid">
+    return f'''<div class="prefooter">
+  <div class="wrap">
+    <div class="prefooter__text">
+      <div class="kicker"><span class="va">Uneix-te a nosaltres</span><span class="es">Únete a nosotros</span></div>
+      <h2><span class="va">Vine a la muntanya<br>amb el CEPEGO</span><span class="es">Ven a la montaña<br>con el CEPEGO</span></h2>
+      <p><span class="va">Fes-te soci per 35 €/any i gaudeix de totes les activitats, descomptes al refugi i la comunitat del club.</span><span class="es">Hazte socio por 35 €/año y disfruta de todas las actividades, descuentos en el refugio y la comunidad del club.</span></p>
+    </div>
+    <div class="prefooter__cta">
+      <a href="soci.html" class="btn btn-primary"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></a>
+      <a href="contacte.html" class="btn btn-ghost"><span class="va">Contacta'ns</span><span class="es">Contáctanos</span></a>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="wrap">
+    <!-- Brand strip -->
+    <div class="footer__head">
+      <img class="logo" src="{IMG}crest-white.png" alt="Escut CEPEGO">
       <div>
-        <div class="footer__brand">
-          <img src="{IMG}crest-white.png" alt="Escut CEPEGO">
-          <span><b>Centre Excursionista<br>de Pego</b><small>Des de 1973</small></span>
-        </div>
-        <p class="footer__desc"><span class="va">Club de muntanya sense ànim de lucre. Senderisme, escalada, barranquisme, espeleologia i alta muntanya, amb base al refugi La Figuereta.</span><span class="es">Club de montaña sin ánimo de lucro. Senderismo, escalada, barranquismo, espeleología y alta montaña, con base en el refugio La Figuereta.</span></p>
-        <div class="social">
-          <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{IG_SVG}</a>
-          <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook">{FB_SVG}</a>
-          <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com" aria-label="Correu">{MAIL_SVG}</a>
-        </div>
+        <div class="footer__name">Centre Excursionista<br>de Pego<small>Des de 1973 · Pego, Alacant</small></div>
       </div>
+      <p class="footer__tagline"><span class="va">Club de muntanya sense ànim de lucre. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña sin ánimo de lucro. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
+      <div class="social">
+        <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{IG_SVG}</a>
+        <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook">{FB_SVG}</a>
+        <a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com" aria-label="Correu">{MAIL_SVG}</a>
+      </div>
+    </div>
+    <!-- 3 columns -->
+    <div class="footer__grid">
       <div>
-        <h4><span class="va">El club</span><span class="es">El club</span></h4>
+        <h4><span class="va">Activitats</span><span class="es">Actividades</span></h4>
         <ul>
-          <li><a href="refugi.html">La Figuereta</a></li>
-          <li><a href="rutes.html"><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></a></li>
+          <li><a href="rutes.html"><span class="va">Senderisme i rutes</span><span class="es">Senderismo y rutas</span></a></li>
           <li><a href="escalada.html">Escalada</a></li>
           <li><a href="espeleo.html">Espeleologia</a></li>
           <li><a href="barrancs.html"><span class="va">Barrancs</span><span class="es">Barrancos</span></a></li>
-          <li><a href="calendari.html"><span class="va">Calendari</span><span class="es">Calendario</span></a></li>
+          <li><a href="calendari.html"><span class="va">Calendari d'activitats</span><span class="es">Calendario de actividades</span></a></li>
         </ul>
       </div>
       <div>
-        <h4><span class="va">El refugi</span><span class="es">El refugio</span></h4>
+        <h4>La Figuereta</h4>
         <ul>
-          <li><a href="reservar.html"><span class="va">Disponibilitat</span><span class="es">Disponibilidad</span></a></li>
-          <li><a href="reservar.html"><span class="va">Reservar</span><span class="es">Reservar</span></a></li>
-          <li><a href="meteo.html"><span class="va">El temps al refugi</span><span class="es">Meteo</span></a></li>
-          <li><a href="{ALTA}" target="_blank" rel="noopener"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></a></li>
+          <li><a href="refugi.html"><span class="va">El refugi</span><span class="es">El refugio</span></a></li>
+          <li><a href="reservar.html"><span class="va">Disponibilitat i reserva</span><span class="es">Disponibilidad y reserva</span></a></li>
+          <li><a href="meteo.html"><span class="va">El temps al refugi</span><span class="es">Meteo en el refugio</span></a></li>
+          <li><a href="soci.html"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></a></li>
+          <li><a href="soci.html#baixa"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></a></li>
         </ul>
       </div>
       <div>
         <h4><span class="va">Contacte</span><span class="es">Contacto</span></h4>
-        <ul>
-          <li><span class="va">Carrer Llavador, s/n</span><span class="es">Calle Llavador, s/n</span><br>03780 Pego</li>
-          <li><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
-          <li><a data-cms-href="telefon" href="tel:686090511"><span data-cms="telefon">686 090 511</span></a></li>
+        <ul class="footer__contact">
+          <li><span class="ic">📍</span><span><span class="va">Carrer Llavador, s/n</span><span class="es">Calle Llavador, s/n</span><br>03780 Pego</span></li>
+          <li><span class="ic">✉️</span><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
+          <li><span class="ic">📞</span><a data-cms-href="telefon" href="tel:686090511"><span data-cms="telefon">686 090 511</span></a></li>
+          <li><span class="ic">📷</span><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></li>
         </ul>
       </div>
     </div>
-    <div class="wrap footer__partners">
+    <!-- Partners -->
+    <div class="footer__partners">
       <span><span class="va">Amb el suport de</span><span class="es">Con el apoyo de</span></span>
       <a href="{FEMECV}" target="_blank" rel="noopener"><img src="{IMG}bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV"></a>
       <a href="{AJPEGO}" target="_blank" rel="noopener"><img src="{IMG}bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego"></a>
       <a href="{PIV}" target="_blank" rel="noopener"><img src="{IMG}bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls"></a>
       <img src="{IMG}bb9bb0_fb25ea68ebd444d79d92311d8dd0561f~mv2.png" alt="Refugi La Figuereta">
     </div>
-  </div>
-  <div class="wrap footer__bar">
-    <span>© <span data-year></span> Centre Excursionista de Pego</span>
-    <span><span class="va">Fet amb estima a la muntanya</span><span class="es">Hecho con cariño a la montaña</span></span>
+    <!-- Copyright bar -->
+    <div class="footer__bar">
+      <span>© <span data-year></span> Centre Excursionista de Pego</span>
+      <span><span class="va">Fet amb estima a la muntanya</span><span class="es">Hecho con cariño a la montaña</span></span>
+    </div>
   </div>
 </footer>'''
 

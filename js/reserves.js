@@ -141,8 +141,8 @@
           if(res && res.ok){
             form.reset(); selStart=selEnd=null; sync(); render();
             show(l==='es'
-              ? '¡Solicitud enviada! La revisaremos y te contactaremos para confirmar la fecha y el pago de la señal (50 €).'
-              : 'Sol·licitud enviada! La revisarem i et contactarem per confirmar la data i el pagament de la senyal (50 €).','ok');
+              ? '¡Solicitud enviada! La revisaremos y nos pondremos en contacto contigo por correo electrónico para confirmar la fecha y el pago de la señal (50 €).'
+              : 'Sol·licitud enviada! La revisarem i ens posarem en contacte amb tu per correu electrònic per confirmar la data i el pagament de la senyal (50 €).','ok');
           } else {
             submitBtn.disabled=false;
             show(l==='es'?'No se ha podido enviar. Inténtalo de nuevo o escríbenos por email.':'No s\'ha pogut enviar. Torna-ho a provar o escriu-nos per correu.','err');

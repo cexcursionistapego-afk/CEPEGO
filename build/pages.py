@@ -9,19 +9,36 @@ def build(g):
     RESERVA_EMBED="https://airtable.com/embed/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka"
 
     # ============================================= HOME
+    # (btype, bg/gradient, href, tva, tes, pva, pes, icon)
     acts=[
-     (L2,"rutes.html","Senderisme","Senderismo","Rutes tot l'any per Pego i les Valls.","Rutas todo el año por Pego y sus valles."),
-     (L1,"escalada.html","Escalada","Escalada","Escola del Calvari, 28 vies equipades.","Escuela del Calvari, 28 vías equipadas."),
-     (REFUGI[9],"espeleo.html","Espeleologia","Espeleología","Avencs i coves del massís calcari.","Avencos y cuevas del macizo calcáreo."),
-     (REFUGI[5],"barrancs.html","Barrancs","Barrancos","Descens dels barrancs de la comarca.","Descenso de los barrancos de la comarca."),
-     (REFUGI[10],"refugi.html","Alta muntanya","Alta montaña","Eixides amb base al refugi La Figuereta.","Salidas con base en el refugio La Figuereta."),
-     (REFUGI[4],"meteo.html","El temps","Meteo","Estació al refugi, xarxa AVAMET.","Estación en el refugio, red AVAMET."),
+     ('img', L2,  "rutes.html",    "Senderisme","Senderismo",
+      "Rutes tot l'any per Pego i les Valls, amb fitxes i distàncies.","Rutas todo el año por Pego y sus valles, con fichas y distancias.","🥾"),
+     ('img', L1,  "escalada.html", "Escalada","Escalada",
+      "Escola del Calvari: 28 vies equipades per a tots els nivells.","Escuela del Calvari: 28 vías equipadas para todos los niveles.","🧗"),
+     ('grad',"linear-gradient(155deg,#140d2e 0%,#2d1b5e 55%,#1e3348 100%)",
+      "espeleo.html","Espeleologia","Espeleología",
+      "Avencs i coves del massís calcari de la Vall d'Ebo.","Avencos y cuevas del macizo calcáreo de la Vall d'Ebo.","🔦"),
+     ('grad',"linear-gradient(155deg,#07334a 0%,#0e6480 55%,#1e8fa0 100%)",
+      "barrancs.html","Barrancs","Barrancos",
+      "Descens de barrancs per la comarca. Corda, neoprè i aventura.","Descenso de barrancos por la comarca. Cuerda, neopreno y aventura.","💧"),
+     ('grad',"linear-gradient(155deg,#0e1f3a 0%,#1c3d6b 55%,#2a5a8c 100%)",
+      "calendari.html","Alta muntanya","Alta montaña",
+      "Eixides d'alta muntanya, cims i itineraris alpins per tota la temporada.","Salidas de alta montaña, cimas e itinerarios alpinos toda la temporada.","⛰️"),
+     ('grad',"linear-gradient(155deg,#1a2d42 0%,#1f4e6e 55%,#2975a0 100%)",
+      "meteo.html","El temps","Meteo",
+      "Estació meteorològica al refugi, connectada a la xarxa AVAMET.","Estación meteorológica en el refugio, conectada a la red AVAMET.","🌤️"),
     ]
     act_cards=""
-    for bg,href,tva,tes,pva,pes in acts:
+    for btype,bg,href,tva,tes,pva,pes,icon in acts:
+        if btype=='img':
+            bg_html=f'<div class="act__bg" style="background-image:url(\'{bg}\')"></div>'
+            icon_html=""
+        else:
+            bg_html=f'<div class="act__bg" style="background:{bg}"></div>'
+            icon_html=f'<div class="act__icon">{icon}</div>'
         act_cards+=f'''      <a class="act reveal" href="{href}">
-        <div class="act__bg" style="background-image:url('{bg}')"></div>
-        <div class="act__body">
+        {bg_html}
+        {icon_html}<div class="act__body">
           <h3><span class="va">{tva}</span><span class="es">{tes}</span></h3>
           <p><span class="va">{pva}</span><span class="es">{pes}</span></p>
           <div class="act__arrow"><span class="va">Descobrir</span><span class="es">Descubrir</span> →</div>
@@ -38,7 +55,7 @@ def build(g):
     <h1><span class="va">Vivim la muntanya,<br><em>compartim</em> l'aventura</span><span class="es">Vivimos la montaña,<br><em>compartimos</em> la aventura</span></h1>
     <p><span class="va">El Centre Excursionista de Pego és un club sense ànim de lucre format per gent de totes les edats unida per la natura i els esports de muntanya.</span><span class="es">El Centro Excursionista de Pego es un club sin ánimo de lucro formado por gente de todas las edades unida por la naturaleza y los deportes de montaña.</span></p>
     <div class="hero__actions">
-      <a href="{ALTA}" target="_blank" rel="noopener" class="btn btn-primary"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></a>
+      <a href="soci.html" class="btn btn-primary"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></a>
       <a href="refugi.html" class="btn btn-ghost"><span class="va">El refugi La Figuereta</span><span class="es">El refugio La Figuereta</span></a>
     </div>
   </div>
@@ -496,3 +513,60 @@ def build(g):
 '''+footer()
     write("contacte.html", doc("Contacte | CEPEGO",
         "Contacta amb el Centre Excursionista de Pego: correu, telèfon i formulari de reserva.", contacte))
+
+    # ============================================= SOCI (ALTA / BAIXA)
+    soci=header("soci")+subhero(REFUGI[1],'<span class="va">Centre Excursionista de Pego</span><span class="es">Centre Excursionista de Pego</span>',
+        '<span class="va">Racó del soci</span><span class="es">Área del socio</span>',
+        '<span class="va">Racó del soci</span><span class="es">Área del socio</span>',
+        '<span class="va">Gestiona la teua pertinença al club: alta, baixa i informació per als socis.</span>',
+        '<span class="es">Gestiona tu pertenencia al club: alta, baja e información para los socios.</span>')+f'''
+<section class="section" id="alta">
+  <div class="wrap narrow">
+    <div class="reveal">
+      <div class="kicker center-k"><span class="va">Uneix-te al club</span><span class="es">Únete al club</span></div>
+      <h2 style="text-align:center"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></h2>
+      <p class="lead center" style="text-align:center"><span class="va">La quota anual és de <strong>35 €</strong>. Ompli el formulari i et contactarem per correu electrònic per confirmar-te l'alta i indicar-te com realitzar el pagament.</span><span class="es">La cuota anual es de <strong>35 €</strong>. Rellena el formulario y te contactaremos por correo electrónico para confirmar el alta e indicarte cómo realizar el pago.</span></p>
+    </div>
+    <div class="card reveal" style="max-width:600px;margin:clamp(24px,3vw,40px) auto 0">
+      <form id="alta-form" novalidate>
+        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required></div>
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+        </div>
+        <div class="field"><label><span class="va">Població</span><span class="es">Población</span></label><input name="poblacio"></div>
+        <div class="field"><label><span class="va">Missatge o notes (opcional)</span><span class="es">Mensaje o notas (opcional)</span></label><textarea name="missatge" rows="3"></textarea></div>
+        <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button type="submit" id="alta-submit" class="btn btn-primary"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
+        <div id="alta-msg" class="r-msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule" id="baixa">
+<section class="section">
+  <div class="wrap narrow">
+    <div class="reveal">
+      <div class="kicker center-k"><span class="va">Donar-se de baixa</span><span class="es">Darse de baja</span></div>
+      <h2 style="text-align:center"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h2>
+      <p class="lead center" style="text-align:center"><span class="va">Lamentem veure't marxar. Ompli el formulari i processarem la teua baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario y procesaremos tu baja. Te confirmaremos por correo electrónico.</span></p>
+    </div>
+    <div class="card reveal" style="max-width:600px;margin:clamp(24px,3vw,40px) auto 0;border-top:3px solid var(--ember)">
+      <form id="baixa-form" novalidate>
+        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required></div>
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+        </div>
+        <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="3"></textarea></div>
+        <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button type="submit" id="baixa-submit" class="btn btn-ghost"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
+        <div id="baixa-msg" class="r-msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+'''+footer()
+    write("soci.html", doc("Racó del soci | CEPEGO",
+        "Gestiona la teua pertinença al Centre Excursionista de Pego: alta de soci, baixa i informació.", soci, extra_js="js/soci.js"))

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Espeleologia | CEPEGO</title>
-<meta name="description" content="Les principals cavitats i avencs de la zona de Pego, amb les seues topografies.">
+<title>Racó del soci | CEPEGO</title>
+<meta name="description" content="Gestiona la teua pertinença al Centre Excursionista de Pego: alta de soci, baixa i informació.">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,17 +31,17 @@
         </div>
       </div>
       <div class="nav-group">
-        <a href="rutes.html" class="nav-parent active"><span class="va">Activitats</span><span class="es">Actividades</span> <i class="caret"></i></a>
+        <a href="rutes.html" class="nav-parent"><span class="va">Activitats</span><span class="es">Actividades</span> <i class="caret"></i></a>
         <div class="nav-sub">
           <a href="rutes.html" class=""><b><span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span></b><span class="desc"><span class="va">Senderisme per Pego</span><span class="es">Senderismo por Pego</span></span></a>
           <a href="escalada.html" class=""><b>Escalada</b><span class="desc"><span class="va">Escola del Calvari</span><span class="es">Escuela del Calvari</span></span></a>
-          <a href="espeleo.html" class="active"><b>Espeleologia</b><span class="desc"><span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span></span></a>
+          <a href="espeleo.html" class=""><b>Espeleologia</b><span class="desc"><span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span></span></a>
           <a href="barrancs.html" class=""><b><span class="va">Barrancs</span><span class="es">Barrancos</span></b><span class="desc"><span class="va">Descens de barrancs</span><span class="es">Descenso de barrancos</span></span></a>
         </div>
       </div>
       <a href="calendari.html" class=""><span class="va">Calendari</span><span class="es">Calendario</span></a>
       <a href="contacte.html" class=""><span class="va">Contacte</span><span class="es">Contacto</span></a>
-      <a href="soci.html" class="soci-link"><span class="va">Racó del soci</span><span class="es">Área del socio</span></a>
+      <a href="soci.html" class="soci-link active"><span class="va">Racó del soci</span><span class="es">Área del socio</span></a>
       <button class="lang-btn" data-lang-btn type="button">ES</button>
     </nav>
     <button class="nav-toggle" aria-label="Menú" type="button">
@@ -49,20 +49,58 @@
     </button>
   </div>
 </header><section class="subhero">
-  <div class="subhero__bg" style="background-image:url('img/bb9bb0_80c717276f16429da7a2ff0aee4b2bc5~mv2.jpg')"></div>
+  <div class="subhero__bg" style="background-image:url('img/bb9bb0_a2ce80027c5a41e283c411a4d6aadbd8~mv2.jpg')"></div>
   <div class="subhero__scrim"></div>
   <div class="wrap subhero__inner">
-    <div class="kicker on-photo"><span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span></div>
-    <h1><span class="va">Espeleologia</span><span class="es">Espeleología</span></h1>
-    <p><span class="va">Les principals cavitats de la nostra zona, amb ressenyes i topografies.</span><span class="es">Las principales cavidades de nuestra zona, con reseñas y topografías.</span></p>
+    <div class="kicker on-photo"><span class="va">Centre Excursionista de Pego</span><span class="es">Centre Excursionista de Pego</span></div>
+    <h1><span class="va"><span class="va">Racó del soci</span><span class="es">Área del socio</span></span><span class="es"><span class="va">Racó del soci</span><span class="es">Área del socio</span></span></h1>
+    <p><span class="va"><span class="va">Gestiona la teua pertinença al club: alta, baixa i informació per als socis.</span></span><span class="es"><span class="es">Gestiona tu pertenencia al club: alta, baja e información para los socios.</span></span></p>
   </div>
 </section>
+<section class="section" id="alta">
+  <div class="wrap narrow">
+    <div class="reveal">
+      <div class="kicker center-k"><span class="va">Uneix-te al club</span><span class="es">Únete al club</span></div>
+      <h2 style="text-align:center"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></h2>
+      <p class="lead center" style="text-align:center"><span class="va">La quota anual és de <strong>35 €</strong>. Ompli el formulari i et contactarem per correu electrònic per confirmar-te l'alta i indicar-te com realitzar el pagament.</span><span class="es">La cuota anual es de <strong>35 €</strong>. Rellena el formulario y te contactaremos por correo electrónico para confirmar el alta e indicarte cómo realizar el pago.</span></p>
+    </div>
+    <div class="card reveal" style="max-width:600px;margin:clamp(24px,3vw,40px) auto 0">
+      <form id="alta-form" novalidate>
+        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required></div>
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+        </div>
+        <div class="field"><label><span class="va">Població</span><span class="es">Población</span></label><input name="poblacio"></div>
+        <div class="field"><label><span class="va">Missatge o notes (opcional)</span><span class="es">Mensaje o notas (opcional)</span></label><textarea name="missatge" rows="3"></textarea></div>
+        <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button type="submit" id="alta-submit" class="btn btn-primary"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
+        <div id="alta-msg" class="r-msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule" id="baixa">
 <section class="section">
-  <div class="wrap">
-    <div class="topos reveal">
-      <a href="img/bb9bb0_855db2b521a34b89b40493f0da2e37e8~mv2.png"><img loading="lazy" src="img/bb9bb0_855db2b521a34b89b40493f0da2e37e8~mv2.png" alt="Topografia"></a>
-      <a href="img/bb9bb0_52ad1044d2e44fa296bdd0ee216e139b~mv2.png"><img loading="lazy" src="img/bb9bb0_52ad1044d2e44fa296bdd0ee216e139b~mv2.png" alt="Topografia avenc"></a>
-      <a href="img/bb9bb0_ad75be20ffaa4beda5eb4123765e797b~mv2.png"><img loading="lazy" src="img/bb9bb0_ad75be20ffaa4beda5eb4123765e797b~mv2.png" alt="Topografia avenc"></a>
+  <div class="wrap narrow">
+    <div class="reveal">
+      <div class="kicker center-k"><span class="va">Donar-se de baixa</span><span class="es">Darse de baja</span></div>
+      <h2 style="text-align:center"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h2>
+      <p class="lead center" style="text-align:center"><span class="va">Lamentem veure't marxar. Ompli el formulari i processarem la teua baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario y procesaremos tu baja. Te confirmaremos por correo electrónico.</span></p>
+    </div>
+    <div class="card reveal" style="max-width:600px;margin:clamp(24px,3vw,40px) auto 0;border-top:3px solid var(--ember)">
+      <form id="baixa-form" novalidate>
+        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required></div>
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+        </div>
+        <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="3"></textarea></div>
+        <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button type="submit" id="baixa-submit" class="btn btn-ghost"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
+        <div id="baixa-msg" class="r-msg"></div>
+      </form>
     </div>
   </div>
 </section>
@@ -142,5 +180,6 @@
   </div>
 </footer>
 <script src="js/main.js"></script>
+<script src="js/soci.js"></script>
 </body>
 </html>
