@@ -19,9 +19,15 @@
   var today = new Date(); today.setHours(0,0,0,0);
   var todayStr = iso(today);
   var view = new Date(today.getFullYear(), today.getMonth(), 1);
-  var busy = {};                // 'YYYY-MM-DD' -> true (dies RESERVAT)
+  var busy = {};                // 'YYYY-MM-DD' -> true (dies RESERVAT o tancament estiu)
   var selStart = null, selEnd = null;
   var loaded = false;
+
+  // Summer blackout: May 31 – Sep 30 (refugi tancat). Applies every year.
+  function isSummer(ds) {
+    var md = ds.slice(5); // 'MM-DD'
+    return md >= '05-31' && md < '10-01';
+  }
 
   var grid = document.createElement('div'); grid.className='rcal';
   var legend = document.createElement('div'); legend.className='rcal-legend';
@@ -42,10 +48,10 @@
       while(d<=r.end && guard<400){ busy[d]=true; d=addDays(d,1); guard++; }
     });
   }
-  function rangeHasBusy(a,b){ var d=a,guard=0; while(d<=b&&guard<400){ if(busy[d]) return true; d=addDays(d,1); guard++; } return false; }
+  function rangeHasBusy(a,b){ var d=a,guard=0; while(d<=b&&guard<400){ if(busy[d]||isSummer(d)) return true; d=addDays(d,1); guard++; } return false; }
 
   function onDay(ds){
-    if(busy[ds] || ds < todayStr) return;
+    if(busy[ds] || isSummer(ds) || ds < todayStr) return;
     if(!selStart || (selStart && selEnd)){ selStart=ds; selEnd=null; }
     else if(ds <= selStart){ selStart=ds; selEnd=null; }
     else { if(rangeHasBusy(selStart, ds)){ selStart=ds; selEnd=null; } else { selEnd=ds; } }
@@ -86,12 +92,13 @@
     for(var day=1; day<=days; day++){
       var ds=y+'-'+pad(m+1)+'-'+pad(day);
       var cls=[];
+      var isBlocked = busy[ds] || isSummer(ds);
       if(ds<todayStr) cls.push('past');
-      else if(busy[ds]) cls.push('busy');
+      else if(isBlocked) cls.push('busy');
       else cls.push('free');
       if(ds===selStart||ds===selEnd) cls.push('sel');
       else if(selStart&&selEnd&&ds>selStart&&ds<selEnd) cls.push('inrange');
-      h+='<button type="button" class="'+cls.join(' ')+'" data-d="'+ds+'" '+((ds<todayStr||busy[ds])?'disabled':'')+'>'+day+'</button>';
+      h+='<button type="button" class="'+cls.join(' ')+'" data-d="'+ds+'" '+((ds<todayStr||isBlocked)?'disabled':'')+'>'+day+'</button>';
     }
     h+='</div></div>';
     return h;

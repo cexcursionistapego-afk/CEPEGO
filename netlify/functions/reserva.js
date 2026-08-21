@@ -32,6 +32,15 @@ exports.handler = async function (event) {
 
   const persones = parseInt(b.persones, 10);
   if (!isNaN(persones) && persones > 21) return res(400, { ok: false, error: 'persones', message: 'Màxim 21 persones.' });
+
+  // Summer blackout: no bookings from May 31 to October 1 (annual rule)
+  function mmdd(s) { return s ? s.slice(5) : ''; } // 'YYYY-MM-DD' → 'MM-DD'
+  const eDate = mmdd(entrada), sDate = mmdd(salida);
+  const SUMMER_START = '05-31', SUMMER_END = '10-01';
+  function inSummer(md) { return md >= SUMMER_START && md < SUMMER_END; }
+  if (inSummer(eDate) || inSummer(sDate) || (eDate < SUMMER_START && sDate > SUMMER_START)) {
+    return res(400, { ok: false, error: 'blackout', message: 'El refugi no es pot reservar del 31 de maig al 1 d\'octubre.' });
+  }
   const soci = (b.soci === 'Si' || b.soci === 'No') ? b.soci : undefined;
   const internet = (b.internet === 'Si' || b.internet === 'No') ? b.internet : undefined;
 

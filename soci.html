@@ -64,17 +64,64 @@
       <h2 style="text-align:center"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></h2>
       <p class="lead center" style="text-align:center"><span class="va">La quota anual és de <strong>35 €</strong>. Ompli el formulari i et contactarem per correu electrònic per confirmar-te l'alta i indicar-te com realitzar el pagament.</span><span class="es">La cuota anual es de <strong>35 €</strong>. Rellena el formulario y te contactaremos por correo electrónico para confirmar el alta e indicarte cómo realizar el pago.</span></p>
     </div>
-    <div class="card reveal" style="max-width:600px;margin:clamp(24px,3vw,40px) auto 0">
+    <div class="card reveal" style="max-width:680px;margin:clamp(24px,3vw,40px) auto 0">
       <form id="alta-form" novalidate>
-        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+
+        <div class="form-section-label"><span class="va">Dades personals</span><span class="es">Datos personales</span></div>
+        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required autocomplete="name"></div>
         <div class="select-row">
-          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required></div>
-          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+          <div class="field"><label><span class="va">Data de naixement</span><span class="es">Fecha de nacimiento</span> *</label><input type="date" name="naixement" required></div>
+          <div class="field"><label><span class="va">DNI / NIE / Passaport</span><span class="es">DNI / NIE / Pasaporte</span> *</label><input name="dni" required placeholder="12345678A" autocomplete="off"></div>
         </div>
-        <div class="field"><label><span class="va">Població</span><span class="es">Población</span></label><input name="poblacio"></div>
-        <div class="field"><label><span class="va">Missatge o notes (opcional)</span><span class="es">Mensaje o notas (opcional)</span></label><textarea name="missatge" rows="3"></textarea></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Gènere</span><span class="es">Género</span></label>
+            <select name="genere">
+              <option value="">—</option>
+              <option value="Home"><span class="va">Home</span><span class="es">Hombre</span></option>
+              <option value="Dona"><span class="va">Dona</span><span class="es">Mujer</span></option>
+              <option value="Altre"><span class="va">Altre / No especificat</span><span class="es">Otro / No especificado</span></option>
+            </select>
+          </div>
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span> *</label><input type="tel" name="telefon" required autocomplete="tel"></div>
+        </div>
+        <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required autocomplete="email"></div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Adreça</span><span class="es">Dirección</span></div>
+        <div class="field"><label><span class="va">Carrer i número</span><span class="es">Calle y número</span> *</label><input name="adreca" required autocomplete="street-address"></div>
+        <div class="select-row">
+          <div class="field" style="flex:0 0 110px"><label><span class="va">Codi postal</span><span class="es">Código postal</span> *</label><input name="cp" required maxlength="5" placeholder="03780" autocomplete="postal-code"></div>
+          <div class="field"><label><span class="va">Localitat</span><span class="es">Localidad</span> *</label><input name="poblacio" required autocomplete="address-level2"></div>
+          <div class="field" style="flex:0 0 140px"><label><span class="va">Província</span><span class="es">Provincia</span> *</label><input name="provincia" required autocomplete="address-level1" value="Alacant"></div>
+        </div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Interessos i notes</span><span class="es">Intereses y notas</span></div>
+        <div class="field">
+          <label><span class="va">Activitats d'interès</span><span class="es">Actividades de interés</span></label>
+          <div class="check-group">
+            <label class="chk"><input type="checkbox" name="act" value="Senderisme"> <span class="va">Senderisme</span><span class="es">Senderismo</span></label>
+            <label class="chk"><input type="checkbox" name="act" value="Escalada"> Escalada</label>
+            <label class="chk"><input type="checkbox" name="act" value="Espeleologia"> Espeleologia</label>
+            <label class="chk"><input type="checkbox" name="act" value="Barrancs"> <span class="va">Barrancs</span><span class="es">Barrancos</span></label>
+            <label class="chk"><input type="checkbox" name="act" value="Alta muntanya"> <span class="va">Alta muntanya</span><span class="es">Alta montaña</span></label>
+          </div>
+        </div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Com ens has conegut?</span><span class="es">¿Cómo nos conociste?</span></label>
+            <select name="origen">
+              <option value="">—</option>
+              <option value="Un amic/amiga"><span class="va">Un amic/amiga</span><span class="es">Un amigo/a</span></option>
+              <option value="Instagram/Facebook">Instagram / Facebook</option>
+              <option value="Internet / Google">Internet / Google</option>
+              <option value="Ajuntament de Pego"><span class="va">Ajuntament de Pego</span><span class="es">Ayuntamiento de Pego</span></option>
+              <option value="Altre"><span class="va">Altre</span><span class="es">Otro</span></option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label><span class="va">Notes addicionals (opcional)</span><span class="es">Notas adicionales (opcional)</span></label><textarea name="missatge" rows="2"></textarea></div>
+
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button type="submit" id="alta-submit" class="btn btn-primary"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
+        <button type="submit" id="alta-submit" class="btn btn-primary" style="width:100%;margin-top:8px"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
+        <p class="note" style="margin:12px 0 0;font-size:.82rem;opacity:.75"><span class="va">* Camps obligatoris. Les teues dades es tracten d'acord amb la normativa RGPD i s'utilitzen exclusivament per a la gestió de la teua pertinença al club.</span><span class="es">* Campos obligatorios. Tus datos se tratan según la normativa RGPD y se utilizan exclusivamente para la gestión de tu pertenencia al club.</span></p>
         <div id="alta-msg" class="r-msg"></div>
       </form>
     </div>
@@ -119,13 +166,11 @@
 </div>
 <footer class="footer">
   <div class="wrap">
-    <!-- Brand strip -->
+    <!-- Brand strip centrat -->
     <div class="footer__head">
-      <img class="logo" src="img/crest-white.png" alt="Escut CEPEGO">
-      <div>
-        <div class="footer__name">Centre Excursionista<br>de Pego<small>Des de 1973 · Pego, Alacant</small></div>
-      </div>
-      <p class="footer__tagline"><span class="va">Club de muntanya sense ànim de lucre. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña sin ánimo de lucro. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
+      <img class="logo" src="img/favicon.png" alt="Escut CEPEGO">
+      <div class="footer__name">Centre Excursionista<span>de Pego</span><small>Des de 1973 · Pego, Alacant</small></div>
+      <p class="footer__tagline"><span class="va">Club de muntanya sense ànim de lucre. Senderisme, escalada, barranquisme, espeleologia i alta muntanya des de Pego, Alacant.</span><span class="es">Club de montaña sin ánimo de lucro. Senderismo, escalada, barranquismo, espeleología y alta montaña desde Pego, Alicante.</span></p>
       <div class="social">
         <a href="https://www.instagram.com/refugifiguereta" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2m0 2.16c-3.14 0-3.5.01-4.74.07-.9.04-1.38.2-1.7.32-.43.17-.74.36-1.06.68-.32.32-.51.63-.68 1.06-.12.32-.28.8-.32 1.7-.06 1.24-.07 1.6-.07 4.74s.01 3.5.07 4.74c.04.9.2 1.38.32 1.7.17.43.36.74.68 1.06.32.32.63.51 1.06.68.32.12.8.28 1.7.32 1.24.06 1.6.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.2 1.7-.32.43-.17.74-.36 1.06-.68.32-.32.51-.63.68-1.06.12-.32.28-.8.32-1.7.06-1.24.07-1.6.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.2-1.38-.32-1.7a2.86 2.86 0 0 0-.68-1.06 2.86 2.86 0 0 0-1.06-.68c-.32-.12-.8-.28-1.7-.32-1.24-.06-1.6-.07-4.74-.07m0 3.67a4.97 4.97 0 1 1 0 9.94 4.97 4.97 0 0 1 0-9.94m0 8.2a3.23 3.23 0 1 0 0-6.46 3.23 3.23 0 0 0 0 6.46m6.34-8.42a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0"/></svg></a>
         <a href="https://www.facebook.com/share/17fdDSFxDx" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.87 11.85v-8.38H7.08V12h3.05V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95H15.8c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12"/></svg></a>
@@ -166,11 +211,13 @@
     </div>
     <!-- Partners -->
     <div class="footer__partners">
-      <span><span class="va">Amb el suport de</span><span class="es">Con el apoyo de</span></span>
-      <a href="https://www.femecv.com/va" target="_blank" rel="noopener"><img src="img/bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV"></a>
-      <a href="https://www.pego.org/" target="_blank" rel="noopener"><img src="img/bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego"></a>
-      <a href="https://www.pegoilesvalls.es/" target="_blank" rel="noopener"><img src="img/bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls"></a>
-      <img src="img/bb9bb0_fb25ea68ebd444d79d92311d8dd0561f~mv2.png" alt="Refugi La Figuereta">
+      <div class="footer__partners-label"><span class="va">Amb el suport de</span><span class="es">Con el apoyo de</span></div>
+      <div class="footer__partners-logos">
+        <a href="https://www.femecv.com/va" target="_blank" rel="noopener" class="partner-card"><img src="img/bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV"></a>
+        <a href="https://www.pego.org/" target="_blank" rel="noopener" class="partner-card"><img src="img/bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego"></a>
+        <a href="https://www.pegoilesvalls.es/" target="_blank" rel="noopener" class="partner-card"><img src="img/bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls"></a>
+        <div class="partner-card"><img src="img/bb9bb0_fb25ea68ebd444d79d92311d8dd0561f~mv2.png" alt="Refugi La Figuereta"></div>
+      </div>
     </div>
     <!-- Copyright bar -->
     <div class="footer__bar">

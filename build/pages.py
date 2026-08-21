@@ -9,40 +9,30 @@ def build(g):
     RESERVA_EMBED="https://airtable.com/embed/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka"
 
     # ============================================= HOME
-    # (btype, bg/gradient, href, tva, tes, pva, pes, icon)
+    # (href, tva, tes, pva, pes, num)
     acts=[
-     ('img', L2,  "rutes.html",    "Senderisme","Senderismo",
-      "Rutes tot l'any per Pego i les Valls, amb fitxes i distàncies.","Rutas todo el año por Pego y sus valles, con fichas y distancias.","🥾"),
-     ('img', L1,  "escalada.html", "Escalada","Escalada",
-      "Escola del Calvari: 28 vies equipades per a tots els nivells.","Escuela del Calvari: 28 vías equipadas para todos los niveles.","🧗"),
-     ('grad',"linear-gradient(155deg,#140d2e 0%,#2d1b5e 55%,#1e3348 100%)",
-      "espeleo.html","Espeleologia","Espeleología",
-      "Avencs i coves del massís calcari de la Vall d'Ebo.","Avencos y cuevas del macizo calcáreo de la Vall d'Ebo.","🔦"),
-     ('grad',"linear-gradient(155deg,#07334a 0%,#0e6480 55%,#1e8fa0 100%)",
-      "barrancs.html","Barrancs","Barrancos",
-      "Descens de barrancs per la comarca. Corda, neoprè i aventura.","Descenso de barrancos por la comarca. Cuerda, neopreno y aventura.","💧"),
-     ('grad',"linear-gradient(155deg,#0e1f3a 0%,#1c3d6b 55%,#2a5a8c 100%)",
-      "calendari.html","Alta muntanya","Alta montaña",
-      "Eixides d'alta muntanya, cims i itineraris alpins per tota la temporada.","Salidas de alta montaña, cimas e itinerarios alpinos toda la temporada.","⛰️"),
-     ('grad',"linear-gradient(155deg,#1a2d42 0%,#1f4e6e 55%,#2975a0 100%)",
-      "meteo.html","El temps","Meteo",
-      "Estació meteorològica al refugi, connectada a la xarxa AVAMET.","Estación meteorológica en el refugio, conectada a la red AVAMET.","🌤️"),
+     ("rutes.html",    "Senderisme","Senderismo",
+      "Rutes tot l'any per Pego i les Valls, amb fitxes de track i distàncies.","Rutas todo el año por Pego y sus valles, con fichas de track y distancias.","01"),
+     ("escalada.html", "Escalada","Escalada",
+      "Escola del Calvari: 28 vies equipades per a tots els nivells, des d'iniciació fins a dificultat.","Escuela del Calvari: 28 vías equipadas para todos los niveles, desde iniciación hasta dificultad.","02"),
+     ("espeleo.html",  "Espeleologia","Espeleología",
+      "Avencs i coves del massís calcari de la Vall d'Ebo. Exploració subterrània en grup.","Avencos y cuevas del macizo calcáreo de la Vall d'Ebo. Exploración subterránea en grupo.","03"),
+     ("barrancs.html", "Barrancs","Barrancos",
+      "Descens de barrancs per la comarca. Corda, neoprè i aventura entre aiguamolls i cascades.","Descenso de barrancos por la comarca. Cuerda, neopreno y aventura entre parajes y cascadas.","04"),
+     ("calendari.html","Alta muntanya","Alta montaña",
+      "Eixides als grans cims i itineraris alpins de la temporada hivernal. Material tècnic i experiència.","Salidas a las grandes cimas e itinerarios alpinos de la temporada invernal. Material técnico y experiencia.","05"),
+     ("meteo.html",    "Meteorologia","Meteorología",
+      "Estació meteorològica professional al refugi, connectada en temps real a la xarxa AVAMET.","Estación meteorológica profesional en el refugio, conectada en tiempo real a la red AVAMET.","06"),
     ]
     act_cards=""
-    for btype,bg,href,tva,tes,pva,pes,icon in acts:
-        if btype=='img':
-            bg_html=f'<div class="act__bg" style="background-image:url(\'{bg}\')"></div>'
-            icon_html=""
-        else:
-            bg_html=f'<div class="act__bg" style="background:{bg}"></div>'
-            icon_html=f'<div class="act__icon">{icon}</div>'
-        act_cards+=f'''      <a class="act reveal" href="{href}">
-        {bg_html}
-        {icon_html}<div class="act__body">
-          <h3><span class="va">{tva}</span><span class="es">{tes}</span></h3>
-          <p><span class="va">{pva}</span><span class="es">{pes}</span></p>
-          <div class="act__arrow"><span class="va">Descobrir</span><span class="es">Descubrir</span> →</div>
+    for href,tva,tes,pva,pes,num in acts:
+        act_cards+=f'''      <a class="act-row reveal" href="{href}">
+        <div class="act-row__num">{num}</div>
+        <div class="act-row__main">
+          <div class="act-row__name"><span class="va">{tva}</span><span class="es">{tes}</span></div>
+          <p class="act-row__desc"><span class="va">{pva}</span><span class="es">{pes}</span></p>
         </div>
+        <div class="act-row__link"><span class="va">Descobrir</span><span class="es">Descubrir</span> →</div>
       </a>\n'''
 
     home=header("inici")+f'''
@@ -107,7 +97,7 @@ def build(g):
       <div class="kicker center-k"><span class="va">Què fem</span><span class="es">Qué hacemos</span></div>
       <h2><span class="va">Les nostres activitats</span><span class="es">Nuestras actividades</span></h2>
     </div>
-    <div class="act-bento">
+    <div class="act-list">
 {act_cards}    </div>
   </div>
 </section>
@@ -170,22 +160,21 @@ def build(g):
 <section class="section">
   <div class="wrap">
 
-    <p class="lead narrow center reveal" style="margin-bottom:clamp(36px,5vw,64px)"><span class="va">La Figuereta és el refugi del Centre Excursionista de Pego, a la Vall d'Ebo, habilitat per passar uns dies en la natura fent senderisme, escalada, descens de barrancs, espeleologia o turisme rural pels pobles propers: Ebo, Vall d'Alcalà, Vall de Laguar, l'Atzúvia i Pego.</span><span class="es">La Figuereta es el refugio del Centro Excursionista de Pego, en la Vall d'Ebo, habilitado para pasar unos días en la naturaleza haciendo senderismo, escalada, barrancos, espeleología o turismo rural por los pueblos cercanos: Ebo, Vall d'Alcalà, Vall de Laguar, Adsubia y Pego.</span></p>
+    <!-- Intro + heading BEFORE mosaic -->
+    <div class="narrow center reveal" style="margin-bottom:clamp(32px,4.5vw,60px)">
+      <p class="lead"><span class="va">La Figuereta és el refugi del Centre Excursionista de Pego, a la Vall d'Ebo, habilitat per passar uns dies en la natura fent senderisme, escalada, descens de barrancs, espeleologia o turisme rural pels pobles propers.</span><span class="es">La Figuereta es el refugio del Centro Excursionista de Pego, en la Vall d'Ebo, habilitado para pasar unos días en la naturaleza haciendo senderismo, escalada, barrancos, espeleología o turismo rural por los pueblos cercanos.</span></p>
+      <div class="kicker center-k" style="margin-top:clamp(28px,4vw,52px)"><span class="va">Equipament</span><span class="es">Equipamiento</span></div>
+      <h2 style="margin-top:.4em"><span class="va">Tot a punt per a 21 persones</span><span class="es">Todo listo para 21 personas</span></h2>
+      <p><span class="va">Dos habitacles comunicats amb lliteres, cuina completa i tots els serveis per gaudir de la natura.</span><span class="es">Dos habitáculos comunicados con literas, cocina completa y todos los servicios para disfrutar de la naturaleza.</span></p>
+    </div>
 
     <!-- MOSAIC INTRO: tall left + 2 right stacked -->
-    <div class="refugi-mosaic reveal">
+    <div class="refugi-mosaic reveal" style="margin-bottom:clamp(44px,6vw,80px)">
       <div class="refugi-mosaic__main">
         <img loading="lazy" src="{REFUGI[1]}" alt="Refugi La Figuereta">
       </div>
       <div><img loading="lazy" src="{REFUGI[2]}" alt="Refugi La Figuereta"></div>
       <div><img loading="lazy" src="{REFUGI[3]}" alt="Refugi La Figuereta"></div>
-    </div>
-
-    <!-- KICKER -->
-    <div class="narrow center" style="margin-bottom:clamp(28px,4vw,52px)">
-      <div class="kicker center-k"><span class="va">Equipament</span><span class="es">Equipamiento</span></div>
-      <h2 style="margin-top:.4em"><span class="va">Tot a punt per a 21 persones</span><span class="es">Todo listo para 21 personas</span></h2>
-      <p class="lead"><span class="va">Dos habitacles comunicats amb lliteres, cuina completa i tots els serveis per gaudir de la natura.</span><span class="es">Dos habitáculos comunicados con literas, cocina completa y todos los servicios para disfrutar de la naturaleza.</span></p>
     </div>
 
     <!-- BLOC 1: CUINA — foto esquerra -->
@@ -292,6 +281,13 @@ def build(g):
     </div>
   </div>
 </section>
+
+<div class="wrap narrow" style="padding-top:clamp(20px,3vw,36px)">
+  <div class="avis reveal" style="border-radius:var(--r);margin-bottom:clamp(16px,2.5vw,28px)">
+    <span class="va">&#x26A0;&#xFE0F; El refugi <strong>no admet reserves del 31 de maig al 1 d'octubre</strong> (tancament d'estiu anual).</span>
+    <span class="es">&#x26A0;&#xFE0F; El refugio <strong>no admite reservas del 31 de mayo al 1 de octubre</strong> (cierre de verano anual).</span>
+  </div>
+</div>
 
 <section class="section bg-paper2" style="padding-top:clamp(30px,4vw,60px)">
   <div class="wrap reserva-grid">
@@ -527,17 +523,64 @@ def build(g):
       <h2 style="text-align:center"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></h2>
       <p class="lead center" style="text-align:center"><span class="va">La quota anual és de <strong>35 €</strong>. Ompli el formulari i et contactarem per correu electrònic per confirmar-te l'alta i indicar-te com realitzar el pagament.</span><span class="es">La cuota anual es de <strong>35 €</strong>. Rellena el formulario y te contactaremos por correo electrónico para confirmar el alta e indicarte cómo realizar el pago.</span></p>
     </div>
-    <div class="card reveal" style="max-width:600px;margin:clamp(24px,3vw,40px) auto 0">
+    <div class="card reveal" style="max-width:680px;margin:clamp(24px,3vw,40px) auto 0">
       <form id="alta-form" novalidate>
-        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+
+        <div class="form-section-label"><span class="va">Dades personals</span><span class="es">Datos personales</span></div>
+        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required autocomplete="name"></div>
         <div class="select-row">
-          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required></div>
-          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+          <div class="field"><label><span class="va">Data de naixement</span><span class="es">Fecha de nacimiento</span> *</label><input type="date" name="naixement" required></div>
+          <div class="field"><label><span class="va">DNI / NIE / Passaport</span><span class="es">DNI / NIE / Pasaporte</span> *</label><input name="dni" required placeholder="12345678A" autocomplete="off"></div>
         </div>
-        <div class="field"><label><span class="va">Població</span><span class="es">Población</span></label><input name="poblacio"></div>
-        <div class="field"><label><span class="va">Missatge o notes (opcional)</span><span class="es">Mensaje o notas (opcional)</span></label><textarea name="missatge" rows="3"></textarea></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Gènere</span><span class="es">Género</span></label>
+            <select name="genere">
+              <option value="">—</option>
+              <option value="Home"><span class="va">Home</span><span class="es">Hombre</span></option>
+              <option value="Dona"><span class="va">Dona</span><span class="es">Mujer</span></option>
+              <option value="Altre"><span class="va">Altre / No especificat</span><span class="es">Otro / No especificado</span></option>
+            </select>
+          </div>
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span> *</label><input type="tel" name="telefon" required autocomplete="tel"></div>
+        </div>
+        <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required autocomplete="email"></div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Adreça</span><span class="es">Dirección</span></div>
+        <div class="field"><label><span class="va">Carrer i número</span><span class="es">Calle y número</span> *</label><input name="adreca" required autocomplete="street-address"></div>
+        <div class="select-row">
+          <div class="field" style="flex:0 0 110px"><label><span class="va">Codi postal</span><span class="es">Código postal</span> *</label><input name="cp" required maxlength="5" placeholder="03780" autocomplete="postal-code"></div>
+          <div class="field"><label><span class="va">Localitat</span><span class="es">Localidad</span> *</label><input name="poblacio" required autocomplete="address-level2"></div>
+          <div class="field" style="flex:0 0 140px"><label><span class="va">Província</span><span class="es">Provincia</span> *</label><input name="provincia" required autocomplete="address-level1" value="Alacant"></div>
+        </div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Interessos i notes</span><span class="es">Intereses y notas</span></div>
+        <div class="field">
+          <label><span class="va">Activitats d'interès</span><span class="es">Actividades de interés</span></label>
+          <div class="check-group">
+            <label class="chk"><input type="checkbox" name="act" value="Senderisme"> <span class="va">Senderisme</span><span class="es">Senderismo</span></label>
+            <label class="chk"><input type="checkbox" name="act" value="Escalada"> Escalada</label>
+            <label class="chk"><input type="checkbox" name="act" value="Espeleologia"> Espeleologia</label>
+            <label class="chk"><input type="checkbox" name="act" value="Barrancs"> <span class="va">Barrancs</span><span class="es">Barrancos</span></label>
+            <label class="chk"><input type="checkbox" name="act" value="Alta muntanya"> <span class="va">Alta muntanya</span><span class="es">Alta montaña</span></label>
+          </div>
+        </div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Com ens has conegut?</span><span class="es">¿Cómo nos conociste?</span></label>
+            <select name="origen">
+              <option value="">—</option>
+              <option value="Un amic/amiga"><span class="va">Un amic/amiga</span><span class="es">Un amigo/a</span></option>
+              <option value="Instagram/Facebook">Instagram / Facebook</option>
+              <option value="Internet / Google">Internet / Google</option>
+              <option value="Ajuntament de Pego"><span class="va">Ajuntament de Pego</span><span class="es">Ayuntamiento de Pego</span></option>
+              <option value="Altre"><span class="va">Altre</span><span class="es">Otro</span></option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label><span class="va">Notes addicionals (opcional)</span><span class="es">Notas adicionales (opcional)</span></label><textarea name="missatge" rows="2"></textarea></div>
+
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button type="submit" id="alta-submit" class="btn btn-primary"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
+        <button type="submit" id="alta-submit" class="btn btn-primary" style="width:100%;margin-top:8px"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
+        <p class="note" style="margin:12px 0 0;font-size:.82rem;opacity:.75"><span class="va">* Camps obligatoris. Les teues dades es tracten d'acord amb la normativa RGPD i s'utilitzen exclusivament per a la gestió de la teua pertinença al club.</span><span class="es">* Campos obligatorios. Tus datos se tratan según la normativa RGPD y se utilizan exclusivamente para la gestión de tu pertenencia al club.</span></p>
         <div id="alta-msg" class="r-msg"></div>
       </form>
     </div>

@@ -110,13 +110,11 @@ def footer():
 </div>
 <footer class="footer">
   <div class="wrap">
-    <!-- Brand strip -->
+    <!-- Brand strip centrat -->
     <div class="footer__head">
-      <img class="logo" src="{IMG}crest-white.png" alt="Escut CEPEGO">
-      <div>
-        <div class="footer__name">Centre Excursionista<br>de Pego<small>Des de 1973 · Pego, Alacant</small></div>
-      </div>
-      <p class="footer__tagline"><span class="va">Club de muntanya sense ànim de lucre. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña sin ánimo de lucro. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
+      <img class="logo" src="{IMG}favicon.png" alt="Escut CEPEGO">
+      <div class="footer__name">Centre Excursionista<span>de Pego</span><small>Des de 1973 · Pego, Alacant</small></div>
+      <p class="footer__tagline"><span class="va">Club de muntanya sense ànim de lucre. Senderisme, escalada, barranquisme, espeleologia i alta muntanya des de Pego, Alacant.</span><span class="es">Club de montaña sin ánimo de lucro. Senderismo, escalada, barranquismo, espeleología y alta montaña desde Pego, Alicante.</span></p>
       <div class="social">
         <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{IG_SVG}</a>
         <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook">{FB_SVG}</a>
@@ -157,11 +155,13 @@ def footer():
     </div>
     <!-- Partners -->
     <div class="footer__partners">
-      <span><span class="va">Amb el suport de</span><span class="es">Con el apoyo de</span></span>
-      <a href="{FEMECV}" target="_blank" rel="noopener"><img src="{IMG}bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV"></a>
-      <a href="{AJPEGO}" target="_blank" rel="noopener"><img src="{IMG}bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego"></a>
-      <a href="{PIV}" target="_blank" rel="noopener"><img src="{IMG}bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls"></a>
-      <img src="{IMG}bb9bb0_fb25ea68ebd444d79d92311d8dd0561f~mv2.png" alt="Refugi La Figuereta">
+      <div class="footer__partners-label"><span class="va">Amb el suport de</span><span class="es">Con el apoyo de</span></div>
+      <div class="footer__partners-logos">
+        <a href="{FEMECV}" target="_blank" rel="noopener" class="partner-card"><img src="{IMG}bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV"></a>
+        <a href="{AJPEGO}" target="_blank" rel="noopener" class="partner-card"><img src="{IMG}bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego"></a>
+        <a href="{PIV}" target="_blank" rel="noopener" class="partner-card"><img src="{IMG}bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls"></a>
+        <div class="partner-card"><img src="{IMG}bb9bb0_fb25ea68ebd444d79d92311d8dd0561f~mv2.png" alt="Refugi La Figuereta"></div>
+      </div>
     </div>
     <!-- Copyright bar -->
     <div class="footer__bar">
