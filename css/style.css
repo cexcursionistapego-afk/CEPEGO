@@ -524,4 +524,4 @@ html[data-lang="es"] .va{display:none}
 
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}
   .reveal{opacity:1;transform:none}.band__bg{background-attachment:scroll}
-  .hero .crest,.hero h1,.hero p,.hero__actions{animation:none;opacity:1;transform:none}}
+  .hero .crest,.hero__brand,.hero__place-title,.hero p,.hero__actions{animation:none;opacity:1;transform:none}}
