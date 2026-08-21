@@ -5,8 +5,8 @@ import os
 OUT="/home/user/CEPEGO"
 
 # ---------- enllaços externs reals ----------
-ALTA  = "https://airtable.com/appkuKVxHSMyDElfh/shrZGPPFiEixpHQ62"
-BAIXA = "https://airtable.com/appkuKVxHSMyDElfh/shrePFFh2FtSgKhAY"
+ALTA  = "https://airtable.com/appkuKVxHSMyDElfh/shrePFFh2FtSgKhAY"
+BAIXA = "https://airtable.com/appkuKVxHSMyDElfh/shrZGPPFiEixpHQ62"
 RESERVA = "https://airtable.com/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka/form"
 GCAL = ("https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23ffffff"
         "&ctz=Europe%2FMadrid&mode=MONTH&showTitle=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0"

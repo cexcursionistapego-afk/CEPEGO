@@ -144,24 +144,91 @@ def build(g):
      ("Internet de banda ampla (cal reservar-lo).","Internet de banda ancha (hay que reservarlo)."),
      ("No hi ha utensilis de cuina: porta el que necessites.","No hay utensilios de cocina: trae lo que necesites."),
      ("Lliteres amb matalàs i coixí: només cal el sac de dormir.","Literas con colchón y cojín: solo hace falta el saco de dormir.")]
-    eq="".join(f'          <li><span class="va">{va}</span><span class="es">{es}</span></li>\n' for va,es in equip)
-    gal="".join(f'      <a href="{u}"><img loading="lazy" src="{u}" alt="Refugi La Figuereta"></a>\n' for u in REFUGI)
+    def eq_li(idxs):
+        return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
     refugi=header("refugi")+subhero(REFUGI[0],'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
         "La Figuereta","La Figuereta",
         "El refugi de muntanya del Centre Excursionista de Pego.","El refugio de montaña del Centro Excursionista de Pego.")+f'''
+
 <section class="section">
   <div class="wrap">
-    <p class="lead narrow center" style="margin-bottom:clamp(40px,5vw,72px)"><span class="va">La Figuereta és el refugi del Centre Excursionista de Pego, a la Vall d'Ebo, habilitat per passar uns dies en la natura fent senderisme, escalada, descens de barrancs, espeleologia o turisme rural pels pobles propers: Ebo, Vall d'Alcalà, Vall de Laguar, l'Atzúvia i Pego.</span><span class="es">La Figuereta es el refugio del Centro Excursionista de Pego, en la Vall d'Ebo, habilitado para pasar unos días en la naturaleza haciendo senderismo, escalada, barrancos, espeleología o turismo rural por los pueblos cercanos: Ebo, Vall d'Alcalà, Vall de Laguar, Adsubia y Pego.</span></p>
-    <div class="split reveal">
-      <div class="prose">
-        <div class="kicker"><span class="va">Equipament</span><span class="es">Equipamiento</span></div>
-        <h2><span class="va">Tot a punt per a 21 persones</span><span class="es">Todo listo para 21 personas</span></h2>
-        <p><span class="va">Dos habitacles comunicats amb lliteres. Aquests són els serveis que trobaràs:</span><span class="es">Dos habitáculos comunicados con literas. Estos son los servicios que encontrarás:</span></p>
-        <ul class="equip">
-{eq}        </ul>
+
+    <p class="lead narrow center reveal" style="margin-bottom:clamp(36px,5vw,64px)"><span class="va">La Figuereta és el refugi del Centre Excursionista de Pego, a la Vall d'Ebo, habilitat per passar uns dies en la natura fent senderisme, escalada, descens de barrancs, espeleologia o turisme rural pels pobles propers: Ebo, Vall d'Alcalà, Vall de Laguar, l'Atzúvia i Pego.</span><span class="es">La Figuereta es el refugio del Centro Excursionista de Pego, en la Vall d'Ebo, habilitado para pasar unos días en la naturaleza haciendo senderismo, escalada, barrancos, espeleología o turismo rural por los pueblos cercanos: Ebo, Vall d'Alcalà, Vall de Laguar, Adsubia y Pego.</span></p>
+
+    <!-- MOSAIC INTRO: tall left + 2 right stacked -->
+    <div class="refugi-mosaic reveal">
+      <div class="refugi-mosaic__main">
+        <img loading="lazy" src="{REFUGI[1]}" alt="Refugi La Figuereta">
       </div>
-      <div class="split__media"><img src="{REFUGI[1]}" alt="Interior del refugi"></div>
+      <div><img loading="lazy" src="{REFUGI[2]}" alt="Refugi La Figuereta"></div>
+      <div><img loading="lazy" src="{REFUGI[3]}" alt="Refugi La Figuereta"></div>
     </div>
+
+    <!-- KICKER -->
+    <div class="narrow center" style="margin-bottom:clamp(28px,4vw,52px)">
+      <div class="kicker center-k"><span class="va">Equipament</span><span class="es">Equipamiento</span></div>
+      <h2 style="margin-top:.4em"><span class="va">Tot a punt per a 21 persones</span><span class="es">Todo listo para 21 personas</span></h2>
+      <p class="lead"><span class="va">Dos habitacles comunicats amb lliteres, cuina completa i tots els serveis per gaudir de la natura.</span><span class="es">Dos habitáculos comunicados con literas, cocina completa y todos los servicios para disfrutar de la naturaleza.</span></p>
+    </div>
+
+    <!-- BLOC 1: CUINA — foto esquerra -->
+    <div class="equip-block reveal">
+      <div class="equip-block__media">
+        <img loading="lazy" src="{REFUGI[7]}" alt="Cuina del refugi">
+      </div>
+      <div>
+        <span class="equip-tag"><span class="va">Cuina i àpats</span><span class="es">Cocina y comidas</span></span>
+        <h3 style="margin-top:.5em"><span class="va">Cuina equipada per a tothom</span><span class="es">Cocina equipada para todos</span></h3>
+        <ul class="equip equip-1col" style="margin-top:18px">
+{eq_li([0,1,2,3,8])}        </ul>
+      </div>
+    </div>
+
+    <!-- FRANJA FOTOGRÀFICA -->
+    <div class="photo-strip reveal">
+      <img loading="lazy" src="{REFUGI[5]}" alt="Refugi La Figuereta">
+      <img loading="lazy" src="{REFUGI[6]}" alt="Refugi La Figuereta">
+      <img loading="lazy" src="{REFUGI[8]}" alt="Refugi La Figuereta">
+    </div>
+
+    <!-- BLOC 2: DORMIR — foto dreta amb badge -->
+    <div class="equip-block equip-block--rev reveal">
+      <div>
+        <span class="equip-tag"><span class="va">Dormir</span><span class="es">Dormir</span></span>
+        <h3 style="margin-top:.5em"><span class="va">Descansa com a casa</span><span class="es">Descansa como en casa</span></h3>
+        <ul class="equip equip-1col" style="margin-top:18px">
+{eq_li([9])}        </ul>
+        <p style="margin-top:16px;font-size:.94rem;color:var(--muted)"><span class="va">Dos habitacles separats però comunicats. Porta sempre el teu sac de dormir.</span><span class="es">Dos habitáculos separados pero comunicados. Trae siempre tu saco de dormir.</span></p>
+      </div>
+      <div class="equip-block__media">
+        <img loading="lazy" src="{REFUGI[4]}" alt="Dormitori del refugi">
+        <div class="cap-badge">
+          <div class="n">21</div>
+          <div class="l"><span class="va">places<br>màxim</span><span class="es">plazas<br>máximo</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOC 3: SERVEIS — foto esquerra -->
+    <div class="equip-block reveal">
+      <div class="equip-block__media">
+        <img loading="lazy" src="{REFUGI[11]}" alt="Exterior del refugi La Figuereta">
+      </div>
+      <div>
+        <span class="equip-tag"><span class="va">Instal·lacions</span><span class="es">Instalaciones</span></span>
+        <h3 style="margin-top:.5em"><span class="va">Tot el que necessites</span><span class="es">Todo lo que necesitas</span></h3>
+        <ul class="equip equip-1col" style="margin-top:18px">
+{eq_li([4,5,6,7])}        </ul>
+        <p class="note" style="margin-top:18px"><span class="va">⚠️ L'aigua és d'una cava natural i <strong>no és potable</strong>: porta la teua per a consumir.</span><span class="es">⚠️ El agua es de una cava natural y <strong>no es potable</strong>: trae la tuya para consumir.</span></p>
+      </div>
+    </div>
+
+    <!-- DUO FINAL -->
+    <div class="photo-duo reveal">
+      <img loading="lazy" src="{REFUGI[9]}" alt="Entorn del refugi">
+      <img loading="lazy" src="{REFUGI[10]}" alt="Alta muntanya des del refugi">
+    </div>
+
   </div>
 </section>
 
@@ -178,20 +245,9 @@ def build(g):
     </div>
   </div>
 </section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="narrow center reveal" style="margin-bottom:clamp(30px,4vw,50px)">
-      <div class="kicker center-k"><span class="va">Galeria</span><span class="es">Galería</span></div>
-      <h2><span class="va">El refugi en imatges</span><span class="es">El refugio en imágenes</span></h2>
-    </div>
-    <div class="gallery">
-{gal}    </div>
-  </div>
-</section>
 '''+footer()
     write("refugi.html", doc("La Figuereta | Centre Excursionista de Pego",
-        "Refugi de muntanya La Figuereta, a la Vall d'Ebo. Equipament, com arribar, entorn i galeria.", refugi))
+        "Refugi de muntanya La Figuereta, a la Vall d'Ebo. Equipament complet per a 21 persones.", refugi))
 
     # ============================================= RESERVAR
     rules=[("Sols es pot fer foc a la xemeneia de dins del refugi; proporcionem llenya, graelles i material lliure de tòxics.","Solo se puede hacer fuego en la chimenea del interior; proporcionamos leña, parrillas y material libre de tóxicos."),
