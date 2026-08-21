@@ -87,11 +87,12 @@ html[data-lang="es"] .va{display:none}
   backdrop-filter:blur(14px) saturate(1.1);border-bottom:1px solid transparent;transition:.3s var(--ease)}
 .site-header.scrolled{background:rgba(245,241,233,.94);border-bottom-color:var(--hair);box-shadow:var(--shadow-sm)}
 .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
-.brand{display:flex;align-items:center;gap:12px;color:var(--ink)}
-.brand img{width:44px;height:44px;object-fit:contain}
-.brand b{font-family:var(--font-display);font-weight:560;font-size:1.12rem;letter-spacing:-.01em;line-height:1}
-.brand small{display:block;font-family:var(--font-body);font-weight:600;font-size:.6rem;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--muted);margin-top:3px}
+.brand{display:flex;align-items:center;gap:14px;color:var(--ink);text-decoration:none}
+.brand img{width:54px;height:54px;object-fit:contain;flex-shrink:0}
+.brand b{font-family:var(--font-display);font-weight:600;font-size:1.18rem;letter-spacing:-.02em;line-height:1.1;display:flex;flex-direction:column}
+.brand b em{font-style:normal;color:var(--navy);font-weight:700;font-size:1.32rem;letter-spacing:-.03em;line-height:1}
+.brand small{display:block;font-family:var(--font-body);font-weight:600;font-size:.58rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--muted);margin-top:4px}
 
 .nav{display:flex;align-items:center;gap:2px}
 .nav a{font-weight:500;font-size:.88rem;color:var(--ink);padding:9px 12px;border-radius:10px;white-space:nowrap;position:relative}
