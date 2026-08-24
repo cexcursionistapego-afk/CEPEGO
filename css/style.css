@@ -246,7 +246,7 @@ html[data-lang="es"] .va{display:none}
 
 /* stat row */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.stats>div{padding:clamp(24px,3.5vw,44px) 20px;text-align:center;position:relative}
+.stats>div{padding:clamp(10px,1.5vw,18px) 20px;text-align:center;position:relative}
 .stats>div::after{content:"";position:absolute;right:0;top:18%;bottom:18%;width:1px;background:var(--hair)}
 .stats>div:last-child::after{display:none}
 .stats .n{font-family:var(--font-display);font-size:clamp(2.2rem,3.8vw,3.4rem);color:var(--navy);line-height:1;font-weight:540;letter-spacing:-.02em}

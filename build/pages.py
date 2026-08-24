@@ -50,7 +50,7 @@ def build(g):
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="padding:clamp(24px,3.5vw,48px) 0">
   <div class="wrap">
     <div class="stats reveal">
       <div><div class="n">1973</div><div class="l"><span class="va">Fundació</span><span class="es">Fundación</span></div></div>
