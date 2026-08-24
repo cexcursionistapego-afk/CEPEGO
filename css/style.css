@@ -488,10 +488,10 @@ html[data-lang="es"] .va{display:none}
 /* ---- Partners ---- */
 .footer__partners{padding:clamp(20px,3vw,36px) 0;text-align:center;border-top:1px solid rgba(255,255,255,.05)}
 .footer__partners-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:#373b45;margin-bottom:20px}
-.footer__partners-logos{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap}
-.partner-card{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:14px 20px;transition:.2s;text-decoration:none}
+.footer__partners-logos{display:flex;gap:22px;align-items:center;justify-content:center;flex-wrap:wrap}
+.partner-card{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:14px;padding:20px 28px;transition:.2s;text-decoration:none}
 .partner-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
-.partner-card img{height:52px;width:auto;object-fit:contain;display:block}
+.partner-card img{height:80px;width:auto;object-fit:contain;display:block}
 
 /* ---- Bar ---- */
 .footer__bar{border-top:1px solid rgba(255,255,255,.05);padding:clamp(14px,2vw,22px) 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:#373b45}
