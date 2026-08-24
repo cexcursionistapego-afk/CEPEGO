@@ -44,13 +44,11 @@ FIG_SUB=[("refugi.html","La Figuereta",'<span class="va">El refugi de muntanya</
 METEO_SUB=[("meteo.html",'<span class="va">El temps · Refugi La Figuereta</span><span class="es">El tiempo · Refugio La Figuereta</span>','<span class="va">Estació meteorològica al refugi</span><span class="es">Estación meteorológica en el refugio</span>',"meteo"),
  ("meteo-pego.html",'<span class="va">El temps · Pego</span><span class="es">El tiempo · Pego</span>','<span class="va">Estació meteorològica a Pego</span><span class="es">Estación meteorológica en Pego</span>',"meteo-pego")]
 ACT_SUB=[("rutes.html",'<span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span>','<span class="va">Senderisme per Pego</span><span class="es">Senderismo por Pego</span>',"rutes"),
- ("escalada.html","Escalada",'<span class="va">Escola del Calvari</span><span class="es">Escuela del Calvari</span>',"escalada"),
- ("espeleo.html","Espeleologia",'<span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span>',"espeleo"),
- ("barrancs.html",'<span class="va">Barrancs</span><span class="es">Barrancos</span>','<span class="va">Descens de barrancs</span><span class="es">Descenso de barrancos</span>',"barrancs")]
+ ("escalada.html","Escalada",'<span class="va">Escola del Calvari</span><span class="es">Escuela del Calvari</span>',"escalada")]
 
 def header(active):
     fig_open   = active in ("refugi","reservar")
-    act_open   = active in ("rutes","escalada","espeleo","barrancs")
+    act_open   = active in ("rutes","escalada")
     meteo_open = active in ("meteo","meteo-pego")
     soci_ac=' active' if active=='soci' else ''
     def sub(items):
