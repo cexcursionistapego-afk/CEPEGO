@@ -78,7 +78,7 @@ def build(g):
         <p><span class="va">Tenim dues seccions principals: qui fa senderisme —per la zona i per terres més llunyanes, aprofitant caps de setmana i ponts— i qui es dedica a l'escalada, majoritàriament esportiva, bloc i clàssica. També fem alta muntanya, espeleologia i barranquisme.</span><span class="es">Tenemos dos secciones principales: quien hace senderismo —por la zona y por tierras más lejanas, aprovechando fines de semana y puentes— y quien se dedica a la escalada, mayoritariamente deportiva, bloque y clásica. También hacemos alta montaña, espeleología y barranquismo.</span></p>
         <a href="rutes.html" class="link-arrow"><span class="va">Descobreix les activitats</span><span class="es">Descubre las actividades</span></a>
       </div>
-      <div class="split__media">
+      <div class="split__media hide-mobile">
         <img src="{IMG}bb9bb0_dd4b5c48aab64d6fa0f2f034dfbaf7e1~mv2.jpeg" alt="El refugi La Figuereta al capvespre">
       </div>
     </div>
