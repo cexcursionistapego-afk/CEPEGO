@@ -47,6 +47,23 @@ exports.handler = async function (event) {
       const txt = await r.text();
       return res(200, { ok: false, error: 'airtable', detail: txt.slice(0, 300) });
     }
+    const data = await r.json();
+    const recordId = data.records && data.records[0] && data.records[0].id;
+
+    if (recordId && b.dni_foto_b64) {
+      try {
+        await fetch(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent('DNI CARA FOTO')}/uploadAttachment`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contentType: b.dni_foto_type || 'image/jpeg',
+            file: b.dni_foto_b64,
+            filename: b.dni_foto_name || 'dni.jpg',
+          }),
+        });
+      } catch (e) { /* la sol·licitud ja s'ha creat; l'adjunt es pot pujar manualment si falla */ }
+    }
+
     return res(200, { ok: true });
   } catch (e) {
     return res(200, { ok: false, error: 'exception', detail: String(e).slice(0, 200) });

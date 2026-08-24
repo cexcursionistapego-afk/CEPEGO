@@ -96,7 +96,7 @@
       var l = lang();
       var fd = new FormData(baixaForm);
       var body = {};
-      fd.forEach(function (v, k) { body[k] = v; });
+      fd.forEach(function (v, k) { if (!(v instanceof File)) body[k] = v; });
 
       var requiredB = ['nom', 'cognoms', 'dni', 'email'];
       for (var j = 0; j < requiredB.length; j++) {
@@ -106,13 +106,26 @@
         }
       }
 
+      var fDni = baixaForm.querySelector('[name="dni_foto"]').files[0];
+      if (fDni && fDni.size > MAX_FILE) {
+        show(baixaMsg, l === 'es' ? 'La foto debe pesar menos de 4MB.' : 'La foto ha de pesar menys de 4MB.', 'err');
+        return;
+      }
+
       baixaBtn.disabled = true;
       show(baixaMsg, l === 'es' ? 'Enviando…' : 'Enviant…', '');
 
-      fetch('/api/baixa-soci', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+      (fDni ? fileToBase64(fDni) : Promise.resolve(null)).then(function (b64) {
+        if (b64) {
+          body.dni_foto_b64 = b64;
+          body.dni_foto_type = fDni.type || 'image/jpeg';
+          body.dni_foto_name = fDni.name || 'dni.jpg';
+        }
+        return fetch('/api/baixa-soci', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
       })
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
         .then(function (res) {
