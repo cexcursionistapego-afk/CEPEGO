@@ -74,7 +74,6 @@ def build(g):
       </div>
       <div class="split__media">
         <img src="{IMG}bb9bb0_dd4b5c48aab64d6fa0f2f034dfbaf7e1~mv2.jpeg" alt="El refugi La Figuereta al capvespre">
-        <div class="tagpin"><span class="n">540</span><span><span class="va">metres<br>d'altitud</span><span class="es">metros<br>de altitud</span></span></div>
       </div>
     </div>
   </div>
