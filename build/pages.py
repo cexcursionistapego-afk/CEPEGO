@@ -88,16 +88,6 @@ def build(g):
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="narrow center reveal" style="margin-bottom:clamp(34px,4vw,56px)">
-      <div class="kicker center-k"><span class="va">Què fem</span><span class="es">Qué hacemos</span></div>
-      <h2><span class="va">Les nostres activitats</span><span class="es">Nuestras actividades</span></h2>
-    </div>
-    <div class="act-list">
-{act_cards}    </div>
-  </div>
-</section>
 
 <section class="section bg-paper2">
   <div class="wrap">
