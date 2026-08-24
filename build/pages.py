@@ -189,7 +189,8 @@ def build(g):
      ("Aigüera exterior amb punts d'aigua (NO potable).","Fregadero exterior con puntos de agua (NO potable)."),
      ("Internet de banda ampla (cal reservar-lo).","Internet de banda ancha (hay que reservarlo)."),
      ("No hi ha utensilis de cuina: porta el que necessites.","No hay utensilios de cocina: trae lo que necesites."),
-     ("Lliteres amb matalàs i coixí: només cal el sac de dormir.","Literas con colchón y cojín: solo hace falta el saco de dormir.")]
+     ("Lliteres amb matalàs i coixí: només cal el sac de dormir.","Literas con colchón y cojín: solo hace falta el saco de dormir."),
+     ("Pantalla amb informació meteorològica de l'interior i l'exterior, i pronòstic del temps per a les pròximes hores.","Pantalla con información meteorológica del interior y el exterior, y pronóstico del tiempo para las próximas horas.")]
     def eq_li(idxs):
         return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
     refugi=header("refugi")+subhero(REFUGI[6],'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
@@ -226,7 +227,7 @@ def build(g):
         <span class="equip-tag"><span class="va">Sala d'estar</span><span class="es">Sala de estar</span></span>
         <h3 style="margin-top:.5em"><span class="va">Una sala d'estar gran</span><span class="es">Una sala de estar grande</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([0,7,4])}        </ul>
+{eq_li([0,7,4,10])}        </ul>
       </div>
       <div class="equip-block__media">
         <img loading="lazy" src="{REFUGI[9]}" alt="Sala d'estar del refugi">
