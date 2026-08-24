@@ -162,6 +162,10 @@ html[data-lang="es"] .va{display:none}
 .hero__meta{position:absolute;right:clamp(20px,5vw,48px);bottom:clamp(54px,8vw,120px);z-index:1;text-align:right;
   font-family:var(--font-mono);font-size:.73rem;letter-spacing:.14em;color:rgba(255,255,255,.6);writing-mode:vertical-rl;transform:rotate(180deg)}
 @media(max-width:760px){.hero__meta{display:none}}
+@media(max-width:600px){
+  .hero__inner{padding-bottom:clamp(50px,9vw,100px)}
+  .hero__scrim{background:linear-gradient(180deg,rgba(15,18,26,.45) 0%,rgba(15,18,26,.25) 45%,rgba(15,18,26,.82) 100%)}
+}
 
 /* subpage hero (compact, editorial) */
 .subhero{position:relative;color:#fff;overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;min-height:clamp(340px,52vh,520px)}
