@@ -6,7 +6,7 @@ def build(g):
     IMG=g['IMG']; REFUGI=g['REFUGI']; L1=g['L1']; L2=g['L2']; HERO=g['HERO_BENCS']; CREST=g['CREST']
     ALTA=g['ALTA']; BAIXA=g['BAIXA']; RESERVA=g['RESERVA']; GCAL=g['GCAL']; METEO=g['METEO']; METEO_PEGO=g['METEO_PEGO']
     IG=g['IG']; FB=g['FB']
-    RESERVA_EMBED="https://airtable.com/embed/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka"
+    RESERVA_EMBED="https://airtable.com/embed/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka/form"
 
     # ============================================= HOME
     # (href, tva, tes, pva, pes, num)

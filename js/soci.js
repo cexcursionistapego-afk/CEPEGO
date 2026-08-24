@@ -95,8 +95,8 @@
           if (res && res.ok) {
             altaForm.reset();
             show(altaMsg, l === 'es'
-              ? '¡Solicitud de alta enviada! Te contactaremos por correo electrónico para confirmar el alta e indicarte el pago de la cuota anual (35 €).'
-              : 'Sol·licitud d\'alta enviada! Et contactarem per correu electrònic per confirmar-te l\'alta i indicar-te el pagament de la quota anual (35 €).',
+              ? '¡Solicitud de alta enviada! Te contactaremos por correo electrónico para confirmar el alta e indicarte el pago de la cuota anual.'
+              : 'Sol·licitud d\'alta enviada! Et contactarem per correu electrònic per confirmar-te l\'alta i indicar-te el pagament de la quota anual.',
               'ok');
           } else {
             altaBtn.disabled = false;
