@@ -524,57 +524,9 @@ def build(g):
     <div class="card reveal" style="max-width:680px;margin:clamp(24px,3vw,40px) auto 0">
       <form id="alta-form" novalidate>
 
-        <div class="form-section-label"><span class="va">Dades personals</span><span class="es">Datos personales</span></div>
         <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required autocomplete="name"></div>
-        <div class="select-row">
-          <div class="field"><label><span class="va">Data de naixement</span><span class="es">Fecha de nacimiento</span> *</label><input type="date" name="naixement" required></div>
-          <div class="field"><label><span class="va">DNI / NIE / Passaport</span><span class="es">DNI / NIE / Pasaporte</span> *</label><input name="dni" required placeholder="12345678A" autocomplete="off"></div>
-        </div>
-        <div class="select-row">
-          <div class="field"><label><span class="va">Gènere</span><span class="es">Género</span></label>
-            <select name="genere">
-              <option value="">—</option>
-              <option value="Home"><span class="va">Home</span><span class="es">Hombre</span></option>
-              <option value="Dona"><span class="va">Dona</span><span class="es">Mujer</span></option>
-              <option value="Altre"><span class="va">Altre / No especificat</span><span class="es">Otro / No especificado</span></option>
-            </select>
-          </div>
-          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span> *</label><input type="tel" name="telefon" required autocomplete="tel"></div>
-        </div>
         <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required autocomplete="email"></div>
-
-        <div class="form-section-label" style="margin-top:20px"><span class="va">Adreça</span><span class="es">Dirección</span></div>
-        <div class="field"><label><span class="va">Carrer i número</span><span class="es">Calle y número</span> *</label><input name="adreca" required autocomplete="street-address"></div>
-        <div class="select-row">
-          <div class="field" style="flex:0 0 110px"><label><span class="va">Codi postal</span><span class="es">Código postal</span> *</label><input name="cp" required maxlength="5" placeholder="03780" autocomplete="postal-code"></div>
-          <div class="field"><label><span class="va">Localitat</span><span class="es">Localidad</span> *</label><input name="poblacio" required autocomplete="address-level2"></div>
-          <div class="field" style="flex:0 0 140px"><label><span class="va">Província</span><span class="es">Provincia</span> *</label><input name="provincia" required autocomplete="address-level1" value="Alacant"></div>
-        </div>
-
-        <div class="form-section-label" style="margin-top:20px"><span class="va">Interessos i notes</span><span class="es">Intereses y notas</span></div>
-        <div class="field">
-          <label><span class="va">Activitats d'interès</span><span class="es">Actividades de interés</span></label>
-          <div class="check-group">
-            <label class="chk"><input type="checkbox" name="act" value="Senderisme"> <span class="va">Senderisme</span><span class="es">Senderismo</span></label>
-            <label class="chk"><input type="checkbox" name="act" value="Escalada"> Escalada</label>
-            <label class="chk"><input type="checkbox" name="act" value="Espeleologia"> Espeleologia</label>
-            <label class="chk"><input type="checkbox" name="act" value="Barrancs"> <span class="va">Barrancs</span><span class="es">Barrancos</span></label>
-            <label class="chk"><input type="checkbox" name="act" value="Alta muntanya"> <span class="va">Alta muntanya</span><span class="es">Alta montaña</span></label>
-          </div>
-        </div>
-        <div class="select-row">
-          <div class="field"><label><span class="va">Com ens has conegut?</span><span class="es">¿Cómo nos conociste?</span></label>
-            <select name="origen">
-              <option value="">—</option>
-              <option value="Un amic/amiga"><span class="va">Un amic/amiga</span><span class="es">Un amigo/a</span></option>
-              <option value="Instagram/Facebook">Instagram / Facebook</option>
-              <option value="Internet / Google">Internet / Google</option>
-              <option value="Ajuntament de Pego"><span class="va">Ajuntament de Pego</span><span class="es">Ayuntamiento de Pego</span></option>
-              <option value="Altre"><span class="va">Altre</span><span class="es">Otro</span></option>
-            </select>
-          </div>
-        </div>
-        <div class="field"><label><span class="va">Notes addicionals (opcional)</span><span class="es">Notas adicionales (opcional)</span></label><textarea name="missatge" rows="2"></textarea></div>
+        <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span> *</label><textarea name="missatge" rows="4" required placeholder="Presenta't i diga'ns per què vols unir-te al club…"></textarea></div>
 
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
         <button type="submit" id="alta-submit" class="btn btn-primary" style="width:100%;margin-top:8px"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>

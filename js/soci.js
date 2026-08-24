@@ -19,7 +19,7 @@
       if (acts.length) body.act = acts;
 
       // Client-side required validation
-      var required = ['nom', 'naixement', 'dni', 'telefon', 'email', 'adreca', 'cp', 'poblacio', 'provincia'];
+      var required = ['nom', 'email', 'missatge'];
       for (var i = 0; i < required.length; i++) {
         if (!(body[required[i]] || '').trim()) {
           show(altaMsg, l === 'es' ? 'Falten camps obligatoris (*).' : 'Falten camps obligatoris (*).' , 'err');
