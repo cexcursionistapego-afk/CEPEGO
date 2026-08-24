@@ -219,7 +219,7 @@ def build(g):
     <!-- BLOC 1: CUINA — foto esquerra -->
     <div class="equip-block reveal">
       <div class="equip-block__media">
-        <img loading="lazy" src="{REFUGI[7]}" alt="Cuina del refugi">
+        <img loading="lazy" src="{REFUGI[4]}" alt="Cuina del refugi">
       </div>
       <div>
         <span class="equip-tag"><span class="va">Cuina i àpats</span><span class="es">Cocina y comidas</span></span>
@@ -246,7 +246,7 @@ def build(g):
         <p style="margin-top:16px;font-size:.94rem;color:var(--muted)"><span class="va">Dos habitacles separats però comunicats. Porta sempre el teu sac de dormir.</span><span class="es">Dos habitáculos separados pero comunicados. Trae siempre tu saco de dormir.</span></p>
       </div>
       <div class="equip-block__media">
-        <img loading="lazy" src="{REFUGI[4]}" alt="Dormitori del refugi">
+        <img loading="lazy" src="{REFUGI[8]}" alt="Dormitori del refugi">
         <div class="cap-badge">
           <div class="n">21</div>
           <div class="l"><span class="va">places<br>màxim</span><span class="es">plazas<br>máximo</span></div>
@@ -257,7 +257,7 @@ def build(g):
     <!-- BLOC 3: SERVEIS — foto esquerra -->
     <div class="equip-block reveal">
       <div class="equip-block__media">
-        <img loading="lazy" src="{REFUGI[11]}" alt="Exterior del refugi La Figuereta">
+        <img loading="lazy" src="{REFUGI[2]}" alt="Instal·lacions exteriors del refugi">
       </div>
       <div>
         <span class="equip-tag"><span class="va">Instal·lacions</span><span class="es">Instalaciones</span></span>
@@ -270,8 +270,8 @@ def build(g):
 
     <!-- DUO FINAL -->
     <div class="photo-duo reveal">
-      <img loading="lazy" src="{REFUGI[9]}" alt="Entorn del refugi">
-      <img loading="lazy" src="{REFUGI[10]}" alt="Alta muntanya des del refugi">
+      <img loading="lazy" src="{REFUGI[11]}" alt="Entorn del refugi al capvespre">
+      <img loading="lazy" src="{REFUGI[10]}" alt="Camí d'accés al refugi">
     </div>
 
   </div>
