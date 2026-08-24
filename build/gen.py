@@ -12,7 +12,7 @@ GCAL = ("https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%2
         "&ctz=Europe%2FMadrid&mode=MONTH&showTitle=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0"
         "&src=NWxxOWptcDJva3Z1YjVkOTZjMGxlcDNhZThAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23B4121B")
 METEO = "https://www.avamet.org/mxo_i.php?id=c30m135e02"
-METEO_PEGO = "https://www.avamet.org/mxo_i.php?id=c30m135e01"
+METEO_PEGO = "https://www.avamet.org/mxo-i.php?id=c30m102e14"
 IG = "https://www.instagram.com/refugifiguereta"
 FB = "https://www.facebook.com/share/17fdDSFxDx"
 FEMECV="https://www.femecv.com/va"; AJPEGO="https://www.pego.org/"; PIV="https://www.pegoilesvalls.es/"
