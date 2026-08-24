@@ -210,7 +210,7 @@ def build(g):
     <!-- MOSAIC INTRO: tall left + 2 right stacked -->
     <div class="refugi-mosaic reveal" style="margin-bottom:clamp(44px,6vw,80px)">
       <div class="refugi-mosaic__main">
-        <img loading="lazy" src="{REFUGI[1]}" alt="Refugi La Figuereta">
+        <img loading="lazy" src="{REFUGI[4]}" alt="Refugi La Figuereta">
       </div>
       <div><img loading="lazy" src="{REFUGI[2]}" alt="Refugi La Figuereta"></div>
       <div><img loading="lazy" src="{REFUGI[3]}" alt="Refugi La Figuereta"></div>
@@ -219,7 +219,7 @@ def build(g):
     <!-- BLOC 1: CUINA — foto esquerra -->
     <div class="equip-block reveal">
       <div class="equip-block__media">
-        <img loading="lazy" src="{REFUGI[4]}" alt="Cuina del refugi">
+        <img loading="lazy" src="{REFUGI[1]}" alt="Cuina del refugi">
       </div>
       <div>
         <span class="equip-tag"><span class="va">Cuina i àpats</span><span class="es">Cocina y comidas</span></span>
