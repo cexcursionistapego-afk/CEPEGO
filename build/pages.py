@@ -570,9 +570,6 @@ def build(g):
         <div class="field">
           <label class="chk"><input type="checkbox" name="sala" value="1"> <span class="va">Vull utilitzar la sala d'entrenament (<strong>50 €</strong>/any addicionals)</span><span class="es">Quiero utilizar la sala de entrenamiento (<strong>50 €</strong>/año adicionales)</span></label>
         </div>
-        <div class="field">
-          <label class="chk"><input type="checkbox" name="difusio" value="1"> <span class="va">Vull entrar al grup de difusió (WhatsApp)</span><span class="es">Quiero entrar en el grupo de difusión (WhatsApp)</span></label>
-        </div>
         <div class="field"><label><span class="va">Notes (opcional)</span><span class="es">Notas (opcional)</span></label><textarea name="notas" rows="2"></textarea></div>
 
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>

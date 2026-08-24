@@ -1,6 +1,8 @@
 // POST /api/baixa-soci
 // Envia una sol·licitud de baixa a la taula BAIXES CENTRE EXCURSIONISTA PEGO.
 
+const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN } = require('./_validators');
+
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblGeQzo49FyjBQJs'; // BAIXES CENTRE EXCURSIONISTA PEGO
 
@@ -26,6 +28,15 @@ exports.handler = async function (event) {
 
   if (!nom || !cognoms || !dni || !email)
     return res(400, { ok: false, error: 'camps', message: 'Falten camps obligatoris.' });
+
+  if (!isValidDNI(dni))
+    return res(400, { ok: false, error: 'dni', message: 'DNI/NIE no vàlid.' });
+  if (!isValidEmail(email))
+    return res(400, { ok: false, error: 'email', message: 'Correu electrònic no vàlid.' });
+  if (s(b.telefon) && !isValidPhone(b.telefon))
+    return res(400, { ok: false, error: 'telefon', message: 'Telèfon no vàlid.' });
+  if (s(b.iban) && !isValidIBAN(b.iban))
+    return res(400, { ok: false, error: 'iban', message: 'IBAN no vàlid.' });
 
   const fields = {
     'NOM':     nom,

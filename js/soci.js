@@ -2,6 +2,28 @@
 (function () {
   function lang() { return document.documentElement.getAttribute('data-lang') === 'es' ? 'es' : 'va'; }
 
+  function normDigits(v) { return (v || '').replace(/\D/g, ''); }
+  function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
+  function isValidPhone(v) {
+    var d = normDigits(v);
+    if (d.length === 11 && d.slice(0, 2) === '34') d = d.slice(2);
+    return /^[6789]\d{8}$/.test(d);
+  }
+  function isValidDNI(v) {
+    var t = (v || '').trim().toUpperCase();
+    return /^\d{8}[A-Z]$/.test(t) || /^[XYZ]\d{7}[A-Z]$/.test(t);
+  }
+  function isValidIBAN(v) {
+    var t = (v || '').replace(/\s/g, '').toUpperCase();
+    return /^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(t);
+  }
+  var MSG = {
+    dni:     { va: 'El DNI/NIE no és vàlid.',        es: 'El DNI/NIE no es válido.' },
+    telefon: { va: 'El telèfon no és vàlid.',        es: 'El teléfono no es válido.' },
+    email:   { va: 'El correu electrònic no és vàlid.', es: 'El correo electrónico no es válido.' },
+    iban:    { va: 'L\'IBAN no és vàlid.',           es: 'El IBAN no es válido.' },
+  };
+
   /* ---- Alta de soci ---- */
   var altaForm = document.getElementById('alta-form');
   var altaMsg  = document.getElementById('alta-msg');
@@ -24,7 +46,6 @@
       var body = {};
       fd.forEach(function (v, k) { if (!(v instanceof File)) body[k] = v; });
       body.sala = altaForm.querySelector('[name="sala"]').checked;
-      body.difusio = altaForm.querySelector('[name="difusio"]').checked;
 
       // Client-side required validation
       var required = ['nom', 'cognoms', 'dni', 'naixement', 'telefon', 'email', 'localitat', 'iban'];
@@ -34,6 +55,11 @@
           return;
         }
       }
+
+      if (!isValidDNI(body.dni))       { show(altaMsg, MSG.dni[l], 'err'); return; }
+      if (!isValidPhone(body.telefon)) { show(altaMsg, MSG.telefon[l], 'err'); return; }
+      if (!isValidEmail(body.email))   { show(altaMsg, MSG.email[l], 'err'); return; }
+      if (!isValidIBAN(body.iban))     { show(altaMsg, MSG.iban[l], 'err'); return; }
 
       var fAnvers = altaForm.querySelector('[name="dni_anvers"]').files[0];
       var fRevers = altaForm.querySelector('[name="dni_revers"]').files[0];
@@ -105,6 +131,11 @@
           return;
         }
       }
+
+      if (!isValidDNI(body.dni))   { show(baixaMsg, MSG.dni[l], 'err'); return; }
+      if (!isValidEmail(body.email)) { show(baixaMsg, MSG.email[l], 'err'); return; }
+      if ((body.telefon || '').trim() && !isValidPhone(body.telefon)) { show(baixaMsg, MSG.telefon[l], 'err'); return; }
+      if ((body.iban || '').trim() && !isValidIBAN(body.iban)) { show(baixaMsg, MSG.iban[l], 'err'); return; }
 
       var fDni = baixaForm.querySelector('[name="dni_foto"]').files[0];
       if (fDni && fDni.size > MAX_FILE) {

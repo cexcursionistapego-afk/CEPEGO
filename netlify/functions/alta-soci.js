@@ -3,6 +3,8 @@
 // d'Airtable, replicant els camps del "FORMULARI D'ALTA" oficial (incloent
 // les fotos del DNI, pujades com a adjunts després de crear el registre).
 
+const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN } = require('./_validators');
+
 const BASE  = process.env.AIRTABLE_BASE || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblNm2FZG9KCdiCDq'; // SOCIS CENTRE EXCURSIONISTA PEGO
 
@@ -33,6 +35,15 @@ exports.handler = async function (event) {
   if (!nom || !cognoms || !dni || !naixement || !telefon || !email || !localitat || !iban)
     return res(400, { ok: false, error: 'camps', message: 'Falten camps obligatoris.' });
 
+  if (!isValidDNI(dni))
+    return res(400, { ok: false, error: 'dni', message: 'DNI/NIE no vàlid.' });
+  if (!isValidPhone(telefon))
+    return res(400, { ok: false, error: 'telefon', message: 'Telèfon no vàlid.' });
+  if (!isValidEmail(email))
+    return res(400, { ok: false, error: 'email', message: 'Correu electrònic no vàlid.' });
+  if (!isValidIBAN(iban))
+    return res(400, { ok: false, error: 'iban', message: 'IBAN no vàlid.' });
+
   if (!b.dni_anvers_b64 || !b.dni_revers_b64)
     return res(400, { ok: false, error: 'documents', message: 'Falten les fotos del DNI.' });
 
@@ -47,7 +58,6 @@ exports.handler = async function (event) {
     'CONTER CORRENT (IBAN)': iban,
     'DONAR DE ALTA': true,
     "ÚS DE LA SALA D'ENTRENAMENT": !!b.sala,
-    'GRUP DIFUSIÓ': !!b.difusio,
   };
   if (s(b.notas)) fields['NOTAS'] = s(b.notas);
 
