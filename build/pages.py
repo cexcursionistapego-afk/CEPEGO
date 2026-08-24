@@ -4,7 +4,7 @@
 def build(g):
     doc=g['doc']; header=g['header']; footer=g['footer']; subhero=g['subhero']; write=g['write']
     IMG=g['IMG']; REFUGI=g['REFUGI']; L1=g['L1']; L2=g['L2']; HERO=g['HERO_BENCS']; CREST=g['CREST']
-    ALTA=g['ALTA']; BAIXA=g['BAIXA']; RESERVA=g['RESERVA']; GCAL=g['GCAL']; METEO=g['METEO']
+    ALTA=g['ALTA']; BAIXA=g['BAIXA']; RESERVA=g['RESERVA']; GCAL=g['GCAL']; METEO=g['METEO']; METEO_PEGO=g['METEO_PEGO']
     IG=g['IG']; FB=g['FB']
     RESERVA_EMBED="https://airtable.com/embed/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka"
 
@@ -358,6 +358,24 @@ def build(g):
 '''+footer()
     write("meteo.html", doc("El temps al refugi | CEPEGO",
         "Estació meteorològica del refugi La Figuereta connectada a la xarxa AVAMET.", meteo))
+
+    # ============================================= METEO PEGO
+    meteo_pego=header("meteo-pego")+subhero(L2,'AVAMET',
+        "El temps a Pego","El tiempo en Pego",
+        "Estació meteorològica a Pego, connectada a la xarxa AVAMET.","Estación meteorológica en Pego, conectada a la red AVAMET.")+f'''
+<section class="section">
+  <div class="wrap">
+    <div class="embed reveal" style="max-width:1000px;margin:0 auto">
+      <iframe src="{METEO_PEGO}" title="AVAMET — Pego" scrolling="no" style="height:1180px;max-height:82vh"></iframe>
+    </div>
+    <div class="center" style="margin-top:24px">
+      <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO_PEGO}"><span class="va">Obrir a AVAMET</span><span class="es">Abrir en AVAMET</span></a>
+    </div>
+  </div>
+</section>
+'''+footer()
+    write("meteo-pego.html", doc("El tiempo en Pego | CEPEGO",
+        "Estació meteorològica de Pego connectada a la xarxa AVAMET.", meteo_pego))
 
     # ============================================= RUTES
     routes=[("Circular Figuereta – Tossal","2,97 km","+154 m","673 m","facil","Fàcil","Fácil",
