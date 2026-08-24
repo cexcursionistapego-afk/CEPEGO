@@ -170,7 +170,7 @@ def build(g):
           <a href="{BAIXA}" target="_blank" rel="noopener" class="btn btn-outline"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></a>
         </div>
       </div>
-      <div class="split__media"><img src="{REFUGI[4]}" alt="Grup del CEPEGO a la muntanya"></div>
+      <div class="split__media"><img src="{IMG}bb9bb0_becd04976a1149d3a87a611761d3fe35~mv2.jpeg" alt="Grup del CEPEGO a la muntanya"></div>
     </div>
   </div>
 </section>
@@ -268,25 +268,19 @@ def build(g):
       </div>
     </div>
 
-    <!-- FOTO FINAL: accés al refugi -->
-    <div class="reveal" style="max-width:680px;margin:clamp(24px,3.5vw,48px) auto 0">
-      <img loading="lazy" src="{REFUGI[10]}" alt="Camí d'accés al refugi" style="width:100%;height:clamp(240px,30vw,380px);object-fit:cover;border-radius:var(--r-lg);box-shadow:var(--shadow);display:block">
+    <!-- BLOC 4: COM ARRIBAR — integrat com la resta -->
+    <div class="equip-block reveal" style="border-top:1px solid var(--hair)">
+      <div class="equip-block__media">
+        <img loading="lazy" src="{REFUGI[10]}" alt="Camí d'accés al refugi">
+      </div>
+      <div>
+        <span class="equip-tag"><span class="va">Accés</span><span class="es">Acceso</span></span>
+        <h3 style="margin-top:.5em"><span class="va">Com arribar</span><span class="es">Cómo llegar</span></h3>
+        <p style="margin-top:12px;color:var(--muted)"><span class="va">Per la carretera de Pego a la Vall d'Ebo (CV-712), uns 8 km. Quan comença a baixar cap a Ebo, uns 200 m més avall a mà dreta trobem el camí d'accés, ben senyalitzat. Després d'1,7 km s'arriba al refugi.</span><span class="es">Por la carretera de Pego a la Vall d'Ebo (CV-712), unos 8 km. Cuando empieza a bajar hacia Ebo, unos 200 m más abajo a mano derecha encontramos el camino de acceso, bien señalizado. Tras 1,7 km se llega al refugio.</span></p>
+        <a class="btn btn-outline" style="margin-top:18px" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Refugi+La+Figuereta+Vall+d%27Ebo">Google Maps</a>
+      </div>
     </div>
 
-  </div>
-</section>
-
-<section class="section bg-paper2">
-  <div class="wrap grid cols-2">
-    <div class="card reveal">
-      <h3><span class="va">Com arribar</span><span class="es">Cómo llegar</span></h3>
-      <p><span class="va">Per la carretera de Pego a la Vall d'Ebo (CV-712), uns 8 km. Quan comença a baixar cap a Ebo, uns 200 m més avall a mà dreta trobem el camí d'accés, ben senyalitzat. Després d'1,7 km s'arriba al refugi.</span><span class="es">Por la carretera de Pego a la Vall d'Ebo (CV-712), unos 8 km. Cuando empieza a bajar hacia Ebo, unos 200 m más abajo a mano derecha encontramos el camino de acceso, bien señalizado. Tras 1,7 km se llega al refugio.</span></p>
-      <a class="btn btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Refugi+La+Figuereta+Vall+d%27Ebo">Google Maps</a>
-    </div>
-    <div class="card reveal">
-      <h3><span class="va">Entorn natural</span><span class="es">Entorno natural</span></h3>
-      <p><span class="va">Sobre un macís calcari a 540 m, amb vegetació de bosc baix mediterrani —argelagues, margallons, pi blanc— i fins i tot la Llengua de Cèrvol, espècie endèmica i protegida dels avencs de la zona. Al voltant, turisme rural i gastronomia a Ebo, Vall d'Alcalà, Laguar, Gallinera i Pego.</span><span class="es">Sobre un macizo calcáreo a 540 m, con vegetación de bosque bajo mediterráneo —aliagas, palmitos, pino blanco— e incluso la Lengua de Ciervo, especie endémica y protegida de los avencos de la zona. Alrededor, turismo rural y gastronomía en Ebo, Vall d'Alcalà, Laguar, Gallinera y Pego.</span></p>
-    </div>
   </div>
 </section>
 '''+footer()
@@ -487,7 +481,7 @@ def build(g):
         "Escola d'escalada del Calvari a Pego: sectors Iniciació i Placa del Sol, 28 vies.", escalada))
 
     # ============================================= ESPELEO
-    espeleo=header("espeleo")+subhero(REFUGI[9],'<span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span>',
+    espeleo=header("espeleo")+subhero(IMG+"bb9bb0_82b4e09447a84e64a0cbbb9b026159e5~mv2.jpeg",'<span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span>',
         "Espeleologia","Espeleología",
         "Les principals cavitats de la nostra zona, amb ressenyes i topografies.","Las principales cavidades de nuestra zona, con reseñas y topografías.")+f'''
 <section class="section">
@@ -504,7 +498,7 @@ def build(g):
         "Les principals cavitats i avencs de la zona de Pego, amb les seues topografies.", espeleo))
 
     # ============================================= BARRANCS
-    barrancs=header("barrancs")+subhero(REFUGI[5],'<span class="va">Aigua i roca</span><span class="es">Agua y roca</span>',
+    barrancs=header("barrancs")+subhero(IMG+"bb9bb0_c7bc744c47aa43e89c657194275c9132~mv2.jpg",'<span class="va">Aigua i roca</span><span class="es">Agua y roca</span>',
         "Barrancs","Barrancos",
         "Els principals barrancs de la comarca, amb material i topografia.","Los principales barrancos de la comarca, con material y topografía.")+f'''
 <section class="section">
@@ -537,7 +531,7 @@ def build(g):
         "Activitats del Centre Excursionista de Pego al llarg de l'any.", calendari))
 
     # ============================================= CONTACTE
-    contacte=header("contacte")+subhero(REFUGI[4],'Pego',
+    contacte=header("contacte")+subhero(L2,'Pego',
         "Contacta amb el club","Contacta con el club",
         "Vols fer-te soci o passar uns dies a La Figuereta? Escriu-nos.","¿Quieres hacerte socio o pasar unos días en La Figuereta? Escríbenos.")+f'''
 <section class="section">
@@ -552,7 +546,12 @@ def build(g):
       <div style="margin-top:26px"><a class="btn btn-primary" href="{RESERVA}" target="_blank" rel="noopener"><span class="va">Formulari de contacte i reserva</span><span class="es">Formulario de contacto y reserva</span></a></div>
     </div>
     <div class="reveal">
-      <div class="embed"><iframe src="{RESERVA_EMBED}" title="Formulari de contacte" style="height:640px;background:#fff"></iframe></div>
+      <div class="card" style="text-align:center;padding:clamp(32px,5vw,56px) clamp(24px,4vw,40px)">
+        <div style="font-size:2.6rem;margin-bottom:14px">📝</div>
+        <h3 style="font-size:1.4rem"><span class="va">Formulari de contacte</span><span class="es">Formulario de contacto</span></h3>
+        <p style="margin-top:10px;color:var(--muted)"><span class="va">Consultes, sol·licituds d'alta i reserves del refugi, tot des d'un mateix formulari.</span><span class="es">Consultas, solicitudes de alta y reservas del refugio, todo desde un mismo formulario.</span></p>
+        <a class="btn btn-primary" style="width:100%;margin-top:22px" href="{RESERVA}" target="_blank" rel="noopener"><span class="va">Obrir formulari</span><span class="es">Abrir formulario</span></a>
+      </div>
     </div>
   </div>
 </section>
