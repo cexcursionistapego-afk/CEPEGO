@@ -8,6 +8,12 @@ def build(g):
     IG=g['IG']; FB=g['FB']
     RESERVA_EMBED="https://airtable.com/embed/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka/form"
 
+    def gallery_imgs(files, alt):
+        return "".join(
+            f'      <a href="{IMG}bb9bb0_{f}"><img loading="lazy" src="{IMG}bb9bb0_{f}" alt="{alt}"></a>\n'
+            for f in files
+        )
+
     # ============================================= HOME
     # (href, tva, tes, pva, pes, num)
     acts=[
@@ -97,16 +103,7 @@ def build(g):
       <p class="lead"><span class="va">Cada any organitzem jornades de manteniment i senyalització dels senders de Pego i les valls, perquè la muntanya estiga sempre neta i transitable. La quota de soci ajuda a fer-ho possible.</span><span class="es">Cada año organizamos jornadas de mantenimiento y señalización de los senderos de Pego y sus valles, para que la montaña esté siempre limpia y transitable. La cuota de socio ayuda a hacerlo posible.</span></p>
     </div>
     <div class="senders-gallery reveal">
-      <img loading="lazy" src="{IMG}bb9bb0_391b36f3ebd04e3182be56e88280aca8~mv2.jpeg" alt="Jornada de recuperació de senders">
-      <img loading="lazy" src="{IMG}bb9bb0_2a340796bdb14c5cacc3936de7383b74~mv2.jpeg" alt="Jornada de recuperació de senders">
-      <img loading="lazy" src="{IMG}bb9bb0_82b4e09447a84e64a0cbbb9b026159e5~mv2.jpeg" alt="Jornada de recuperació de senders">
-      <img loading="lazy" src="{IMG}bb9bb0_57ae4d984d9c48b2a32c53e3bfe3498d~mv2.jpeg" alt="Jornada de recuperació de senders">
-      <img loading="lazy" src="{IMG}bb9bb0_becd04976a1149d3a87a611761d3fe35~mv2.jpeg" alt="Jornada de recuperació de senders">
-      <img loading="lazy" src="{IMG}bb9bb0_051b66f2418a4085955891b0c0a262c5~mv2.jpeg" alt="Jornada de recuperació de senders">
-      <img loading="lazy" src="{IMG}bb9bb0_e3a29c2c30e74be998225d7b468bbe37~mv2.jpeg" alt="Jornada de recuperació de senders">
-      <img loading="lazy" src="{IMG}bb9bb0_c7bc744c47aa43e89c657194275c9132~mv2.jpg" alt="Jornada de recuperació de senders">
-      <img loading="lazy" src="{IMG}bb9bb0_feeaad2d5baf4e91b2f160405d5c0f55~mv2.jpeg" alt="Jornada de recuperació de senders">
-    </div>
+{gallery_imgs(['391b36f3ebd04e3182be56e88280aca8~mv2.jpeg','2a340796bdb14c5cacc3936de7383b74~mv2.jpeg','82b4e09447a84e64a0cbbb9b026159e5~mv2.jpeg','57ae4d984d9c48b2a32c53e3bfe3498d~mv2.jpeg','becd04976a1149d3a87a611761d3fe35~mv2.jpeg','051b66f2418a4085955891b0c0a262c5~mv2.jpeg','e3a29c2c30e74be998225d7b468bbe37~mv2.jpeg','c7bc744c47aa43e89c657194275c9132~mv2.jpg','feeaad2d5baf4e91b2f160405d5c0f55~mv2.jpeg'], "Jornada de recuperació de senders")}    </div>
   </div>
 </section>
 
@@ -118,16 +115,7 @@ def build(g):
       <p class="lead"><span class="va">Rocòdrom amb blocs de dificultat variada, panell d'entrenament i sala amb màquines per a preparar totes les disciplines de muntanya. Accés per <strong data-cms="quota_sala">50 €</strong>/any addicionals a la quota de soci.</span><span class="es">Rocódromo con bloques de dificultad variada, panel de entrenamiento y sala con máquinas para preparar todas las disciplinas de montaña. Acceso por <strong>50 €</strong>/año adicionales a la cuota de socio.</span></p>
     </div>
     <div class="senders-gallery reveal">
-      <img loading="lazy" src="{IMG}bb9bb0_27dddcd5086a44a0827ac05bf406df3a~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-      <img loading="lazy" src="{IMG}bb9bb0_f8b750629ad5479d9b83d134fca28bb2~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-      <img loading="lazy" src="{IMG}bb9bb0_0a8a6079eb9e4d08b920f87662ca13a0~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-      <img loading="lazy" src="{IMG}bb9bb0_a878841efccf4e4cbfd75fa1348c80d8~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-      <img loading="lazy" src="{IMG}bb9bb0_b4b6f8c3f6f144d3854112914b948cc3~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-      <img loading="lazy" src="{IMG}bb9bb0_61c60a6949b449169cf212140f7dfec0~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-      <img loading="lazy" src="{IMG}bb9bb0_8ac56ee5cd134f028578b52d80640a5c~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-      <img loading="lazy" src="{IMG}bb9bb0_198f57a26919421c999cdc96a0534cf5~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-      <img loading="lazy" src="{IMG}bb9bb0_43da4fad9c1547daa345593283911dfb~mv2.jpg" alt="Sala d'entrenament del CEPEGO">
-    </div>
+{gallery_imgs(['27dddcd5086a44a0827ac05bf406df3a~mv2.jpg','f8b750629ad5479d9b83d134fca28bb2~mv2.jpg','0a8a6079eb9e4d08b920f87662ca13a0~mv2.jpg','a878841efccf4e4cbfd75fa1348c80d8~mv2.jpg','b4b6f8c3f6f144d3854112914b948cc3~mv2.jpg','61c60a6949b449169cf212140f7dfec0~mv2.jpg','8ac56ee5cd134f028578b52d80640a5c~mv2.jpg','198f57a26919421c999cdc96a0534cf5~mv2.jpg','43da4fad9c1547daa345593283911dfb~mv2.jpg'], "Sala d'entrenament del CEPEGO")}    </div>
   </div>
 </section>
 
