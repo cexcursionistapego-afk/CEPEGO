@@ -212,7 +212,7 @@ def build(g):
     <div class="photo-strip reveal">
       <img loading="lazy" src="{REFUGI[5]}" alt="Refugi La Figuereta">
       <img loading="lazy" src="{REFUGI[0]}" alt="Refugi La Figuereta">
-      <img loading="lazy" src="{REFUGI[8]}" alt="Refugi La Figuereta">
+      <img loading="lazy" src="{REFUGI[9]}" alt="Refugi La Figuereta">
     </div>
 
     <!-- BLOC 2: DORMIR — foto dreta amb badge -->
