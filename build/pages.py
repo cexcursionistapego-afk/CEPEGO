@@ -184,7 +184,7 @@ def build(g):
      ("Cuina amb 4 fogons de gas (bombona de butà inclosa).","Cocina con 4 fogones de gas (bombona de butano incluida)."),
      ("Nevera amb congelador, microones i torrador de pa.","Nevera con congelador, microondas y tostador de pan."),
      ("Cafetera Nespresso: 1 € la càpsula.","Cafetera Nespresso: 1 € la cápsula."),
-     ("Endolls a 220 v.","Enchufes a 220 v."),
+     ("Endolls a 220 v. a les dues plantes.","Enchufes a 220 v. en las dos plantas."),
      ("Lavabos i dutxa amb aigua calenta (moneda d'1 €, dóna per a dues persones).","Lavabos y ducha con agua caliente (moneda de 1 €, da para dos personas)."),
      ("Aigüera exterior amb punts d'aigua (NO potable).","Fregadero exterior con puntos de agua (NO potable)."),
      ("Internet de banda ampla (cal reservar-lo).","Internet de banda ancha (hay que reservarlo)."),
@@ -216,7 +216,20 @@ def build(g):
         <span class="equip-tag"><span class="va">Cuina i àpats</span><span class="es">Cocina y comidas</span></span>
         <h3 style="margin-top:.5em"><span class="va">Cuina equipada per a tothom</span><span class="es">Cocina equipada para todos</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([0,1,2,3,8])}        </ul>
+{eq_li([1,2,3,8])}        </ul>
+      </div>
+    </div>
+
+    <!-- BLOC SALA D'ESTAR — foto dreta -->
+    <div class="equip-block equip-block--rev reveal">
+      <div>
+        <span class="equip-tag"><span class="va">Sala d'estar</span><span class="es">Sala de estar</span></span>
+        <h3 style="margin-top:.5em"><span class="va">Una sala d'estar gran</span><span class="es">Una sala de estar grande</span></h3>
+        <ul class="equip equip-1col" style="margin-top:18px">
+{eq_li([0,7,4])}        </ul>
+      </div>
+      <div class="equip-block__media">
+        <img loading="lazy" src="{REFUGI[9]}" alt="Sala d'estar del refugi">
       </div>
     </div>
 
@@ -254,7 +267,7 @@ def build(g):
         <span class="equip-tag"><span class="va">Instal·lacions</span><span class="es">Instalaciones</span></span>
         <h3 style="margin-top:.5em"><span class="va">Tot el que necessites</span><span class="es">Todo lo que necesitas</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([4,5,6,7])}        </ul>
+{eq_li([5,6])}        </ul>
         <p class="note" style="margin-top:18px"><span class="va">⚠️ L'aigua és d'una cava natural i <strong>no és potable</strong>: porta la teua per a consumir.</span><span class="es">⚠️ El agua es de una cava natural y <strong>no es potable</strong>: trae la tuya para consumir.</span></p>
       </div>
     </div>
