@@ -192,7 +192,7 @@ def build(g):
      ("Lliteres amb matalàs i coixí: només cal el sac de dormir.","Literas con colchón y cojín: solo hace falta el saco de dormir.")]
     def eq_li(idxs):
         return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
-    refugi=header("refugi")+subhero(REFUGI[0],'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
+    refugi=header("refugi")+subhero(REFUGI[6],'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
         "La Figuereta","La Figuereta",
         "El refugi de muntanya del Centre Excursionista de Pego.","El refugio de montaña del Centro Excursionista de Pego.")+f'''
 
@@ -232,7 +232,7 @@ def build(g):
     <!-- FRANJA FOTOGRÀFICA -->
     <div class="photo-strip reveal">
       <img loading="lazy" src="{REFUGI[5]}" alt="Refugi La Figuereta">
-      <img loading="lazy" src="{REFUGI[6]}" alt="Refugi La Figuereta">
+      <img loading="lazy" src="{REFUGI[0]}" alt="Refugi La Figuereta">
       <img loading="lazy" src="{REFUGI[8]}" alt="Refugi La Figuereta">
     </div>
 
