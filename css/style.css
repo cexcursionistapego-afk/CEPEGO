@@ -459,10 +459,6 @@ html[data-lang="es"] .va{display:none}
   position:relative;padding:clamp(56px,7vw,100px) 0 clamp(36px,5vw,60px);
   display:flex;flex-direction:column;align-items:center;gap:18px;
   text-align:center;border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden}
-/* Radial glow behind crest */
-.footer__head::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:500px;height:350px;pointer-events:none;
-  background:radial-gradient(ellipse at 50% 30%,rgba(180,18,27,.14) 0%,rgba(30,46,99,.08) 50%,transparent 75%)}
 /* Mountain silhouette bottom */
 .footer__head::after{content:"";position:absolute;bottom:0;left:0;right:0;height:100px;pointer-events:none;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='rgba(255,255,255,.025)' d='M0,100 L0,70 L80,40 L160,62 L240,20 L320,55 L400,10 L480,48 L560,25 L640,60 L720,5 L800,45 L880,22 L960,58 L1040,14 L1120,42 L1200,28 L1280,55 L1360,35 L1440,50 L1440,100 Z'/%3E%3C/svg%3E") bottom/cover no-repeat}
