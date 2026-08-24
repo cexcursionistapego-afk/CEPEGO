@@ -6,35 +6,64 @@
   var altaForm = document.getElementById('alta-form');
   var altaMsg  = document.getElementById('alta-msg');
   var altaBtn  = document.getElementById('alta-submit');
+  var MAX_FILE = 4 * 1024 * 1024; // 4MB
+  function fileToBase64(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(reader.result.split(',')[1]); };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
   if (altaForm) {
     altaForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var l = lang();
       var fd = new FormData(altaForm);
       var body = {};
-      // Collect checkboxes as array
-      var acts = [];
-      altaForm.querySelectorAll('[name="act"]:checked').forEach(function (cb) { acts.push(cb.value); });
-      fd.forEach(function (v, k) { if (k !== 'act') body[k] = v; });
-      if (acts.length) body.act = acts;
+      fd.forEach(function (v, k) { if (!(v instanceof File)) body[k] = v; });
+      body.sala = altaForm.querySelector('[name="sala"]').checked;
+      body.difusio = altaForm.querySelector('[name="difusio"]').checked;
 
       // Client-side required validation
-      var required = ['nom', 'email', 'missatge'];
+      var required = ['nom', 'cognoms', 'dni', 'naixement', 'telefon', 'email', 'localitat', 'iban'];
       for (var i = 0; i < required.length; i++) {
         if (!(body[required[i]] || '').trim()) {
-          show(altaMsg, l === 'es' ? 'Falten camps obligatoris (*).' : 'Falten camps obligatoris (*).' , 'err');
+          show(altaMsg, l === 'es' ? 'Faltan campos obligatorios (*).' : 'Falten camps obligatoris (*).', 'err');
           return;
         }
+      }
+
+      var fAnvers = altaForm.querySelector('[name="dni_anvers"]').files[0];
+      var fRevers = altaForm.querySelector('[name="dni_revers"]').files[0];
+      if (!fAnvers || !fRevers) {
+        show(altaMsg, l === 'es' ? 'Faltan las fotos del DNI.' : 'Falten les fotos del DNI.', 'err');
+        return;
+      }
+      if (fAnvers.size > MAX_FILE || fRevers.size > MAX_FILE) {
+        show(altaMsg, l === 'es' ? 'Cada foto debe pesar menos de 4MB.' : 'Cada foto ha de pesar menys de 4MB.', 'err');
+        return;
       }
 
       altaBtn.disabled = true;
       show(altaMsg, l === 'es' ? 'Enviando…' : 'Enviant…', '');
 
-      fetch('/api/alta-soci', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      })
+      Promise.all([fileToBase64(fAnvers), fileToBase64(fRevers)])
+        .then(function (b64) {
+          body.dni_anvers_b64 = b64[0];
+          body.dni_anvers_type = fAnvers.type || 'image/jpeg';
+          body.dni_anvers_name = fAnvers.name || 'dni-anvers.jpg';
+          body.dni_revers_b64 = b64[1];
+          body.dni_revers_type = fRevers.type || 'image/jpeg';
+          body.dni_revers_name = fRevers.name || 'dni-revers.jpg';
+
+          return fetch('/api/alta-soci', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          });
+        })
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
         .then(function (res) {
           if (res && res.ok) {

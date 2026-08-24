@@ -542,9 +542,38 @@ def build(g):
     <div class="card reveal" style="max-width:680px;margin:clamp(24px,3vw,40px) auto 0">
       <form id="alta-form" novalidate>
 
-        <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required autocomplete="name"></div>
-        <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required autocomplete="email"></div>
-        <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span> *</label><textarea name="missatge" rows="4" required placeholder="Presenta't i diga'ns per què vols unir-te al club…"></textarea></div>
+        <div class="form-section-label"><span class="va">Dades personals</span><span class="es">Datos personales</span></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Nom</span><span class="es">Nombre</span> *</label><input name="nom" required autocomplete="given-name"></div>
+          <div class="field"><label><span class="va">Cognoms</span><span class="es">Apellidos</span> *</label><input name="cognoms" required autocomplete="family-name"></div>
+        </div>
+        <div class="select-row">
+          <div class="field"><label>DNI / NIE *</label><input name="dni" required placeholder="12345678A" autocomplete="off"></div>
+          <div class="field"><label><span class="va">Data de naixement</span><span class="es">Fecha de nacimiento</span> *</label><input type="date" name="naixement" required></div>
+        </div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span> *</label><input type="tel" name="telefon" required autocomplete="tel"></div>
+          <div class="field"><label><span class="va">Correu electrònic</span><span class="es">Correo electrónico</span> *</label><input type="email" name="email" required autocomplete="email"></div>
+        </div>
+        <div class="field"><label><span class="va">Localitat</span><span class="es">Localidad</span> *</label><input name="localitat" required autocomplete="address-level2"></div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Pagament de la quota</span><span class="es">Pago de la cuota</span></div>
+        <div class="field"><label><span class="va">Compte corrent (IBAN)</span><span class="es">Cuenta corriente (IBAN)</span> *</label><input name="iban" required placeholder="ES00 0000 0000 0000 0000 0000" autocomplete="off"></div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Documentació</span><span class="es">Documentación</span></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Foto DNI (anvers)</span><span class="es">Foto DNI (anverso)</span> *</label><input type="file" name="dni_anvers" accept="image/*" required></div>
+          <div class="field"><label><span class="va">Foto DNI (revers)</span><span class="es">Foto DNI (reverso)</span> *</label><input type="file" name="dni_revers" accept="image/*" required></div>
+        </div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Opcions</span><span class="es">Opciones</span></div>
+        <div class="field">
+          <label class="chk"><input type="checkbox" name="sala" value="1"> <span class="va">Vull utilitzar la sala d'entrenament (<strong>50 €</strong>/any addicionals)</span><span class="es">Quiero utilizar la sala de entrenamiento (<strong>50 €</strong>/año adicionales)</span></label>
+        </div>
+        <div class="field">
+          <label class="chk"><input type="checkbox" name="difusio" value="1"> <span class="va">Vull entrar al grup de difusió (WhatsApp)</span><span class="es">Quiero entrar en el grupo de difusión (WhatsApp)</span></label>
+        </div>
+        <div class="field"><label><span class="va">Notes (opcional)</span><span class="es">Notas (opcional)</span></label><textarea name="notas" rows="2"></textarea></div>
 
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
         <button type="submit" id="alta-submit" class="btn btn-primary" style="width:100%;margin-top:8px"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
