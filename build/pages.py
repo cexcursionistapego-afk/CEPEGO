@@ -131,22 +131,6 @@ def build(g):
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="split reverse reveal">
-      <div class="prose">
-        <div class="kicker"><span class="va">El refugi</span><span class="es">El refugio</span></div>
-        <h2>La Figuereta</h2>
-        <p><span class="va">El nostre refugi de muntanya, a la Vall d'Ebo, sobre un macís calcari a 540 m. Equipat per a 21 persones per passar uns dies fent senderisme, escalada, barrancs, espeleologia o turisme rural.</span><span class="es">Nuestro refugio de montaña, en la Vall d'Ebo, sobre un macizo calcáreo a 540 m. Equipado para 21 personas para pasar unos días haciendo senderismo, escalada, barrancos, espeleología o turismo rural.</span></p>
-        <div class="hero__actions" style="margin-top:8px">
-          <a href="reservar.html" class="btn btn-navy"><span class="va">Disponibilitat i reserva</span><span class="es">Disponibilidad y reserva</span></a>
-          <a href="refugi.html" class="btn btn-outline"><span class="va">Conéixer el refugi</span><span class="es">Conocer el refugio</span></a>
-        </div>
-      </div>
-      <div class="split__media"><img src="{REFUGI[0]}" alt="Refugi La Figuereta"></div>
-    </div>
-  </div>
-</section>
 
 <section class="section">
   <div class="wrap">
