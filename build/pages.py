@@ -207,15 +207,6 @@ def build(g):
       <p><span class="va">Dos habitacles comunicats amb lliteres, cuina completa i tots els serveis per gaudir de la natura.</span><span class="es">Dos habitáculos comunicados con literas, cocina completa y todos los servicios para disfrutar de la naturaleza.</span></p>
     </div>
 
-    <!-- MOSAIC INTRO: tall left + 2 right stacked -->
-    <div class="refugi-mosaic reveal" style="margin-bottom:clamp(44px,6vw,80px)">
-      <div class="refugi-mosaic__main">
-        <img loading="lazy" src="{REFUGI[11]}" alt="Refugi La Figuereta al capvespre">
-      </div>
-      <div><img loading="lazy" src="{REFUGI[3]}" alt="Refugi La Figuereta"></div>
-      <div><img loading="lazy" src="{REFUGI[9]}" alt="Refugi La Figuereta"></div>
-    </div>
-
     <!-- BLOC 1: CUINA — foto esquerra -->
     <div class="equip-block reveal">
       <div class="equip-block__media">
