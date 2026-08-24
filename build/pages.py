@@ -102,6 +102,36 @@ def build(g):
 
 <section class="section bg-paper2">
   <div class="wrap">
+    <div class="narrow center reveal" style="margin-bottom:clamp(20px,3vw,36px)">
+      <div class="kicker center-k"><span class="va">Voluntariat</span><span class="es">Voluntariado</span></div>
+      <h2><span class="va">Recuperació de senders</span><span class="es">Recuperación de senderos</span></h2>
+      <p class="lead"><span class="va">Cada any organitzem jornades de manteniment i senyalització dels senders de Pego i les valls, perquè la muntanya estiga sempre neta i transitable. La quota de soci ajuda a fer-ho possible.</span><span class="es">Cada año organizamos jornadas de mantenimiento y señalización de los senderos de Pego y sus valles, para que la montaña esté siempre limpia y transitable. La cuota de socio ayuda a hacerlo posible.</span></p>
+    </div>
+    <div class="senders-gallery reveal">
+      <img loading="lazy" src="{IMG}bb9bb0_391b36f3ebd04e3182be56e88280aca8~mv2.jpeg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_2a340796bdb14c5cacc3936de7383b74~mv2.jpeg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_82b4e09447a84e64a0cbbb9b026159e5~mv2.jpeg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_57ae4d984d9c48b2a32c53e3bfe3498d~mv2.jpeg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_becd04976a1149d3a87a611761d3fe35~mv2.jpeg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_051b66f2418a4085955891b0c0a262c5~mv2.jpeg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_e3a29c2c30e74be998225d7b468bbe37~mv2.jpeg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_c7bc744c47aa43e89c657194275c9132~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_feeaad2d5baf4e91b2f160405d5c0f55~mv2.jpeg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_27dddcd5086a44a0827ac05bf406df3a~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_f8b750629ad5479d9b83d134fca28bb2~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_0a8a6079eb9e4d08b920f87662ca13a0~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_a878841efccf4e4cbfd75fa1348c80d8~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_b4b6f8c3f6f144d3854112914b948cc3~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_61c60a6949b449169cf212140f7dfec0~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_8ac56ee5cd134f028578b52d80640a5c~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_198f57a26919421c999cdc96a0534cf5~mv2.jpg" alt="Jornada de recuperació de senders">
+      <img loading="lazy" src="{IMG}bb9bb0_43da4fad9c1547daa345593283911dfb~mv2.jpg" alt="Jornada de recuperació de senders">
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
     <div class="split reverse reveal">
       <div class="prose">
         <div class="kicker"><span class="va">El refugi</span><span class="es">El refugio</span></div>
@@ -507,7 +537,6 @@ def build(g):
       <h2><span class="va">Parla amb nosaltres</span><span class="es">Habla con nosotros</span></h2>
       <p class="lead"><span class="va">Gestionem les consultes i sol·licituds de reserva des del nostre formulari. També pots escriure'ns directament.</span><span class="es">Gestionamos las consultas y solicitudes de reserva desde nuestro formulario. También puedes escribirnos directamente.</span></p>
       <div class="info-line"><span class="ic">✉️</span><div><b><span class="va">Correu</span><span class="es">Correo</span></b><br><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></div></div>
-      <div class="info-line"><span class="ic">📞</span><div><b><span class="va">Telèfon</span><span class="es">Teléfono</span></b><br><a data-cms-href="telefon" href="tel:686090511"><span data-cms="telefon">686 090 511</span></a></div></div>
       <div class="info-line"><span class="ic">📍</span><div><b><span class="va">Adreça</span><span class="es">Dirección</span></b><br><span data-cms="adreca">Carrer Llavador, s/n · 03780 Pego (Alacant)</span></div></div>
       <div class="info-line"><span class="ic">📷</span><div><b>Instagram</b><br><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></div></div>
       <div style="margin-top:26px"><a class="btn btn-primary" href="{RESERVA}" target="_blank" rel="noopener"><span class="va">Formulari de contacte i reserva</span><span class="es">Formulario de contacto y reserva</span></a></div>
