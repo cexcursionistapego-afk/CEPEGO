@@ -118,21 +118,6 @@ def build(g):
 {gallery_imgs(['27dddcd5086a44a0827ac05bf406df3a~mv2.jpg','f8b750629ad5479d9b83d134fca28bb2~mv2.jpg','0a8a6079eb9e4d08b920f87662ca13a0~mv2.jpg','a878841efccf4e4cbfd75fa1348c80d8~mv2.jpg','b4b6f8c3f6f144d3854112914b948cc3~mv2.jpg','61c60a6949b449169cf212140f7dfec0~mv2.jpg','8ac56ee5cd134f028578b52d80640a5c~mv2.jpg','198f57a26919421c999cdc96a0534cf5~mv2.jpg','43da4fad9c1547daa345593283911dfb~mv2.jpg'], "Sala d'entrenament del CEPEGO")}    </div>
   </div>
 </section>
-
-
-<section class="section">
-  <div class="wrap">
-    <div class="narrow center reveal">
-      <div class="kicker center-k"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></div>
-      <h2><span class="va">Forma part del club</span><span class="es">Forma parte del club</span></h2>
-      <p class="lead"><span class="va">Per només <strong data-cms="quota_soci">35 €</strong> a l'any ajudes al manteniment i senyalització de les sendes de Pego i les valls, i gaudeixes de descomptes al refugi. Amb la sala d'entrenament (<strong data-cms="quota_sala">50 €</strong>/any) pots entrenar totes les disciplines de muntanya.</span><span class="es">Por solo <strong>35 €</strong> al año ayudas al mantenimiento y señalización de las sendas de Pego y sus valles, y disfrutas de descuentos en el refugio. Con la sala de entrenamiento (<strong>50 €</strong>/año) puedes entrenar todas las disciplinas de montaña.</span></p>
-      <div class="hero__actions" style="margin-top:8px;justify-content:center">
-        <a href="{ALTA}" target="_blank" rel="noopener" class="btn btn-primary"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></a>
-        <a href="{BAIXA}" target="_blank" rel="noopener" class="btn btn-outline"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></a>
-      </div>
-    </div>
-  </div>
-</section>
 '''+footer()
     write("index.html", doc("Centre Excursionista de Pego | Refugi La Figuereta",
         "Club de muntanya sense ànim de lucre des de 1973 a Pego. Senderisme, escalada, barranquisme, espeleologia i el refugi La Figuereta.",
