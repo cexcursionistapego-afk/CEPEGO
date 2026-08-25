@@ -154,7 +154,7 @@ def footer():
       <div>
         <h4><span class="va">Contacte</span><span class="es">Contacto</span></h4>
         <ul class="footer__contact">
-          <li><span class="ic">📍</span><span><span class="va">Carrer Llavador, s/n</span><span class="es">Calle Llavador, s/n</span><br>03780 Pego</span></li>
+          <li><span class="ic">📍</span><span><span class="va">Carrer Llavador, 83</span><span class="es">Calle Llavador, 83</span><br>03780 Pego</span></li>
           <li><span class="ic">✉️</span><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
           <li><span class="ic">📷</span><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></li>
         </ul>
@@ -166,7 +166,6 @@ def footer():
       <div class="footer__partners-logos">
         <a href="{FEMECV}" target="_blank" rel="noopener" class="partner-card"><img src="{IMG}bb9bb0_7802a963683f424da28ee87c97bdaa72~mv2.png" alt="FEMECV"></a>
         <a href="{AJPEGO}" target="_blank" rel="noopener" class="partner-card"><img src="{IMG}bb9bb0_9fc7a34e8e324d0fb392ad3102b3900a~mv2.png" alt="Ajuntament de Pego"></a>
-        <a href="{PIV}" target="_blank" rel="noopener" class="partner-card"><img src="{IMG}bb9bb0_42618edbc822455d95eb8f934e2b0f13~mv2.png" alt="Pego i les Valls"></a>
       </div>
     </div>
     <!-- Copyright bar -->
