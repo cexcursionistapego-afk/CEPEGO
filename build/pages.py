@@ -485,23 +485,22 @@ def build(g):
     # ============================================= CONTACTE
     contacte=header("contacte")+subhero(IMG+"senyal-pego.jpg",'Pego',
         "Contacta amb el club","Contacta con el club",
-        "Vols fer-te soci o passar uns dies a La Figuereta? Escriu-nos.","¿Quieres hacerte socio o pasar unos días en La Figuereta? Escríbenos.",
+        "Tens dubtes o suggeriments? Escriu-nos.","¿Tienes dudas o sugerencias? Escríbenos.",
         pos='30%')+f'''
 <section class="section">
   <div class="wrap narrow">
     <div class="reveal">
       <div class="kicker"><span class="va">Escriu-nos</span><span class="es">Escríbenos</span></div>
       <h2><span class="va">Parla amb nosaltres</span><span class="es">Habla con nosotros</span></h2>
-      <p class="lead"><span class="va">Gestionem les consultes i sol·licituds de reserva des del nostre formulari. També pots escriure'ns directament.</span><span class="es">Gestionamos las consultas y solicitudes de reserva desde nuestro formulario. También puedes escribirnos directamente.</span></p>
+      <p class="lead"><span class="va">Gestionem les consultes des del nostre formulari. També pots escriure'ns directament.</span><span class="es">Gestionamos las consultas desde nuestro formulario. También puedes escribirnos directamente.</span></p>
       <div class="info-line"><span class="ic">✉️</span><div><b><span class="va">Correu</span><span class="es">Correo</span></b><br><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></div></div>
       <div class="info-line"><span class="ic">📍</span><div><b><span class="va">Adreça</span><span class="es">Dirección</span></b><br><span data-cms="adreca">Carrer Llavador, s/n · 03780 Pego (Alacant)</span></div></div>
       <div class="info-line"><span class="ic">📷</span><div><b>Instagram</b><br><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></div></div>
-      <div style="margin-top:26px"><a class="btn btn-primary" href="{RESERVA}" target="_blank" rel="noopener"><span class="va">Formulari de contacte i reserva</span><span class="es">Formulario de contacto y reserva</span></a></div>
     </div>
     <div class="reveal">
       <div class="card">
         <h3 style="font-size:1.4rem"><span class="va">Dubtes i suggeriments</span><span class="es">Dudas y sugerencias</span></h3>
-        <p class="note"><span class="va">Per a reserves del refugi, utilitza el formulari de dalt. Per a qualsevol altra consulta o suggeriment, escriu-nos ací.</span><span class="es">Para reservas del refugio, utiliza el formulario de arriba. Para cualquier otra consulta o sugerencia, escríbenos aquí.</span></p>
+        <p class="note"><span class="va">Escriu-nos qualsevol consulta o suggeriment.</span><span class="es">Escríbenos cualquier consulta o sugerencia.</span></p>
         <form id="contacte-form" novalidate>
           <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
           <div class="select-row">
