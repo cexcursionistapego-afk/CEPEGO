@@ -122,7 +122,7 @@ def build(g):
 '''+footer()
     write("index.html", doc("Centre Excursionista de Pego | Refugi La Figuereta",
         "Club de muntanya sense ànim de lucre des de 1973 a Pego. Senderisme, escalada, barranquisme, espeleologia i el refugi La Figuereta.",
-        home, identity=True))
+        home, path="index.html", identity=True))
 
     # ============================================= REFUGI
     equip=[("Una llar amb llenya per a fer foc i rostir (proporcionem les ferramentes).","Chimenea con leña para hacer fuego y asar (proporcionamos las herramientas)."),
@@ -236,7 +236,7 @@ def build(g):
 </section>
 '''+footer()
     write("refugi.html", doc("La Figuereta | Centre Excursionista de Pego",
-        "Refugi de muntanya La Figuereta, a la Vall d'Ebo. Equipament complet per a 21 persones.", refugi))
+        "Refugi de muntanya La Figuereta, a la Vall d'Ebo. Equipament complet per a 21 persones.", refugi, path="refugi.html"))
 
     # ============================================= RESERVAR
     rules=[("Sols es pot fer foc a la xemeneia de dins del refugi; proporcionem llenya, graelles i material lliure de tòxics.","Solo se puede hacer fuego en la chimenea del interior; proporcionamos leña, parrillas y material libre de tóxicos."),
@@ -324,7 +324,7 @@ def build(g):
 </section>
 '''+footer()
     write("reservar.html", doc("Reservar | Refugi La Figuereta — CEPEGO",
-        "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, extra_js="js/reserves.js"))
+        "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, path="reservar.html", extra_js="js/reserves.js"))
 
     # ============================================= METEO
     meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'AVAMET',
@@ -343,7 +343,7 @@ def build(g):
 </section>
 '''+footer()
     write("meteo.html", doc("El temps al refugi | CEPEGO",
-        "Estació meteorològica del refugi La Figuereta connectada a la xarxa AVAMET.", meteo))
+        "Estació meteorològica del refugi La Figuereta connectada a la xarxa AVAMET.", meteo, path="meteo.html"))
 
     # ============================================= METEO PEGO
     meteo_pego=header("meteo-pego")+subhero(L2,'AVAMET',
@@ -361,7 +361,7 @@ def build(g):
 </section>
 '''+footer()
     write("meteo-pego.html", doc("El tiempo en Pego | CEPEGO",
-        "Estació meteorològica de Pego connectada a la xarxa AVAMET.", meteo_pego))
+        "Estació meteorològica de Pego connectada a la xarxa AVAMET.", meteo_pego, path="meteo-pego.html"))
 
     # ============================================= RUTES
     routes=[("Circular Figuereta – Tossal","2,97 km","+154 m","673 m","facil","Fàcil","Fácil",
@@ -399,7 +399,7 @@ def build(g):
 </section>
 '''+footer()
     write("rutes.html", doc("Rutes i entorn | CEPEGO",
-        "Rutes de senderisme per Pego i les Valls amb el seu perfil i itinerari.", rutes))
+        "Rutes de senderisme per Pego i les Valls amb el seu perfil i itinerari.", rutes, path="rutes.html"))
 
     # ============================================= ESCALADA
     inic=[("1","Diedre","V"),("2","Placa","V"),("3","Plaqueta","IV"),("4","Mosquera","V"),("5","Ximet","V"),
@@ -430,7 +430,7 @@ def build(g):
 </section>
 '''+footer()
     write("escalada.html", doc("Escalada | CEPEGO",
-        "Escola d'escalada del Calvari a Pego: sectors Iniciació i Placa del Sol, 28 vies.", escalada))
+        "Escola d'escalada del Calvari a Pego: sectors Iniciació i Placa del Sol, 28 vies.", escalada, path="escalada.html"))
 
     # ============================================= ESPELEO
     espeleo=header("espeleo")+subhero(IMG+"bb9bb0_82b4e09447a84e64a0cbbb9b026159e5~mv2.jpeg",'<span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span>',
@@ -447,7 +447,7 @@ def build(g):
 </section>
 '''+footer()
     write("espeleo.html", doc("Espeleologia | CEPEGO",
-        "Les principals cavitats i avencs de la zona de Pego, amb les seues topografies.", espeleo))
+        "Les principals cavitats i avencs de la zona de Pego, amb les seues topografies.", espeleo, path="espeleo.html"))
 
     # ============================================= BARRANCS
     barrancs=header("barrancs")+subhero(IMG+"bb9bb0_c7bc744c47aa43e89c657194275c9132~mv2.jpg",'<span class="va">Aigua i roca</span><span class="es">Agua y roca</span>',
@@ -462,7 +462,7 @@ def build(g):
 </section>
 '''+footer()
     write("barrancs.html", doc("Barrancs | CEPEGO",
-        "Els principals barrancs de la zona de Pego, amb material i topografia.", barrancs))
+        "Els principals barrancs de la zona de Pego, amb material i topografia.", barrancs, path="barrancs.html"))
 
     # ============================================= CALENDARI
     calendari=header("calendari")+subhero(IMG+"calendari-grup.jpg",'<span class="va">Activitats</span><span class="es">Actividades</span>',
@@ -480,7 +480,7 @@ def build(g):
 </section>
 '''+footer()
     write("calendari.html", doc("Calendari d'activitats | CEPEGO",
-        "Activitats del Centre Excursionista de Pego al llarg de l'any.", calendari))
+        "Activitats del Centre Excursionista de Pego al llarg de l'any.", calendari, path="calendari.html"))
 
     # ============================================= CONTACTE
     contacte=header("contacte")+subhero(IMG+"senyal-pego.jpg",'Pego',
@@ -523,7 +523,7 @@ def build(g):
 </section>
 '''+footer()
     write("contacte.html", doc("Contacte | CEPEGO",
-        "Contacta amb el Centre Excursionista de Pego: correu, telèfon i formulari de reserva.", contacte, extra_js="js/contacte.js"))
+        "Contacta amb el Centre Excursionista de Pego: correu, adreça i formulari de contacte.", contacte, path="contacte.html", extra_js="js/contacte.js"))
 
     # ============================================= SOCI (ALTA / BAIXA)
     soci=header("soci")+subhero(IMG+"soci-cim.jpg",'<span class="va">Centre Excursionista de Pego</span><span class="es">Centre Excursionista de Pego</span>',
@@ -615,4 +615,90 @@ def build(g):
 </section>
 '''+footer()
     write("soci.html", doc("Racó del soci | CEPEGO",
-        "Gestiona la teua pertinença al Centre Excursionista de Pego: alta de soci, baixa i informació.", soci, extra_js="js/soci.js"))
+        "Gestiona la teua pertinença al Centre Excursionista de Pego: alta de soci, baixa i informació.", soci, path="soci.html", extra_js="js/soci.js"))
+
+    # ============================================= AVÍS LEGAL / PRIVACITAT / COOKIES
+    def legal_head(kva,kes,hva,hes):
+        return f'''<section class="section-sm">
+  <div class="wrap narrow">
+    <div class="kicker"><span class="va">{kva}</span><span class="es">{kes}</span></div>
+    <h1 style="font-size:clamp(2rem,4.5vw,3.2rem)"><span class="va">{hva}</span><span class="es">{hes}</span></h1>
+  </div>
+</section>'''
+
+    avis_legal=header("legal")+legal_head("Informació legal","Información legal","Avís legal","Aviso legal")+f'''
+<section class="section" style="padding-top:0">
+  <div class="wrap narrow prose">
+    <h2><span class="va">1. Dades identificatives</span><span class="es">1. Datos identificativos</span></h2>
+    <p><span class="va">En compliment del deure d'informació de la Llei 34/2002, de Serveis de la Societat de la Informació i de Comerç Electrònic (LSSICE), s'informa que este lloc web és titularitat de:</span><span class="es">En cumplimiento del deber de información de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), se informa de que este sitio web es titularidad de:</span></p>
+    <ul>
+      <li><span class="va">Denominació:</span><span class="es">Denominación:</span> Centre Excursionista de Pego (CEPEGO), <span class="va">associació sense ànim de lucre</span><span class="es">asociación sin ánimo de lucro</span></li>
+      <li>NIF/CIF: <em>[<span class="va">pendent d'indicar pel club</span><span class="es">pendiente de indicar por el club</span>]</em></li>
+      <li><span class="va">Domicili:</span><span class="es">Domicilio:</span> Carrer Llavador, 83 · 03780 Pego (Alacant)</li>
+      <li><span class="va">Correu de contacte:</span><span class="es">Correo de contacto:</span> <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></li>
+    </ul>
+    <h2><span class="va">2. Objecte</span><span class="es">2. Objeto</span></h2>
+    <p><span class="va">Este lloc web té com a finalitat informar sobre les activitats, el refugi La Figuereta i els serveis del Centre Excursionista de Pego, així com gestionar sol·licituds d'alta i baixa de soci, reserves del refugi i consultes generals.</span><span class="es">Este sitio web tiene como finalidad informar sobre las actividades, el refugio La Figuereta y los servicios del Centro Excursionista de Pego, así como gestionar solicitudes de alta y baja de socio, reservas del refugio y consultas generales.</span></p>
+    <h2><span class="va">3. Condicions d'ús</span><span class="es">3. Condiciones de uso</span></h2>
+    <p><span class="va">L'accés i ús d'este lloc web atribueix la condició d'usuari i implica l'acceptació de les condicions ací establides. L'usuari es compromet a fer un ús adequat dels continguts i a no emprar-los per a activitats il·lícites, contràries a la bona fe i a l'ordre públic.</span><span class="es">El acceso y uso de este sitio web atribuye la condición de usuario e implica la aceptación de las condiciones aquí establecidas. El usuario se compromete a hacer un uso adecuado de los contenidos y a no emplearlos para actividades ilícitas, contrarias a la buena fe y al orden público.</span></p>
+    <h2><span class="va">4. Propietat intel·lectual</span><span class="es">4. Propiedad intelectual</span></h2>
+    <p><span class="va">Els continguts del lloc web (textos, imatges, disseny gràfic, logotips) són propietat del Centre Excursionista de Pego o de tercers que n'han autoritzat l'ús, i estan protegits per la normativa de propietat intel·lectual. No es permet la seua reproducció sense autorització prèvia.</span><span class="es">Los contenidos del sitio web (textos, imágenes, diseño gráfico, logotipos) son propiedad del Centro Excursionista de Pego o de terceros que han autorizado su uso, y están protegidos por la normativa de propiedad intelectual. No se permite su reproducción sin autorización previa.</span></p>
+    <h2><span class="va">5. Enllaços externs</span><span class="es">5. Enlaces externos</span></h2>
+    <p><span class="va">Este lloc pot incloure enllaços a llocs de tercers (AVAMET, Google Maps, Airtable, xarxes socials). El Centre Excursionista de Pego no es fa responsable dels continguts o polítiques d'eixos llocs externs.</span><span class="es">Este sitio puede incluir enlaces a sitios de terceros (AVAMET, Google Maps, Airtable, redes sociales). El Centro Excursionista de Pego no se hace responsable de los contenidos o políticas de esos sitios externos.</span></p>
+    <h2><span class="va">6. Legislació aplicable</span><span class="es">6. Legislación aplicable</span></h2>
+    <p><span class="va">Estes condicions es regeixen per la legislació espanyola. Per a qualsevol controvèrsia, les parts se sotmeten als jutjats i tribunals de la província d'Alacant.</span><span class="es">Estas condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales de la provincia de Alicante.</span></p>
+  </div>
+</section>
+'''+footer()
+    write("avis-legal.html", doc("Avís legal | CEPEGO",
+        "Avís legal del lloc web del Centre Excursionista de Pego.", avis_legal, path="avis-legal.html"))
+
+    privacitat=header("legal")+legal_head("Protecció de dades","Protección de datos","Política de privacitat","Política de privacidad")+f'''
+<section class="section" style="padding-top:0">
+  <div class="wrap narrow prose">
+    <h2><span class="va">1. Responsable del tractament</span><span class="es">1. Responsable del tratamiento</span></h2>
+    <p>Centre Excursionista de Pego · Carrer Llavador, 83 · 03780 Pego (Alacant) · <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></p>
+    <h2><span class="va">2. Quines dades recollim i per a què</span><span class="es">2. Qué datos recogemos y para qué</span></h2>
+    <ul>
+      <li><b><span class="va">Alta i baixa de soci:</span><span class="es">Alta y baja de socio:</span></b> <span class="va">nom, cognoms, DNI/NIE, data de naixement, telèfon, correu, localitat, IBAN i fotografies del DNI, per a gestionar la teua pertinença al club i el cobrament de la quota.</span><span class="es">nombre, apellidos, DNI/NIE, fecha de nacimiento, teléfono, correo, localidad, IBAN y fotografías del DNI, para gestionar tu pertenencia al club y el cobro de la cuota.</span></li>
+      <li><b><span class="va">Reserva del refugi:</span><span class="es">Reserva del refugio:</span></b> <span class="va">nom, correu, telèfon, població, nombre de persones i missatge, per a gestionar la teua sol·licitud de reserva.</span><span class="es">nombre, correo, teléfono, población, número de personas y mensaje, para gestionar tu solicitud de reserva.</span></li>
+      <li><b><span class="va">Formulari de contacte:</span><span class="es">Formulario de contacto:</span></b> <span class="va">nom, correu, telèfon i missatge, per a respondre les teues consultes o suggeriments.</span><span class="es">nombre, correo, teléfono y mensaje, para responder tus consultas o sugerencias.</span></li>
+    </ul>
+    <h2><span class="va">3. Base legal</span><span class="es">3. Base legal</span></h2>
+    <p><span class="va">El tractament es basa en l'execució d'una relació associativa o contractual (alta de soci, reserva) i en el consentiment de la persona interessada en enviar cada formulari.</span><span class="es">El tratamiento se basa en la ejecución de una relación asociativa o contractual (alta de socio, reserva) y en el consentimiento de la persona interesada al enviar cada formulario.</span></p>
+    <h2><span class="va">4. Amb qui compartim les dades</span><span class="es">4. Con quién compartimos los datos</span></h2>
+    <p><span class="va">Les dades s'emmagatzemen a Airtable (encarregat del tractament) i el lloc web s'allotja a Netlify. Ambdós proveïdors poden processar dades fora de l'Espai Econòmic Europeu, sota les garanties previstes pel RGPD (clàusules contractuals tipus). No cedim dades a tercers amb finalitats comercials.</span><span class="es">Los datos se almacenan en Airtable (encargado del tratamiento) y el sitio web se aloja en Netlify. Ambos proveedores pueden procesar datos fuera del Espacio Económico Europeo, bajo las garantías previstas por el RGPD (cláusulas contractuales tipo). No cedemos datos a terceros con fines comerciales.</span></p>
+    <h2><span class="va">5. Termini de conservació</span><span class="es">5. Plazo de conservación</span></h2>
+    <p><span class="va">Les dades de socis es conserven mentre dure la relació associativa i, després, durant els terminis exigits per la normativa aplicable. Les dades de reserves i consultes es conserven el temps necessari per a gestionar-les.</span><span class="es">Los datos de socios se conservan mientras dure la relación asociativa y, después, durante los plazos exigidos por la normativa aplicable. Los datos de reservas y consultas se conservan el tiempo necesario para gestionarlas.</span></p>
+    <h2><span class="va">6. Els teus drets</span><span class="es">6. Tus derechos</span></h2>
+    <p><span class="va">Pots exercir els teus drets d'accés, rectificació, supressió, oposició, limitació i portabilitat escrivint a</span><span class="es">Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a</span> <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a>. <span class="va">També pots presentar una reclamació davant l'Agència Espanyola de Protecció de Dades (aepd.es) si consideres que no s'han atés els teus drets correctament.</span><span class="es">También puedes presentar una reclamación ante la Agencia Española de Protección de Datos (aepd.es) si consideras que no se han atendido tus derechos correctamente.</span></p>
+    <h2><span class="va">7. Seguretat</span><span class="es">7. Seguridad</span></h2>
+    <p><span class="va">Apliquem mesures tècniques i organitzatives raonables per a protegir les teues dades contra accessos no autoritzats, pèrdua o alteració.</span><span class="es">Aplicamos medidas técnicas y organizativas razonables para proteger tus datos contra accesos no autorizados, pérdida o alteración.</span></p>
+    <h2><span class="va">8. Menors d'edat</span><span class="es">8. Menores de edad</span></h2>
+    <p><span class="va">L'alta de soci de persones menors d'edat requereix el consentiment i les dades del pare, mare o tutor/a legal.</span><span class="es">El alta de socio de personas menores de edad requiere el consentimiento y los datos del padre, madre o tutor/a legal.</span></p>
+  </div>
+</section>
+'''+footer()
+    write("privacitat.html", doc("Política de privacitat | CEPEGO",
+        "Política de privacitat i protecció de dades del Centre Excursionista de Pego.", privacitat, path="privacitat.html"))
+
+    cookies=header("legal")+legal_head("Navegació","Navegación","Política de cookies","Política de cookies")+f'''
+<section class="section" style="padding-top:0">
+  <div class="wrap narrow prose">
+    <h2><span class="va">1. Què usem</span><span class="es">1. Qué usamos</span></h2>
+    <p><span class="va">Este lloc web no utilitza cookies pròpies d'analítica o publicitat. Únicament guardem al teu navegador (mitjançant <em>localStorage</em>, no una cookie) la teua preferència d'idioma (valencià/castellà), una dada purament tècnica necessària per al funcionament del lloc.</span><span class="es">Este sitio web no utiliza cookies propias de analítica o publicidad. Únicamente guardamos en tu navegador (mediante <em>localStorage</em>, no una cookie) tu preferencia de idioma (valenciano/castellano), un dato puramente técnico necesario para el funcionamiento del sitio.</span></p>
+    <h2><span class="va">2. Contingut de tercers</span><span class="es">2. Contenido de terceros</span></h2>
+    <p><span class="va">Algunes pàgines inclouen contingut incrustat de tercers que pot instal·lar les seues pròpies cookies quan es carrega:</span><span class="es">Algunas páginas incluyen contenido incrustado de terceros que puede instalar sus propias cookies cuando se carga:</span></p>
+    <ul>
+      <li><b>Google Maps</b> — <span class="va">mapa a la pàgina de Contacte.</span><span class="es">mapa en la página de Contacto.</span></li>
+      <li><b>AVAMET</b> — <span class="va">estacions meteorològiques a les pàgines de Meteo.</span><span class="es">estaciones meteorológicas en las páginas de Meteo.</span></li>
+      <li><b>Google Fonts</b> — <span class="va">tipografies del lloc, carregades des dels servidors de Google.</span><span class="es">tipografías del sitio, cargadas desde los servidores de Google.</span></li>
+    </ul>
+    <p><span class="va">Estos serveis es regeixen per les seues pròpies polítiques de privacitat i cookies, alienes al Centre Excursionista de Pego.</span><span class="es">Estos servicios se rigen por sus propias políticas de privacidad y cookies, ajenas al Centro Excursionista de Pego.</span></p>
+    <h2><span class="va">3. Com gestionar-les</span><span class="es">3. Cómo gestionarlas</span></h2>
+    <p><span class="va">Pots eliminar o bloquejar les cookies i les dades emmagatzemades pels llocs que visites des de la configuració del teu navegador.</span><span class="es">Puedes eliminar o bloquear las cookies y los datos almacenados por los sitios que visitas desde la configuración de tu navegador.</span></p>
+  </div>
+</section>
+'''+footer()
+    write("cookies.html", doc("Política de cookies | CEPEGO",
+        "Política de cookies del lloc web del Centre Excursionista de Pego.", cookies, path="cookies.html"))

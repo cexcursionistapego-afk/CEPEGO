@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Generador del sitio CEPEGO — rediseño editorial (VA + ES)
-import os
+import os, json
 OUT="/home/user/CEPEGO"
+SITE_URL="https://cepego.com"
 
 # ---------- enllaços externs reals ----------
 ALTA  = "https://airtable.com/appkuKVxHSMyDElfh/shrePFFh2FtSgKhAY"
@@ -16,6 +17,26 @@ METEO_PEGO = "https://www.avamet.org/mxo-i.php?id=c30m102e14"
 IG = "https://www.instagram.com/refugifiguereta"
 FB = "https://www.facebook.com/share/17fdDSFxDx"
 FEMECV="https://www.femecv.com/va"; AJPEGO="https://www.pego.org/"; PIV="https://www.pegoilesvalls.es/"
+
+ORG_JSONLD = json.dumps({
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Centre Excursionista de Pego",
+    "alternateName": "CEPEGO",
+    "url": SITE_URL + "/",
+    "logo": SITE_URL + "/img/favicon.png",
+    "foundingDate": "1973",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Carrer Llavador, 83",
+        "addressLocality": "Pego",
+        "postalCode": "03780",
+        "addressRegion": "Alacant",
+        "addressCountry": "ES"
+    },
+    "email": "cexcursionistapego@gmail.com",
+    "sameAs": [IG, FB]
+}, ensure_ascii=False)
 
 IMG="img/"
 HERO_BENCS = IMG+"bb9bb0_fa8879e4ce8d4035b0588d0d1be17435~mv2.jpeg"
@@ -171,14 +192,21 @@ def footer():
     <!-- Copyright bar -->
     <div class="footer__bar">
       <span>© <span data-year></span> Centre Excursionista de Pego</span>
+      <span class="footer__legal-links">
+        <a href="avis-legal.html"><span class="va">Avís legal</span><span class="es">Aviso legal</span></a> ·
+        <a href="privacitat.html"><span class="va">Privacitat</span><span class="es">Privacidad</span></a> ·
+        <a href="cookies.html">Cookies</a>
+      </span>
       <span><span class="va">Fet amb estima a la muntanya</span><span class="es">Hecho con cariño a la montaña</span></span>
     </div>
   </div>
 </footer>'''
 
-def doc(title, desc, body, identity=False, extra_js=None):
+def doc(title, desc, body, path="", identity=False, extra_js=None, image=None):
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
     idredirect=('<script>if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(u){if(!u){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}</script>\n' if identity else '')
+    canon = SITE_URL + "/" + (path if (path and path != "index.html") else "")
+    img_url = SITE_URL + "/" + (image or HERO_BENCS)
     return f'''<!DOCTYPE html>
 <html lang="ca-valencia" data-lang="va">
 <head>
@@ -186,8 +214,22 @@ def doc(title, desc, body, identity=False, extra_js=None):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+<link rel="canonical" href="{canon}">
 <link rel="icon" type="image/png" href="{IMG}favicon.png">
 <link rel="apple-touch-icon" href="{IMG}favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Centre Excursionista de Pego">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{canon}">
+<meta property="og:image" content="{img_url}">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{img_url}">
+<script type="application/ld+json">{ORG_JSONLD}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -219,4 +261,23 @@ def write(fn, html):
 # ======================================================= build pages in a separate module
 import pages
 pages.build(globals())
+
+# ======================================================= robots.txt + sitemap.xml
+PAGES = ["index.html","refugi.html","reservar.html","meteo.html","meteo-pego.html",
+    "rutes.html","escalada.html","espeleo.html","barrancs.html","calendari.html",
+    "contacte.html","soci.html","avis-legal.html","privacitat.html","cookies.html"]
+
+open(os.path.join(OUT,"robots.txt"),"w",encoding="utf-8").write(
+    "User-agent: *\nAllow: /\nSitemap: "+SITE_URL+"/sitemap.xml\n")
+
+from datetime import date
+today = date.today().isoformat()
+urls = "".join(
+    f'  <url><loc>{SITE_URL}/{("" if p=="index.html" else p)}</loc><lastmod>{today}</lastmod></url>\n'
+    for p in PAGES)
+open(os.path.join(OUT,"sitemap.xml"),"w",encoding="utf-8").write(
+    '<?xml version="1.0" encoding="UTF-8"?>\n'
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    + urls + '</urlset>\n')
+
 print("OK")
