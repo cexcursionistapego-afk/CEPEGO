@@ -497,7 +497,7 @@ def build(g):
         "Activitats del Centre Excursionista de Pego al llarg de l'any.", calendari))
 
     # ============================================= CONTACTE
-    contacte=header("contacte")+subhero(L2,'Pego',
+    contacte=header("contacte")+subhero(REFUGI[9],'Pego',
         "Contacta amb el club","Contacta con el club",
         "Vols fer-te soci o passar uns dies a La Figuereta? Escriu-nos.","¿Quieres hacerte socio o pasar unos días en La Figuereta? Escríbenos.")+f'''
 <section class="section">
