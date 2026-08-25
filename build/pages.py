@@ -342,7 +342,8 @@ def build(g):
     # ============================================= METEO
     meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'AVAMET',
         "El temps al refugi","Meteo al refugio",
-        "Estació meteorològica a La Figuereta, connectada a la xarxa AVAMET.","Estación meteorológica en La Figuereta, conectada a la red AVAMET.")+f'''
+        "Estació meteorològica a La Figuereta, connectada a la xarxa AVAMET.","Estación meteorológica en La Figuereta, conectada a la red AVAMET.",
+        pos='18%')+f'''
 <section class="section">
   <div class="wrap">
     <div class="embed reveal" style="max-width:1000px;margin:0 auto">
@@ -479,7 +480,8 @@ def build(g):
     # ============================================= CALENDARI
     calendari=header("calendari")+subhero(REFUGI[11],'<span class="va">Activitats</span><span class="es">Actividades</span>',
         "Calendari d'activitats","Calendario de actividades",
-        "Activitats que realitzem al llarg de l'any, excepte a l'estiu.","Actividades que realizamos a lo largo del año, excepto en verano.")+f'''
+        "Activitats que realitzem al llarg de l'any, excepte a l'estiu.","Actividades que realizamos a lo largo del año, excepto en verano.",
+        pos='80%')+f'''
 <section class="section">
   <div class="wrap">
     <div id="cal-featured" class="cal-featured"></div>

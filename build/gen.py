@@ -202,9 +202,9 @@ def doc(title, desc, body, identity=False, extra_js=None):
 </html>
 '''
 
-def subhero(bg, kicker, h1va, h1es, pva, pes):
+def subhero(bg, kicker, h1va, h1es, pva, pes, pos='center'):
     return f'''<section class="subhero">
-  <div class="subhero__bg" style="background-image:url('{bg}')"></div>
+  <div class="subhero__bg" style="background-image:url('{bg}');background-position:center {pos}"></div>
   <div class="subhero__scrim"></div>
   <div class="wrap subhero__inner">
     <div class="kicker on-photo">{kicker}</div>
