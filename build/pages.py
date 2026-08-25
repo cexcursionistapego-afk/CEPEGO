@@ -479,10 +479,9 @@ def build(g):
         "Els principals barrancs de la zona de Pego, amb material i topografia.", barrancs))
 
     # ============================================= CALENDARI
-    calendari=header("calendari")+subhero(REFUGI[11],'<span class="va">Activitats</span><span class="es">Actividades</span>',
+    calendari=header("calendari")+subhero(IMG+"calendari-grup.jpg",'<span class="va">Activitats</span><span class="es">Actividades</span>',
         "Calendari d'activitats","Calendario de actividades",
-        "Activitats que realitzem al llarg de l'any, excepte a l'estiu.","Actividades que realizamos a lo largo del año, excepto en verano.",
-        pos='80%')+f'''
+        "Activitats que realitzem al llarg de l'any, excepte a l'estiu.","Actividades que realizamos a lo largo del año, excepto en verano.")+f'''
 <section class="section">
   <div class="wrap">
     <div id="cal-featured" class="cal-featured"></div>
