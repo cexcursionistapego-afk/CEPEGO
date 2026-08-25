@@ -135,7 +135,10 @@ def build(g):
      ("Internet de banda ampla (cal reservar-lo).","Internet de banda ancha (hay que reservarlo)."),
      ("No hi ha utensilis de cuina: porta el que necessites.","No hay utensilios de cocina: trae lo que necesites."),
      ("Lliteres amb matalàs i coixí: només cal el sac de dormir.","Literas con colchón y cojín: solo hace falta el saco de dormir."),
-     ("Pantalla amb informació meteorològica de l'interior i l'exterior, i pronòstic del temps per a les pròximes hores.","Pantalla con información meteorológica del interior y el exterior, y pronóstico del tiempo para las próximas horas.")]
+     ("Pantalla amb informació meteorològica de l'interior i l'exterior, i pronòstic del temps per a les pròximes hores.","Pantalla con información meteorológica del interior y el exterior, y pronóstico del tiempo para las próximas horas."),
+     ("Detectors de fum i de monòxid de carboni amb alarma i avís directe al guarda del refugi (normes UNE-EN 14604 i UNE-EN 50291).","Detectores de humo y de monóxido de carbono con alarma y aviso directo al guarda del refugio (normas UNE-EN 14604 y UNE-EN 50291)."),
+     ("Extintors homologats (UNE-EN 3) distribuïts pel refugi.","Extintores homologados (UNE-EN 3) distribuidos por el refugio."),
+     ("Eixides d'emergència senyalitzades (norma UNE 23034).","Salidas de emergencia señalizadas (norma UNE 23034).")]
     def eq_li(idxs):
         return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
     refugi=header("refugi")+subhero(REFUGI[11],'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
@@ -216,6 +219,19 @@ def build(g):
         <ul class="equip equip-1col" style="margin-top:18px">
 {eq_li([5,6])}        </ul>
         <p class="note" style="margin-top:18px"><span class="va">⚠️ L'aigua és d'una cava natural, un bé escàs: <strong>no és potable</strong> i cal utilitzar-la de manera responsable. Porta la teua per a consumir.</span><span class="es">⚠️ El agua es de una cava natural, un bien escaso: <strong>no es potable</strong> y hay que utilizarla de forma responsable. Trae la tuya para consumir.</span></p>
+      </div>
+    </div>
+
+    <!-- BLOC 3B: SEGURETAT — foto dreta -->
+    <div class="equip-block equip-block--rev reveal">
+      <div>
+        <span class="equip-tag"><span class="va">Seguretat</span><span class="es">Seguridad</span></span>
+        <h3 style="margin-top:.5em"><span class="va">La teua seguretat, la nostra prioritat</span><span class="es">Tu seguridad, nuestra prioridad</span></h3>
+        <ul class="equip equip-1col" style="margin-top:18px">
+{eq_li([11,12,13])}        </ul>
+      </div>
+      <div class="equip-block__media">
+        <img loading="lazy" src="{REFUGI[7]}" alt="Zona de descans del refugi">
       </div>
     </div>
 
