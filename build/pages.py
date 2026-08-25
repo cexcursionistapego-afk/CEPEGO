@@ -78,8 +78,8 @@ def build(g):
         <p><span class="va">Tenim dues seccions principals: qui fa senderisme —per la zona i per terres més llunyanes, aprofitant caps de setmana i ponts— i qui es dedica a l'escalada, majoritàriament esportiva, bloc i clàssica. També fem alta muntanya, espeleologia i barranquisme.</span><span class="es">Tenemos dos secciones principales: quien hace senderismo —por la zona y por tierras más lejanas, aprovechando fines de semana y puentes— y quien se dedica a la escalada, mayoritariamente deportiva, bloque y clásica. También hacemos alta montaña, espeleología y barranquismo.</span></p>
         <a href="rutes.html" class="link-arrow"><span class="va">Descobreix les activitats</span><span class="es">Descubre las actividades</span></a>
       </div>
-      <div class="split__media hide-mobile">
-        <img src="{IMG}bb9bb0_dd4b5c48aab64d6fa0f2f034dfbaf7e1~mv2.jpeg" alt="El refugi La Figuereta al capvespre">
+      <div class="split__media">
+        <img src="{IMG}club-cim.jpg" alt="El club a un cim d'alta muntanya">
       </div>
     </div>
   </div>
@@ -340,7 +340,7 @@ def build(g):
         "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, extra_js="js/reserves.js"))
 
     # ============================================= METEO
-    meteo=header("meteo")+subhero(HERO,'AVAMET',
+    meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'AVAMET',
         "El temps al refugi","Meteo al refugio",
         "Estació meteorològica a La Figuereta, connectada a la xarxa AVAMET.","Estación meteorológica en La Figuereta, conectada a la red AVAMET.")+f'''
 <section class="section">
@@ -400,7 +400,7 @@ def build(g):
           <p style="font-size:.9rem;color:var(--muted)">{itin}</p>
         </div>
       </div>\n'''
-    rutes=header("rutes")+subhero(L2,'Wikiloc',
+    rutes=header("rutes")+subhero(IMG+"senderisme-grup.jpg",'Wikiloc',
         "Rutes i entorn","Rutas y entorno",
         "Les principals rutes per Pego i les Valls, amb distància, desnivell i itinerari.","Las principales rutas por Pego y sus valles, con distancia, desnivel e itinerario.")+f'''
 <section class="section">
@@ -424,7 +424,7 @@ def build(g):
     def via(cap,rows):
         tr="".join(f'    <tr><td>{n}</td><td>{nm}</td><td>{g}</td></tr>\n' for n,nm,g in rows)
         return f'  <table class="viatable"><caption>{cap}</caption>\n{tr}  </table>'
-    escalada=header("escalada")+subhero(L1,'<span class="va">Calvari · Pego</span><span class="es">Calvari · Pego</span>',
+    escalada=header("escalada")+subhero(IMG+"escalada-via.jpg",'<span class="va">Calvari · Pego</span><span class="es">Calvari · Pego</span>',
         "Escalada","Escalada",
         "L'escola d'escalada del Calvari: dos sectors i 28 vies equipades.","La escuela de escalada del Calvari: dos sectores y 28 vías equipadas.")+f'''
 <section class="section">
