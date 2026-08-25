@@ -207,14 +207,14 @@ def build(g):
     <!-- BLOC 3: SERVEIS — foto esquerra -->
     <div class="equip-block reveal">
       <div class="equip-block__media">
-        <img loading="lazy" src="{REFUGI[2]}" alt="Instal·lacions exteriors del refugi">
+        <img loading="lazy" src="{REFUGI[2]}" alt="Punts d'aigua exteriors del refugi">
       </div>
       <div>
-        <span class="equip-tag"><span class="va">Instal·lacions</span><span class="es">Instalaciones</span></span>
+        <span class="equip-tag"><span class="va">Punts d'aigua i higiene</span><span class="es">Puntos de agua e higiene</span></span>
         <h3 style="margin-top:.5em"><span class="va">Tot el que necessites</span><span class="es">Todo lo que necesitas</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
 {eq_li([5,6])}        </ul>
-        <p class="note" style="margin-top:18px"><span class="va">⚠️ L'aigua és d'una cava natural i <strong>no és potable</strong>: porta la teua per a consumir.</span><span class="es">⚠️ El agua es de una cava natural y <strong>no es potable</strong>: trae la tuya para consumir.</span></p>
+        <p class="note" style="margin-top:18px"><span class="va">⚠️ L'aigua és d'una cava natural, un bé escàs: <strong>no és potable</strong> i cal utilitzar-la de manera responsable. Porta la teua per a consumir.</span><span class="es">⚠️ El agua es de una cava natural, un bien escaso: <strong>no es potable</strong> y hay que utilizarla de forma responsable. Trae la tuya para consumir.</span></p>
       </div>
     </div>
 
