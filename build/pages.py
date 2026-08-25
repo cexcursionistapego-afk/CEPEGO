@@ -260,6 +260,7 @@ def build(g):
      ("Tancar les dues claus de pas de l'aigua després de l'estada.","Cerrar las dos llaves de paso del agua tras la estancia."),
      ("Deixar el refugi igual o millor, i emportar-se tota la brossa.","Dejar el refugio igual o mejor, y llevarse toda la basura."),
      ("Respectar l'entorn, la flora i la fauna.","Respetar el entorno, la flora y la fauna."),
+     ("No es pot traure el mobiliari de l'interior a l'exterior baix cap concepte.","No se puede sacar el mobiliario del interior al exterior bajo ningún concepto."),
      ("Cabuda màxima de 21 persones.","Cabida máxima de 21 personas."),
      ("Portar utensilis de cuina i sac de dormir.","Traer utensilios de cocina y saco de dormir."),
      ("L'aigua és d'una cava natural: millor porta la teua per a consumir.","El agua es de una cava natural: mejor trae la tuya para consumir."),
