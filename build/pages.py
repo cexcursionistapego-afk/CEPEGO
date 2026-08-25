@@ -76,7 +76,7 @@ def build(g):
         <h2><span class="va">Amics units per la muntanya</span><span class="es">Amigos unidos por la montaña</span></h2>
         <p><span class="va">El CEP està format per amics de diferents generacions, amants de la natura i dels esports d'aventura. Gran part dels membres som persones de diferents edats amb una gran dedicació en tot allò que fem.</span><span class="es">El CEP está formado por amigos de diferentes generaciones, amantes de la naturaleza y de los deportes de aventura. Gran parte de los miembros somos personas de diferentes edades con una gran dedicación en todo lo que hacemos.</span></p>
         <p><span class="va">Tenim dues seccions principals: qui fa senderisme —per la zona i per terres més llunyanes, aprofitant caps de setmana i ponts— i qui es dedica a l'escalada, majoritàriament esportiva, bloc i clàssica. També fem alta muntanya, espeleologia i barranquisme.</span><span class="es">Tenemos dos secciones principales: quien hace senderismo —por la zona y por tierras más lejanas, aprovechando fines de semana y puentes— y quien se dedica a la escalada, mayoritariamente deportiva, bloque y clásica. También hacemos alta montaña, espeleología y barranquismo.</span></p>
-        <a href="rutes.html" class="link-arrow"><span class="va">Descobreix les activitats</span><span class="es">Descubre las actividades</span></a>
+        <a href="calendari.html" class="link-arrow"><span class="va">Descobreix les activitats</span><span class="es">Descubre las actividades</span></a>
       </div>
       <div class="split__media">
         <img src="{IMG}club-cim.jpg" alt="El club a un cim d'alta muntanya">
