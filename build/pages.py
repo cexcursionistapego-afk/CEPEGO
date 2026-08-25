@@ -333,8 +333,8 @@ def build(g):
         pos='18%')+f'''
 <section class="section">
   <div class="wrap">
-    <div class="embed reveal" style="max-width:1000px;margin:0 auto">
-      <iframe src="{METEO}" title="AVAMET — La Figuereta" scrolling="no" style="height:1180px;max-height:82vh"></iframe>
+    <div class="avamet-wrap reveal">
+      <iframe src="{METEO}" title="AVAMET — La Figuereta" scrolling="no"></iframe>
     </div>
     <div class="center" style="margin-top:24px">
       <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO}"><span class="va">Obrir a AVAMET</span><span class="es">Abrir en AVAMET</span></a>
@@ -351,8 +351,8 @@ def build(g):
         "Estació meteorològica a Pego, connectada a la xarxa AVAMET.","Estación meteorológica en Pego, conectada a la red AVAMET.")+f'''
 <section class="section">
   <div class="wrap">
-    <div class="embed reveal" style="max-width:1000px;margin:0 auto">
-      <iframe src="{METEO_PEGO}" title="AVAMET — Pego" scrolling="no" style="height:1180px;max-height:82vh"></iframe>
+    <div class="avamet-wrap reveal">
+      <iframe src="{METEO_PEGO}" title="AVAMET — Pego" scrolling="no"></iframe>
     </div>
     <div class="center" style="margin-top:24px">
       <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO_PEGO}"><span class="va">Obrir a AVAMET</span><span class="es">Abrir en AVAMET</span></a>

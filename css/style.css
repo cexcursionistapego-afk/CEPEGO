@@ -380,6 +380,14 @@ html[data-lang="es"] .va{display:none}
 .embed{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--hair);background:var(--white)}
 .embed iframe{display:block;width:100%;border:0}
 
+/* AVAMET widget: forced at its native desktop width, then scaled down to fit —
+   AVAMET's own page breaks its layout (fixed header overlaps the title) at narrow
+   mobile widths, so we render it at 1000px and shrink visually instead of letting
+   it reflow. */
+.avamet-wrap{max-width:1000px;margin:0 auto;overflow:hidden;border-radius:var(--r);
+  box-shadow:var(--shadow);border:1px solid var(--hair);background:var(--white)}
+.avamet-wrap iframe{display:block;width:1000px;height:1180px;border:0;transform-origin:top left}
+
 /* contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,60px)}
 @media(max-width:840px){.contact-grid{grid-template-columns:1fr}}
