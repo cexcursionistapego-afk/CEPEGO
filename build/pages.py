@@ -267,8 +267,8 @@ def build(g):
 
 <div class="wrap narrow" style="padding-top:clamp(20px,3vw,36px)">
   <div class="avis reveal" style="border-radius:var(--r);margin-bottom:clamp(16px,2.5vw,28px)">
-    <span class="va">&#x26A0;&#xFE0F; El refugi <strong>no admet reserves del 31 de maig al 1 d'octubre</strong> (tancament d'estiu anual).</span>
-    <span class="es">&#x26A0;&#xFE0F; El refugio <strong>no admite reservas del 31 de mayo al 1 de octubre</strong> (cierre de verano anual).</span>
+    <span class="va">&#x26A0;&#xFE0F; El refugi <strong>no admet reserves del 31 de maig al 1 d'octubre</strong> (tancament d'estiu anual). Tampoc es lloga <strong>la nit del 31 de desembre ni la de l'1 de gener</strong>.</span>
+    <span class="es">&#x26A0;&#xFE0F; El refugio <strong>no admite reservas del 31 de mayo al 1 de octubre</strong> (cierre de verano anual). Tampoco se alquila <strong>la noche del 31 de diciembre ni la del 1 de enero</strong>.</span>
   </div>
 </div>
 
@@ -498,6 +498,23 @@ def build(g):
       <div class="info-line"><span class="ic">📷</span><div><b>Instagram</b><br><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></div></div>
       <div style="margin-top:26px"><a class="btn btn-primary" href="{RESERVA}" target="_blank" rel="noopener"><span class="va">Formulari de contacte i reserva</span><span class="es">Formulario de contacto y reserva</span></a></div>
     </div>
+    <div class="reveal">
+      <div class="card">
+        <h3 style="font-size:1.4rem"><span class="va">Dubtes i suggeriments</span><span class="es">Dudas y sugerencias</span></h3>
+        <p class="note"><span class="va">Per a reserves del refugi, utilitza el formulari de dalt. Per a qualsevol altra consulta o suggeriment, escriu-nos ací.</span><span class="es">Para reservas del refugio, utiliza el formulario de arriba. Para cualquier otra consulta o sugerencia, escríbenos aquí.</span></p>
+        <form id="contacte-form" novalidate>
+          <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+          <div class="select-row">
+            <div class="field"><label><span class="va">Correu</span><span class="es">Correo</span> *</label><input type="email" name="email" required></div>
+            <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+          </div>
+          <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span> *</label><textarea name="missatge" required></textarea></div>
+          <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <button type="submit" id="c-submit" class="btn btn-primary"><span class="va">Enviar missatge</span><span class="es">Enviar mensaje</span></button>
+          <div id="c-msg" class="r-msg"></div>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 <section class="section-sm" style="padding-top:0">
@@ -507,7 +524,7 @@ def build(g):
 </section>
 '''+footer()
     write("contacte.html", doc("Contacte | CEPEGO",
-        "Contacta amb el Centre Excursionista de Pego: correu, telèfon i formulari de reserva.", contacte))
+        "Contacta amb el Centre Excursionista de Pego: correu, telèfon i formulari de reserva.", contacte, extra_js="js/contacte.js"))
 
     # ============================================= SOCI (ALTA / BAIXA)
     soci=header("soci")+subhero(IMG+"soci-cim.jpg",'<span class="va">Centre Excursionista de Pego</span><span class="es">Centre Excursionista de Pego</span>',

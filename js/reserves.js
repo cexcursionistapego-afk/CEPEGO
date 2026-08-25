@@ -23,10 +23,12 @@
   var selStart = null, selEnd = null;
   var loaded = false;
 
-  // Summer blackout: May 31 – Sep 30 (refugi tancat). Applies every year.
+  // Blackout: May 31 – Sep 30 (tancament d'estiu) i 31 de desembre / 1 de gener (mai es lloga). Cada any.
   function isSummer(ds) {
     var md = ds.slice(5); // 'MM-DD'
-    return md >= '05-31' && md < '10-01';
+    if (md >= '05-31' && md < '10-01') return true;
+    if (md === '12-31' || md === '01-01') return true;
+    return false;
   }
 
   var grid = document.createElement('div'); grid.className='rcal';

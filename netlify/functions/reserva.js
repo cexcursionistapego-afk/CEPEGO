@@ -41,6 +41,22 @@ exports.handler = async function (event) {
   if (inSummer(eDate) || inSummer(sDate) || (eDate < SUMMER_START && sDate > SUMMER_START)) {
     return res(400, { ok: false, error: 'blackout', message: 'El refugi no es pot reservar del 31 de maig al 1 d\'octubre.' });
   }
+
+  // Cap d'any: el refugi mai es lloga la nit del 31 de desembre ni la de l'1 de gener (regla anual)
+  function parseISO(s) { const p = s.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function addDaysISO(s, n) { const d = parseISO(s); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+  function spansNewYear(a, b) {
+    let d = a, guard = 0;
+    while (d < b && guard < 400) {
+      const md = mmdd(d);
+      if (md === '12-31' || md === '01-01') return true;
+      d = addDaysISO(d, 1); guard++;
+    }
+    return false;
+  }
+  if (spansNewYear(entrada, salida)) {
+    return res(400, { ok: false, error: 'blackout', message: 'El refugi no es lloga el 31 de desembre ni l\'1 de gener.' });
+  }
   const soci = (b.soci === 'Si' || b.soci === 'No') ? b.soci : undefined;
   const internet = (b.internet === 'Si' || b.internet === 'No') ? b.internet : undefined;
 

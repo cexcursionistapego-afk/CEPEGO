@@ -75,6 +75,23 @@
       <div class="info-line"><span class="ic">📷</span><div><b>Instagram</b><br><a href="https://www.instagram.com/refugifiguereta" target="_blank" rel="noopener">@refugifiguereta</a></div></div>
       <div style="margin-top:26px"><a class="btn btn-primary" href="https://airtable.com/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka/form" target="_blank" rel="noopener"><span class="va">Formulari de contacte i reserva</span><span class="es">Formulario de contacto y reserva</span></a></div>
     </div>
+    <div class="reveal">
+      <div class="card">
+        <h3 style="font-size:1.4rem"><span class="va">Dubtes i suggeriments</span><span class="es">Dudas y sugerencias</span></h3>
+        <p class="note"><span class="va">Per a reserves del refugi, utilitza el formulari de dalt. Per a qualsevol altra consulta o suggeriment, escriu-nos ací.</span><span class="es">Para reservas del refugio, utiliza el formulario de arriba. Para cualquier otra consulta o sugerencia, escríbenos aquí.</span></p>
+        <form id="contacte-form" novalidate>
+          <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
+          <div class="select-row">
+            <div class="field"><label><span class="va">Correu</span><span class="es">Correo</span> *</label><input type="email" name="email" required></div>
+            <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+          </div>
+          <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span> *</label><textarea name="missatge" required></textarea></div>
+          <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <button type="submit" id="c-submit" class="btn btn-primary"><span class="va">Enviar missatge</span><span class="es">Enviar mensaje</span></button>
+          <div id="c-msg" class="r-msg"></div>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 <section class="section-sm" style="padding-top:0">
@@ -153,5 +170,6 @@
   </div>
 </footer>
 <script src="js/main.js"></script>
+<script src="js/contacte.js"></script>
 </body>
 </html>

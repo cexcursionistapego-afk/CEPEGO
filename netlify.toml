@@ -21,6 +21,10 @@
   from = "/api/baixa-soci"
   to = "/.netlify/functions/baixa-soci"
   status = 200
+[[redirects]]
+  from = "/api/contacte"
+  to = "/.netlify/functions/contacte"
+  status = 200
 
 # Cau curt per als índexs de dades editables
 [[headers]]
