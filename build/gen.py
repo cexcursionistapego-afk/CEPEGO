@@ -21,7 +21,7 @@ IMG="img/"
 HERO_BENCS = IMG+"bb9bb0_fa8879e4ce8d4035b0588d0d1be17435~mv2.jpeg"
 L1 = IMG+"bb9bb0_215ca88e66b746a4bb297d1714c6ccc1~mv2_d_2048_1371_s_2.jpg"
 L2 = IMG+"bb9bb0_83fc4a39cac54e4086907766e7327e78~mv2_d_2048_1371_s_2.jpg"
-CREST = IMG+"bb9bb0_42f6ed7c6336433e83f81bfbd39aaf56~mv2.png"
+CREST = IMG+"escut-cepego.png"
 CREST_BW = IMG+"bb9bb0_adf7f0669ac24f07b323f93d8f79508e~mv2.png"
 
 REFUGI=[IMG+x for x in [
