@@ -482,9 +482,10 @@ def build(g):
         "Activitats del Centre Excursionista de Pego al llarg de l'any.", calendari))
 
     # ============================================= CONTACTE
-    contacte=header("contacte")+subhero(REFUGI[9],'Pego',
+    contacte=header("contacte")+subhero(IMG+"senyal-pego.jpg",'Pego',
         "Contacta amb el club","Contacta con el club",
-        "Vols fer-te soci o passar uns dies a La Figuereta? Escriu-nos.","¿Quieres hacerte socio o pasar unos días en La Figuereta? Escríbenos.")+f'''
+        "Vols fer-te soci o passar uns dies a La Figuereta? Escriu-nos.","¿Quieres hacerte socio o pasar unos días en La Figuereta? Escríbenos.",
+        pos='30%')+f'''
 <section class="section">
   <div class="wrap narrow">
     <div class="reveal">
@@ -508,7 +509,7 @@ def build(g):
         "Contacta amb el Centre Excursionista de Pego: correu, telèfon i formulari de reserva.", contacte))
 
     # ============================================= SOCI (ALTA / BAIXA)
-    soci=header("soci")+subhero(REFUGI[1],'<span class="va">Centre Excursionista de Pego</span><span class="es">Centre Excursionista de Pego</span>',
+    soci=header("soci")+subhero(IMG+"soci-cim.jpg",'<span class="va">Centre Excursionista de Pego</span><span class="es">Centre Excursionista de Pego</span>',
         '<span class="va">Racó del soci</span><span class="es">Área del socio</span>',
         '<span class="va">Racó del soci</span><span class="es">Área del socio</span>',
         '<span class="va">Gestiona la teua pertinença al club: alta, baixa i informació per als socis.</span>',
