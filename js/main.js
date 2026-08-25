@@ -104,22 +104,6 @@
 
   bindGalleries();
 
-  /* ---------- AVAMET: escala el widget en compte de deixar-lo reflowar ---------- */
-  var avametWraps = document.querySelectorAll('.avamet-wrap');
-  if (avametWraps.length) {
-    var fitAvamet = function () {
-      avametWraps.forEach(function (wrap) {
-        var ifr = wrap.querySelector('iframe');
-        if (!ifr) return;
-        var scale = wrap.clientWidth / 1000;
-        ifr.style.transform = 'scale(' + scale + ')';
-        wrap.style.height = Math.round(1180 * scale) + 'px';
-      });
-    };
-    fitAvamet();
-    window.addEventListener('resize', fitAvamet);
-  }
-
   /* ---------- REVEAL en scroll ---------- */
   var rev=document.querySelectorAll('.reveal');
   if(rev.length && 'IntersectionObserver' in window){
