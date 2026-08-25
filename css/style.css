@@ -385,6 +385,7 @@ html[data-lang="es"] .va{display:none}
 @media(max-width:840px){.contact-grid{grid-template-columns:1fr}}
 .info-line{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px}
 .info-line .ic{width:44px;height:44px;flex:0 0 auto;border-radius:12px;background:var(--paper-2);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.info-line .ic svg{width:22px;height:22px;fill:var(--navy)}
 .info-line b{font-family:var(--font-body)}
 .field{margin-bottom:16px}
 .field label{display:block;font-weight:600;margin-bottom:6px;font-size:.9rem}

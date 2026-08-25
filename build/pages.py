@@ -5,7 +5,7 @@ def build(g):
     doc=g['doc']; header=g['header']; footer=g['footer']; subhero=g['subhero']; write=g['write']
     IMG=g['IMG']; REFUGI=g['REFUGI']; L1=g['L1']; L2=g['L2']; HERO=g['HERO_BENCS']; CREST=g['CREST']
     ALTA=g['ALTA']; BAIXA=g['BAIXA']; RESERVA=g['RESERVA']; GCAL=g['GCAL']; METEO=g['METEO']; METEO_PEGO=g['METEO_PEGO']
-    IG=g['IG']; FB=g['FB']
+    IG=g['IG']; FB=g['FB']; IG_SVG=g['IG_SVG']
     RESERVA_EMBED="https://airtable.com/embed/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka/form"
 
     def gallery_imgs(files, alt):
@@ -495,7 +495,7 @@ def build(g):
       <p class="lead"><span class="va">Gestionem les consultes des del nostre formulari. També pots escriure'ns directament.</span><span class="es">Gestionamos las consultas desde nuestro formulario. También puedes escribirnos directamente.</span></p>
       <div class="info-line"><span class="ic">✉️</span><div><b><span class="va">Correu</span><span class="es">Correo</span></b><br><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></div></div>
       <div class="info-line"><span class="ic">📍</span><div><b><span class="va">Adreça</span><span class="es">Dirección</span></b><br><span data-cms="adreca">Carrer Llavador, s/n · 03780 Pego (Alacant)</span></div></div>
-      <div class="info-line"><span class="ic">📷</span><div><b>Instagram</b><br><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></div></div>
+      <div class="info-line"><span class="ic">{IG_SVG}</span><div><b>Instagram</b><br><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></div></div>
     </div>
     <div class="reveal">
       <div class="card">
