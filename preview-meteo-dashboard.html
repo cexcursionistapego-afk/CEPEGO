@@ -1,0 +1,124 @@
+<!doctype html>
+<html data-lang="va" lang="ca-valencia">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>PREVIEW — Dashboard meteo (no és pàgina del lloc)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* Nomes per a esta pàgina de previsualització (no forma part del disseny del lloc) */
+  .preview-note{background:var(--navy);color:#fff;padding:14px 20px;font-size:.85rem;text-align:center}
+  .preview-note b{color:#f3c98a}
+  .preview-lang{position:fixed;bottom:20px;right:20px;z-index:50}
+</style>
+</head>
+<body>
+
+<div class="preview-note">
+  <b>PREVIEW intern</b> — fitxer temporal per a revisar el nou dashboard meteo amb dades simulades. No és una pàgina publicada del lloc ni s'enllaça des de cap menú.
+</div>
+
+<button class="lang-btn preview-lang" data-lang-btn type="button">ES</button>
+
+<section class="section">
+  <div class="wrap narrow center" style="margin-bottom:clamp(28px,4vw,48px)">
+    <div class="kicker center-k">AVAMET · CEPEGO</div>
+    <h1 style="font-size:clamp(2rem,4vw,2.8rem)"><span class="va">Nou dashboard meteo</span><span class="es">Nuevo dashboard meteo</span></h1>
+    <p class="lead"><span class="va">Substitueix l'iframe d'AVAMET per targetes pròpies amb els dos estacions del club, una al costat de l'altra.</span><span class="es">Sustituye el iframe de AVAMET por tarjetas propias con las dos estaciones del club, una al lado de la otra.</span></p>
+  </div>
+</section>
+
+<section class="section-sm" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker" style="margin-bottom:14px">01 — <span class="va">Estat correcte</span><span class="es">Estado correcto</span></div>
+    <div class="meteo-dash-grid">
+      <div id="meteo-dash-figuereta" data-meteo-src="data/meteo-mock.json"></div>
+      <div id="meteo-dash-pego" data-meteo-src="data/meteo-mock.json"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker" style="margin-bottom:14px">02 — <span class="va">Dades incompletes (camps null)</span><span class="es">Datos incompletos (campos null)</span></div>
+    <div class="meteo-dash-grid">
+      <div id="meteo-dash-nulls-a" data-meteo-src="data/meteo-mock-nulls.json"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker" style="margin-bottom:14px">03 — <span class="va">Error / sense connexió</span><span class="es">Error / sin conexión</span></div>
+    <div class="meteo-dash-grid">
+      <div id="meteo-dash-error-a" data-meteo-station="figuereta" data-meteo-src="data/meteo-mock-broken.json"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="padding-top:0">
+  <div class="wrap narrow prose">
+    <h3><span class="va">Notes d'implementació</span><span class="es">Notas de implementación</span></h3>
+    <p><span class="va">Este fitxer és només per a revisió visual. Fa servir dades simulades (contracte JSON idèntic al que servirà <code>/api/meteo?station=figuereta</code> i <code>/api/meteo?station=pego</code>) via l'atribut <code>data-meteo-src</code>. Quan l'API real estiga llesta, n'hi haurà prou en traure eixe atribut dels contenidors perquè <code>js/meteo-dashboard.js</code> demane l'endpoint real.</span>
+    <span class="es">Este archivo es solo para revisión visual. Usa datos simulados (contrato JSON idéntico al que servirá <code>/api/meteo?station=figuereta</code> y <code>/api/meteo?station=pego</code>) mediante el atributo <code>data-meteo-src</code>. Cuando la API real esté lista, bastará con quitar ese atributo de los contenedores para que <code>js/meteo-dashboard.js</code> pida el endpoint real.</span></p>
+  </div>
+</section>
+
+<script>
+  /* ---- capa de simulació NOMÉS per a esta previsualització ----
+     Intercepta les tres URLs mock i respon amb dades locals.
+     Si el fitxer s'obri amb servidor (no file://) intenta llegir de veres
+     data/meteo-mock.json abans de recórrer a la còpia inline. */
+  (function(){
+    var realFetch = window.fetch.bind(window);
+    var MOCK_NULLS = {
+      ok: true, station_name: "Estació parcial",
+      updated: null, temp: null, temp_min: null, temp_max: null,
+      humidity: null, wind_speed: null, wind_dir: null, wind_gust_max: null,
+      pressure: null, precip_today: null, precip_month: null, precip_year: null
+    };
+    var MOCK_FALLBACK = {
+      figuereta: {ok:true, station_name:"Refugi La Figuereta", updated:"2026-08-26T00:40:00+02:00",
+        temp:27.1, temp_min:26.6, temp_max:27.8, humidity:46, wind_speed:15, wind_dir:"SO",
+        wind_gust_max:20, pressure:1016, precip_today:0.0, precip_month:null, precip_year:713.0},
+      pego: {ok:true, station_name:"Pego", updated:"2026-08-26T00:38:00+02:00",
+        temp:24.3, temp_min:19.8, temp_max:31.2, humidity:58, wind_speed:4, wind_dir:"NE",
+        wind_gust_max:9, pressure:1015, precip_today:0.0, precip_month:12.4, precip_year:341.5}
+    };
+    function jsonResponse(obj){ return Promise.resolve({ ok:true, json:function(){ return Promise.resolve(obj); } }); }
+
+    window.fetch = function(url, opts){
+      var s = String(url);
+      if (s.indexOf('data/meteo-mock-broken.json') > -1){
+        // simula una resposta d'API fallida (ex: 500/timeout)
+        return Promise.resolve({ ok:false, json:function(){ return Promise.resolve(null); } });
+      }
+      if (s.indexOf('data/meteo-mock-nulls.json') > -1){
+        return jsonResponse(MOCK_NULLS);
+      }
+      if (s.indexOf('data/meteo-mock.json') > -1){
+        return realFetch(url, opts).catch(function(){ return jsonResponse(MOCK_FALLBACK); });
+      }
+      return realFetch(url, opts);
+    };
+  })();
+</script>
+<script src="js/main.js"></script>
+<script src="js/meteo-dashboard.js"></script>
+<script>
+  /* Les seccions 02 i 03 fan servir contenidors amb id propi (no els dos
+     per defecte que muntar automàticament js/meteo-dashboard.js), així que
+     els muntem a mà amb l'API pública que exposa el mateix mòdul. */
+  document.addEventListener('DOMContentLoaded', function(){
+    if (window.CepegoMeteoDash){
+      window.CepegoMeteoDash.mount('meteo-dash-nulls-a', 'figuereta');
+      window.CepegoMeteoDash.mount('meteo-dash-error-a', 'figuereta');
+    }
+  });
+</script>
+</body>
+</html>
