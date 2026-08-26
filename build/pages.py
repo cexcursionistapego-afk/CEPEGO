@@ -499,7 +499,7 @@ def build(g):
     contacte=header("contacte")+subhero(IMG+"senyal-pego.jpg",'Pego',
         "Contacta amb el club","Contacta con el club",
         "Tens dubtes o suggeriments? Escriu-nos.","¿Tienes dudas o sugerencias? Escríbenos.",
-        pos='30%')+f'''
+        pos='42%')+f'''
 <section class="section">
   <div class="wrap narrow">
     <div class="reveal">
