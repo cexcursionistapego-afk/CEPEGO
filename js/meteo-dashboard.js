@@ -16,7 +16,7 @@
     },
     pego: {
       va: 'Pego', es: 'Pego',
-      sub_va: 'Les Verdales · 89 m', sub_es: 'Les Verdales · 89 m',
+      sub_va: 'Les Verdales · 89 m alt.', sub_es: 'Les Verdales · 89 m alt.',
       avamet: 'https://www.avamet.org/mxo-i.php?id=c30m102e14'
     }
   };
