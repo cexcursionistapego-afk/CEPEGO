@@ -10,6 +10,16 @@
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
   }); }
 
+  // AEMET sempre torna l'etiqueta del dia en castellà ("mié. 26", "jue. 27"…).
+  // Es tradueix l'abreviatura del dia de la setmana per a la versió valenciana.
+  var DOW_VA = { 'lun':'Dl', 'mar':'Dt', 'mié':'Dc', 'mie':'Dc', 'jue':'Dj', 'vie':'Dv', 'sáb':'Ds', 'sab':'Ds', 'dom':'Dg' };
+  function translateDayLabel(label) {
+    var s = String(label || '').trim();
+    var m = /^([a-záéíóúñ]+)\.\s*(\d+)$/i.exec(s);
+    if (!m || !DOW_VA[m[1].toLowerCase()]) return { va: s, es: s };
+    return { va: DOW_VA[m[1].toLowerCase()] + '. ' + m[2], es: s };
+  }
+
   // Icona segons paraules clau de la descripció d'AEMET (independent de
   // dia/nit: AEMET fa servir el mateix text per als dos, només canvia l'icona
   // pròpia que no reutilitzem ací).
@@ -74,7 +84,7 @@
       : periodHTML('general', '', '', d.desc_general);
     return '' +
       '<div class="aemet-day">' +
-        '<div class="aemet-day__label">' + esc(d.label) + '</div>' +
+        '<div class="aemet-day__label">' + (function(tr){ return bi(esc(tr.va), esc(tr.es)); })(translateDayLabel(d.label)) + '</div>' +
         (d.alert ? '<div class="aemet-day__alert aemet-day__alert--' + alertColor(d.alert) + '">' + (function(tr){ return bi(esc(tr.va), esc(tr.es)); })(translateAlert(d.alert)) + '</div>' : '') +
         periods +
         '<div class="aemet-day__temps">' +
