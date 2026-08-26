@@ -210,8 +210,8 @@ def build(g):
       </div>
     </div>
 
-    <!-- BLOC 3: SERVEIS — foto esquerra -->
-    <div class="equip-block reveal">
+    <!-- BLOC 3: SERVEIS — foto esquerra en escriptori, baix en mòbil -->
+    <div class="equip-block equip-block--photo-below-mobile reveal">
       <div class="equip-block__media">
         <img loading="lazy" src="{REFUGI[2]}" alt="Punts d'aigua exteriors del refugi">
       </div>
@@ -224,8 +224,8 @@ def build(g):
       </div>
     </div>
 
-    <!-- BLOC 4: COM ARRIBAR — integrat com la resta -->
-    <div class="equip-block reveal" style="border-top:1px solid var(--hair)">
+    <!-- BLOC 4: COM ARRIBAR — foto esquerra en escriptori, baix en mòbil -->
+    <div class="equip-block equip-block--photo-below-mobile reveal" style="border-top:1px solid var(--hair)">
       <div class="equip-block__media">
         <img loading="lazy" src="{REFUGI[10]}" alt="Camí d'accés al refugi">
       </div>
@@ -338,10 +338,6 @@ def build(g):
     <div class="meteo-dash-grid reveal">
       <div id="meteo-dash-figuereta"></div>
       <div id="meteo-dash-pego"></div>
-    </div>
-    <div class="center" style="margin-top:24px">
-      <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO}">La Figuereta — AVAMET</a>
-      <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO_PEGO}">Pego — AVAMET</a>
     </div>
   </div>
 </section>
@@ -639,7 +635,7 @@ def build(g):
     <p><span class="va">En compliment del deure d'informació de la Llei 34/2002, de Serveis de la Societat de la Informació i de Comerç Electrònic (LSSICE), s'informa que este lloc web és titularitat de:</span><span class="es">En cumplimiento del deber de información de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), se informa de que este sitio web es titularidad de:</span></p>
     <ul>
       <li><span class="va">Denominació:</span><span class="es">Denominación:</span> Centre Excursionista de Pego (CEPEGO), <span class="va">associació sense ànim de lucre</span><span class="es">asociación sin ánimo de lucro</span></li>
-      <li>NIF/CIF: <em>[<span class="va">pendent d'indicar pel club</span><span class="es">pendiente de indicar por el club</span>]</em></li>
+      <li>NIF/CIF: G03293297</li>
       <li><span class="va">Domicili:</span><span class="es">Domicilio:</span> Carrer Llavador, 83 · 03780 Pego (Alacant)</li>
       <li><span class="va">Correu de contacte:</span><span class="es">Correo de contacto:</span> <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></li>
     </ul>

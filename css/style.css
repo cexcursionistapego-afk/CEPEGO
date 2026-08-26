@@ -324,6 +324,7 @@ html[data-lang="es"] .va{display:none}
 @media(max-width:820px){
   .equip-block{grid-template-columns:1fr;gap:22px}
   .equip-block--rev .equip-block__media{order:0}
+  .equip-block--photo-below-mobile .equip-block__media{order:2}
   .equip-block__media img{height:280px}
   .equip-block__media .cap-badge{right:16px!important;left:auto!important;bottom:16px}
 }
