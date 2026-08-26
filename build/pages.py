@@ -125,7 +125,7 @@ def build(g):
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="center"><div class="kicker center-k"><span class="va">El territori</span><span class="es">El territorio</span></div></div>
+    <div class="center"><div class="kicker center-k"><span class="va">El nostre territori</span><span class="es">Nuestro territorio</span></div></div>
     <div class="skyline reveal">
 {skyline_svg(PEAKS, W=1200, baseline=200, min_px=32, max_px=110, vertical=False, top=64)}
 {skyline_svg(PEAKS, W=440, baseline=250, min_px=18, max_px=55, vertical=True, top=170)}
