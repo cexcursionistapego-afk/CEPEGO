@@ -139,7 +139,8 @@ def build(g):
      ("Pantalla amb informació meteorològica de l'interior i l'exterior, i pronòstic del temps per a les pròximes hores.","Pantalla con información meteorológica del interior y el exterior, y pronóstico del tiempo para las próximas horas."),
      ("Detectors de fum i de monòxid de carboni amb alarma i avís directe al guarda del refugi (normes UNE-EN 14604 i UNE-EN 50291).","Detectores de humo y de monóxido de carbono con alarma y aviso directo al guarda del refugio (normas UNE-EN 14604 y UNE-EN 50291)."),
      ("Extintors homologats (UNE-EN 3) distribuïts pel refugi.","Extintores homologados (UNE-EN 3) distribuidos por el refugio."),
-     ("Eixides d'emergència senyalitzades (norma UNE 23034).","Salidas de emergencia señalizadas (norma UNE 23034).")]
+     ("Eixides d'emergència senyalitzades (norma UNE 23034).","Salidas de emergencia señalizadas (norma UNE 23034)."),
+     ("Cal pujar sense calçat a la zona de dormir.","Hay que subir sin calzado a la zona de dormir.")]
     def eq_li(idxs):
         return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
     refugi=header("refugi")+subhero(REFUGI[11],'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
@@ -197,7 +198,7 @@ def build(g):
         <span class="equip-tag"><span class="va">Dormir</span><span class="es">Dormir</span></span>
         <h3 style="margin-top:.5em"><span class="va">Descansa com a casa</span><span class="es">Descansa como en casa</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([9,11,12,13])}        </ul>
+{eq_li([9,11,12,13,14])}        </ul>
         <p style="margin-top:16px;font-size:.94rem;color:var(--muted)"><span class="va">Dos habitacles separats però comunicats. Porta sempre el teu sac de dormir.</span><span class="es">Dos habitáculos separados pero comunicados. Trae siempre tu saco de dormir.</span></p>
       </div>
       <div class="equip-block__media">
@@ -346,18 +347,11 @@ def build(g):
 </section>
 '''
     meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'AVAMET',
-        "El temps al refugi","Meteo al refugio",
-        "Estació meteorològica a La Figuereta, connectada a la xarxa AVAMET.","Estación meteorológica en La Figuereta, conectada a la red AVAMET.",
+        "El temps","El tiempo",
+        "Estacions meteorològiques a La Figuereta i a Pego, connectades a la xarxa AVAMET.","Estaciones meteorológicas en La Figuereta y en Pego, conectadas a la red AVAMET.",
         pos='18%')+meteo_dash+footer()
-    write("meteo.html", doc("El temps al refugi | CEPEGO",
-        "Estació meteorològica del refugi La Figuereta connectada a la xarxa AVAMET.", meteo, path="meteo.html", extra_js="js/meteo-dashboard.js"))
-
-    # ============================================= METEO PEGO
-    meteo_pego=header("meteo-pego")+subhero(L2,'AVAMET',
-        "El temps a Pego","El tiempo en Pego",
-        "Estació meteorològica a Pego, connectada a la xarxa AVAMET.","Estación meteorológica en Pego, conectada a la red AVAMET.")+meteo_dash+footer()
-    write("meteo-pego.html", doc("El tiempo en Pego | CEPEGO",
-        "Estació meteorològica de Pego connectada a la xarxa AVAMET.", meteo_pego, path="meteo-pego.html", extra_js="js/meteo-dashboard.js"))
+    write("meteo.html", doc("El temps | CEPEGO",
+        "Estacions meteorològiques del refugi La Figuereta i de Pego connectades a la xarxa AVAMET.", meteo, path="meteo.html", extra_js="js/meteo-dashboard.js"))
 
     # ============================================= RUTES
     routes=[("Circular Figuereta – Tossal","2,97 km","+154 m","673 m","facil","Fàcil","Fácil",

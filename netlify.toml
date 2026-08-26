@@ -30,6 +30,12 @@
   to = "/.netlify/functions/meteo"
   status = 200
 
+# Redirecció de l'antiga pàgina de meteo de Pego, ara unificada en una sola
+[[redirects]]
+  from = "/meteo-pego.html"
+  to = "/meteo.html"
+  status = 301
+
 # Cau curt per als índexs de dades editables
 [[headers]]
   for = "/data/*"
