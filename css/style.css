@@ -463,17 +463,22 @@ html[data-lang="es"] .va{display:none}
 .avis__x:hover{opacity:1}
 
 /* ================= PREVISIO AEMET ================= */
+.aemet-place-wrap{position:relative}
+.aemet-place{font-family:var(--font-display);font-weight:600;font-size:clamp(46px,9vw,108px);
+  line-height:1;text-align:center;color:var(--hair);margin-bottom:clamp(-34px,-4vw,-16px);
+  user-select:none;pointer-events:none}
 .aemet-forecast{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:clamp(16px,2.5vw,28px)}
 @media(max-width:760px){.aemet-forecast{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:460px){.aemet-forecast{grid-template-columns:repeat(3,1fr)}}
 .aemet-forecast__msg{grid-column:1/-1;text-align:center;color:var(--muted);padding:20px 0}
 .aemet-day{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:14px 8px;text-align:center;box-shadow:var(--shadow-sm)}
-.aemet-day__label{position:relative;font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--navy)}
-.aemet-day__alert{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:5px;vertical-align:2px}
-.aemet-day__alert--green{background:#3fa34d}
-.aemet-day__alert--yellow{background:#e8b923}
-.aemet-day__alert--orange{background:#e8791f}
-.aemet-day__alert--red{background:var(--ember)}
+.aemet-day__label{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--navy)}
+.aemet-day__alert{margin-top:6px;font-size:.62rem;font-weight:600;letter-spacing:.01em;
+  padding:3px 6px;border-radius:20px;line-height:1.2;display:inline-block}
+.aemet-day__alert--green{background:#e4f3e6;color:#256b32}
+.aemet-day__alert--yellow{background:#fbf0d2;color:#8a6d0c}
+.aemet-day__alert--orange{background:#fbe4d2;color:#9a4a10}
+.aemet-day__alert--red{background:#fbdcdc;color:#8f1d1d}
 .aemet-day__period{margin-top:8px}
 .aemet-day__period-l{font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .aemet-day__ic{font-size:1.5rem;line-height:1.2}

@@ -384,7 +384,8 @@ def build(g):
 </section>
 
 <section class="section" style="padding-top:0">
-  <div class="wrap">
+  <div class="wrap aemet-place-wrap">
+    <div class="aemet-place" aria-hidden="true">Pego</div>
     <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió</span><span class="es">Previsión</span></div>
     <h2 class="center" style="margin-top:6px"><span class="va">Els pròxims dies</span><span class="es">Los próximos días</span></h2>
     <div id="aemet-forecast" class="reveal"></div>
