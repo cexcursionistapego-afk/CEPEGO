@@ -14,7 +14,7 @@ def build(g):
             for f in files
         )
 
-    def skyline_svg(peaks, W, baseline, min_px, max_px, vertical=False, top=40):
+    def skyline_svg(peaks, W, baseline, min_px, max_px, vertical=False, top=40, view_top=0):
         n=len(peaks)
         left=W*0.05; right=W*0.05
         step=(W-left-right)/(n-1)
@@ -54,7 +54,7 @@ def build(g):
                 for i,(name,alt,_) in enumerate(peaks)
             )
         cls="skyline-chart skyline-chart--v" if vertical else "skyline-chart skyline-chart--h"
-        return f'''<svg class="{cls}" viewBox="0 0 {W} {baseline+10}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Skyline dels cims que envolten Pego">
+        return f'''<svg class="{cls}" viewBox="0 {view_top} {W} {baseline+10-view_top}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Skyline dels cims que envolten Pego">
       {labels}
       <polyline class="sk-ridge" points="{polyline}" fill="none"/>
       <line class="sk-base" x1="0" y1="{baseline}" x2="{W}" y2="{baseline}"/>
@@ -128,7 +128,7 @@ def build(g):
     <div class="center"><div class="kicker center-k"><span class="va">El nostre territori</span><span class="es">Nuestro territorio</span></div></div>
     <div class="skyline reveal">
 {skyline_svg(PEAKS, W=1200, baseline=200, min_px=32, max_px=110, vertical=False, top=64)}
-{skyline_svg(PEAKS, W=440, baseline=250, min_px=18, max_px=55, vertical=True, top=170)}
+{skyline_svg(PEAKS, W=440, baseline=250, min_px=18, max_px=55, vertical=True, top=170, view_top=60)}
     </div>
   </div>
 </section>
