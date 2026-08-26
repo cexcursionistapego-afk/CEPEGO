@@ -413,23 +413,40 @@ def build(g):
      ("5","Muca muca","7a"),("6","Teto","7a"),("7","Anaconda","7c"),("8","Quimera","6b+/c"),("9","Garguller","7a+/b"),
      ("10","Me'n Fot Dénia","6b+"),("11","Mística","6c"),("12","Plat Combinat","V"),("13","Plat Combinat II","V+"),
      ("14","Rafelet un flanet","V"),("15","Caldetes","V+")]
-    def via(cap,rows):
-        tr="".join(f'    <tr><td>{n}</td><td>{nm}</td><td>{g}</td></tr>\n' for n,nm,g in rows)
-        return f'  <table class="viatable"><caption>{cap}</caption>\n{tr}  </table>'
+    def grade_class(g):
+        base=g.split('+')[0].split('/')[0].strip()
+        if base in ("IV","V"): return "facil"
+        if base in ("6a","6b"): return "moderada"
+        return "dificil"
+    def via_cards(rows):
+        return "".join(
+            f'      <div class="via-card"><span class="via-card__n">{n}</span>'
+            f'<span class="via-card__name">{nm}</span>'
+            f'<span class="tag {grade_class(g)}">{g}</span></div>\n'
+            for n,nm,g in rows)
+    def sector_block(name,count,grade_range_va,grade_range_es,img,rows,rev=False):
+        media=f'''      <div class="topos reveal">
+        <a href="{IMG}{img}"><img loading="lazy" src="{IMG}{img}" alt="Ressenya {name}"></a>
+      </div>'''
+        content=f'''      <div>
+        <span class="equip-tag">Sector</span>
+        <h3 style="margin-top:.5em">{name}</h3>
+        <p style="color:var(--muted);margin-bottom:20px"><span class="va">{count} vies · de {grade_range_va}</span><span class="es">{count} vías · de {grade_range_es}</span></p>
+        <div class="via-grid">
+{via_cards(rows)}        </div>
+      </div>'''
+        order = (media+"\n"+content) if rev else (content+"\n"+media)
+        cls = "sector-block sector-block--rev reveal" if rev else "sector-block reveal"
+        return f'    <div class="{cls}">\n{order}\n    </div>'
     escalada=header("escalada")+subhero(IMG+"escalada-via.jpg",'<span class="va">Calvari · Pego</span><span class="es">Calvari · Pego</span>',
         "Escalada","Escalada",
         "L'escola d'escalada del Calvari: dos sectors i 28 vies equipades.","La escuela de escalada del Calvari: dos sectores y 28 vías equipadas.")+f'''
 <section class="section">
   <div class="wrap">
     <p class="lead narrow reveal" style="margin-bottom:clamp(34px,4vw,56px)"><span class="va">L'accés és molt fàcil, seguint el camí al final del Passeig del Calvari. En arribar al barranc, a mà esquerra hi ha les indicacions. Consta de dos sectors: <strong>Iniciació</strong> (13 vies de IV a 6b+/c, uns 12 m) i <strong>Placa del Sol</strong> (15 vies de V a 7c, de 20 a 27 m, el més dur i espectacular). Equipament de parabolt de 10 mm i cadenes amb mosquetó fixe.</span><span class="es">El acceso es muy fácil, siguiendo el camino al final del Paseo del Calvari. Al llegar al barranco, a mano izquierda están las indicaciones. Consta de dos sectores: <strong>Iniciación</strong> (13 vías de IV a 6b+/c, unos 12 m) y <strong>Placa del Sol</strong> (15 vías de V a 7c, de 20 a 27 m, el más duro y espectacular). Equipamiento de parabolt de 10 mm y cadenas con mosquetón fijo.</span></p>
-    <div class="grid cols-2" style="align-items:start">
-{via("Sector Iniciació",inic)}
-{via("Sector Placa del Sol",placa)}
-    </div>
-    <div class="topos reveal" style="margin-top:34px">
-      <a href="{IMG}bb9bb0_8ac538198ebe452eb7192aadfadf4652~mv2.png"><img loading="lazy" src="{IMG}bb9bb0_8ac538198ebe452eb7192aadfadf4652~mv2.png" alt="Ressenya escalada"></a>
-      <a href="{IMG}bb9bb0_62daeaf5f5f044a0a19c177e3c098354~mv2.png"><img loading="lazy" src="{IMG}bb9bb0_62daeaf5f5f044a0a19c177e3c098354~mv2.png" alt="Ressenya escalada"></a>
-    </div>
+{sector_block("Sector Iniciació",13,"IV a 6b+/c","IV a 6b+/c","bb9bb0_8ac538198ebe452eb7192aadfadf4652~mv2.png",inic)}
+{sector_block("Sector Placa del Sol",15,"V a 7c","V a 7c","bb9bb0_62daeaf5f5f044a0a19c177e3c098354~mv2.png",placa,rev=True)}
+    <p class="note" style="margin-top:12px"><span class="va">📷 La numeració de les vies segueix l'ordre d'esquerra a dreta tal com es veu la paret. Fes clic a la fotografia per ampliar-la i localitzar cada via.</span><span class="es">📷 La numeración de las vías sigue el orden de izquierda a derecha tal como se ve la pared. Haz clic en la fotografía para ampliarla y localizar cada vía.</span></p>
   </div>
 </section>
 '''+footer()
