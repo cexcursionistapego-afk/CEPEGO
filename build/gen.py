@@ -28,7 +28,7 @@ ORG_JSONLD = json.dumps({
     "foundingDate": "1973",
     "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Carrer Llavador, 83",
+        "streetAddress": "Carrer del Llavador, 83",
         "addressLocality": "Pego",
         "postalCode": "03780",
         "addressRegion": "Alacant",
@@ -168,7 +168,7 @@ def footer():
       <div>
         <h4><span class="va">Contacte</span><span class="es">Contacto</span></h4>
         <ul class="footer__contact">
-          <li><span class="ic">📍</span><span><span class="va">Carrer Llavador, 83</span><span class="es">Calle Llavador, 83</span><br>03780 Pego</span></li>
+          <li><span class="ic">📍</span><span><span class="va">Carrer del Llavador, 83</span><span class="es">Calle del Lavadero, 83</span><br>03780 Pego</span></li>
           <li><span class="ic">✉️</span><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></li>
           <li><span class="ic">📷</span><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></li>
         </ul>
