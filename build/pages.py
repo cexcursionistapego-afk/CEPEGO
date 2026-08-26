@@ -507,7 +507,7 @@ def build(g):
 </section>
 <section class="section-sm" style="padding-top:0">
   <div class="wrap">
-    <div class="embed reveal"><iframe src="https://www.google.com/maps?q=Carrer%20del%20Llavador%2C%2083%2C%20Pego%2C%20Alacant&output=embed" height="380" title="Mapa CEPEGO" loading="lazy"></iframe></div>
+    <div class="embed reveal"><iframe src="https://www.google.com/maps?q=Centre%20Excursionista%20Pego&output=embed" height="380" title="Mapa CEPEGO" loading="lazy"></iframe></div>
   </div>
 </section>
 '''+footer()
