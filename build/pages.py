@@ -504,7 +504,6 @@ def build(g):
     <div class="reveal">
       <div class="card">
         <h3 style="font-size:1.4rem"><span class="va">Dubtes i suggeriments</span><span class="es">Dudas y sugerencias</span></h3>
-        <p class="note"><span class="va">Escriu-nos qualsevol consulta o suggeriment.</span><span class="es">Escríbenos cualquier consulta o sugerencia.</span></p>
         <form id="contacte-form" novalidate>
           <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
           <div class="select-row">
