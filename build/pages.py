@@ -386,7 +386,7 @@ def build(g):
 <section class="section" style="padding-top:0">
   <div class="wrap">
     <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió</span><span class="es">Previsión</span></div>
-    <h2 class="center" style="margin-top:6px"><span class="va">Pego i la Figuereta</span><span class="es">Pego y la Figuereta</span></h2>
+    <h2 class="center" style="margin-top:6px;color:var(--ember)"><span class="va">Pego i la Figuereta</span><span class="es">Pego y la Figuereta</span></h2>
     <div id="aemet-forecast" class="reveal"></div>
     <p class="note center" style="margin-top:14px"><span class="va">Font: AEMET.</span><span class="es">Fuente: AEMET.</span></p>
   </div>
