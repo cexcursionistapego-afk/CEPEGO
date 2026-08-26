@@ -198,6 +198,8 @@ def footer():
 def doc(title, desc, body, path="", identity=False, extra_js=None, image=None):
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
     idredirect=('<script>if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(u){if(!u){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}</script>\n' if identity else '')
+    extra_js_list = [extra_js] if isinstance(extra_js, str) else (extra_js or [])
+    extra_js_tags = "".join(f'<script src="{s}"></script>\n' for s in extra_js_list)
     canon = SITE_URL + "/" + (path if (path and path != "index.html") else "")
     img_url = SITE_URL + "/" + (image or HERO_BENCS)
     return f'''<!DOCTYPE html>
@@ -232,7 +234,7 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None):
 <div id="avis"></div>
 {body}
 <script src="js/main.js"></script>
-{('<script src="'+extra_js+'"></script>'+chr(10)) if extra_js else ''}{idredirect}</body>
+{extra_js_tags}{idredirect}</body>
 </html>
 '''
 

@@ -29,6 +29,10 @@
   from = "/api/meteo"
   to = "/.netlify/functions/meteo"
   status = 200
+[[redirects]]
+  from = "/api/aemet"
+  to = "/.netlify/functions/aemet"
+  status = 200
 
 # Redirecció de l'antiga pàgina de meteo de Pego, ara unificada en una sola
 [[redirects]]
