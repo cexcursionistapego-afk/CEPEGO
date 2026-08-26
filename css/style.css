@@ -163,7 +163,8 @@ html[data-lang="es"] .va{display:none}
   font-family:var(--font-mono);font-size:.73rem;letter-spacing:.14em;color:rgba(255,255,255,.6);writing-mode:vertical-rl;transform:rotate(180deg)}
 @media(max-width:760px){.hero__meta{display:none}}
 @media(max-width:600px){
-  .hero__inner{padding-bottom:clamp(50px,9vw,100px)}
+  .hero{min-height:72vh}
+  .hero__inner{padding-bottom:clamp(50px,9vw,100px);padding-top:80px}
   .hero__scrim{background:linear-gradient(180deg,rgba(15,18,26,.45) 0%,rgba(15,18,26,.25) 45%,rgba(15,18,26,.82) 100%)}
 }
 
