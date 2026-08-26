@@ -176,13 +176,18 @@ function parseAemet(rawHtml) {
     idx += d.colspan;
     let mati = group.find((p) => bucket(p.hour) === 'mati');
     let vesprada = group.find((p) => bucket(p.hour) === 'vesprada');
-    if (!mati && !vesprada && group.length) vesprada = group[0];
+    // Dies més llunyans (o hui, si ja ha passat el matí): un sol tram sense
+    // rang horari clar de mati/vesprada — es deixa com a previsió general,
+    // no s'etiqueta com "vesprada" perquè no ho és necessàriament.
+    let general = null;
+    if (!mati && !vesprada && group.length) general = group[0].desc || null;
     const precipDefined = precipGroup.filter((v) => v != null);
     return {
       label: d.label,
       date_title: d.title,
       desc_mati: (mati && mati.desc) || null,
       desc_vesprada: (vesprada && vesprada.desc) || null,
+      desc_general: general,
       precip_max: precipDefined.length ? Math.max(...precipDefined) : null,
       temp_min: tempPairs[i] ? tempPairs[i].min : null,
       temp_max: tempPairs[i] ? tempPairs[i].max : null,
