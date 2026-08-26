@@ -484,7 +484,7 @@ def build(g):
       <h2><span class="va">Parla amb nosaltres</span><span class="es">Habla con nosotros</span></h2>
       <p class="lead"><span class="va">Gestionem les consultes des del nostre formulari. També pots escriure'ns directament.</span><span class="es">Gestionamos las consultas desde nuestro formulario. También puedes escribirnos directamente.</span></p>
       <div class="info-line"><span class="ic">✉️</span><div><b><span class="va">Correu</span><span class="es">Correo</span></b><br><a data-cms-href="email" href="mailto:cexcursionistapego@gmail.com"><span data-cms="email">cexcursionistapego@gmail.com</span></a></div></div>
-      <div class="info-line"><span class="ic">📍</span><div><b><span class="va">Adreça</span><span class="es">Dirección</span></b><br><span data-cms="adreca">Carrer Llavador, s/n · 03780 Pego (Alacant)</span></div></div>
+      <div class="info-line"><span class="ic">📍</span><div><b><span class="va">Adreça</span><span class="es">Dirección</span></b><br><span data-cms="adreca"><span class="va">Carrer del Llavador, 83</span><span class="es">Calle del Lavadero, 83</span> · 03780 Pego (Alacant)</span></div></div>
       <div class="info-line"><span class="ic">{IG_SVG}</span><div><b>Instagram</b><br><a href="{IG}" target="_blank" rel="noopener">@refugifiguereta</a></div></div>
     </div>
     <div class="reveal">
@@ -507,7 +507,7 @@ def build(g):
 </section>
 <section class="section-sm" style="padding-top:0">
   <div class="wrap">
-    <div class="embed reveal"><iframe src="https://www.google.com/maps?q=Carrer%20Llavador%2C%20Pego%2C%20Alacant&output=embed" height="380" title="Mapa CEPEGO" loading="lazy"></iframe></div>
+    <div class="embed reveal"><iframe src="https://www.google.com/maps?q=Carrer%20del%20Llavador%2C%2083%2C%20Pego%2C%20Alacant&output=embed" height="380" title="Mapa CEPEGO" loading="lazy"></iframe></div>
   </div>
 </section>
 '''+footer()
@@ -623,7 +623,7 @@ def build(g):
     <ul>
       <li><span class="va">Denominació:</span><span class="es">Denominación:</span> Centre Excursionista de Pego (CEPEGO), <span class="va">associació sense ànim de lucre</span><span class="es">asociación sin ánimo de lucro</span></li>
       <li>NIF/CIF: G03293297</li>
-      <li><span class="va">Domicili:</span><span class="es">Domicilio:</span> Carrer Llavador, 83 · 03780 Pego (Alacant)</li>
+      <li><span class="va">Domicili:</span><span class="es">Domicilio:</span> <span class="va">Carrer del Llavador, 83</span><span class="es">Calle del Lavadero, 83</span> · 03780 Pego (Alacant)</li>
       <li><span class="va">Correu de contacte:</span><span class="es">Correo de contacto:</span> <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></li>
     </ul>
     <h2><span class="va">2. Objecte</span><span class="es">2. Objeto</span></h2>
@@ -646,7 +646,7 @@ def build(g):
 <section class="section" style="padding-top:0">
   <div class="wrap narrow prose">
     <h2><span class="va">1. Responsable del tractament</span><span class="es">1. Responsable del tratamiento</span></h2>
-    <p>Centre Excursionista de Pego · Carrer Llavador, 83 · 03780 Pego (Alacant) · <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></p>
+    <p>Centre Excursionista de Pego · <span class="va">Carrer del Llavador, 83</span><span class="es">Calle del Lavadero, 83</span> · 03780 Pego (Alacant) · <a href="mailto:cexcursionistapego@gmail.com">cexcursionistapego@gmail.com</a></p>
     <h2><span class="va">2. Quines dades recollim i per a què</span><span class="es">2. Qué datos recogemos y para qué</span></h2>
     <ul>
       <li><b><span class="va">Alta i baixa de soci:</span><span class="es">Alta y baja de socio:</span></b> <span class="va">nom, cognoms, DNI/NIE, data de naixement, telèfon, correu, localitat, IBAN i fotografies del DNI, per a gestionar la teua pertinença al club i el cobrament de la quota.</span><span class="es">nombre, apellidos, DNI/NIE, fecha de nacimiento, teléfono, correo, localidad, IBAN y fotografías del DNI, para gestionar tu pertenencia al club y el cobro de la cuota.</span></li>
