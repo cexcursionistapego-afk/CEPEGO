@@ -386,8 +386,9 @@ def build(g):
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió Pego i la Figuereta, d'AEMET</span><span class="es">Previsión Pego y la Figuereta, de AEMET</span></div>
+    <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió Pego i la Figuereta, pròxims dies</span><span class="es">Previsión Pego y la Figuereta, próximos días</span></div>
     <div id="aemet-forecast" class="reveal"></div>
+    <p class="note center" style="margin-top:14px"><span class="va">Font: AEMET.</span><span class="es">Fuente: AEMET.</span></p>
   </div>
 </section>
 '''
