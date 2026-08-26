@@ -533,9 +533,9 @@ html[data-lang="es"] .va{display:none}
 
 /* ================= PRE-FOOTER CTA ================= */
 .prefooter{background:var(--navy);padding:clamp(56px,7vw,100px) 0;position:relative;overflow:hidden}
-/* Subtle mountain silhouette decoration */
+/* Subtle mountain silhouette decoration — simple, minimal skyline */
 .prefooter::after{content:"";position:absolute;bottom:0;left:0;right:0;height:80px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='rgba(0,0,0,.18)' d='M0,80 L0,55 L60,30 L130,50 L200,15 L280,40 L360,8 L440,35 L520,20 L600,45 L680,5 L760,38 L840,18 L920,42 L1000,12 L1080,36 L1160,22 L1240,48 L1320,30 L1380,50 L1440,35 L1440,80 Z'/%3E%3C/svg%3E") bottom/cover no-repeat;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='rgba(0,0,0,.18)' d='M0,80 L0,62 L180,24 L340,58 L540,10 L740,54 L940,30 L1140,60 L1320,18 L1440,44 L1440,80 Z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
   pointer-events:none}
 .prefooter .wrap{display:flex;align-items:center;justify-content:space-between;gap:clamp(20px,4vw,48px);flex-wrap:wrap;position:relative;z-index:1}
 .prefooter__text .kicker{color:#f3c98a}.prefooter__text .kicker::before{background:#f3c98a}
@@ -554,9 +554,9 @@ html[data-lang="es"] .va{display:none}
   position:relative;padding:clamp(56px,7vw,100px) 0 clamp(36px,5vw,60px);
   display:flex;flex-direction:column;align-items:center;gap:18px;
   text-align:center;border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden}
-/* Mountain silhouette bottom */
+/* Mountain silhouette bottom — simple, minimal skyline (matches prefooter) */
 .footer__head::after{content:"";position:absolute;bottom:0;left:0;right:0;height:100px;pointer-events:none;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='rgba(255,255,255,.025)' d='M0,100 L0,70 L80,40 L160,62 L240,20 L320,55 L400,10 L480,48 L560,25 L640,60 L720,5 L800,45 L880,22 L960,58 L1040,14 L1120,42 L1200,28 L1280,55 L1360,35 L1440,50 L1440,100 Z'/%3E%3C/svg%3E") bottom/cover no-repeat}
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='rgba(255,255,255,.035)' d='M0,100 L0,78 L180,30 L340,72 L540,13 L740,68 L940,38 L1140,75 L1320,22 L1440,55 L1440,100 Z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat}
 .footer__head .logo{width:80px;height:80px;object-fit:contain;position:relative;z-index:1}
 .footer__name{font-family:var(--font-display);color:#fff;font-size:clamp(1.7rem,2.8vw,2.4rem);font-weight:540;line-height:1.05;letter-spacing:-.02em;position:relative;z-index:1}
 .footer__name span{display:block}
