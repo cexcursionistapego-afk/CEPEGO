@@ -289,13 +289,13 @@ html[data-lang="es"] .va{display:none}
 .cal-featured img{width:100%;height:auto;display:block;transition:transform .6s var(--ease)}
 .cal-featured a:hover img{transform:scale(1.03)}
 @media(max-width:820px){.cal-featured{grid-template-columns:1fr}}
-.cal-archive{columns:5;column-gap:12px}
-.cal-archive a{display:block;margin:0 0 12px;break-inside:avoid;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm);cursor:zoom-in}
-.cal-archive img{width:100%;height:auto;transition:transform .5s var(--ease)}
+.cal-archive{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:start}
+.cal-archive a{display:block;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm);cursor:zoom-in}
+.cal-archive img{width:100%;height:auto;transition:transform .5s var(--ease);display:block}
 .cal-archive a:hover img{transform:scale(1.05)}
-@media(max-width:1000px){.cal-archive{columns:4}}
-@media(max-width:700px){.cal-archive{columns:3}}
-@media(max-width:460px){.cal-archive{columns:2}}
+@media(max-width:1000px){.cal-archive{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:700px){.cal-archive{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:460px){.cal-archive{grid-template-columns:repeat(2,1fr)}}
 
 /* ================= REFUGI EQUIPMENT EDITORIAL ================= */
 /* Intro mosaic: tall left + 2 stacked right */
@@ -364,12 +364,14 @@ html[data-lang="es"] .va{display:none}
 .viatable td:first-child{width:42px;color:var(--muted);font-family:var(--font-mono);font-size:.85rem}
 .viatable td:last-child{text-align:right;font-family:var(--font-mono);color:var(--ember);font-weight:600;white-space:nowrap}
 
-/* climbing sectors: photo + route grid, paired per sector */
-.sector-block{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,64px);align-items:start;
+/* climbing sectors: photo + route grid, paired per sector, matched top+bottom */
+.sector-block{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,64px);align-items:stretch;
   padding:clamp(36px,5vw,64px) 0;border-top:1px solid var(--hair)}
 .sector-block:first-of-type{border-top:none;padding-top:0}
-.sector-block .topos{grid-template-columns:1fr}
-@media(max-width:820px){.sector-block{grid-template-columns:1fr}.sector-block--rev .topos{order:2}}
+.sector-block .topos{grid-template-columns:1fr;height:100%}
+.sector-block .topos a{height:100%}
+.sector-block .topos img{height:100%;object-fit:cover;max-height:none}
+@media(max-width:820px){.sector-block{grid-template-columns:1fr;align-items:start}.sector-block .topos{height:auto}.sector-block .topos a{height:auto}.sector-block .topos img{height:auto;object-fit:contain}.sector-block--rev .topos{order:2}}
 .via-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
 @media(max-width:520px){.via-grid{grid-template-columns:1fr}}
 .via-card{display:flex;align-items:center;gap:9px;background:var(--white);border:1px solid var(--hair);

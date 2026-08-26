@@ -16,7 +16,7 @@
     },
     pego: {
       va: 'Pego', es: 'Pego',
-      sub_va: 'Nucli urbà', sub_es: 'Núcleo urbano',
+      sub_va: 'Les Verdales', sub_es: 'Les Verdales',
       avamet: 'https://www.avamet.org/mxo-i.php?id=c30m102e14'
     }
   };
