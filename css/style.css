@@ -250,15 +250,6 @@ html[data-lang="es"] .va{display:none}
 .card h3{color:var(--navy)}
 .feature-num{font-family:var(--font-display);font-size:3rem;color:var(--ember);line-height:.9}
 
-/* stat row */
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
-.stats>div{padding:clamp(10px,1.5vw,18px) 20px;text-align:center;position:relative}
-.stats>div::after{content:"";position:absolute;right:0;top:18%;bottom:18%;width:1px;background:var(--hair)}
-.stats>div:last-child::after{display:none}
-.stats .n{font-family:var(--font-display);font-size:clamp(2.2rem,3.8vw,3.4rem);color:var(--navy);line-height:1;font-weight:540;letter-spacing:-.02em}
-.stats .l{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:8px}
-@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.stats>div::after{display:none}.stats>div:nth-child(odd)::after{display:block}}
-
 /* lists */
 .equip{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:2px 30px}
 .equip li{padding:12px 0 12px 30px;position:relative;border-bottom:1px solid var(--hair)}
