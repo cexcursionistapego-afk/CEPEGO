@@ -71,7 +71,7 @@
   }
   function show(i){ idx=(i+items.length)%items.length; lbImg.src=items[idx].getAttribute('href'); }
   function close(){ lb.classList.remove('open'); }
-  var GALLERY_SEL='.gallery a, .cal-featured a, .cal-archive a, .topos a, .route__img, .senders-gallery a';
+  var GALLERY_SEL='.gallery a, .cal-featured a, .cal-archive a, .topos a, .senders-gallery a';
   function bindGalleries(){
     items=Array.prototype.slice.call(document.querySelectorAll(GALLERY_SEL));
     if(!items.length) return; ensureLB();

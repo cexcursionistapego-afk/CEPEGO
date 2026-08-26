@@ -362,17 +362,17 @@ def build(g):
     # ============================================= RUTES
     routes=[("Circular Figuereta – Tossal","2,97 km","+154 m","673 m","facil","Fàcil","Fácil",
       "Figuereta · Cova Blanca · Tossal Gran · Despoblat Beniqueis · Camí de la Figuereta · Coveta de Llúcia · Figuereta.",
-      IMG+"bb9bb0_7e2efa67934342c2974582cae5147165~mv2.png"),
+      IMG+"bb9bb0_7e2efa67934342c2974582cae5147165~mv2.png", "https://loc.wiki/t/18485253?h=jpy94v53z8&wa=sd"),
      ("Circular Figuereta – Ebo","8,4 km","+294 m","598 m","moderada","Moderada","Moderada",
       "Figuereta · Travessia del Maset · Avenc Estret i del Mig · Riu Girona · Font del Gili · Ebo · Camí Vell d'Atzúbia · Tossal Gran · Figuereta.",
-      IMG+"bb9bb0_08ee550eeae74d7fbc28b76279017f00~mv2.png"),
+      IMG+"bb9bb0_08ee550eeae74d7fbc28b76279017f00~mv2.png", "https://loc.wiki/t/196024884?h=jpy94v53z8&wa=sd"),
      ("Circular Pego – Figuereta","11,57 km","+563 m","587 m","moderada","Moderada","Moderada",
       "Pego · Calvari · Escola d'Escalada · Barranc de les Coves · Font del Lliberet · Bodoix · La Figuereta · Senda del Xical · Barranc de la Canal · Calvari.",
-      IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png")]
+      IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png", "https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd")]
     rc=""
-    for name,dist,desn,alt,tc,tva,tes,itin,img in routes:
+    for name,dist,desn,alt,tc,tva,tes,itin,img,wikiloc in routes:
         rc+=f'''      <div class="route reveal">
-        <a class="route__img" href="{img}"><img loading="lazy" src="{img}" alt="Mapa {name}"></a>
+        <a class="route__img" href="{wikiloc}" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="{img}" alt="Codi QR i mapa {name} — Wikiloc"></a>
         <div class="route__b">
           <span class="tag {tc}"><span class="va">{tva}</span><span class="es">{tes}</span></span>
           <h3 style="margin-top:10px">{name}</h3>
