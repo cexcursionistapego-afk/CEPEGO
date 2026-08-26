@@ -279,6 +279,7 @@ html[data-lang="es"] .va{display:none}
 .note{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:18px 22px;color:var(--muted);font-size:.94rem}
 .avamet-credit{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
 .avamet-credit__logo{height:48px;width:auto;border-radius:4px}
+.avamet-credit__logo--avamet{height:80px}
 
 /* price row */
 .prices{display:flex;gap:16px;flex-wrap:wrap}

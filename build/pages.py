@@ -382,7 +382,7 @@ def build(g):
       <div id="meteo-dash-pego"></div>
     </div>
     <p class="note center avamet-credit" style="margin-top:14px">
-      <img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo">
+      <img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo avamet-credit__logo--avamet">
     </p>
   </div>
 </section>
