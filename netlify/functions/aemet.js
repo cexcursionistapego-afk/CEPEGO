@@ -68,7 +68,13 @@ exports.handler = async function () {
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; CEPEGO-meteo/1.0; +https://cepego.com)' },
     });
     if (!r.ok) return res(200, { ok: false, error: 'fetch_failed', status: r.status });
-    html = await r.text();
+    // La pàgina d'AEMET declara charset=ISO-8859-15 (vore <meta http-equiv=
+    // "Content-Type">), però no sempre l'envia a la capçalera HTTP Content-
+    // Type — sense això, r.text() assumeix UTF-8 per defecte i qualsevol
+    // vocal accentuada ix corrupta (ex. "sáb." → "s�b."). Es decodifica
+    // explícitament amb ISO-8859-15 a partir dels bytes crus.
+    const buf = await r.arrayBuffer();
+    html = new TextDecoder('iso-8859-15').decode(buf);
   } catch (e) {
     return res(200, { ok: false, error: 'exception', detail: String(e).slice(0, 200) });
   }
