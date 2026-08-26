@@ -208,7 +208,7 @@ html[data-lang="es"] .va{display:none}
 @media(max-width:600px){.hide-mobile{display:none}}
 
 /* peaks skyline chart */
-.skyline{margin-top:clamp(18px,3vw,32px)}
+.skyline{margin-top:clamp(4px,1vw,10px)}
 .skyline-chart{display:block;width:100%;height:auto;overflow:visible}
 .skyline-chart--v{display:none}
 @media(max-width:820px){
