@@ -394,7 +394,7 @@ def build(g):
 '''
     meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'AVAMET',
         "El temps","El tiempo",
-        "Estacions meteorològiques a La Figuereta i a Pego, connectades a la xarxa AVAMET.","Estaciones meteorológicas en La Figuereta y en Pego, conectadas a la red AVAMET.",
+        "Estacions meteorològiques a La Figuereta i a Pego connectades a la xarxa AVAMET, més la previsió del temps i els avisos d'alertes meteorològiques d'AEMET.","Estaciones meteorológicas en La Figuereta y en Pego conectadas a la red AVAMET, más la previsión del tiempo y los avisos de alertas meteorológicas de AEMET.",
         pos='18%')+meteo_dash+footer()
     write("meteo.html", doc("El temps | CEPEGO",
         "Estacions meteorològiques del refugi La Figuereta i de Pego connectades a la xarxa AVAMET, i previsió AEMET.", meteo, path="meteo.html", extra_js=["js/meteo-dashboard.js","js/aemet-forecast.js"]))
