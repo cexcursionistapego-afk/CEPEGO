@@ -14,40 +14,70 @@ def build(g):
             for f in files
         )
 
-    def skyline_svg(peaks):
-        # peaks: list of (name, label_altitude_str, numeric_altitude)
+    def skyline_svg(peaks, W, baseline, min_px, max_px, vertical=False, top=40):
+        import math
         n=len(peaks)
-        W=1200; left=60; right=60
+        left=W*0.05; right=W*0.05
         step=(W-left-right)/(n-1)
         xs=[left+i*step for i in range(n)]
         heights=[p[2] for p in peaks]
         hmin,hmax=min(heights),max(heights)
-        baseline=200; min_px,max_px=40,168
         def scale(h):
             return min_px+(h-hmin)/(hmax-hmin)*(max_px-min_px)
         pxh=[scale(h) for h in heights]
         peak_y=[baseline-p for p in pxh]
-        pts=[f"0,{baseline}"]
+
+        def jagged(x0,y0,x1,y1,seed):
+            segs=2; out=[]
+            amp=min(4.5, abs(x1-x0)*0.09)
+            for k in range(1,segs+1):
+                t=k/(segs+1)
+                jx=x0+(x1-x0)*t; jy=y0+(y1-y0)*t
+                jy+=amp*math.sin(seed*2.3+k*1.9)
+                out.append((jx,jy))
+            return out
+
+        nodes=[(0.0,float(baseline))]
         for i in range(n):
-            pts.append(f"{xs[i]:.1f},{peak_y[i]:.1f}")
+            nodes.append((xs[i],peak_y[i]))
             if i<n-1:
                 sx=(xs[i]+xs[i+1])/2
                 sh=min(pxh[i],pxh[i+1])*0.32
-                pts.append(f"{sx:.1f},{baseline-sh:.1f}")
-        pts.append(f"{W},{baseline}")
-        polyline=" ".join(pts)
-        labels="".join(
-            f'<line class="sk-lead" x1="{xs[i]:.1f}" y1="40" x2="{xs[i]:.1f}" y2="{peak_y[i]-6:.1f}"/>'
-            f'<circle class="sk-dot" cx="{xs[i]:.1f}" cy="{peak_y[i]:.1f}" r="3"/>'
-            f'<text class="sk-name" x="{xs[i]:.1f}" y="16" text-anchor="middle">{name.upper()}</text>'
-            f'<text class="sk-alt" x="{xs[i]:.1f}" y="30" text-anchor="middle">{alt} m</text>'
-            for i,(name,alt,_) in enumerate(peaks)
-        )
-        return f'''<svg class="skyline-chart" viewBox="0 0 {W} {baseline+10}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Skyline dels cims que envolten Pego">
+                nodes.append((sx,baseline-sh))
+        nodes.append((float(W),float(baseline)))
+
+        pts=[nodes[0]]
+        for idx in range(len(nodes)-1):
+            x0,y0=nodes[idx]; x1,y1=nodes[idx+1]
+            for jx,jy in jagged(x0,y0,x1,y1,idx):
+                pts.append((jx,jy))
+            pts.append((x1,y1))
+        polyline=" ".join(f"{x:.1f},{y:.1f}" for x,y in pts)
+
+        if vertical:
+            labels="".join(
+                f'<line class="sk-lead" x1="{xs[i]:.1f}" y1="{top}" x2="{xs[i]:.1f}" y2="{peak_y[i]-5:.1f}"/>'
+                f'<circle class="sk-dot" cx="{xs[i]:.1f}" cy="{peak_y[i]:.1f}" r="2.4"/>'
+                f'<text class="sk-label-v" x="{xs[i]:.1f}" y="{top-5}" text-anchor="start" transform="rotate(-90 {xs[i]:.1f} {top-5})">{name.upper()} · {alt} m</text>'
+                for i,(name,alt,_) in enumerate(peaks)
+            )
+        else:
+            labels="".join(
+                f'<line class="sk-lead" x1="{xs[i]:.1f}" y1="{top}" x2="{xs[i]:.1f}" y2="{peak_y[i]-6:.1f}"/>'
+                f'<circle class="sk-dot" cx="{xs[i]:.1f}" cy="{peak_y[i]:.1f}" r="3"/>'
+                f'<text class="sk-name" x="{xs[i]:.1f}" y="{top-24}" text-anchor="middle">{name.upper()}</text>'
+                f'<text class="sk-alt" x="{xs[i]:.1f}" y="{top-10}" text-anchor="middle">{alt} m</text>'
+                for i,(name,alt,_) in enumerate(peaks)
+            )
+        cls="skyline-chart skyline-chart--v" if vertical else "skyline-chart skyline-chart--h"
+        return f'''<svg class="{cls}" viewBox="0 0 {W} {baseline+10}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Skyline dels cims que envolten Pego">
       {labels}
       <polyline class="sk-ridge" points="{polyline}" fill="none"/>
       <line class="sk-base" x1="0" y1="{baseline}" x2="{W}" y2="{baseline}"/>
     </svg>'''
+
+    PEAKS=[("Segària","509",509),("Cabal","713",713),("Penya Migdia","747",747),("Montnegre","653",653),
+           ("Bodoix","541–556",548),("Ambra","298",298),("Xical","546",546),("Xillibre","751",751),("Mostalla","359",359)]
 
     # ============================================= HOME
     # (href, tva, tes, pva, pes, num)
@@ -113,7 +143,8 @@ def build(g):
   <div class="wrap">
     <div class="center"><div class="kicker center-k"><span class="va">El territori</span><span class="es">El territorio</span></div></div>
     <div class="skyline reveal">
-{skyline_svg([("Segària","509",509),("Cabal","713",713),("Penya Migdia","747",747),("Montnegre","653",653),("Bodoix","541–556",548),("Ambra","298",298),("Xical","546",546),("Xillibre","751",751),("Mostalla","359",359)])}
+{skyline_svg(PEAKS, W=1200, baseline=200, min_px=40, max_px=168, vertical=False, top=40)}
+{skyline_svg(PEAKS, W=440, baseline=190, min_px=28, max_px=95, vertical=True, top=120)}
     </div>
   </div>
 </section>
