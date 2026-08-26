@@ -37,6 +37,28 @@
     return 'green';
   }
 
+  // AEMET sempre torna el text de l'avís en castellà; ací es tradueix el
+  // cas més comú ("Sin peligro") i alguns termes freqüents dels avisos
+  // actius. Si no es reconeix cap patró, es mostra el text original (en
+  // castellà) també per a la versió valenciana, millor que no mostrar res.
+  function translateAlert(text) {
+    var t = String(text || '').trim();
+    if (/^sin peligro$/i.test(t)) return { va: 'Sense perill', es: 'Sin peligro' };
+    var va = t
+      .replace(/Aviso amarillo/i, 'Avís groc')
+      .replace(/Aviso naranja/i, 'Avís taronja')
+      .replace(/Aviso rojo/i, 'Avís roig')
+      .replace(/por tormentas?/i, 'per tempestes')
+      .replace(/por calor/i, 'per calor')
+      .replace(/por fr[ií]o/i, 'per fred')
+      .replace(/por lluvias?/i, 'per pluges')
+      .replace(/por precipitaciones/i, 'per precipitacions')
+      .replace(/por viento/i, 'per vent')
+      .replace(/por nieve/i, 'per neu')
+      .replace(/por niebla/i, 'per boira');
+    return { va: va, es: t };
+  }
+
   function periodHTML(cls, labelVa, labelEs, desc) {
     if (!desc) return '';
     return '' +
@@ -53,7 +75,7 @@
     return '' +
       '<div class="aemet-day">' +
         '<div class="aemet-day__label">' + esc(d.label) + '</div>' +
-        (d.alert ? '<div class="aemet-day__alert aemet-day__alert--' + alertColor(d.alert) + '">' + esc(d.alert) + '</div>' : '') +
+        (d.alert ? '<div class="aemet-day__alert aemet-day__alert--' + alertColor(d.alert) + '">' + (function(tr){ return bi(esc(tr.va), esc(tr.es)); })(translateAlert(d.alert)) + '</div>' : '') +
         periods +
         '<div class="aemet-day__temps">' +
           (d.temp_max != null ? '<span class="mx">' + Math.round(d.temp_max) + '°</span>' : '') +

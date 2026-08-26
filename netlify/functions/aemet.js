@@ -174,13 +174,20 @@ function parseAemet(rawHtml) {
     const group = periods.slice(idx, idx + d.colspan);
     const precipGroup = precipVals.slice(idx, idx + d.colspan);
     idx += d.colspan;
-    let mati = group.find((p) => bucket(p.hour) === 'mati');
-    let vesprada = group.find((p) => bucket(p.hour) === 'vesprada');
-    // Dies més llunyans (o hui, si ja ha passat el matí): un sol tram sense
-    // rang horari clar de mati/vesprada — es deixa com a previsió general,
-    // no s'etiqueta com "vesprada" perquè no ho és necessàriament.
-    let general = null;
-    if (!mati && !vesprada && group.length) general = group[0].desc || null;
+    // Dies amb un sol tram (la majoria dels dies més llunyans): encara que
+    // eixe tram porte un rang horari que casualment case amb el patró de
+    // "vesprada" (ex. "12–24h", que en realitat cobreix mig dia sencer), no
+    // es pot dir que siga només de vesprada — es deixa com a previsió
+    // general sense etiqueta. Només als dies amb 2+ trams (on sí que hi ha
+    // una separació real matí/vesprada) es fa la distinció.
+    let mati = null, vesprada = null, general = null;
+    if (group.length > 1) {
+      mati = group.find((p) => bucket(p.hour) === 'mati');
+      vesprada = group.find((p) => bucket(p.hour) === 'vesprada');
+      if (!mati && !vesprada) general = group[0].desc || null;
+    } else if (group.length === 1) {
+      general = group[0].desc || null;
+    }
     const precipDefined = precipGroup.filter((v) => v != null);
     return {
       label: d.label,
