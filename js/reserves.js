@@ -87,7 +87,7 @@
     var y=base.getFullYear(), m=base.getMonth();
     var first=new Date(y,m,1); var startDow=(first.getDay()+6)%7; // Dl=0
     var days=new Date(y,m+1,0).getDate();
-    var h='<div class="rcal-m"><div class="rcal-h">'+MESOS[l][m]+' '+y+'</div><div class="rcal-w">';
+    var h='<div class="rcal-m"><div class="rcal-w">';
     DIES[l].forEach(function(d){ h+='<span>'+d+'</span>'; });
     h+='</div><div class="rcal-d">';
     for(var i=0;i<startDow;i++) h+='<span class="e"></span>';
@@ -110,12 +110,14 @@
     var l=lang();
     var m2=new Date(view.getFullYear(), view.getMonth()+1, 1);
     var canPrev = (view.getFullYear()>today.getFullYear())||(view.getFullYear()===today.getFullYear()&&view.getMonth()>today.getMonth());
-    function navHTML(prevId,nextId){
+    var monthsLabel=MESOS[l][view.getMonth()]+' '+view.getFullYear()+' – '+MESOS[l][m2.getMonth()]+' '+m2.getFullYear();
+    function navHTML(prevId,nextId,label){
       return '<div class="rcal-nav"><button type="button" id="'+prevId+'" '+(canPrev?'':'disabled')+' aria-label="Anterior">‹</button>'+
+      (label?'<span class="rcal-nav-months">'+label+'</span>':'')+
       '<button type="button" id="'+nextId+'" aria-label="Següent">›</button></div>';
     }
     grid.innerHTML =
-      navHTML('rcal-prev','rcal-next')+
+      navHTML('rcal-prev','rcal-next',monthsLabel)+
       '<div class="rcal-grid">'+monthHTML(view)+monthHTML(m2)+'</div>'+
       navHTML('rcal-prev-b','rcal-next-b');
     legend.innerHTML =
