@@ -23,11 +23,11 @@
   var selStart = null, selEnd = null;
   var loaded = false;
 
-  // Blackout: May 31 – Sep 30 (tancament d'estiu) i 31 de desembre / 1 de gener (mai es lloga). Cada any.
+  // Blackout: May 31 – Sep 30 (tancament d'estiu) i la nit del 31 de desembre (mai es lloga). Cada any.
   function isSummer(ds) {
     var md = ds.slice(5); // 'MM-DD'
     if (md >= '05-31' && md < '10-01') return true;
-    if (md === '12-31' || md === '01-01') return true;
+    if (md === '12-31') return true;
     return false;
   }
 
