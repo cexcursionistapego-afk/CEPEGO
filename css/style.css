@@ -221,7 +221,8 @@ html[data-lang="es"] .va{display:none}
 .skyline-chart .sk-dot{fill:var(--ink)}
 .skyline-chart .sk-name{font:700 12px var(--font-body);letter-spacing:.06em;fill:var(--ink)}
 .skyline-chart .sk-alt{font:500 10px var(--font-body);fill:var(--muted)}
-.skyline-chart .sk-label-v{font:700 10px var(--font-body);letter-spacing:.04em;fill:var(--ink)}
+.skyline-chart .sk-name-v{font:700 10px var(--font-body);letter-spacing:.04em;fill:var(--ink)}
+.skyline-chart .sk-alt-v{font:500 8px var(--font-body);fill:var(--muted)}
 
 /* full-bleed image band with quote/caption */
 .band{position:relative;min-height:clamp(340px,48vh,540px);display:flex;align-items:center;color:#fff;overflow:hidden;isolation:isolate}

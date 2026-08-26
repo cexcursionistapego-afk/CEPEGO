@@ -55,10 +55,12 @@ def build(g):
         polyline=" ".join(f"{x:.1f},{y:.1f}" for x,y in pts)
 
         if vertical:
+            ly=top-5
             labels="".join(
                 f'<line class="sk-lead" x1="{xs[i]:.1f}" y1="{top}" x2="{xs[i]:.1f}" y2="{peak_y[i]-5:.1f}"/>'
                 f'<circle class="sk-dot" cx="{xs[i]:.1f}" cy="{peak_y[i]:.1f}" r="2.4"/>'
-                f'<text class="sk-label-v" x="{xs[i]:.1f}" y="{top-5}" text-anchor="start" transform="rotate(-90 {xs[i]:.1f} {top-5})">{name.upper()} · {alt} m</text>'
+                f'<text class="sk-name-v" x="{xs[i]-6:.1f}" y="{ly}" text-anchor="start" transform="rotate(-90 {xs[i]-6:.1f} {ly})">{name.upper()}</text>'
+                f'<text class="sk-alt-v" x="{xs[i]+6:.1f}" y="{ly}" text-anchor="start" transform="rotate(-90 {xs[i]+6:.1f} {ly})">{alt} m</text>'
                 for i,(name,alt,_) in enumerate(peaks)
             )
         else:
@@ -143,8 +145,8 @@ def build(g):
   <div class="wrap">
     <div class="center"><div class="kicker center-k"><span class="va">El territori</span><span class="es">El territorio</span></div></div>
     <div class="skyline reveal">
-{skyline_svg(PEAKS, W=1200, baseline=200, min_px=40, max_px=168, vertical=False, top=40)}
-{skyline_svg(PEAKS, W=440, baseline=190, min_px=28, max_px=95, vertical=True, top=120)}
+{skyline_svg(PEAKS, W=1200, baseline=200, min_px=38, max_px=135, vertical=False, top=50)}
+{skyline_svg(PEAKS, W=440, baseline=230, min_px=25, max_px=70, vertical=True, top=140)}
     </div>
   </div>
 </section>
