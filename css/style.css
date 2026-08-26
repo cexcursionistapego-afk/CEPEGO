@@ -207,6 +207,20 @@ html[data-lang="es"] .va{display:none}
   .split__media::before{display:none}}
 @media(max-width:600px){.hide-mobile{display:none}}
 
+/* peaks skyline chart */
+.skyline{margin-top:clamp(18px,3vw,32px)}
+.skyline-chart{display:block;width:100%;height:auto;overflow:visible}
+@media(max-width:900px){
+  .skyline{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .skyline-chart{width:900px;max-width:none;flex:none}
+}
+.skyline-chart .sk-ridge{stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.skyline-chart .sk-base{stroke:var(--ink);stroke-width:1;opacity:.18}
+.skyline-chart .sk-lead{stroke:var(--hair);stroke-width:1}
+.skyline-chart .sk-dot{fill:var(--ink)}
+.skyline-chart .sk-name{font:700 12px var(--font-body);letter-spacing:.06em;fill:var(--ink)}
+.skyline-chart .sk-alt{font:500 10px var(--font-body);fill:var(--muted)}
+
 /* full-bleed image band with quote/caption */
 .band{position:relative;min-height:clamp(340px,48vh,540px);display:flex;align-items:center;color:#fff;overflow:hidden;isolation:isolate}
 .band__bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;background-attachment:fixed}
