@@ -429,7 +429,7 @@ html[data-lang="es"] .va{display:none}
 .rcal-nav button:disabled{opacity:.35;cursor:not-allowed}
 .rcal-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
 @media(max-width:560px){.rcal-grid{grid-template-columns:1fr}}
-.rcal-h{text-align:center;font-family:var(--font-display);font-size:1.05rem;color:var(--ink);margin-bottom:8px}
+.rcal-h{text-align:center;font-family:var(--font-display);font-weight:600;font-size:1.3rem;color:var(--navy);margin-bottom:10px}
 .rcal-w{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px}
 .rcal-w span{text-align:center;font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:4px 0}
 .rcal-d{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
