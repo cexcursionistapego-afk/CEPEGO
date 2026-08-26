@@ -383,7 +383,6 @@ def build(g):
     </div>
     <p class="note center avamet-credit" style="margin-top:14px">
       <img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo">
-      <span class="va">Font: AVAMET.</span><span class="es">Fuente: AVAMET.</span>
     </p>
   </div>
 </section>
@@ -392,7 +391,9 @@ def build(g):
   <div class="wrap">
     <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió Pego i la Figuereta, pròxims dies</span><span class="es">Previsión Pego y la Figuereta, próximos días</span></div>
     <div id="aemet-forecast" class="reveal"></div>
-    <p class="note center" style="margin-top:14px"><span class="va">Font: AEMET.</span><span class="es">Fuente: AEMET.</span></p>
+    <p class="note center avamet-credit" style="margin-top:14px">
+      <img src="{IMG}aemet-logo.jpg" alt="AEMET" class="avamet-credit__logo">
+    </p>
   </div>
 </section>
 '''
