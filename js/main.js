@@ -89,12 +89,19 @@
   if(feat){ fetch('data/calendari.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():{fotos:[]};}).then(function(d){
     var f=(d&&d.fotos)||[];
     if(!f.length){ feat.innerHTML='<p class="note">Encara no hi ha calendaris publicats.</p>'; return; }
-    var main=f[0];
-    feat.innerHTML='<a href="'+main.image+'"><img loading="lazy" src="'+main.image+'" alt="'+(main.caption||'Calendari actual').replace(/"/g,'&quot;')+'"></a>'+
-      '<div class="prose"><div class="kicker"><span class="va">Enguany</span><span class="es">Este año</span></div>'+
-      '<h2>'+ (main.caption? main.caption.replace(/</g,'&lt;') : '<span class="va">Calendari actual</span><span class="es">Calendario actual</span>') +'</h2>'+
-      '<p class="lead"><span class="va">El nostre calendari d\'activitats. Fes clic per ampliar-lo.</span><span class="es">Nuestro calendario de actividades. Haz clic para ampliarlo.</span></p></div>';
-    var rest=f.slice(1);
+    var vigent = !!(d&&d.vigent);
+    var main = vigent ? f[0] : null;
+    var rest = vigent ? f.slice(1) : f;
+    if(main){
+      feat.innerHTML='<a href="'+main.image+'"><img loading="lazy" src="'+main.image+'" alt="'+(main.caption||'Calendari actual').replace(/"/g,'&quot;')+'"></a>'+
+        '<div class="prose"><div class="kicker"><span class="va">Enguany</span><span class="es">Este año</span></div>'+
+        '<h2>'+ (main.caption? main.caption.replace(/</g,'&lt;') : '<span class="va">Calendari actual</span><span class="es">Calendario actual</span>') +'</h2>'+
+        '<p class="lead"><span class="va">El nostre calendari d\'activitats. Fes clic per ampliar-lo.</span><span class="es">Nuestro calendario de actividades. Haz clic para ampliarlo.</span></p></div>';
+    } else {
+      feat.innerHTML='<div class="prose"><div class="kicker"><span class="va">Molt prompte</span><span class="es">Muy pronto</span></div>'+
+        '<h2><span class="va">El pròxim calendari està en camí</span><span class="es">El próximo calendario está en camino</span></h2>'+
+        '<p class="lead"><span class="va">Ja hem completat l\'últim calendari d\'activitats i estem preparant el pròxim. Mentrestant, pots consultar els calendaris anteriors ací baix.</span><span class="es">Ya hemos completado el último calendario de actividades y estamos preparando el próximo. Mientras tanto, puedes consultar los calendarios anteriores aquí abajo.</span></p></div>';
+    }
     if(rest.length){
       var head=document.getElementById('cal-archive-head'); if(head) head.style.display='';
       arch.innerHTML=rest.map(function(x){return '<a href="'+x.image+'"><img loading="lazy" src="'+x.image+'" alt="'+(x.caption||'').replace(/"/g,'&quot;')+'"></a>';}).join('');

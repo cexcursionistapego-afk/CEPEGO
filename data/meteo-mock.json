@@ -1,0 +1,34 @@
+{
+  "figuereta": {
+    "ok": true,
+    "station_name": "Refugi La Figuereta",
+    "updated": "2026-08-26T00:40:00+02:00",
+    "temp": 27.1,
+    "temp_min": 26.6,
+    "temp_max": 27.8,
+    "humidity": 46,
+    "wind_speed": 15,
+    "wind_dir": "SO",
+    "wind_gust_max": 20,
+    "pressure": 1016,
+    "precip_today": 0.0,
+    "precip_month": null,
+    "precip_year": 713.0
+  },
+  "pego": {
+    "ok": true,
+    "station_name": "Pego",
+    "updated": "2026-08-26T00:38:00+02:00",
+    "temp": 24.3,
+    "temp_min": 19.8,
+    "temp_max": 31.2,
+    "humidity": 58,
+    "wind_speed": 4,
+    "wind_dir": "NE",
+    "wind_gust_max": 9,
+    "pressure": 1015,
+    "precip_today": 0.0,
+    "precip_month": 12.4,
+    "precip_year": 341.5
+  }
+}
