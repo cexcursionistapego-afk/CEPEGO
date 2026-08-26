@@ -15,7 +15,6 @@ def build(g):
         )
 
     def skyline_svg(peaks, W, baseline, min_px, max_px, vertical=False, top=40):
-        import math
         n=len(peaks)
         left=W*0.05; right=W*0.05
         step=(W-left-right)/(n-1)
@@ -27,16 +26,6 @@ def build(g):
         pxh=[scale(h) for h in heights]
         peak_y=[baseline-p for p in pxh]
 
-        def jagged(x0,y0,x1,y1,seed):
-            segs=2; out=[]
-            amp=min(4.5, abs(x1-x0)*0.09)
-            for k in range(1,segs+1):
-                t=k/(segs+1)
-                jx=x0+(x1-x0)*t; jy=y0+(y1-y0)*t
-                jy+=amp*math.sin(seed*2.3+k*1.9)
-                out.append((jx,jy))
-            return out
-
         nodes=[(0.0,float(baseline))]
         for i in range(n):
             nodes.append((xs[i],peak_y[i]))
@@ -45,14 +34,7 @@ def build(g):
                 sh=min(pxh[i],pxh[i+1])*0.32
                 nodes.append((sx,baseline-sh))
         nodes.append((float(W),float(baseline)))
-
-        pts=[nodes[0]]
-        for idx in range(len(nodes)-1):
-            x0,y0=nodes[idx]; x1,y1=nodes[idx+1]
-            for jx,jy in jagged(x0,y0,x1,y1,idx):
-                pts.append((jx,jy))
-            pts.append((x1,y1))
-        polyline=" ".join(f"{x:.1f},{y:.1f}" for x,y in pts)
+        polyline=" ".join(f"{x:.1f},{y:.1f}" for x,y in nodes)
 
         if vertical:
             ly=top-5
@@ -67,8 +49,8 @@ def build(g):
             labels="".join(
                 f'<line class="sk-lead" x1="{xs[i]:.1f}" y1="{top}" x2="{xs[i]:.1f}" y2="{peak_y[i]-6:.1f}"/>'
                 f'<circle class="sk-dot" cx="{xs[i]:.1f}" cy="{peak_y[i]:.1f}" r="3"/>'
-                f'<text class="sk-name" x="{xs[i]:.1f}" y="{top-24}" text-anchor="middle">{name.upper()}</text>'
-                f'<text class="sk-alt" x="{xs[i]:.1f}" y="{top-10}" text-anchor="middle">{alt} m</text>'
+                f'<text class="sk-name" x="{xs[i]:.1f}" y="{top-30}" text-anchor="middle">{name.upper()}</text>'
+                f'<text class="sk-alt" x="{xs[i]:.1f}" y="{top-15}" text-anchor="middle">{alt} m</text>'
                 for i,(name,alt,_) in enumerate(peaks)
             )
         cls="skyline-chart skyline-chart--v" if vertical else "skyline-chart skyline-chart--h"
@@ -79,7 +61,7 @@ def build(g):
     </svg>'''
 
     PEAKS=[("Segària","509",509),("Cabal","713",713),("Penya Migdia","747",747),("Montnegre","653",653),
-           ("Bodoix","541–556",548),("Ambra","298",298),("Xical","546",546),("Xillibre","751",751),("Mostalla","359",359)]
+           ("Bodoix","556",556),("Ambra","298",298),("Xical","546",546),("Xillibre","751",751),("Mostalla","359",359)]
 
     # ============================================= HOME
     # (href, tva, tes, pva, pes, num)
@@ -145,8 +127,8 @@ def build(g):
   <div class="wrap">
     <div class="center"><div class="kicker center-k"><span class="va">El territori</span><span class="es">El territorio</span></div></div>
     <div class="skyline reveal">
-{skyline_svg(PEAKS, W=1200, baseline=200, min_px=38, max_px=135, vertical=False, top=50)}
-{skyline_svg(PEAKS, W=440, baseline=230, min_px=25, max_px=70, vertical=True, top=140)}
+{skyline_svg(PEAKS, W=1200, baseline=200, min_px=32, max_px=110, vertical=False, top=64)}
+{skyline_svg(PEAKS, W=440, baseline=250, min_px=18, max_px=55, vertical=True, top=170)}
     </div>
   </div>
 </section>
