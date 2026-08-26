@@ -112,7 +112,6 @@
     var canPrev = (view.getFullYear()>today.getFullYear())||(view.getFullYear()===today.getFullYear()&&view.getMonth()>today.getMonth());
     function navHTML(prevId,nextId){
       return '<div class="rcal-nav"><button type="button" id="'+prevId+'" '+(canPrev?'':'disabled')+' aria-label="Anterior">‹</button>'+
-      '<span>'+ (l==='es'?'Disponibilidad':'Disponibilitat') +'</span>'+
       '<button type="button" id="'+nextId+'" aria-label="Següent">›</button></div>';
     }
     grid.innerHTML =
