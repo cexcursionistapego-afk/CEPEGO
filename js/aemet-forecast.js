@@ -27,11 +27,33 @@
     return '🌡️';
   }
 
+  // Nivell d'avís AEMET → color, a partir del text (p.ex. "Sin peligro",
+  // "Aviso amarillo por...", "Aviso naranja por...", "Aviso rojo por...").
+  function alertColor(text) {
+    var t = (text || '').toLowerCase();
+    if (t.indexOf('rojo') !== -1) return 'red';
+    if (t.indexOf('naranja') !== -1) return 'orange';
+    if (t.indexOf('amarillo') !== -1) return 'yellow';
+    return 'green';
+  }
+
+  function periodHTML(cls, labelVa, labelEs, desc) {
+    if (!desc) return '';
+    return '' +
+      '<div class="aemet-day__period ' + cls + '">' +
+        '<div class="aemet-day__period-l">' + bi(labelVa, labelEs) + '</div>' +
+        '<div class="aemet-day__ic" title="' + esc(desc) + '">' + emoji(desc) + '</div>' +
+      '</div>';
+  }
+
   function dayHTML(d) {
     return '' +
       '<div class="aemet-day">' +
-        '<div class="aemet-day__label">' + esc(d.label) + '</div>' +
-        '<div class="aemet-day__ic" title="' + esc(d.desc || '') + '">' + emoji(d.desc) + '</div>' +
+        '<div class="aemet-day__label">' + esc(d.label) +
+          (d.alert ? '<span class="aemet-day__alert aemet-day__alert--' + alertColor(d.alert) + '" title="' + esc(d.alert) + '"></span>' : '') +
+        '</div>' +
+        periodHTML('mati', 'Matí', 'Mañana', d.desc_mati) +
+        periodHTML('vesprada', 'Vesprada', 'Tarde', d.desc_vesprada) +
         '<div class="aemet-day__temps">' +
           (d.temp_max != null ? '<span class="mx">' + Math.round(d.temp_max) + '°</span>' : '') +
           (d.temp_min != null ? '<span class="mn">' + Math.round(d.temp_min) + '°</span>' : '') +

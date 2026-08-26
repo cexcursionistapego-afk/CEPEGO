@@ -421,7 +421,8 @@ html[data-lang="es"] .va{display:none}
 @media(max-width:900px){.reserva-grid{grid-template-columns:1fr}}
 .rcal{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(16px,2vw,24px);box-shadow:var(--shadow-sm)}
 .rcal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.rcal-grid+.rcal-nav{margin-bottom:0;margin-top:14px}
+.rcal-grid+.rcal-nav{display:none}
+@media(max-width:560px){.rcal-grid+.rcal-nav{display:flex;margin-bottom:0;margin-top:14px}}
 .rcal-nav span{font-family:var(--font-body);font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
 .rcal-nav button{width:38px;height:38px;border-radius:50%;border:1px solid var(--hair);background:var(--paper);font-size:1.3rem;line-height:1;cursor:pointer;color:var(--navy)}
 .rcal-nav button:hover:not(:disabled){background:var(--navy);color:#fff}
@@ -467,9 +468,16 @@ html[data-lang="es"] .va{display:none}
 @media(max-width:460px){.aemet-forecast{grid-template-columns:repeat(3,1fr)}}
 .aemet-forecast__msg{grid-column:1/-1;text-align:center;color:var(--muted);padding:20px 0}
 .aemet-day{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:14px 8px;text-align:center;box-shadow:var(--shadow-sm)}
-.aemet-day__label{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--navy)}
-.aemet-day__ic{font-size:1.7rem;margin:8px 0}
-.aemet-day__temps{font-family:var(--font-display);font-size:1.05rem}
+.aemet-day__label{position:relative;font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--navy)}
+.aemet-day__alert{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:5px;vertical-align:2px}
+.aemet-day__alert--green{background:#3fa34d}
+.aemet-day__alert--yellow{background:#e8b923}
+.aemet-day__alert--orange{background:#e8791f}
+.aemet-day__alert--red{background:var(--ember)}
+.aemet-day__period{margin-top:8px}
+.aemet-day__period-l{font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.aemet-day__ic{font-size:1.5rem;line-height:1.2}
+.aemet-day__temps{font-family:var(--font-display);font-size:1.05rem;margin-top:6px}
 .aemet-day__temps .mx{color:var(--ink);font-weight:600}
 .aemet-day__temps .mn{color:var(--muted);margin-left:6px}
 .aemet-day__precip{font-size:.72rem;color:var(--muted);margin-top:4px}
