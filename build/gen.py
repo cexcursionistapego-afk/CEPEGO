@@ -62,15 +62,13 @@ NAV=[("index.html",'<span class="va">Inici</span><span class="es">Inicio</span>'
 
 FIG_SUB=[("refugi.html","La Figuereta",'<span class="va">El refugi de muntanya</span><span class="es">El refugio de montaña</span>',"refugi"),
  ("reservar.html","Reservar",'<span class="va">Disponibilitat i reserva</span><span class="es">Disponibilidad y reserva</span>',"reservar")]
-METEO_SUB=[("meteo.html",'<span class="va">El temps · Refugi La Figuereta</span><span class="es">El tiempo · Refugio La Figuereta</span>','<span class="va">Estació meteorològica al refugi</span><span class="es">Estación meteorológica en el refugio</span>',"meteo"),
- ("meteo-pego.html",'<span class="va">El temps · Pego</span><span class="es">El tiempo · Pego</span>','<span class="va">Estació meteorològica a Pego</span><span class="es">Estación meteorológica en Pego</span>',"meteo-pego")]
 ACT_SUB=[("rutes.html",'<span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span>','<span class="va">Senderisme per Pego</span><span class="es">Senderismo por Pego</span>',"rutes"),
  ("escalada.html","Escalada",'<span class="va">Escola del Calvari</span><span class="es">Escuela del Calvari</span>',"escalada")]
 
 def header(active):
     fig_open   = active in ("refugi","reservar")
     act_open   = active in ("rutes","escalada")
-    meteo_open = active in ("meteo","meteo-pego")
+    meteo_ac   = ' active' if active=='meteo' else ''
     soci_ac=' active' if active=='soci' else ''
     def sub(items):
         r=""
@@ -80,7 +78,6 @@ def header(active):
         return r
     figcls  =' active' if fig_open   else ''
     actcls  =' active' if act_open   else ''
-    meteocls=' active' if meteo_open else ''
     inici_ac=' active' if active=='inici' else ''
     cal_ac  =' active' if active=='calendari' else ''
     con_ac  =' active' if active=='contacte' else ''
@@ -105,11 +102,7 @@ def header(active):
         <div class="nav-sub">
 {sub(ACT_SUB)}        </div>
       </div>
-      <div class="nav-group">
-        <a href="meteo.html" class="nav-parent{meteocls}"><span class="va">Meteo</span><span class="es">Meteo</span> <i class="caret"></i></a>
-        <div class="nav-sub">
-{sub(METEO_SUB)}        </div>
-      </div>
+      <a href="meteo.html" class="{meteo_ac.strip()}"><span class="va">Meteo</span><span class="es">Meteo</span></a>
       <a href="calendari.html" class="{cal_ac.strip()}"><span class="va">Calendari</span><span class="es">Calendario</span></a>
       <a href="contacte.html" class="{con_ac.strip()}"><span class="va">Contacte</span><span class="es">Contacto</span></a>
       <a href="soci.html" class="soci-link{soci_ac}"><span class="va">Racó del soci</span><span class="es">Área del socio</span></a>
@@ -263,7 +256,7 @@ import pages
 pages.build(globals())
 
 # ======================================================= robots.txt + sitemap.xml
-PAGES = ["index.html","refugi.html","reservar.html","meteo.html","meteo-pego.html",
+PAGES = ["index.html","refugi.html","reservar.html","meteo.html",
     "rutes.html","escalada.html","espeleo.html","barrancs.html","calendari.html",
     "contacte.html","soci.html","avis-legal.html","privacitat.html","cookies.html"]
 
