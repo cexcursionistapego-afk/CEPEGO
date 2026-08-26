@@ -332,41 +332,32 @@ def build(g):
         "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, path="reservar.html", extra_js="js/reserves.js"))
 
     # ============================================= METEO
-    meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'AVAMET',
-        "El temps al refugi","Meteo al refugio",
-        "Estació meteorològica a La Figuereta, connectada a la xarxa AVAMET.","Estación meteorológica en La Figuereta, conectada a la red AVAMET.",
-        pos='18%')+f'''
-<section class="section">
+    meteo_dash=f'''<section class="section">
   <div class="wrap">
-    <div class="embed reveal" style="max-width:1000px;margin:0 auto">
-      <iframe src="{METEO}" title="AVAMET — La Figuereta" scrolling="no" style="height:1180px;max-height:82vh"></iframe>
+    <div class="meteo-dash-grid reveal">
+      <div id="meteo-dash-figuereta"></div>
+      <div id="meteo-dash-pego"></div>
     </div>
     <div class="center" style="margin-top:24px">
-      <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO}"><span class="va">Obrir a AVAMET</span><span class="es">Abrir en AVAMET</span></a>
+      <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO}">La Figuereta — AVAMET</a>
+      <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO_PEGO}">Pego — AVAMET</a>
     </div>
   </div>
 </section>
-'''+footer()
+'''
+    meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'AVAMET',
+        "El temps al refugi","Meteo al refugio",
+        "Estació meteorològica a La Figuereta, connectada a la xarxa AVAMET.","Estación meteorológica en La Figuereta, conectada a la red AVAMET.",
+        pos='18%')+meteo_dash+footer()
     write("meteo.html", doc("El temps al refugi | CEPEGO",
-        "Estació meteorològica del refugi La Figuereta connectada a la xarxa AVAMET.", meteo, path="meteo.html"))
+        "Estació meteorològica del refugi La Figuereta connectada a la xarxa AVAMET.", meteo, path="meteo.html", extra_js="js/meteo-dashboard.js"))
 
     # ============================================= METEO PEGO
     meteo_pego=header("meteo-pego")+subhero(L2,'AVAMET',
         "El temps a Pego","El tiempo en Pego",
-        "Estació meteorològica a Pego, connectada a la xarxa AVAMET.","Estación meteorológica en Pego, conectada a la red AVAMET.")+f'''
-<section class="section">
-  <div class="wrap">
-    <div class="embed reveal" style="max-width:1000px;margin:0 auto">
-      <iframe src="{METEO_PEGO}" title="AVAMET — Pego" scrolling="no" style="height:1180px;max-height:82vh"></iframe>
-    </div>
-    <div class="center" style="margin-top:24px">
-      <a class="btn btn-outline" target="_blank" rel="noopener" href="{METEO_PEGO}"><span class="va">Obrir a AVAMET</span><span class="es">Abrir en AVAMET</span></a>
-    </div>
-  </div>
-</section>
-'''+footer()
+        "Estació meteorològica a Pego, connectada a la xarxa AVAMET.","Estación meteorológica en Pego, conectada a la red AVAMET.")+meteo_dash+footer()
     write("meteo-pego.html", doc("El tiempo en Pego | CEPEGO",
-        "Estació meteorològica de Pego connectada a la xarxa AVAMET.", meteo_pego, path="meteo-pego.html"))
+        "Estació meteorològica de Pego connectada a la xarxa AVAMET.", meteo_pego, path="meteo-pego.html", extra_js="js/meteo-dashboard.js"))
 
     # ============================================= RUTES
     routes=[("Circular Figuereta – Tossal","2,97 km","+154 m","673 m","facil","Fàcil","Fácil",
