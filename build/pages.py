@@ -14,6 +14,41 @@ def build(g):
             for f in files
         )
 
+    def skyline_svg(peaks):
+        # peaks: list of (name, label_altitude_str, numeric_altitude)
+        n=len(peaks)
+        W=1200; left=60; right=60
+        step=(W-left-right)/(n-1)
+        xs=[left+i*step for i in range(n)]
+        heights=[p[2] for p in peaks]
+        hmin,hmax=min(heights),max(heights)
+        baseline=200; min_px,max_px=40,168
+        def scale(h):
+            return min_px+(h-hmin)/(hmax-hmin)*(max_px-min_px)
+        pxh=[scale(h) for h in heights]
+        peak_y=[baseline-p for p in pxh]
+        pts=[f"0,{baseline}"]
+        for i in range(n):
+            pts.append(f"{xs[i]:.1f},{peak_y[i]:.1f}")
+            if i<n-1:
+                sx=(xs[i]+xs[i+1])/2
+                sh=min(pxh[i],pxh[i+1])*0.32
+                pts.append(f"{sx:.1f},{baseline-sh:.1f}")
+        pts.append(f"{W},{baseline}")
+        polyline=" ".join(pts)
+        labels="".join(
+            f'<line class="sk-lead" x1="{xs[i]:.1f}" y1="40" x2="{xs[i]:.1f}" y2="{peak_y[i]-6:.1f}"/>'
+            f'<circle class="sk-dot" cx="{xs[i]:.1f}" cy="{peak_y[i]:.1f}" r="3"/>'
+            f'<text class="sk-name" x="{xs[i]:.1f}" y="16" text-anchor="middle">{name.upper()}</text>'
+            f'<text class="sk-alt" x="{xs[i]:.1f}" y="30" text-anchor="middle">{alt} m</text>'
+            for i,(name,alt,_) in enumerate(peaks)
+        )
+        return f'''<svg class="skyline-chart" viewBox="0 0 {W} {baseline+10}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Skyline dels cims que envolten Pego">
+      {labels}
+      <polyline class="sk-ridge" points="{polyline}" fill="none"/>
+      <line class="sk-base" x1="0" y1="{baseline}" x2="{W}" y2="{baseline}"/>
+    </svg>'''
+
     # ============================================= HOME
     # (href, tva, tes, pva, pes, num)
     acts=[
@@ -70,6 +105,15 @@ def build(g):
       <div class="split__media">
         <img src="{IMG}club-cim.jpg" alt="El club a un cim d'alta muntanya">
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="center"><div class="kicker center-k"><span class="va">El territori</span><span class="es">El territorio</span></div></div>
+    <div class="skyline reveal">
+{skyline_svg([("Segària","509",509),("Cabal","713",713),("Penya Migdia","747",747),("Montnegre","653",653),("Bodoix","541–556",548),("Ambra","298",298),("Xical","546",546),("Xillibre","751",751),("Mostalla","359",359)])}
     </div>
   </div>
 </section>
