@@ -159,8 +159,8 @@ def build(g):
       <p><span class="va">Dos habitacles comunicats amb lliteres, cuina completa i tots els serveis per gaudir de la natura.</span><span class="es">Dos habitáculos comunicados con literas, cocina completa y todos los servicios para disfrutar de la naturaleza.</span></p>
     </div>
 
-    <!-- BLOC 1: CUINA — foto esquerra -->
-    <div class="equip-block reveal">
+    <!-- BLOC 1: CUINA — foto esquerra en escriptori, baix en mòbil -->
+    <div class="equip-block equip-block--photo-below-mobile reveal">
       <div class="equip-block__media">
         <img loading="lazy" src="{REFUGI[1]}" alt="Cuina del refugi">
       </div>
