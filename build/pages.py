@@ -196,7 +196,7 @@ def build(g):
         <span class="equip-tag"><span class="va">Dormir</span><span class="es">Dormir</span></span>
         <h3 style="margin-top:.5em"><span class="va">Descansa com a casa</span><span class="es">Descansa como en casa</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([9])}        </ul>
+{eq_li([9,11,12,13])}        </ul>
         <p style="margin-top:16px;font-size:.94rem;color:var(--muted)"><span class="va">Dos habitacles separats però comunicats. Porta sempre el teu sac de dormir.</span><span class="es">Dos habitáculos separados pero comunicados. Trae siempre tu saco de dormir.</span></p>
       </div>
       <div class="equip-block__media">
@@ -219,19 +219,6 @@ def build(g):
         <ul class="equip equip-1col" style="margin-top:18px">
 {eq_li([5,6])}        </ul>
         <p class="note" style="margin-top:18px"><span class="va">⚠️ L'aigua és d'una cava natural, un bé escàs: <strong>no és potable</strong> i cal utilitzar-la de manera responsable. Porta la teua per a consumir.</span><span class="es">⚠️ El agua es de una cava natural, un bien escaso: <strong>no es potable</strong> y hay que utilizarla de forma responsable. Trae la tuya para consumir.</span></p>
-      </div>
-    </div>
-
-    <!-- BLOC 3B: SEGURETAT — foto dreta -->
-    <div class="equip-block equip-block--rev reveal">
-      <div>
-        <span class="equip-tag"><span class="va">Seguretat</span><span class="es">Seguridad</span></span>
-        <h3 style="margin-top:.5em"><span class="va">La teua seguretat, la nostra prioritat</span><span class="es">Tu seguridad, nuestra prioridad</span></h3>
-        <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([11,12,13])}        </ul>
-      </div>
-      <div class="equip-block__media">
-        <img loading="lazy" src="{REFUGI[7]}" alt="Zona de descans del refugi">
       </div>
     </div>
 
