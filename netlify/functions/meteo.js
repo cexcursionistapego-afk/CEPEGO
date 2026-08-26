@@ -4,35 +4,20 @@
 // meteorològiques valenciana) per a les dues estacions del club, i retorna les
 // dades en JSON net perquè el frontend no haja de carregar el seu iframe/branding.
 //
-// ============================================================================
-// AVÍS IMPORTANT — CODI NO PROVAT CONTRA HTML REAL
-// ============================================================================
-// Aquest fitxer es va escriure sense accés de xarxa a avamet.org (bloquejat en
-// aquest entorn de desenvolupament). Tot el que sabem de l'estructura de la
-// pàgina prové d'una captura de pantalla del mòbil (només text renderitzat),
-// NO del HTML/DOM real. Per tant:
-//
-//   - No sabem els noms de classes/ids reals que fa servir AVAMET.
-//   - No sabem si les dades vénen inline al HTML, per JS/AJAX (en aquest cas
-//     aquest fetch simple NO les veuria, i caldria trobar l'endpoint JSON/XML
-//     intern que AVAMET use per a refrescar la pàgina), o generades per
-//     plantilla al servidor (cas en què aquest enfocament SÍ funcionaria).
-//   - Totes les regex de sota son heurístiques basades en el text visible
-//     ("Actualització:", "amplitud tèrmica", "humitat relativa", "direcció",
-//     "pressió relativa", "ràfega màxima", "precipitació hui"/"prec. mes"/
-//     "prec. any") i asumeixen que el HTML té una etiqueta amb eixe text
-//     seguida, en algun punt proper, pel valor numèric — potser separats per
-//     tags <span>/<td>/<div>, &nbsp;, o salts de línia. És una suposició
-//     raonable per a pàgines PHP "clàssiques" com aquesta, però NO verificada.
-//   - El format numèric (coma decimal "27,1", graus "°", unitats "km/h",
-//     "hPa", "mm") ve directament de la captura, per tant és fiable, però la
-//     seua posició exacta dins del HTML és una suposició.
-//
-// TODO: recalibrar contra el codi font real de la pàgina en quan estiga
-// disponible (ideal: guardar `curl` o "Veure codi font" de les dues URLs i
-// ajustar les regexs de PATTERNS de sota una a una, comprovant amb
-// `node -e` contra el HTML real abans de desplegar).
-// ============================================================================
+// Calibrat contra el codi font REAL de la pàgina de l'estació de Pego
+// (mxo-i.php?id=c30m102e14, capturat 26-08-2026). L'estructura és plantilla
+// PHP clàssica amb els valors ja renderitzats al HTML (no calen JS/AJAX):
+//   - Nom/coordenades: <h1>/<h3>, no cal parsejar-los (fem servir STATIONS[].name)
+//   - Actualització: <h4>Actualització: <b>DD-MM-YYYY HH:MM</b></h4>
+//   - Temp actual: <div id="mobVTemp">26<span class=decimal>,4°</span>...
+//   - Mín/màx: <span class="mobTT">mín</span>24,6° (i "màx")
+//   - Resta de valors: taula <table class="mobTaula"> amb parelles
+//     <td class="mobVTT">ETIQUETA<br>...</td><td class="mobVTV[r]">VALOR<span class=unitats>UNITAT</span></td>
+// No s'ha pogut verificar la pàgina de La Figuereta (c30m135e02) directament,
+// però fa servir el mateix motor mxo-i.php, per tant s'assumeix idèntica
+// plantilla — a confirmar si mai dona parse_failed per a eixa estació.
+// El HTML ve amb entitats numèriques/nomenades (&deg;, &oacute;, &egrave;...)
+// en compte d'UTF-8 directe, per això es decodifiquen abans de parsejar.
 
 const STATIONS = {
   figuereta: {
@@ -53,73 +38,51 @@ function res(code, obj) {
   };
 }
 
-// Normalitza "27,1" / "27,1°" / "27,1 °C" → 27.1 (Number) o null.
-// GUESSED: assumeix separador decimal coma (locale ca/es), com es veu a la
-// captura de pantalla ("27,1°", "26,6°", "27,8°").
+// Decodifica les entitats HTML que AVAMET fa servir al seu HTML clàssic.
+function decodeEntities(s) {
+  return String(s || '')
+    .replace(/&deg;/g, '°')
+    .replace(/&oacute;/g, 'ó')
+    .replace(/&iacute;/g, 'í')
+    .replace(/&aacute;/g, 'á')
+    .replace(/&eacute;/g, 'é')
+    .replace(/&uacute;/g, 'ú')
+    .replace(/&agrave;/g, 'à')
+    .replace(/&egrave;/g, 'è')
+    .replace(/&igrave;/g, 'ì')
+    .replace(/&ograve;/g, 'ò')
+    .replace(/&ugrave;/g, 'ù')
+    .replace(/&ntilde;/g, 'ñ')
+    .replace(/&ccedil;/g, 'ç')
+    .replace(/&quot;/g, '"')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&');
+}
+
+// "1.019" (punt = separador de milers) → 1019 ; "10,3" (coma = decimal) → 10.3
+// Aplicat directament sobre un fragment amb tags/unitats: qualsevol caràcter
+// que no siga dígit/coma/punt/signe es descarta primer, així "24<span
+// class=unitats>km/h</span>" ja queda reduït a "24" sense parsejar tags a part.
 function toNumber(raw) {
   if (raw == null) return null;
-  const s = String(raw).replace(/&nbsp;| /g, ' ').trim();
-  if (!s || /^-+$/.test(s)) return null; // AVAMET sembla usar "-" o "- mm" per a "sense dada"
-  const cleaned = s.replace(/,/g, '.').replace(/[^0-9.+-]/g, '');
-  if (!cleaned || cleaned === '.' || cleaned === '-') return null;
-  const n = parseFloat(cleaned);
+  let s = String(raw).replace(/[^0-9,.\-]/g, '');
+  if (!s || /^-+$/.test(s)) return null;
+  s = s.replace(/\./g, '').replace(',', '.');
+  const n = parseFloat(s);
   return isNaN(n) ? null : n;
 }
 
-// Neteja tags HTML i entitats bàsiques d'un fragment abans d'aplicar-li regex numèrica.
-function stripTags(s) {
-  return String(s || '')
-    .replace(/<[^>]*>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
+function cleanLabel(raw) {
+  return decodeEntities(raw)
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<[^>]+>/g, '')
     .replace(/\s+/g, ' ')
-    .trim();
+    .trim()
+    .toLowerCase();
 }
 
-// Busca una etiqueta de text (label) dins d'un text JA NETEJAT DE TAGS
-// (vore stripTags) i intenta capturar el primer número (amb coma o punt
-// decimal opcional) que apareix "a prop" darrere. Es treballa sobre text
-// pla (no HTML cru) perquè el label mateix podria vindre partit per tags
-// al HTML real (p.ex. "humitat <b>relativa</b>") — stripTags ho normalitza
-// abans que la regex del label hi busque. GUESSED: la finestra de cerca de
-// 120 caràcters és arbitrària — pot ser massa curta o massa llarga segons
-// el HTML real; a recalibrar.
-function findNumberNear(text, labelPattern, opts) {
-  opts = opts || {};
-  const window = opts.window || 120;
-  const re = new RegExp(labelPattern, 'i');
-  const m = re.exec(text);
-  if (!m) return null;
-  const start = m.index + m[0].length;
-  const chunk = text.slice(start, start + window);
-  // Si just darrere del label ve un guionet solt ("-", "- mm"...) és el codi
-  // d'AVAMET per a "sense dada"/zero — cal aturar-se ací i NO seguir buscant
-  // cap avant, perquè si no acabaríem agafant per error el número del SEGÜENT
-  // camp (p.ex. "prec. mes - mm prec. any 713,0 mm" faria que "prec. mes"
-  // retornara 713 en compte de null). GUESSED que el guionet és sempre just
-  // darrere del label sense cap altre número pel mig.
-  if (/^\s*-(?!\d)/.test(chunk)) return null;
-  // primer número (enter o decimal, amb signe opcional) al text netejat
-  const numMatch = /(-?\d+(?:[.,]\d+)?)/.exec(chunk);
-  if (!numMatch) return null;
-  return toNumber(numMatch[1]);
-}
-
-// Igual que findNumberNear però retorna el primer TOKEN de text (no numèric),
-// útil per a la direcció del vent (p.ex. "SO", "NE"...). `text` ha d'estar
-// ja net de tags (vore stripTags).
-function findTokenNear(text, labelPattern, tokenList, opts) {
-  opts = opts || {};
-  const window = opts.window || 80;
-  const re = new RegExp(labelPattern, 'i');
-  const m = re.exec(text);
-  if (!m) return null;
-  const start = m.index + m[0].length;
-  const chunk = text.slice(start, start + window).toUpperCase();
-  for (const tok of tokenList) {
-    const re2 = new RegExp('\\b' + tok + '\\b');
-    if (re2.test(chunk)) return tok;
-  }
-  return null;
+function cleanText(raw) {
+  return decodeEntities(raw).replace(/<[^>]+>/g, '').trim();
 }
 
 exports.handler = async function (event) {
@@ -131,11 +94,7 @@ exports.handler = async function (event) {
   let html;
   try {
     const r = await fetch(station.url, {
-      headers: {
-        // GUESSED: alguns servidors PHP antics bloquegen fetches sense
-        // User-Agent "de navegador". No verificat contra AVAMET concretament.
-        'User-Agent': 'Mozilla/5.0 (compatible; CEPEGO-meteo/1.0; +https://cepego.org)',
-      },
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; CEPEGO-meteo/1.0; +https://cepego.com)' },
     });
     if (!r.ok) return res(200, { ok: false, error: 'fetch_failed', status: r.status });
     html = await r.text();
@@ -156,41 +115,8 @@ exports.handler = async function (event) {
   }
 };
 
-// ----------------------------------------------------------------------------
-// PARSER — TOT EL DE SOTA ÉS ESPECULATIU (vore l'avís de dalt del fitxer).
-// Llista explícita de patrons "adivinats" que caldrà verificar/ajustar:
-//
-//   1. TEMP ACTUAL: se cerca el primer número gran amb "°" que aparega en
-//      el document (fora de "mín"/"màx"). GUESSED que és el primer "N,N°"
-//      del body sense anar precedit per "mín"/"màx"/"amplitud".
-//   2. TEMP MIN/MAX: es busquen literalment "mín" i "màx" seguits d'un
-//      número amb "°". GUESSED que AVAMET usa eixes paraules exactes (amb
-//      accent) i no "min"/"max" sense accent o en castellà.
-//   3. ACTUALITZACIÓ (updated): regex per a "Actualització" seguit de
-//      "DD-MM-YYYY HH:MM". GUESSED el format exacte de data i que la zona
-//      horària és sempre Europe/Madrid (+01:00 hivern / +02:00 estiu) — es
-//      calcula ací manualment perquè el HTML probablement no done offset.
-//   4. HUMITAT: cerca "humitat relativa" seguit d'un número + "%".
-//   5. VENT (velocitat): cerca "vent" seguit d'un número + "km/h". RISC:
-//      "vent" també podria aparèixer en "ràfega màxima del vent" o similar,
-//      pot capturar el número equivocat si l'ordre real del HTML difereix
-//      del text vist a la captura.
-//   6. DIRECCIÓ: cerca "direcció" seguida d'un dels tokens de compàs
-//      (N/NE/E/SE/S/SO/O/NO). GUESSED que AVAMET usa abreviatures catalanes
-//      (SO en compte de SW). Si AVAMET usa castellà podria ser "SO" (sud-oest
-//      en castellà també és SO, però "O" (oest) podria ser "O" o "W").
-//   7. PRESSIÓ: cerca "pressió relativa" seguida d'un número + "hPa".
-//   8. RÀFEGA MÀXIMA: cerca "ràfega màxima" seguida d'un número + "km/h".
-//   9. PRECIPITACIÓ: cerca "precipitació hui"/"avui", "prec. mes"/"mensual",
-//      "prec. any"/"anual" seguides d'un número + "mm", tractant "-" o
-//      "- mm" com a null (sense dada / zero visual). GUESSED els diferents
-//      textos possibles per a cada etiqueta ja que la captura només mostra
-//      versions abreujades ("prec. mes", "prec. any").
-//
-// Cap d'aquests patrons s'ha pogut contrastar amb el HTML real. Qualsevol
-// camp que no case amb prou confiança es deixa en `null` deliberadament.
-// ----------------------------------------------------------------------------
-function parseAvamet(html, stationName) {
+function parseAvamet(rawHtml, stationName) {
+  const html = decodeEntities(rawHtml);
   const out = {
     station_name: stationName,
     updated: null,
@@ -207,90 +133,59 @@ function parseAvamet(html, stationName) {
     precip_year: null,
   };
 
-  // Versió del document sense tags/entitats, per a fer les cerques de label
-  // més tolerants a com AVAMET puga trencar el text amb <span>/<b>/&nbsp;/etc.
-  // (vore avís de dalt: no sabem si açò és necessari, però és més segur que
-  // buscar directament sobre HTML cru).
-  const text = stripTags(html);
-
-  // --- Actualització: "Actualització: 26-08-2026 00:40" (GUESSED format) ---
+  // --- Actualització: "Actualització: 26-08-2026 09:25" ---
   {
-    const m = /Actualitzaci[oó]\s*:?[\s\S]{0,40}?(\d{2})-(\d{2})-(\d{4})[\s\S]{0,15}?(\d{2}):(\d{2})/i.exec(text);
+    const m = /Actualitzaci[oó]\s*:\s*<b>\s*(\d{2})-(\d{2})-(\d{4})\s+(\d{2}):(\d{2})\s*<\/b>/i.exec(html);
     if (m) {
       const [, dd, mm, yyyy, hh, min] = m;
-      // Zona horària Europe/Madrid: CEST (+02:00) aprox. finals de març a
-      // finals d'octubre, CET (+01:00) la resta de l'any. Aproximació simple
-      // per mes (no calcula el diumenge exacte de canvi d'hora, GUESSED que
-      // n'hi ha prou precisió per a mostrar l'hora al frontend).
+      // Zona horària Europe/Madrid: aproximació per mes (CEST finals de març a
+      // finals d'octubre, CET la resta de l'any) — prou precís per a mostrar
+      // l'hora, no calcula el diumenge exacte de canvi d'hora.
       const monthNum = parseInt(mm, 10);
       const offset = (monthNum > 3 && monthNum < 11) ? '+02:00' : '+01:00';
       out.updated = `${yyyy}-${mm}-${dd}T${hh}:${min}:00${offset}`;
     }
   }
 
-  // --- Temperatura actual: primer "N,N°" que no vaja precedit de mín/màx ---
+  // --- Temp actual: <div id="mobVTemp">26<span class=decimal>,4°</span> ---
+  // (amb fallback per si alguna estació no porta el <span class=decimal>, p.ex.
+  // temperatura sencera sense decimals — no verificat, per precaució)
   {
-    // Cerca totes les ocurrències de número+° (tolerant espais/tags pel mig,
-    // ja que treballem sobre `text` netejat) i descarta les que van justet
-    // darrere de "mín"/"màx"/"amplitud" (per no confondre amb eixos valors).
-    const re = /(-?\d{1,3}(?:[.,]\d)?)\s*°/g;
-    let m;
-    let candidate = null;
-    while ((m = re.exec(text)) !== null) {
-      const precedingCtx = text.slice(Math.max(0, m.index - 30), m.index).toLowerCase();
-      if (/m[ií]n|m[àa]x|amplitud/.test(precedingCtx)) continue;
-      candidate = m[1];
-      break;
+    const m = /<div id="mobVTemp">\s*(-?\d+)\s*<span class=decimal>\s*,?(\d+)?\s*°/i.exec(html);
+    if (m) {
+      out.temp = toNumber(m[2] ? `${m[1]},${m[2]}` : m[1]);
+    } else {
+      const m2 = /<div id="mobVTemp">\s*(-?[\d,.]+)\s*°/i.exec(html);
+      if (m2) out.temp = toNumber(m2[1]);
     }
-    out.temp = toNumber(candidate);
   }
 
-  // --- Mín / Màx ---
-  out.temp_min = (function () {
-    const m = /m[ií]n[^0-9\-]{0,30}(-?\d{1,3}(?:[.,]\d)?)\s*°/i.exec(text);
-    return m ? toNumber(m[1]) : null;
-  })();
-  out.temp_max = (function () {
-    const m = /m[àa]x[^0-9\-]{0,30}(-?\d{1,3}(?:[.,]\d)?)\s*°/i.exec(text);
-    return m ? toNumber(m[1]) : null;
-  })();
+  // --- Mín / Màx: <span class="mobTT">mín</span>24,6° ---
+  {
+    const mn = /<span class="mobTT">m[ií]n<\/span>\s*(-?[\d,.]+)\s*°/i.exec(html);
+    out.temp_min = mn ? toNumber(mn[1]) : null;
+    const mx = /<span class="mobTT">m[àa]x<\/span>\s*(-?[\d,.]+)\s*°/i.exec(html);
+    out.temp_max = mx ? toNumber(mx[1]) : null;
+  }
 
-  // --- Humitat relativa (%) ---
-  out.humidity = findNumberNear(text, 'humitat\\s*relativa');
-
-  // --- Vent (velocitat, km/h) ---
-  // GUESSED: cerca "vent" NO seguit immediatament de "ràfega" al mateix bloc;
-  // com no podem provar-ho, simplement agafem la primera coincidència de
-  // "vent" que no siga part de "direcció del vent" o "ràfega màxima".
-  out.wind_speed = (function () {
-    const re = /\bvent\b(?!\s*:?\s*(?:m[àa]xim|ràfega))/gi;
+  // --- Taula de dades: parells <td class="mobVTT">etiqueta</td><td class="mobVTV[r]">valor</td> ---
+  const map = {};
+  {
+    const re = /<td class="mobVTT">([\s\S]*?)<\/td>\s*<td class="mobVTVr?">([\s\S]*?)<\/td>/g;
     let m;
-    while ((m = re.exec(text)) !== null) {
-      const chunk = text.slice(m.index, m.index + 80);
-      const nm = /(-?\d+(?:[.,]\d+)?)\s*km\s*\/?\s*h/i.exec(chunk);
-      if (nm) return toNumber(nm[1]);
+    while ((m = re.exec(html)) !== null) {
+      map[cleanLabel(m[1])] = m[2];
     }
-    return null;
-  })();
+  }
 
-  // --- Direcció del vent (compàs) ---
-  out.wind_dir = findTokenNear(text, 'direcci[oó]', ['NNE', 'NNO', 'NNW', 'ENE', 'ESE', 'SSE', 'SSO', 'SSW', 'WSW', 'WNW', 'NE', 'NO', 'NW', 'SE', 'SO', 'SW', 'N', 'E', 'S', 'O', 'W']);
-
-  // --- Pressió (hPa) ---
-  // GUESSED label: "pressió relativa" ve de la captura de pantalla, però una
-  // cerca web d'altres pàgines mxo-i.php d'AVAMET va trobar el text "pressió
-  // al nivell de la mar" en alguna estació — per tant s'admeten totes dues
-  // variants (i "pressió absoluta" per si de cas) fins que es puga confirmar
-  // quina fa servir exactament aquesta estació.
-  out.pressure = findNumberNear(text, 'pressi[oó]\\s*(?:relativa|al\\s*nivell\\s*de\\s*la\\s*mar|absoluta)');
-
-  // --- Ràfega màxima (km/h) ---
-  out.wind_gust_max = findNumberNear(text, 'r[àa]fega\\s*m[àa]xima');
-
-  // --- Precipitació (mm) ---
-  out.precip_today = findNumberNear(text, 'precipitaci[oó]\\s*(?:hui|avui|hoy)');
-  out.precip_month = findNumberNear(text, 'prec\\.?\\s*mes|precipitaci[oó]\\s*mensual');
-  out.precip_year = findNumberNear(text, 'prec\\.?\\s*any|precipitaci[oó]\\s*anual');
+  out.humidity = toNumber(map['humitat relativa']);
+  out.pressure = toNumber(map['pressió relativa'] != null ? map['pressió relativa'] : (map['pressió al nivell de la mar'] != null ? map['pressió al nivell de la mar'] : map['pressió absoluta']));
+  out.wind_speed = toNumber(map['vent']);
+  out.wind_gust_max = toNumber(map['ràfega màxima']);
+  out.precip_today = toNumber(map['precipitació hui']);
+  out.precip_month = toNumber(map['prec. mes']);
+  out.precip_year = toNumber(map['prec. any']);
+  out.wind_dir = map['direcció'] != null ? cleanText(map['direcció']).toUpperCase() || null : null;
 
   return out;
 }
