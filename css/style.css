@@ -250,7 +250,7 @@ html[data-lang="es"] .va{display:none}
 .feature-num{font-family:var(--font-display);font-size:3rem;color:var(--ember);line-height:.9}
 
 /* stat row */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
 .stats>div{padding:clamp(10px,1.5vw,18px) 20px;text-align:center;position:relative}
 .stats>div::after{content:"";position:absolute;right:0;top:18%;bottom:18%;width:1px;background:var(--hair)}
 .stats>div:last-child::after{display:none}
