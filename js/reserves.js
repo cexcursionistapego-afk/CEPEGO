@@ -110,18 +110,26 @@
     var l=lang();
     var m2=new Date(view.getFullYear(), view.getMonth()+1, 1);
     var canPrev = (view.getFullYear()>today.getFullYear())||(view.getFullYear()===today.getFullYear()&&view.getMonth()>today.getMonth());
-    grid.innerHTML =
-      '<div class="rcal-nav"><button type="button" id="rcal-prev" '+(canPrev?'':'disabled')+' aria-label="Anterior">‹</button>'+
+    function navHTML(prevId,nextId){
+      return '<div class="rcal-nav"><button type="button" id="'+prevId+'" '+(canPrev?'':'disabled')+' aria-label="Anterior">‹</button>'+
       '<span>'+ (l==='es'?'Disponibilidad':'Disponibilitat') +'</span>'+
-      '<button type="button" id="rcal-next" aria-label="Següent">›</button></div>'+
-      '<div class="rcal-grid">'+monthHTML(view)+monthHTML(m2)+'</div>';
+      '<button type="button" id="'+nextId+'" aria-label="Següent">›</button></div>';
+    }
+    grid.innerHTML =
+      navHTML('rcal-prev','rcal-next')+
+      '<div class="rcal-grid">'+monthHTML(view)+monthHTML(m2)+'</div>'+
+      navHTML('rcal-prev-b','rcal-next-b');
     legend.innerHTML =
       '<span><i class="lg free"></i>'+(l==='es'?'Libre':'Lliure')+'</span>'+
       '<span><i class="lg busy"></i>'+(l==='es'?'Reservado':'Reservat')+'</span>'+
       '<span><i class="lg sel"></i>'+(l==='es'?'Tu selección':'La teua selecció')+'</span>'+
       (loaded?'':' <span class="rcal-load">'+(l==='es'?'cargando…':'carregant…')+'</span>');
-    grid.querySelector('#rcal-prev').addEventListener('click',function(){ if(canPrev){ view=new Date(view.getFullYear(),view.getMonth()-1,1); render(); } });
-    grid.querySelector('#rcal-next').addEventListener('click',function(){ view=new Date(view.getFullYear(),view.getMonth()+1,1); render(); });
+    function goPrev(){ if(canPrev){ view=new Date(view.getFullYear(),view.getMonth()-1,1); render(); } }
+    function goNext(){ view=new Date(view.getFullYear(),view.getMonth()+1,1); render(); }
+    grid.querySelector('#rcal-prev').addEventListener('click',goPrev);
+    grid.querySelector('#rcal-next').addEventListener('click',goNext);
+    grid.querySelector('#rcal-prev-b').addEventListener('click',goPrev);
+    grid.querySelector('#rcal-next-b').addEventListener('click',goNext);
     grid.querySelectorAll('.rcal-d button').forEach(function(b){ b.addEventListener('click',function(){ onDay(b.getAttribute('data-d')); }); });
   }
 
