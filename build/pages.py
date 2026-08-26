@@ -383,7 +383,7 @@ def build(g):
     </div>
     <p class="note center avamet-credit" style="margin-top:14px">
       <img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo">
-      <span class="va">Dades en temps real d'AVAMET.</span><span class="es">Datos en tiempo real de AVAMET.</span>
+      <span class="va">Font: AVAMET.</span><span class="es">Fuente: AVAMET.</span>
     </p>
   </div>
 </section>
