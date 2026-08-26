@@ -463,10 +463,6 @@ html[data-lang="es"] .va{display:none}
 .avis__x:hover{opacity:1}
 
 /* ================= PREVISIO AEMET ================= */
-.aemet-place-wrap{position:relative}
-.aemet-place{font-family:var(--font-display);font-weight:600;font-size:clamp(46px,9vw,108px);
-  line-height:1;text-align:center;color:var(--hair);margin-bottom:clamp(-34px,-4vw,-16px);
-  user-select:none;pointer-events:none}
 .aemet-forecast{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:clamp(16px,2.5vw,28px)}
 @media(max-width:760px){.aemet-forecast{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:460px){.aemet-forecast{grid-template-columns:repeat(3,1fr)}}
