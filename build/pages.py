@@ -308,7 +308,7 @@ def build(g):
   <div class="wrap narrow center reveal">
     <div class="kicker center-k"><span class="va">Com funciona</span><span class="es">Cómo funciona</span></div>
     <h2><span class="va">Tria les dates i envia la sol·licitud</span><span class="es">Elige las fechas y envía la solicitud</span></h2>
-    <p class="lead"><span class="va">Al calendari veus els dies lliures i els ja reservats. Tria les teues dates, envia la sol·licitud i <strong>nosaltres la revisarem</strong>. Et contactarem per confirmar-la i indicar-te el pagament de la senyal (50 €). El total es paga una setmana abans d'entrar.</span><span class="es">En el calendario ves los días libres y los ya reservados. Elige tus fechas, envía la solicitud y <strong>nosotros la revisaremos</strong>. Te contactaremos para confirmarla e indicarte el pago de la señal (50 €). El total se paga una semana antes de entrar.</span></p>
+    <p class="lead"><span class="va">Al calendari veus els dies lliures i els ja reservats. Tria les teues dates, envia la sol·licitud i <strong>nosaltres la revisarem</strong>. Et contactarem per confirmar-la i indicar-te el pagament de la senyal. El total es paga una setmana abans d'entrar.</span><span class="es">En el calendario ves los días libres y los ya reservados. Elige tus fechas, envía la solicitud y <strong>nosotros la revisaremos</strong>. Te contactaremos para confirmarla e indicarte el pago de la señal. El total se paga una semana antes de entrar.</span></p>
   </div>
 </section>
 
@@ -388,7 +388,7 @@ def build(g):
     <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió</span><span class="es">Previsión</span></div>
     <h2 class="center" style="margin-top:6px"><span class="va">Els pròxims dies</span><span class="es">Los próximos días</span></h2>
     <div id="aemet-forecast" class="reveal"></div>
-    <p class="note center" style="margin-top:14px"><span class="va">Font: AEMET (Agència Estatal de Meteorologia), predicció per al municipi de Pego (codi 03102).</span><span class="es">Fuente: AEMET (Agencia Estatal de Meteorología), predicción para el municipio de Pego (código 03102).</span></p>
+    <p class="note center" style="margin-top:14px"><span class="va">Font: AEMET.</span><span class="es">Fuente: AEMET.</span></p>
   </div>
 </section>
 '''

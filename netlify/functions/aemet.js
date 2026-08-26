@@ -21,9 +21,16 @@
 //     no_wrap comunes" colspan="N"><span class="texto_azul">mín</span> /
 //     <span class="texto_rojo">màx</span></td> — una per DIA (colspan igual
 //     que el de la capçalera per a eixe dia).
-// Per a triar una icona representativa de tot el dia, es prioritza el
-// període amb rang horari que continga "12" (migdia); si el dia no té rang
-// horari (dies més llunyans, un sol tram), s'agafa l'únic període disponible.
+// Per a cada dia es reparteixen els períodes en "matí" (06–12h o 00–12h) i
+// "vesprada" (12–18h, 18–24h o 12–24h); el tram 00–06h es descarta (no és ni
+// matí ni vesprada). Als dies més llunyans (un sol tram sense rang horari)
+// s'assigna l'únic període disponible a "vesprada".
+//   - Fila "Avisos": <td class="comunes alinear_texto_centro" colspan="N">
+//     amb un <a title="Sin peligro"> (o el nom de l'avís actiu) a dins —
+//     només n'hi ha per als primers 2-3 dies, la resta de cel·les venen
+//     buides (fons blau, sense <a>). El colspan de cada cel·la amb avís
+//     coincideix amb el d'un dia de la capçalera, així que es mapegen 1 a 1
+//     en ordre (avís[0]→dia[0], avís[1]→dia[1]...).
 
 const URL = 'https://www.aemet.es/es/eltiempo/prediccion/municipios/pego-id03102';
 
@@ -141,21 +148,45 @@ function parseAemet(rawHtml) {
     }
   }
 
+  // --- Avisos: un <a title="..."> per cel·la amb avís, només als primers dies ---
+  const alerts = [];
+  {
+    const secStart = table.indexOf('Avisos');
+    const rowStart = secStart === -1 ? -1 : table.indexOf('<tr>', secStart);
+    const rowEnd = rowStart === -1 ? -1 : table.indexOf('</tr>', rowStart);
+    if (rowStart !== -1) {
+      const row = table.slice(rowStart, rowEnd);
+      const re = /<td class="comunes alinear_texto_centro"[^>]*>\s*<a[^>]*title="([^"]*)"/g;
+      let m;
+      while ((m = re.exec(row)) !== null) alerts.push(decodeEntities(m[1]).trim());
+    }
+  }
+
+  function bucket(hour) {
+    if (hour === '06–12h' || hour === '00–12h') return 'mati';
+    if (hour === '12–18h' || hour === '18–24h' || hour === '12–24h') return 'vesprada';
+    return null;
+  }
+
   // --- Assemblar per dia, agrupant períodes/precipitació pel colspan de la capçalera ---
   let idx = 0;
   return days.map((d, i) => {
     const group = periods.slice(idx, idx + d.colspan);
     const precipGroup = precipVals.slice(idx, idx + d.colspan);
     idx += d.colspan;
-    const midday = group.find((p) => p.hour && p.hour.includes('12')) || group[0] || {};
+    let mati = group.find((p) => bucket(p.hour) === 'mati');
+    let vesprada = group.find((p) => bucket(p.hour) === 'vesprada');
+    if (!mati && !vesprada && group.length) vesprada = group[0];
     const precipDefined = precipGroup.filter((v) => v != null);
     return {
       label: d.label,
       date_title: d.title,
-      desc: midday.desc || null,
+      desc_mati: (mati && mati.desc) || null,
+      desc_vesprada: (vesprada && vesprada.desc) || null,
       precip_max: precipDefined.length ? Math.max(...precipDefined) : null,
       temp_min: tempPairs[i] ? tempPairs[i].min : null,
       temp_max: tempPairs[i] ? tempPairs[i].max : null,
+      alert: alerts[i] || null,
     };
   });
 }
