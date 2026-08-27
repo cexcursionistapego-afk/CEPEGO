@@ -127,8 +127,8 @@ def build(g):
   <div class="wrap">
     <div class="center"><div class="kicker center-k"><span class="va">El nostre territori</span><span class="es">Nuestro territorio</span></div></div>
     <div class="skyline reveal">
-{skyline_svg(PEAKS, W=1200, baseline=200, min_px=32, max_px=110, vertical=False, top=64)}
-{skyline_svg(PEAKS, W=440, baseline=250, min_px=18, max_px=55, vertical=True, top=170, view_top=60)}
+{skyline_svg(PEAKS, W=1200, baseline=400, min_px=64, max_px=220, vertical=False, top=128)}
+{skyline_svg(PEAKS, W=440, baseline=500, min_px=36, max_px=110, vertical=True, top=340, view_top=120)}
     </div>
   </div>
 </section>
