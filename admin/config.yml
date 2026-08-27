@@ -34,7 +34,7 @@ collections:
   # ---------- AJUSTOS DEL CLUB ----------
   - name: "ajustos"
     label: "⚙️ Dades del club (contacte i preus)"
-    description: "Correu, telèfon, adreça, Facebook, IBAN, preus del refugi i quotes de soci. Es canvien en tota la web alhora."
+    description: "Correu, telèfon, adreça, Facebook, IBAN, preus del refugi, quotes de soci i l'avís blau de la pàgina de reservar. Es canvien en tota la web alhora."
     files:
       - name: "site"
         label: "Dades i preus"
@@ -49,6 +49,8 @@ collections:
           - { label: "Preu 3 nits", name: "preu3", widget: "string" }
           - { label: "Quota de soci (a l'any)", name: "quota_soci", widget: "string" }
           - { label: "Quota sala d'entrenament", name: "quota_sala", widget: "string" }
+          - { label: "Avís blau a Reservar (valencià)", name: "avis_reserva_va", widget: "text" }
+          - { label: "Avís blau a Reservar (castellà)", name: "avis_reserva_es", widget: "text" }
 
   # ---------- AVÍS / NOVETAT ----------
   - name: "avis"
