@@ -61,7 +61,7 @@ def build(g):
     </svg>'''
 
     PEAKS=[("Segària","509",509),("Cabal","713",713),("Penya Migdia","747",747),("Montnegre","653",653),
-           ("Bodoix","556",556),("Ambra","298",298),("Xical","546",546),("Xillibre","751",751),("Mostalla","359",359)]
+           ("Bodoix","556",556),("Ambra","298",298),("Xical","363",363),("Xillibre","751",751),("Mostalla","359",359)]
 
     # ============================================= HOME
     # (href, tva, tes, pva, pes, num)
