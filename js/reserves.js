@@ -110,15 +110,17 @@
     var l=lang();
     var m2=new Date(view.getFullYear(), view.getMonth()+1, 1);
     var canPrev = (view.getFullYear()>today.getFullYear())||(view.getFullYear()===today.getFullYear()&&view.getMonth()>today.getMonth());
-    function navHTML(prevId,nextId){
+    function navHTML(prevId,nextId,l1,l2){
+      var mid=l1?'<span class="rcal-nav-months"><span>'+l1+'</span><span>'+l2+'</span></span>':'';
       return '<div class="rcal-nav"><button type="button" id="'+prevId+'" '+(canPrev?'':'disabled')+' aria-label="Anterior">‹</button>'+
+      mid+
       '<button type="button" id="'+nextId+'" aria-label="Següent">›</button></div>';
     }
     var label1=MESOS[l][view.getMonth()]+' '+view.getFullYear();
     var label2=MESOS[l][m2.getMonth()]+' '+m2.getFullYear();
     grid.innerHTML =
-      navHTML('rcal-prev','rcal-next')+
-      '<div class="rcal-grid">'+monthHTML(view,label1)+monthHTML(m2,label2)+'</div>'+
+      navHTML('rcal-prev','rcal-next',label1,label2)+
+      '<div class="rcal-grid">'+monthHTML(view)+monthHTML(m2)+'</div>'+
       navHTML('rcal-prev-b','rcal-next-b');
     legend.innerHTML =
       '<span><i class="lg free"></i>'+(l==='es'?'Libre':'Lliure')+'</span>'+
