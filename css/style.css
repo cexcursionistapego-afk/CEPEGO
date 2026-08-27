@@ -218,7 +218,7 @@ html[data-lang="es"] .va{display:none}
 .skyline-chart .sk-ridge{stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
 .skyline-chart .sk-base{stroke:var(--ink);stroke-width:1;opacity:.18}
 .skyline-chart .sk-lead{stroke:var(--hair);stroke-width:1}
-.skyline-chart .sk-dot{fill:var(--ink)}
+.skyline-chart .sk-dot{fill:var(--ember)}
 .skyline-chart .sk-name{font:700 12px var(--font-body);letter-spacing:.06em;fill:var(--ink)}
 .skyline-chart .sk-alt{font:500 10px var(--font-body);fill:var(--muted)}
 .skyline-chart .sk-name-v{font:700 10px var(--font-body);letter-spacing:.04em;fill:var(--ink)}
