@@ -49,7 +49,9 @@ function decodeEntities(s) {
     .replace(/&eacute;/g, 'é').replace(/&uacute;/g, 'ú').replace(/&ntilde;/g, 'ñ')
     .replace(/&Oacute;/g, 'Ó').replace(/&Aacute;/g, 'Á').replace(/&Eacute;/g, 'É')
     .replace(/&iexcl;/g, '¡').replace(/&ndash;/g, '–')
-    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#176;/g, '°');
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#176;/g, '°')
+    // Byte 0x96 (en-dash de Windows-1252) maldecodificat com a ISO-8859-15
+    .replace(//g, '–');
 }
 
 function toNumber(raw) {
@@ -170,9 +172,11 @@ function parseAemet(rawHtml) {
   }
 
   function bucket(hour) {
-    if (hour === '06–12h' || hour === '00–12h') return 'mati';
-    if (hour === '12–18h' || hour === '12–24h') return 'vesprada';
-    if (hour === '18–24h' || hour === '00–06h') return 'nit';
+    // Normalitza guions: en-dash (–), Windows-1252 0x96 (), hyphen-minus (-)
+    var h = String(hour || '').replace(/[–—−\-]/g, '-');
+    if (h === '06-12h' || h === '00-12h') return 'mati';
+    if (h === '12-18h' || h === '12-24h') return 'vesprada';
+    if (h === '18-24h' || h === '00-06h') return 'nit';
     return null;
   }
 
