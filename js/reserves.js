@@ -144,10 +144,29 @@
   /* -------- formulari -------- */
   var form = document.getElementById('reserva-form');
   var msg = document.getElementById('r-msg');
+  var personesInput = document.getElementById('r-persones');
+  var personesMsg = document.getElementById('r-persones-msg');
+  function checkPersones(){
+    if(!personesInput) return true;
+    var l=lang();
+    var v = parseInt(personesInput.value,10);
+    if(personesInput.value!=='' && v>21){
+      personesInput.value='21';
+      if(personesMsg) personesMsg.textContent = l==='es' ? 'Máximo 21 personas (capacidad del refugio).' : 'Màxim 21 persones (capacitat del refugi).';
+      return false;
+    }
+    if(personesMsg) personesMsg.textContent='';
+    return true;
+  }
+  if(personesInput){
+    personesInput.addEventListener('input',checkPersones);
+    personesInput.addEventListener('change',checkPersones);
+  }
   if(form){
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var l=lang();
+      if(!checkPersones()){ return; }
       if(!fEntrada.value||!fSalida.value){ show(l==='es'?'Elige las fechas en el calendario.':'Tria les dates al calendari.','err'); return; }
       var fd=new FormData(form); var body={};
       fd.forEach(function(v,k){ body[k]=v; });
