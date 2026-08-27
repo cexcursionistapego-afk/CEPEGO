@@ -137,7 +137,7 @@ def build(g):
   <div class="band__bg" style="background-image:url('{L2}')"></div>
   <div class="band__scrim"></div>
   <div class="wrap">
-    <blockquote><span class="va">"La muntanya no és un lloc on anar, és una manera de viure."</span><span class="es">"La montaña no es un lugar al que ir, es una forma de vivir."</span>
+    <blockquote><span class="va">"Més de 50 anys caminant per les muntanyes, és la bona vida."</span><span class="es">"Más de 50 años caminando por las montañas, esa es la buena vida."</span>
       <cite>Centre Excursionista de Pego</cite></blockquote>
   </div>
 </section>
