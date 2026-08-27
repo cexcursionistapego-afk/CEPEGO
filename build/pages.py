@@ -541,10 +541,10 @@ def build(g):
         "Activitats del Centre Excursionista de Pego al llarg de l'any.", calendari, path="calendari.html"))
 
     # ============================================= CONTACTE
-    contacte=header("contacte")+subhero(IMG+"senyal-pego.jpg",'Pego',
+    contacte=header("contacte")+subhero(IMG+"bb9bb0_391b36f3ebd04e3182be56e88280aca8~mv2.jpeg",'Pego',
         "Contacta amb el club","Contacta con el club",
         "Tens dubtes o suggeriments? Escriu-nos.","¿Tienes dudas o sugerencias? Escríbenos.",
-        pos='30%')+f'''
+        pos='25%')+f'''
 <section class="section">
   <div class="wrap narrow">
     <div class="reveal">
