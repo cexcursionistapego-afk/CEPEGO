@@ -46,11 +46,11 @@ CREST = IMG+"escut-cepego.png"
 CREST_BW = IMG+"bb9bb0_adf7f0669ac24f07b323f93d8f79508e~mv2.png"
 
 REFUGI=[IMG+x for x in [
- "bb9bb0_b04771a1130c4e5e90a119181141fb72~mv2.jpg","bb9bb0_a2ce80027c5a41e283c411a4d6aadbd8~mv2.jpg",
+ "bb9bb0_b04771a1130c4e5e90a119181141fb72~mv2.jpg","cuina-figuereta.jpg",
  "bb9bb0_3e06a8681970407a9a99439169cba9c3~mv2.jpg","bb9bb0_0264650fe7984448ac9dad7857dca807~mv2.jpg",
  "bb9bb0_a0e563ab5d99450ea75f1ee2d1973540~mv2.jpg","bb9bb0_e907fb62c0034175905798bce3ea432c~mv2.jpg",
- "bb9bb0_0e8f156719df4d38ae6c85098ec2f198~mv2.jpg","bb9bb0_497dab15c5f64b25bc3e35359d3c0a54~mv2.jpg",
- "bb9bb0_d3e335c0600a45ea91891e67cab2e858~mv2.jpg","bb9bb0_80c717276f16429da7a2ff0aee4b2bc5~mv2.jpg",
+ "sala-estar-figuereta.jpg","bb9bb0_497dab15c5f64b25bc3e35359d3c0a54~mv2.jpg",
+ "dormitori-figuereta.jpg","bb9bb0_80c717276f16429da7a2ff0aee4b2bc5~mv2.jpg",
  "bb9bb0_2d45b0eab4794a76a9c22e3e3b9c7155~mv2.jpeg","bb9bb0_dd4b5c48aab64d6fa0f2f034dfbaf7e1~mv2.jpeg",
  "bb9bb0_83fc4a39cac54e4086907766e7327e78~mv2_d_2048_1371_s_2.jpg"]]
 
