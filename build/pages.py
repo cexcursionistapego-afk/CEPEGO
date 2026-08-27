@@ -290,7 +290,7 @@ def build(g):
         "Refugi de muntanya La Figuereta, a la Vall d'Ebo. Equipament complet per a 21 persones.", refugi, path="refugi.html"))
 
     # ============================================= RESERVAR
-    rules=[("Sols es pot fer foc a la xemeneia de dins del refugi; proporcionem llenya, graelles i material lliure de tòxics.","Solo se puede hacer fuego en la chimenea del interior; proporcionamos leña, parrillas y material libre de tóxicos."),
+    rules=[("Sols es pot fer foc a la xemeneia de dins del refugi; proporcionem llenya, graelles i material per encendre lliure de tòxics.","Solo se puede hacer fuego en la chimenea del interior; proporcionamos leña, parrillas y material para encender libre de tóxicos."),
      ("No deixar el foc encés al dormir.","No dejar el fuego encendido al dormir."),
      ("Tancar les dues claus de pas de l'aigua després de l'estada.","Cerrar las dos llaves de paso del agua tras la estancia."),
      ("Deixar el refugi igual o millor, i emportar-se tota la brossa.","Dejar el refugio igual o mejor, y llevarse toda la basura."),
@@ -358,15 +358,15 @@ def build(g):
   </div>
 </section>
 
-<section class="section">
+<section class="section rules-top">
   <div class="wrap">
     <div class="narrow center reveal" style="margin-bottom:clamp(24px,3vw,40px)">
       <div class="kicker center-k">⚠️ <span class="va">Normes</span><span class="es">Normas</span></div>
       <h2><span class="va">Abans de la teua estada</span><span class="es">Antes de tu estancia</span></h2>
     </div>
-    <ul class="rules narrow">
+    <ul class="rules">
 {rl}    </ul>
-    <p class="note narrow" style="margin-top:22px;border-left:3px solid var(--ember)"><span class="va">En realitzar la reserva, l'usuari o club assumeix plenament la responsabilitat per qualsevol accident o incident durant l'ús de l'espai cedit, eximint la part cedent de qualsevol responsabilitat. Reconeix haver sigut informat de les condicions d'ús i les accepta de forma voluntària.</span><span class="es">Al realizar la reserva, el usuario o club asume plenamente la responsabilidad por cualquier accidente o incidente durante el uso del espacio cedido, eximiendo a la parte cedente de cualquier responsabilidad. Reconoce haber sido informado de las condiciones de uso y las acepta de forma voluntaria.</span></p>
+    <p class="note" style="margin-top:22px;border-left:3px solid var(--ember)"><span class="va">En realitzar la reserva, l'usuari o club assumeix plenament la responsabilitat per qualsevol accident o incident durant l'ús de l'espai cedit, eximint la part cedent de qualsevol responsabilitat. Reconeix haver sigut informat de les condicions d'ús i les accepta de forma voluntària.</span><span class="es">Al realizar la reserva, el usuario o club asume plenamente la responsabilidad por cualquier accidente o incidente durante el uso del espacio cedido, eximiendo a la parte cedente de cualquier responsabilidad. Reconoce haber sido informado de las condiciones de uso y las acepta de forma voluntaria.</span></p>
   </div>
 </section>
 '''+footer()

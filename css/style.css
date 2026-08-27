@@ -273,6 +273,7 @@ html[data-lang="es"] .va{display:none}
 .equip li::before{content:"";position:absolute;left:2px;top:19px;width:9px;height:9px;border-radius:50%;background:var(--sage)}
 @media(max-width:640px){.equip{grid-template-columns:1fr}}
 .rules{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+@media(min-width:901px){.rules-top{padding-top:clamp(24px,3vw,48px)}}
 .rules li{background:var(--white);border:1px solid var(--hair);border-left:3px solid var(--ember);
   padding:14px 18px;border-radius:0 12px 12px 0;font-size:.96rem}
 .iban{font-family:var(--font-mono);background:var(--navy);color:#fff;display:inline-block;padding:11px 18px;border-radius:12px;letter-spacing:.06em}
