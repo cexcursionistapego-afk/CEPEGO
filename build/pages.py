@@ -189,10 +189,10 @@ def build(g):
      ("Cal pujar sense calçat a la zona de dormir.","Hay que subir sin calzado a la zona de dormir.")]
     def eq_li(idxs):
         return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
-    refugi=header("refugi")+subhero(REFUGI[11],'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
+    refugi=header("refugi")+subhero(IMG+"refugi-nit.jpg",'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
         "La Figuereta","La Figuereta",
         "El refugi de muntanya del Centre Excursionista de Pego.","El refugio de montaña del Centro Excursionista de Pego.",
-        pos='80%')+f'''
+        pos='85%')+f'''
 
 <section class="section">
   <div class="wrap">
