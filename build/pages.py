@@ -304,7 +304,7 @@ def build(g):
     reservar=header("reservar")+subhero(REFUGI[5],'<span class="va">Refugi La Figuereta</span><span class="es">Refugio La Figuereta</span>',
         "Reservar","Reservar",
         "Disponibilitat i sol·licitud de reserva del refugi La Figuereta.","Disponibilidad y solicitud de reserva del refugio La Figuereta.")+f'''
-<section class="section-sm">
+<section class="section-sm" style="padding-bottom:clamp(20px,3vw,32px)">
   <div class="wrap narrow center reveal">
     <div class="kicker center-k"><span class="va">Com funciona</span><span class="es">Cómo funciona</span></div>
     <h2><span class="va">Tria les dates i envia la sol·licitud</span><span class="es">Elige las fechas y envía la solicitud</span></h2>
