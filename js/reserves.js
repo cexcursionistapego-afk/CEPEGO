@@ -82,12 +82,12 @@
   }
   function fmt(ds){ var d=parse(ds); return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear(); }
 
-  function monthHTML(base){
+  function monthHTML(base, mobileLabel){
     var l=lang();
     var y=base.getFullYear(), m=base.getMonth();
     var first=new Date(y,m,1); var startDow=(first.getDay()+6)%7; // Dl=0
     var days=new Date(y,m+1,0).getDate();
-    var h='<div class="rcal-m"><div class="rcal-w">';
+    var h='<div class="rcal-m">'+(mobileLabel?'<div class="rcal-m-title">'+mobileLabel+'</div>':'')+'<div class="rcal-w">';
     DIES[l].forEach(function(d){ h+='<span>'+d+'</span>'; });
     h+='</div><div class="rcal-d">';
     for(var i=0;i<startDow;i++) h+='<span class="e"></span>';
@@ -120,7 +120,7 @@
     }
     grid.innerHTML =
       navHTML('rcal-prev','rcal-next',label1,label2)+
-      '<div class="rcal-grid">'+monthHTML(view)+monthHTML(m2)+'</div>'+
+      '<div class="rcal-grid">'+monthHTML(view)+monthHTML(m2,label2)+'</div>'+
       navHTML('rcal-prev-b','rcal-next-b');
     legend.innerHTML =
       '<span><i class="lg free"></i>'+(l==='es'?'Libre':'Lliure')+'</span>'+

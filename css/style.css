@@ -434,6 +434,8 @@ html[data-lang="es"] .va{display:none}
 .rcal-nav-months{display:flex;flex:1;gap:26px;padding:0 6px}
 .rcal-nav-months span{flex:1;text-align:center;font-family:var(--font-display);font-weight:600;font-size:.92rem;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
 @media(max-width:560px){.rcal-nav-months{gap:0}.rcal-nav-months__2{display:none}}
+.rcal-m-title{display:none}
+@media(max-width:560px){.rcal-m-title{display:block;text-align:center;font-family:var(--font-display);font-weight:600;font-size:.92rem;color:var(--navy);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}}
 .rcal-w{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px}
 .rcal-w span{text-align:center;font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:4px 0}
 .rcal-d{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
