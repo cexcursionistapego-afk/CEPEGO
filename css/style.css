@@ -421,8 +421,8 @@ html[data-lang="es"] .va{display:none}
 .field textarea{min-height:130px;resize:vertical}
 
 /* ============ RESERVES: calendari + formulari ============ */
-.reserva-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,4vw,54px);align-items:start}
-@media(max-width:900px){.reserva-grid{grid-template-columns:1fr}}
+.reserva-grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,54px);align-items:start}
+.reserva-grid>.reveal:last-child{max-width:640px;margin:0 auto;width:100%}
 .rcal{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(16px,2vw,24px);box-shadow:var(--shadow-sm)}
 .rcal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .rcal-grid+.rcal-nav{display:none}
