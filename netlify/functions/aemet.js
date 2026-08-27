@@ -120,6 +120,7 @@ function parseAemet(rawHtml) {
       periods.push({
         hour: hourM ? decodeEntities(hourM[1]).replace(/\s+/g, '') : null,
         desc: iconM ? decodeEntities(iconM[1]) : null,
+        idx: periods.length,
       });
     }
   }
@@ -170,7 +171,8 @@ function parseAemet(rawHtml) {
 
   function bucket(hour) {
     if (hour === '06–12h' || hour === '00–12h') return 'mati';
-    if (hour === '12–18h' || hour === '18–24h' || hour === '12–24h') return 'vesprada';
+    if (hour === '12–18h' || hour === '12–24h') return 'vesprada';
+    if (hour === '18–24h' || hour === '00–06h') return 'nit';
     return null;
   }
 
@@ -185,22 +187,31 @@ function parseAemet(rawHtml) {
     // "vesprada" (ex. "12–24h", que en realitat cobreix mig dia sencer), no
     // es pot dir que siga només de vesprada — es deixa com a previsió
     // general sense etiqueta. Només als dies amb 2+ trams (on sí que hi ha
-    // una separació real matí/vesprada) es fa la distinció.
-    let mati = null, vesprada = null, general = null;
+    // una separació real matí/vesprada/nit) es fa la distinció.
+    let mati = null, vesprada = null, nit = null, general = null;
     if (group.length > 1) {
-      mati = group.find((p) => bucket(p.hour) === 'mati');
-      vesprada = group.find((p) => bucket(p.hour) === 'vesprada');
-      if (!mati && !vesprada) general = group[0].desc || null;
+      mati = group.find((p) => bucket(p.hour) === 'mati') || null;
+      vesprada = group.find((p) => bucket(p.hour) === 'vesprada') || null;
+      // Si hi ha 00–06h i 18–24h el mateix dia (dies amb 4 trams), es
+      // prioritza el de 18–24h (la nit que ve) per damunt de la matinada.
+      const nitCandidates = group.filter((p) => bucket(p.hour) === 'nit');
+      nit = nitCandidates.length ? nitCandidates[nitCandidates.length - 1] : null;
+      if (!mati && !vesprada && !nit) general = group[0].desc || null;
     } else if (group.length === 1) {
       general = group[0].desc || null;
     }
     const precipDefined = precipGroup.filter((v) => v != null);
+    const precipOf = (p) => (p ? precipVals[p.idx] : null);
     return {
       label: d.label,
       date_title: d.title,
       desc_mati: (mati && mati.desc) || null,
       desc_vesprada: (vesprada && vesprada.desc) || null,
+      desc_nit: (nit && nit.desc) || null,
       desc_general: general,
+      precip_mati: precipOf(mati),
+      precip_vesprada: precipOf(vesprada),
+      precip_nit: precipOf(nit),
       precip_max: precipDefined.length ? Math.max(...precipDefined) : null,
       temp_min: tempPairs[i] ? tempPairs[i].min : null,
       temp_max: tempPairs[i] ? tempPairs[i].max : null,
