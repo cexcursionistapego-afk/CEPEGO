@@ -430,7 +430,7 @@ html[data-lang="es"] .va{display:none}
 .rcal-nav button:hover:not(:disabled){background:var(--navy);color:#fff}
 .rcal-nav button:disabled{opacity:.35;cursor:not-allowed}
 .rcal-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-@media(max-width:560px){.rcal-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.rcal-grid{grid-template-columns:1fr}.rcal-grid>.rcal-m:last-child{display:none}}
 .rcal-nav-months{display:flex;flex:1;gap:26px;padding:0 6px}
 .rcal-nav-months span{flex:1;text-align:center;font-family:var(--font-display);font-weight:600;font-size:.92rem;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
 @media(max-width:560px){.rcal-nav-months{gap:0}.rcal-nav-months__2{display:none}}
