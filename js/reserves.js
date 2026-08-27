@@ -82,12 +82,12 @@
   }
   function fmt(ds){ var d=parse(ds); return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear(); }
 
-  function monthHTML(base){
+  function monthHTML(base, label){
     var l=lang();
     var y=base.getFullYear(), m=base.getMonth();
     var first=new Date(y,m,1); var startDow=(first.getDay()+6)%7; // Dl=0
     var days=new Date(y,m+1,0).getDate();
-    var h='<div class="rcal-m"><div class="rcal-w">';
+    var h='<div class="rcal-m">'+(label?'<div class="rcal-m-title">'+label+'</div>':'')+'<div class="rcal-w">';
     DIES[l].forEach(function(d){ h+='<span>'+d+'</span>'; });
     h+='</div><div class="rcal-d">';
     for(var i=0;i<startDow;i++) h+='<span class="e"></span>';
@@ -110,15 +110,15 @@
     var l=lang();
     var m2=new Date(view.getFullYear(), view.getMonth()+1, 1);
     var canPrev = (view.getFullYear()>today.getFullYear())||(view.getFullYear()===today.getFullYear()&&view.getMonth()>today.getMonth());
-    var monthsLabel=MESOS[l][view.getMonth()]+' '+view.getFullYear()+' – '+MESOS[l][m2.getMonth()]+' '+m2.getFullYear();
-    function navHTML(prevId,nextId,label){
+    function navHTML(prevId,nextId){
       return '<div class="rcal-nav"><button type="button" id="'+prevId+'" '+(canPrev?'':'disabled')+' aria-label="Anterior">‹</button>'+
-      (label?'<span class="rcal-nav-months">'+label+'</span>':'')+
       '<button type="button" id="'+nextId+'" aria-label="Següent">›</button></div>';
     }
+    var label1=MESOS[l][view.getMonth()]+' '+view.getFullYear();
+    var label2=MESOS[l][m2.getMonth()]+' '+m2.getFullYear();
     grid.innerHTML =
-      navHTML('rcal-prev','rcal-next',monthsLabel)+
-      '<div class="rcal-grid">'+monthHTML(view)+monthHTML(m2)+'</div>'+
+      navHTML('rcal-prev','rcal-next')+
+      '<div class="rcal-grid">'+monthHTML(view,label1)+monthHTML(m2,label2)+'</div>'+
       navHTML('rcal-prev-b','rcal-next-b');
     legend.innerHTML =
       '<span><i class="lg free"></i>'+(l==='es'?'Libre':'Lliure')+'</span>'+
