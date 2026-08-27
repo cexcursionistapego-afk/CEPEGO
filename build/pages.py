@@ -137,7 +137,7 @@ def build(g):
   <div class="band__bg" style="background-image:url('{L2}')"></div>
   <div class="band__scrim"></div>
   <div class="wrap">
-    <blockquote><span class="va">"Més de 50 anys caminant per les muntanyes, és la bona vida."</span><span class="es">"Más de 50 años caminando por las montañas, esa es la buena vida."</span>
+    <blockquote><span class="va">"Més de 50 anys caminant per les muntanyes."</span><span class="es">"Más de 50 años caminando por las montañas."</span>
       <cite>Centre Excursionista de Pego</cite></blockquote>
   </div>
 </section>
@@ -314,8 +314,8 @@ def build(g):
 
 <div class="wrap narrow">
   <div class="avis reveal" style="border-radius:var(--r);margin-bottom:clamp(16px,2.5vw,28px)">
-    <span class="va">&#x26A0;&#xFE0F; El refugi <strong>no admet reserves del 31 de maig al 1 d'octubre</strong> (tancament d'estiu anual). Tampoc es lloga <strong>la nit del 31 de desembre</strong>.</span>
-    <span class="es">&#x26A0;&#xFE0F; El refugio <strong>no admite reservas del 31 de mayo al 1 de octubre</strong> (cierre de verano anual). Tampoco se alquila <strong>la noche del 31 de diciembre</strong>.</span>
+    <span class="va">&#x26A0;&#xFE0F; El refugi <strong>no admet reserves del 31 de maig al 1 d'octubre</strong> (tancament d'estiu anual). Tampoc es lloga <strong>la nit del 31 de desembre</strong>. Fins finals de setembre no gestionarem les reserves, que aniran per ordre d'arribada.</span>
+    <span class="es">&#x26A0;&#xFE0F; El refugio <strong>no admite reservas del 31 de mayo al 1 de octubre</strong> (cierre de verano anual). Tampoco se alquila <strong>la noche del 31 de diciembre</strong>. Hasta finales de septiembre no gestionaremos las reservas, que irán por orden de llegada.</span>
   </div>
 </div>
 
