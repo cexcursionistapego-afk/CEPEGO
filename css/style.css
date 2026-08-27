@@ -424,16 +424,16 @@ html[data-lang="es"] .va{display:none}
 .reserva-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,4vw,54px);align-items:start}
 @media(max-width:900px){.reserva-grid{grid-template-columns:1fr}}
 .rcal{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(16px,2vw,24px);box-shadow:var(--shadow-sm)}
+.rcal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.rcal-grid+.rcal-nav{display:none}
+@media(max-width:560px){.rcal-grid+.rcal-nav{display:flex;margin-bottom:0;margin-top:14px}}
+.rcal-nav button{width:38px;height:38px;border-radius:50%;border:1px solid var(--hair);background:var(--paper);font-size:1.3rem;line-height:1;cursor:pointer;color:var(--navy)}
+.rcal-nav button:hover:not(:disabled){background:var(--navy);color:#fff}
+.rcal-nav button:disabled{opacity:.35;cursor:not-allowed}
 .rcal-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
 @media(max-width:560px){.rcal-grid{grid-template-columns:1fr}}
-.rcal-m-hd{display:flex;align-items:center;gap:6px;margin-bottom:10px}
-.rcal-m-title{flex:1;text-align:center;font-family:var(--font-display);font-weight:600;font-size:.95rem;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
+.rcal-m-title{text-align:center;font-family:var(--font-display);font-weight:600;font-size:.95rem;color:var(--navy);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
 @media(max-width:480px){.rcal-m-title{font-size:.78rem}}
-.rcal-arr{width:34px;height:34px;flex-shrink:0;border-radius:50%;border:1px solid var(--hair);background:var(--paper);font-size:1.2rem;line-height:1;cursor:pointer;color:var(--navy)}
-.rcal-arr:hover:not(:disabled){background:var(--navy);color:#fff}
-.rcal-arr:disabled{opacity:.35;cursor:not-allowed}
-.rcal-nav-b{display:none}
-@media(max-width:560px){.rcal-nav-b{display:flex;justify-content:space-between;margin-top:14px}}
 .rcal-w{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px}
 .rcal-w span{text-align:center;font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:4px 0}
 .rcal-d{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
