@@ -69,19 +69,22 @@
     return { va: va, es: t };
   }
 
-  function periodHTML(cls, labelVa, labelEs, desc) {
+  function periodHTML(cls, labelVa, labelEs, desc, precip) {
     if (!desc) return '';
     return '' +
       '<div class="aemet-day__period ' + cls + '">' +
         (labelVa ? '<div class="aemet-day__period-l">' + bi(labelVa, labelEs) + '</div>' : '') +
         '<div class="aemet-day__ic" title="' + esc(desc) + '">' + emoji(desc) + '</div>' +
+        (precip != null ? '<div class="aemet-day__period-precip">💧 ' + precip + '%</div>' : '') +
       '</div>';
   }
 
   function dayHTML(d) {
-    var periods = (d.desc_mati || d.desc_vesprada)
-      ? periodHTML('mati', 'Matí', 'Mañana', d.desc_mati) + periodHTML('vesprada', 'Vesprada', 'Tarde', d.desc_vesprada)
-      : periodHTML('general', '', '', d.desc_general);
+    var periods = (d.desc_mati || d.desc_vesprada || d.desc_nit)
+      ? periodHTML('mati', 'Matí', 'Mañana', d.desc_mati, d.precip_mati) +
+        periodHTML('vesprada', 'Vesprada', 'Tarde', d.desc_vesprada, d.precip_vesprada) +
+        periodHTML('nit', 'Nit', 'Noche', d.desc_nit, d.precip_nit)
+      : periodHTML('general', '', '', d.desc_general, d.precip_max);
     return '' +
       '<div class="aemet-day">' +
         '<div class="aemet-day__label">' + (function(tr){ return bi(esc(tr.va), esc(tr.es)); })(translateDayLabel(d.label)) + '</div>' +
@@ -91,7 +94,6 @@
           (d.temp_max != null ? '<span class="mx">' + Math.round(d.temp_max) + '°</span>' : '') +
           (d.temp_min != null ? '<span class="mn">' + Math.round(d.temp_min) + '°</span>' : '') +
         '</div>' +
-        '<div class="aemet-day__precip">' + (d.precip_max != null ? '💧 ' + d.precip_max + '%' : '') + '</div>' +
       '</div>';
   }
 
