@@ -374,7 +374,7 @@ def build(g):
         "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, path="reservar.html", extra_js="js/reserves.js"))
 
     # ============================================= METEO
-    meteo_dash=f'''<section class="section">
+    meteo_dash=f'''<section class="section" style="padding:clamp(28px,3.5vw,48px) 0">
   <div class="wrap">
     <div class="kicker center-k" style="justify-content:center"><span class="va">Temps en directe</span><span class="es">Tiempo en directo</span></div>
     <div class="meteo-dash-grid reveal" style="margin-top:clamp(16px,2.5vw,28px)">
