@@ -402,7 +402,7 @@ def build(g):
         "El temps","El tiempo",
         "Estacions meteorològiques a La Figuereta i a Pego connectades a la xarxa AVAMET, més la previsió del temps i els avisos d'alertes meteorològiques d'AEMET.","Estaciones meteorológicas en La Figuereta y en Pego conectadas a la red AVAMET, más la previsión del tiempo y los avisos de alertas meteorológicas de AEMET.",
         pos='18%')+meteo_dash+footer()
-    write("meteo.html", doc("El temps | CEPEGO",
+    write("meteo.html", doc("El temps a Pego i la Figuereta | CEPEGO",
         "Estacions meteorològiques del refugi La Figuereta i de Pego connectades a la xarxa AVAMET, i previsió AEMET.", meteo, path="meteo.html", extra_js=["js/meteo-dashboard.js","js/aemet-forecast.js"]))
 
     # ============================================= RUTES
@@ -440,7 +440,7 @@ def build(g):
   </div>
 </section>
 '''+footer()
-    write("rutes.html", doc("Rutes i entorn | CEPEGO",
+    write("rutes.html", doc("Rutes de senderisme per Pego | CEPEGO",
         "Rutes de senderisme per Pego i les Valls amb el seu perfil i itinerari.", rutes, path="rutes.html"))
 
     # ============================================= ESCALADA
@@ -488,7 +488,7 @@ def build(g):
   </div>
 </section>
 '''+footer()
-    write("escalada.html", doc("Escalada | CEPEGO",
+    write("escalada.html", doc("Escalada a Pego | Escola del Calvari — CEPEGO",
         "Escola d'escalada del Calvari a Pego: sectors Iniciació i Placa del Sol, 28 vies.", escalada, path="escalada.html"))
 
     # ============================================= ESPELEO
@@ -505,7 +505,7 @@ def build(g):
   </div>
 </section>
 '''+footer()
-    write("espeleo.html", doc("Espeleologia | CEPEGO",
+    write("espeleo.html", doc("Espeleologia a Pego | Avencs i coves — CEPEGO",
         "Les principals cavitats i avencs de la zona de Pego, amb les seues topografies.", espeleo, path="espeleo.html"))
 
     # ============================================= BARRANCS
@@ -520,7 +520,7 @@ def build(g):
   </div>
 </section>
 '''+footer()
-    write("barrancs.html", doc("Barrancs | CEPEGO",
+    write("barrancs.html", doc("Barrancs de Pego i la Marina | CEPEGO",
         "Els principals barrancs de la zona de Pego, amb material i topografia.", barrancs, path="barrancs.html"))
 
     # ============================================= CALENDARI
