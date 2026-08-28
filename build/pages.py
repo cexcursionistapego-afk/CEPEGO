@@ -55,9 +55,9 @@ def build(g):
             )
         cls="skyline-chart skyline-chart--v" if vertical else "skyline-chart skyline-chart--h"
         return f'''<svg class="{cls}" viewBox="0 {view_top} {W} {baseline+10-view_top}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Skyline dels cims que envolten Pego">
-      {labels}
       <polyline class="sk-ridge" points="{polyline}" fill="none"/>
       <line class="sk-base" x1="0" y1="{baseline}" x2="{W}" y2="{baseline}"/>
+      {labels}
     </svg>'''
 
     PEAKS=[("Segària","509",509),("Cabal","595",595),("Penya Migdia","646",646),("Montnegre","678",678),
