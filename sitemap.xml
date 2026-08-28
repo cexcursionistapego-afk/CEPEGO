@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://cepego.com/</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/refugi.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/reservar.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/meteo.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/rutes.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/escalada.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/espeleo.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/barrancs.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/calendari.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/contacte.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/soci.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/avis-legal.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/privacitat.html</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://cepego.com/cookies.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://cepego.com/</loc><lastmod>2026-08-28</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://cepego.com/refugi.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cepego.com/reservar.html</loc><lastmod>2026-08-28</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cepego.com/meteo.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cepego.com/rutes.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cepego.com/escalada.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cepego.com/espeleo.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cepego.com/barrancs.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cepego.com/calendari.html</loc><lastmod>2026-08-28</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cepego.com/contacte.html</loc><lastmod>2026-08-28</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://cepego.com/soci.html</loc><lastmod>2026-08-28</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://cepego.com/avis-legal.html</loc><lastmod>2026-08-28</lastmod><changefreq>yearly</changefreq><priority>0.1</priority></url>
+  <url><loc>https://cepego.com/privacitat.html</loc><lastmod>2026-08-28</lastmod><changefreq>yearly</changefreq><priority>0.1</priority></url>
+  <url><loc>https://cepego.com/cookies.html</loc><lastmod>2026-08-28</lastmod><changefreq>yearly</changefreq><priority>0.1</priority></url>
 </urlset>

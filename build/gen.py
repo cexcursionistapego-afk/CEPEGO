@@ -267,8 +267,17 @@ open(os.path.join(OUT,"robots.txt"),"w",encoding="utf-8").write(
 
 from datetime import date
 today = date.today().isoformat()
+PRIORITY = {
+    "index.html":("1.0","weekly"), "reservar.html":("0.9","weekly"), "refugi.html":("0.8","monthly"),
+    "meteo.html":("0.8","daily"), "calendari.html":("0.7","weekly"),
+    "rutes.html":("0.6","monthly"), "escalada.html":("0.6","monthly"),
+    "espeleo.html":("0.6","monthly"), "barrancs.html":("0.6","monthly"),
+    "contacte.html":("0.5","yearly"), "soci.html":("0.5","monthly"),
+    "avis-legal.html":("0.1","yearly"), "privacitat.html":("0.1","yearly"), "cookies.html":("0.1","yearly"),
+}
 urls = "".join(
-    f'  <url><loc>{SITE_URL}/{("" if p=="index.html" else p)}</loc><lastmod>{today}</lastmod></url>\n'
+    f'  <url><loc>{SITE_URL}/{("" if p=="index.html" else p)}</loc><lastmod>{today}</lastmod>'
+    f'<changefreq>{PRIORITY[p][1]}</changefreq><priority>{PRIORITY[p][0]}</priority></url>\n'
     for p in PAGES)
 open(os.path.join(OUT,"sitemap.xml"),"w",encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n'
