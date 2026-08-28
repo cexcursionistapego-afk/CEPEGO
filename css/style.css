@@ -419,6 +419,7 @@ html[data-lang="es"] .va{display:none}
 .field label{display:block;font-weight:600;margin-bottom:6px;font-size:.9rem}
 .field input,.field textarea{width:100%;padding:13px 15px;border:1px solid var(--hair);border-radius:12px;font:inherit;background:var(--white)}
 .field input:focus,.field textarea:focus{outline:2px solid var(--navy);border-color:var(--navy)}
+.field input[type="date"]{-webkit-appearance:none;appearance:none;min-height:48px}
 .field textarea{min-height:130px;resize:vertical}
 
 /* ============ RESERVES: calendari + formulari ============ */
