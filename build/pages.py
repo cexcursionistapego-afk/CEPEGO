@@ -284,6 +284,10 @@ def build(g):
       </div>
     </div>
 
+    <div class="center reveal" style="margin-top:clamp(32px,4vw,56px);padding-top:clamp(24px,3vw,40px);border-top:1px solid var(--hair)">
+      <a href="reservar.html" class="btn btn-primary"><span class="va">Reservar / Disponibilitat</span><span class="es">Reservar / Disponibilidad</span></a>
+    </div>
+
   </div>
 </section>
 '''+footer()
