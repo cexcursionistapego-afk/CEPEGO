@@ -394,7 +394,7 @@ def build(g):
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió Pego i la Figuereta, pròxims dies</span><span class="es">Previsión Pego y la Figuereta, próximos días</span></div>
+    <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió pròxims dies</span><span class="es">Previsión próximos días</span></div>
     <div id="aemet-forecast" class="reveal"></div>
     <p class="note center avamet-credit" style="margin-top:14px">
       <img src="{IMG}aemet-logo.jpg" alt="AEMET" class="avamet-credit__logo">
