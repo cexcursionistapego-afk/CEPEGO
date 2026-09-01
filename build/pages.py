@@ -335,10 +335,7 @@ def build(g):
       <div class="card">
         <h3 style="font-size:1.4rem"><span class="va">La teua sol·licitud</span><span class="es">Tu solicitud</span></h3>
         <p id="r-resum"></p>
-        <div id="r-queue-notice" class="avis" style="display:none;border-radius:var(--r);margin-bottom:16px">
-          <span class="va">⚠️ Les reserves per a eixes dates encara no estan obertes. Pots enviar igualment la sol·licitud i entrarà en una cua per ordre d'arribada; la gestionarem quan s'òbriguen.</span>
-          <span class="es">⚠️ Las reservas para esas fechas aún no están abiertas. Puedes enviar igualmente la solicitud y entrará en una cola por orden de llegada; la gestionaremos cuando se abran.</span>
-        </div>
+        <div id="r-queue-notice" class="avis" style="display:none;border-radius:var(--r);margin-bottom:16px"></div>
         <form id="reserva-form" novalidate>
           <input type="hidden" id="r-entrada" name="entrada">
           <input type="hidden" id="r-salida" name="salida">
