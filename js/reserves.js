@@ -38,6 +38,14 @@
   function inQueuePeriod(qf, entrada, salida) {
     return !!qf && (entrada >= qf || salida >= qf);
   }
+  function fmtLongDate(ds, l) {
+    var d = parse(ds);
+    return d.getDate() + ' de ' + MESOS[l][d.getMonth()].toLowerCase() + ' de ' + d.getFullYear();
+  }
+  function queueNoticeHTML(qf) {
+    return '<span class="va">⚠️ Les reserves per a eixes dates encara no estan obertes. Pots enviar igualment la sol·licitud i entrarà en una cua per ordre d\'arribada; la gestionarem a partir del ' + fmtLongDate(qf,'va') + '.</span>' +
+           '<span class="es">⚠️ Las reservas para esas fechas aún no están abiertas. Puedes enviar igualmente la solicitud y entrará en una cola por orden de llegada; la gestionaremos a partir del ' + fmtLongDate(qf,'es') + '.</span>';
+  }
 
   // Blackout: May 31 – Sep 30 (tancament d'estiu) i la nit del 31 de desembre (mai es lloga). Cada any.
   function isSummer(ds) {
@@ -88,7 +96,11 @@
         ? '<b>Entrada:</b> '+fmt(selStart)+' · <b>Salida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> noche'+(nits>1?'s':'')+' · <b>'+preu+'</b>'
         : '<b>Entrada:</b> '+fmt(selStart)+' · <b>Eixida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> nit'+(nits>1?'s':'')+' · <b>'+preu+'</b>');
       if(submitBtn) submitBtn.disabled=false;
-      if(queueNotice) queueNotice.style.display = inQueuePeriod(queueFrom, selStart, selEnd) ? '' : 'none';
+      if(queueNotice) {
+        var queued = inQueuePeriod(queueFrom, selStart, selEnd);
+        queueNotice.style.display = queued ? '' : 'none';
+        if (queued) queueNotice.innerHTML = queueNoticeHTML(queueFrom);
+      }
     } else {
       if(fEntrada) fEntrada.value=selStart||'';
       if(fSalida) fSalida.value='';
@@ -206,8 +218,8 @@
             form.reset(); selStart=selEnd=null; sync(); render();
             if (wasQueued) {
               show(l==='es'
-                ? 'Solicitud recibida. Las reservas para esas fechas aún no están abiertas: tu solicitud entra en una cola por orden de llegada y la gestionaremos en cuanto se abran.'
-                : 'Sol·licitud rebuda. Les reserves per a eixes dates encara no estan obertes: la teua sol·licitud entra en una cua per ordre d\'arribada i la gestionarem en obrir-les.','ok');
+                ? 'Solicitud recibida. Las reservas para esas fechas aún no están abiertas: tu solicitud entra en una cola por orden de llegada y la gestionaremos a partir del ' + fmtLongDate(queueFrom,'es') + '.'
+                : 'Sol·licitud rebuda. Les reserves per a eixes dates encara no estan obertes: la teua sol·licitud entra en una cua per ordre d\'arribada i la gestionarem a partir del ' + fmtLongDate(queueFrom,'va') + '.','ok');
             } else {
               show(l==='es'
                 ? '¡Solicitud enviada! La revisaremos y nos pondremos en contacto contigo por correo electrónico para confirmar la fecha y el pago de la señal (50 €).'
