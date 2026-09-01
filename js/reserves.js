@@ -218,8 +218,8 @@
                 : 'Sol·licitud rebuda. Les reserves per a eixes dates encara no estan obertes: la teua sol·licitud entra en una cua per ordre d\'arribada i la gestionarem a partir del ' + fmt(queueFrom) + '.','ok');
             } else {
               show(l==='es'
-                ? '¡Solicitud enviada! La revisaremos y nos pondremos en contacto contigo por correo electrónico para confirmar la fecha y el pago de la señal (50 €).'
-                : 'Sol·licitud enviada! La revisarem i ens posarem en contacte amb tu per correu electrònic per confirmar la data i el pagament de la senyal (50 €).','ok');
+                ? '¡Solicitud enviada! La revisaremos y nos pondremos en contacto contigo por correo electrónico para confirmar la fecha.'
+                : 'Sol·licitud enviada! La revisarem i ens posarem en contacte amb tu per correu electrònic per confirmar la data.','ok');
             }
           } else {
             submitBtn.disabled=false;
