@@ -23,6 +23,20 @@
   var selStart = null, selEnd = null;
   var loaded = false;
 
+  // Data des de la qual les reserves entren en cua (ajustos del CMS). Es
+  // guarda com a promesa perquè el formulari sempre espere que aquesta
+  // petició acabe abans d'avaluar-la, encara que vaja més lenta que la de
+  // disponibilitat (en ús real l'usuari triga segons a omplir el formulari,
+  // però convé no dependre'n).
+  var queueFromPromise = fetch('data/site.json',{cache:'no-store'})
+    .then(function(r){ return r.ok?r.json():null; })
+    .then(function(s){ return (s && s.reserves_cua_desde) ? String(s.reserves_cua_desde).slice(0,10) : ''; })
+    .catch(function(){ return ''; });
+
+  function inQueuePeriod(queueFrom, entrada, salida) {
+    return !!queueFrom && (entrada >= queueFrom || salida >= queueFrom);
+  }
+
   // Blackout: May 31 – Sep 30 (tancament d'estiu) i la nit del 31 de desembre (mai es lloga). Cada any.
   function isSummer(ds) {
     var md = ds.slice(5); // 'MM-DD'
@@ -172,14 +186,25 @@
       fd.forEach(function(v,k){ body[k]=v; });
       body.entrada=fEntrada.value; body.salida=fSalida.value;
       submitBtn.disabled=true; show(l==='es'?'Enviando…':'Enviant…','');
-      fetch('/api/reserva',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
-        .then(function(r){ return r.json().catch(function(){return{ok:false};}); })
-        .then(function(res){
+      Promise.all([
+        fetch('/api/reserva',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+          .then(function(r){ return r.json().catch(function(){return{ok:false};}); }),
+        queueFromPromise
+      ])
+        .then(function(results){
+          var res=results[0], queueFrom=results[1];
           if(res && res.ok){
+            var wasQueued = inQueuePeriod(queueFrom, body.entrada, body.salida);
             form.reset(); selStart=selEnd=null; sync(); render();
-            show(l==='es'
-              ? '¡Solicitud enviada! La revisaremos y nos pondremos en contacto contigo por correo electrónico para confirmar la fecha y el pago de la señal (50 €).'
-              : 'Sol·licitud enviada! La revisarem i ens posarem en contacte amb tu per correu electrònic per confirmar la data i el pagament de la senyal (50 €).','ok');
+            if (wasQueued) {
+              show(l==='es'
+                ? 'Solicitud recibida. Las reservas para esas fechas aún no están abiertas: tu solicitud entra en una cola por orden de llegada y la gestionaremos en cuanto se abran.'
+                : 'Sol·licitud rebuda. Les reserves per a eixes dates encara no estan obertes: la teua sol·licitud entra en una cua per ordre d\'arribada i la gestionarem en obrir-les.','ok');
+            } else {
+              show(l==='es'
+                ? '¡Solicitud enviada! La revisaremos y nos pondremos en contacto contigo por correo electrónico para confirmar la fecha y el pago de la señal (50 €).'
+                : 'Sol·licitud enviada! La revisarem i ens posarem en contacte amb tu per correu electrònic per confirmar la data i el pagament de la senyal (50 €).','ok');
+            }
           } else {
             submitBtn.disabled=false;
             show(l==='es'?'No se ha podido enviar. Inténtalo de nuevo o escríbenos por email.':'No s\'ha pogut enviar. Torna-ho a provar o escriu-nos per correu.','err');
