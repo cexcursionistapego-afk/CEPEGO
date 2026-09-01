@@ -34,7 +34,7 @@ collections:
   # ---------- AJUSTOS DEL CLUB ----------
   - name: "ajustos"
     label: "⚙️ Dades del club (contacte i preus)"
-    description: "Correu, telèfon, adreça, Facebook, IBAN, preus del refugi, quotes de soci i l'avís blau de la pàgina de reservar. Es canvien en tota la web alhora."
+    description: "Correu, telèfon, adreça, Facebook, IBAN, preus del refugi, quotes de soci, l'avís blau de la pàgina de reservar i la data de cua de reserves. Es canvien en tota la web alhora."
     files:
       - name: "site"
         label: "Dades i preus"
@@ -51,6 +51,7 @@ collections:
           - { label: "Quota sala d'entrenament", name: "quota_sala", widget: "string" }
           - { label: "Avís blau a Reservar (valencià)", name: "avis_reserva_va", widget: "text" }
           - { label: "Avís blau a Reservar (castellà)", name: "avis_reserva_es", widget: "text" }
+          - { label: "Reserves en cua a partir de (deixa-ho buit per a desactivar)", name: "reserves_cua_desde", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false, hint: "Si poses una data, qui intente reservar per a eixe dia o posteriors podrà enviar la sol·licitud igualment, però se li avisarà que encara no s'han obert les reserves i que entra en una cua per ordre d'arribada. Deixa-ho buit per a tornar al funcionament normal." }
 
   # ---------- AVÍS / NOVETAT ----------
   - name: "avis"
