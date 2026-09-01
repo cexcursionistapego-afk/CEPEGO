@@ -23,18 +23,20 @@
   var selStart = null, selEnd = null;
   var loaded = false;
 
-  // Data des de la qual les reserves entren en cua (ajustos del CMS). Es
-  // guarda com a promesa perquè el formulari sempre espere que aquesta
-  // petició acabe abans d'avaluar-la, encara que vaja més lenta que la de
-  // disponibilitat (en ús real l'usuari triga segons a omplir el formulari,
-  // però convé no dependre'n).
+  // Data des de la qual les reserves entren en cua (ajustos del CMS).
+  // 'queueFrom' es guarda també com a variable normal (a banda de la
+  // promesa) perquè l'avís es puga mostrar a l'instant en triar les dates
+  // al calendari; 'queueFromPromise' és la font autoritativa que s'espera
+  // sempre abans d'enviar, per si encara no ha arribat quan es trie la data.
+  var queueFrom = '';
   var queueFromPromise = fetch('data/site.json',{cache:'no-store'})
     .then(function(r){ return r.ok?r.json():null; })
     .then(function(s){ return (s && s.reserves_cua_desde) ? String(s.reserves_cua_desde).slice(0,10) : ''; })
-    .catch(function(){ return ''; });
+    .catch(function(){ return ''; })
+    .then(function(v){ queueFrom = v; sync(); return v; });
 
-  function inQueuePeriod(queueFrom, entrada, salida) {
-    return !!queueFrom && (entrada >= queueFrom || salida >= queueFrom);
+  function inQueuePeriod(qf, entrada, salida) {
+    return !!qf && (entrada >= qf || salida >= qf);
   }
 
   // Blackout: May 31 – Sep 30 (tancament d'estiu) i la nit del 31 de desembre (mai es lloga). Cada any.
@@ -55,6 +57,7 @@
   var fSalida  = document.getElementById('r-salida');
   var resum    = document.getElementById('r-resum');
   var submitBtn= document.getElementById('r-submit');
+  var queueNotice = document.getElementById('r-queue-notice');
 
   function expand(reserves){
     busy = {};
@@ -85,6 +88,7 @@
         ? '<b>Entrada:</b> '+fmt(selStart)+' · <b>Salida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> noche'+(nits>1?'s':'')+' · <b>'+preu+'</b>'
         : '<b>Entrada:</b> '+fmt(selStart)+' · <b>Eixida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> nit'+(nits>1?'s':'')+' · <b>'+preu+'</b>');
       if(submitBtn) submitBtn.disabled=false;
+      if(queueNotice) queueNotice.style.display = inQueuePeriod(queueFrom, selStart, selEnd) ? '' : 'none';
     } else {
       if(fEntrada) fEntrada.value=selStart||'';
       if(fSalida) fSalida.value='';
@@ -92,6 +96,7 @@
         ? (l==='es'?'Ahora elige el día de salida':'Ara tria el dia d\'eixida')
         : (l==='es'?'Elige el día de entrada en el calendario':'Tria el dia d\'entrada al calendari');
       if(submitBtn) submitBtn.disabled=true;
+      if(queueNotice) queueNotice.style.display = 'none';
     }
   }
   function fmt(ds){ var d=parse(ds); return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear(); }
@@ -182,8 +187,9 @@
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var l=lang();
-      if(!checkPersones()){ return; }
       if(!fEntrada.value||!fSalida.value){ show(l==='es'?'Elige las fechas en el calendario.':'Tria les dates al calendari.','err'); return; }
+      if(!checkPersones()){ return; }
+      if(!form.checkValidity()){ form.reportValidity(); return; }
       var fd=new FormData(form); var body={};
       fd.forEach(function(v,k){ body[k]=v; });
       body.entrada=fEntrada.value; body.salida=fSalida.value;
