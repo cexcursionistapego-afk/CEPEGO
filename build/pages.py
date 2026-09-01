@@ -324,7 +324,7 @@ def build(g):
   </div>
 </div>
 
-<section class="section bg-paper2" style="padding-top:clamp(30px,4vw,60px)">
+<section class="section bg-paper2" style="padding-top:clamp(30px,4vw,60px);padding-bottom:clamp(24px,3vw,48px)">
   <div class="wrap reserva-grid">
     <div class="reveal">
       <div class="kicker"><span class="va">Disponibilitat</span><span class="es">Disponibilidad</span></div>
