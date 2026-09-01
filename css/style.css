@@ -278,7 +278,8 @@ html[data-lang="es"] .va{display:none}
   padding:14px 18px;border-radius:0 12px 12px 0;font-size:.96rem}
 .iban{font-family:var(--font-mono);background:var(--navy);color:#fff;display:inline-block;padding:11px 18px;border-radius:12px;letter-spacing:.06em}
 .note{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:18px 22px;color:var(--muted);font-size:.94rem}
-.avamet-credit{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;width:fit-content;max-width:100%;margin-inline:auto}
+.avamet-credit{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;max-width:calc((100% - clamp(20px,3vw,32px))/2);margin-inline:auto}
+@media(max-width:860px){.avamet-credit{max-width:100%}}
 .avamet-credit__logo{height:48px;width:auto;border-radius:4px}
 .avamet-credit__logo--avamet{height:80px}
 
