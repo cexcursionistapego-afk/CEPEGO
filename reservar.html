@@ -98,25 +98,29 @@
       <div class="card">
         <h3 style="font-size:1.4rem"><span class="va">La teua sol·licitud</span><span class="es">Tu solicitud</span></h3>
         <p id="r-resum"></p>
+        <div id="r-queue-notice" class="avis" style="display:none;border-radius:var(--r);margin-bottom:16px">
+          <span class="va">⚠️ Les reserves per a eixes dates encara no estan obertes. Pots enviar igualment la sol·licitud i entrarà en una cua per ordre d'arribada; la gestionarem quan s'òbriguen.</span>
+          <span class="es">⚠️ Las reservas para esas fechas aún no están abiertas. Puedes enviar igualmente la solicitud y entrará en una cola por orden de llegada; la gestionaremos cuando se abran.</span>
+        </div>
         <form id="reserva-form" novalidate>
           <input type="hidden" id="r-entrada" name="entrada">
           <input type="hidden" id="r-salida" name="salida">
           <div class="field"><label><span class="va">Nom i cognoms</span><span class="es">Nombre y apellidos</span> *</label><input name="nom" required></div>
           <div class="select-row">
             <div class="field"><label><span class="va">Correu</span><span class="es">Correo</span> *</label><input type="email" name="email" required></div>
-            <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span></label><input name="telefon"></div>
+            <div class="field"><label><span class="va">Telèfon</span><span class="es">Teléfono</span> *</label><input name="telefon" required></div>
           </div>
           <div class="select-row">
-            <div class="field"><label><span class="va">Població</span><span class="es">Población</span></label><input name="poblacio"></div>
-            <div class="field"><label><span class="va">Nº persones</span><span class="es">Nº personas</span></label><input type="number" id="r-persones" name="persones" min="1" max="21"><div id="r-persones-msg" class="field-error"></div></div>
+            <div class="field"><label><span class="va">Població</span><span class="es">Población</span> *</label><input name="poblacio" required></div>
+            <div class="field"><label><span class="va">Nº persones</span><span class="es">Nº personas</span> *</label><input type="number" id="r-persones" name="persones" min="1" max="21" required><div id="r-persones-msg" class="field-error"></div></div>
           </div>
           <div class="select-row">
-            <div class="field"><label><span class="va">Ets soci/a?</span><span class="es">¿Eres soci@?</span></label>
-              <select name="soci"><option value="">—</option><option value="Si">Sí</option><option value="No">No</option></select></div>
-            <div class="field"><label><span class="va">Vols internet?</span><span class="es">¿Quieres internet?</span></label>
-              <select name="internet"><option value="">—</option><option value="Si">Sí</option><option value="No">No</option></select></div>
+            <div class="field"><label><span class="va">Ets soci/a?</span><span class="es">¿Eres soci@?</span> *</label>
+              <select name="soci" required><option value="">—</option><option value="Si">Sí</option><option value="No">No</option></select></div>
+            <div class="field"><label><span class="va">Vols internet?</span><span class="es">¿Quieres internet?</span> *</label>
+              <select name="internet" required><option value="">—</option><option value="Si">Sí</option><option value="No">No</option></select></div>
           </div>
-          <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span></label><textarea name="missatge"></textarea></div>
+          <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span> *</label><textarea name="missatge" required></textarea></div>
           <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
           <button type="submit" id="r-submit" class="btn btn-primary" disabled><span class="va">Enviar sol·licitud</span><span class="es">Enviar solicitud</span></button>
           <div id="r-msg" class="r-msg"></div>
