@@ -12,10 +12,17 @@
     document.querySelectorAll('[data-lang-btn]').forEach(function(b){
       b.textContent = (l==='va')?'ES':'VA';
       b.setAttribute('aria-label',(l==='va')?'Cambiar a Español':'Canviar a Valencià');
+      b.classList.toggle('flag-es', l==='va');
+      b.classList.toggle('flag-va', l==='es');
     });
   }
   document.addEventListener('click',function(e){
-    var b=e.target.closest('[data-lang-btn]'); if(b) setLang(root.getAttribute('data-lang')==='va'?'es':'va');
+    var b=e.target.closest('[data-lang-btn]');
+    if(b){
+      setLang(root.getAttribute('data-lang')==='va'?'es':'va');
+      var openNav=document.querySelector('.nav.open');
+      if(openNav && openNav.contains(b)) openNav.classList.remove('open');
+    }
   });
 
   /* ---------- MENÚ MÒBIL ---------- */
