@@ -69,7 +69,7 @@ def build(g):
      ("calendari.html","Senderisme","Senderismo",
       "Rutes tot l'any per Pego i les Valls, amb fitxes de track i distàncies.","Rutas todo el año por Pego y sus valles, con fichas de track y distancias.","01"),
      ("calendari.html","Escalada","Escalada",
-      "Escola del Calvari: 28 vies equipades per a tots els nivells, des d'iniciació fins a dificultat.","Escuela del Calvari: 28 vías equipadas para todos los niveles, desde iniciación hasta dificultad.","02"),
+      "Escola del Barranc de les Coves: 28 vies equipades per a tots els nivells, des d'iniciació fins a dificultat.","Escuela del Barranc de les Coves: 28 vías equipadas para todos los niveles, desde iniciación hasta dificultad.","02"),
      ("calendari.html","Espeleologia","Espeleología",
       "Avencs i coves del massís calcari de la Vall d'Ebo. Exploració subterrània en grup.","Avencos y cuevas del macizo calcáreo de la Vall d'Ebo. Exploración subterránea en grupo.","03"),
      ("calendari.html","Barrancs","Barrancos",
@@ -481,9 +481,9 @@ def build(g):
         order = (media+"\n"+content) if rev else (content+"\n"+media)
         cls = "sector-block sector-block--rev reveal" if rev else "sector-block reveal"
         return f'    <div class="{cls}">\n{order}\n    </div>'
-    escalada=header("escalada")+subhero(IMG+"escalada-via.jpg",'<span class="va">Calvari · Pego</span><span class="es">Calvari · Pego</span>',
+    escalada=header("escalada")+subhero(IMG+"escalada-via.jpg",'<span class="va">Barranc de les Coves · Pego</span><span class="es">Barranc de les Coves · Pego</span>',
         "Escalada","Escalada",
-        "L'escola d'escalada del Calvari: dos sectors i 28 vies equipades.","La escuela de escalada del Calvari: dos sectores y 28 vías equipadas.")+f'''
+        "L'escola d'escalada del Barranc de les Coves: dos sectors i 28 vies equipades.","La escuela de escalada del Barranc de les Coves: dos sectores y 28 vías equipadas.")+f'''
 <section class="section">
   <div class="wrap">
     <p class="lead narrow reveal" style="margin-bottom:clamp(34px,4vw,56px)"><span class="va">L'accés és molt fàcil, seguint el camí al final del Passeig del Calvari. En arribar al barranc, a mà esquerra hi ha les indicacions. Consta de dos sectors: <strong>Iniciació</strong> (13 vies de IV a 6b+/c, uns 12 m) i <strong>Placa del Sol</strong> (15 vies de V a 7c, de 20 a 27 m, el més dur i espectacular). Equipament de parabolt de 10 mm i cadenes amb mosquetó fixe.</span><span class="es">El acceso es muy fácil, siguiendo el camino al final del Paseo del Calvari. Al llegar al barranco, a mano izquierda están las indicaciones. Consta de dos sectores: <strong>Iniciación</strong> (13 vías de IV a 6b+/c, unos 12 m) y <strong>Placa del Sol</strong> (15 vías de V a 7c, de 20 a 27 m, el más duro y espectacular). Equipamiento de parabolt de 10 mm y cadenas con mosquetón fijo.</span></p>
@@ -493,8 +493,8 @@ def build(g):
   </div>
 </section>
 '''+footer()
-    write("escalada.html", doc("Escalada a Pego | Escola del Calvari — CEPEGO",
-        "Escola d'escalada del Calvari a Pego: sectors Iniciació i Placa del Sol, 28 vies.", escalada, path="escalada.html"))
+    write("escalada.html", doc("Escalada a Pego | Escola del Barranc de les Coves — CEPEGO",
+        "Escola d'escalada del Barranc de les Coves a Pego: sectors Iniciació i Placa del Sol, 28 vies.", escalada, path="escalada.html"))
 
     # ============================================= ESPELEO
     espeleo=header("espeleo")+subhero(IMG+"bb9bb0_82b4e09447a84e64a0cbbb9b026159e5~mv2.jpeg",'<span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span>',
@@ -580,7 +580,7 @@ def build(g):
   </div>
 </section>
 <section class="section-sm" style="padding-top:0">
-  <div class="wrap">
+  <div class="wrap narrow">
     <div class="embed reveal"><iframe src="https://www.google.com/maps?q=Centre%20Excursionista%20Pego&output=embed" height="380" title="Mapa CEPEGO" loading="lazy"></iframe></div>
   </div>
 </section>
