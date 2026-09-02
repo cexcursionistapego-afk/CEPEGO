@@ -62,7 +62,7 @@ NAV=[("index.html",'<span class="va">Inici</span><span class="es">Inicio</span>'
 
 FIG_SUB=[("refugi.html","La Figuereta",'<span class="va">El refugi de muntanya</span><span class="es">El refugio de montaña</span>',"refugi"),
  ("reservar.html","Reservar",'<span class="va">Disponibilitat i reserva</span><span class="es">Disponibilidad y reserva</span>',"reservar")]
-ACT_SUB=[("rutes.html",'<span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span>','<span class="va">Senderisme per Pego</span><span class="es">Senderismo por Pego</span>',"rutes"),
+ACT_SUB=[("rutes.html",'<span class="va">Rutes i entorn</span><span class="es">Rutas y entorno</span>','<span class="va">Senderisme per Pego i les Valls</span><span class="es">Senderismo por Pego y sus valles</span>',"rutes"),
  ("escalada.html","Escalada",'<span class="va">Escola del Barranc de les Coves</span><span class="es">Escuela del Barranc de les Coves</span>',"escalada")]
 
 def header(active):
