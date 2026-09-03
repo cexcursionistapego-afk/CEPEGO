@@ -150,7 +150,16 @@
         : (l==='es'?'Elige el día de entrada en el calendario':'Tria el dia d\'entrada al calendari');
       if(submitBtn) submitBtn.disabled=true;
       if(queueNotice) queueNotice.style.display = 'none';
-      if(turnoverNotice) turnoverNotice.style.display = 'none';
+      if(turnoverNotice) {
+        // Amb només l'entrada triada ja sabem si toca "pots entrar a partir
+        // de les 12:00" (l'eixida encara no s'ha triat, no cal esperar-la).
+        if(selStart && existingEndsOn(selStart)){
+          turnoverNotice.style.display = '';
+          turnoverNotice.innerHTML = turnoverNoticeHTML(true, false);
+        } else {
+          turnoverNotice.style.display = 'none';
+        }
+      }
     }
   }
   function fmt(ds){ var d=parse(ds); return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear(); }
