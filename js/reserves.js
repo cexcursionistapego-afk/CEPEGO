@@ -94,7 +94,17 @@
     if(parse(ds).getDay()===6) return 'possible';
     return 'none';
   }
-  function turnoverNoticeHTML(arriveState, mustLeaveNoon){
+  // Igual que arriveNoonState però per a l'eixida pròpia: qualsevol dia que
+  // no siga diumenge (l'únic que queda del tot blocat per a entrades) podria
+  // acabar reservat per algú altre com a entrada, encara que ara mateix no ho
+  // estiga — independentment de quantes nits dure la nostra estada.
+  function leaveNoonState(ds){
+    if(!ds) return 'none';
+    if(existingStartsOn(ds)) return 'definite';
+    if(parse(ds).getDay()!==0) return 'possible';
+    return 'none';
+  }
+  function turnoverNoticeHTML(arriveState, leaveState){
     var va=[], es=[];
     if(arriveState==='definite'){
       va.push('com el grup anterior ix eixe mateix matí, podràs entrar a partir de les 12:00 del migdia');
@@ -103,9 +113,12 @@
       va.push('si algú reserva el dia anterior (divendres), és possible que hages d\'entrar a partir de les 12:00 del migdia; t\'ho comunicaríem si fóra el cas');
       es.push('si alguien reserva el día anterior (viernes), es posible que tengas que entrar a partir de las 12:00 del mediodía; te lo comunicaríamos si fuera el caso');
     }
-    if(mustLeaveNoon){
+    if(leaveState==='definite'){
       va.push('com entra un altre grup eixe mateix dia, hauràs de deixar el refugi abans de les 12:00 del migdia');
       es.push('como entra otro grupo ese mismo día, deberás dejar el refugio antes de las 12:00 del mediodía');
+    } else if(leaveState==='possible'){
+      va.push('si algú reserva a partir del teu dia d\'eixida, és possible que hages de deixar el refugi abans de les 12:00 del migdia; t\'ho comunicaríem si fóra el cas');
+      es.push('si alguien reserva a partir de tu día de salida, es posible que tengas que dejar el refugio antes de las 12:00 del mediodía; te lo comunicaríamos si fuera el caso');
     }
     return '<span class="va">⏰ '+va.join('; ')+'.</span><span class="es">⏰ '+es.join('; ')+'.</span>';
   }
@@ -145,10 +158,10 @@
       if(submitBtn) submitBtn.disabled=false;
       if(turnoverNotice) {
         var arriveState = arriveNoonState(selStart);
-        var mustLeaveNoon = existingStartsOn(selEnd);
-        if(arriveState!=='none' || mustLeaveNoon){
+        var leaveState = leaveNoonState(selEnd);
+        if(arriveState!=='none' || leaveState!=='none'){
           turnoverNotice.style.display = '';
-          turnoverNotice.innerHTML = turnoverNoticeHTML(arriveState, mustLeaveNoon);
+          turnoverNotice.innerHTML = turnoverNoticeHTML(arriveState, leaveState);
         } else {
           turnoverNotice.style.display = 'none';
         }
@@ -172,7 +185,7 @@
         var arriveStateOnly = arriveNoonState(selStart);
         if(arriveStateOnly!=='none'){
           turnoverNotice.style.display = '';
-          turnoverNotice.innerHTML = turnoverNoticeHTML(arriveStateOnly, false);
+          turnoverNotice.innerHTML = turnoverNoticeHTML(arriveStateOnly, 'none');
         } else {
           turnoverNotice.style.display = 'none';
         }
