@@ -20,6 +20,7 @@
   var todayStr = iso(today);
   var view = new Date(today.getFullYear(), today.getMonth(), 1);
   var busy = {};                // 'YYYY-MM-DD' -> true (dies RESERVAT o tancament estiu)
+  var reservesList = [];        // llistat cru de {start,end} per a detectar canvis de torn
   var selStart = null, selEnd = null;
   var loaded = false;
 
@@ -62,18 +63,36 @@
   var resum    = document.getElementById('r-resum');
   var submitBtn= document.getElementById('r-submit');
   var queueNotice = document.getElementById('r-queue-notice');
+  var turnoverNotice = document.getElementById('r-turnover-notice');
 
   function expand(reserves){
     // Les nits ocupades són [start, end) — el dia de eixida (end) no compta
     // com a nit ocupada, ja que eixa mateixa vesprada pot entrar-hi algú altre.
+    reservesList = reserves || [];
     busy = {};
-    (reserves||[]).forEach(function(r){
+    reservesList.forEach(function(r){
       if(!r.start||!r.end) return;
       var d=r.start, guard=0;
       while(d<r.end && guard<400){ busy[d]=true; d=addDays(d,1); guard++; }
     });
   }
   function rangeHasBusy(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(busy[d]||isSummer(d)) return true; d=addDays(d,1); guard++; } return false; }
+  // Torn el mateix dia: algú altre ix eixe matí (entrem a partir de les 12) o
+  // algú altre entra eixa vesprada (hem d'eixir abans de les 12).
+  function existingEndsOn(ds){ return reservesList.some(function(r){ return r.end===ds; }); }
+  function existingStartsOn(ds){ return reservesList.some(function(r){ return r.start===ds; }); }
+  function turnoverNoticeHTML(mustArriveNoon, mustLeaveNoon){
+    var va=[], es=[];
+    if(mustArriveNoon){
+      va.push('com el grup anterior ix eixe mateix matí, podràs entrar a partir de les 12:00 del migdia');
+      es.push('como el grupo anterior sale esa misma mañana, podrás entrar a partir de las 12:00 del mediodía');
+    }
+    if(mustLeaveNoon){
+      va.push('com entra un altre grup eixa mateixa vesprada, hauràs de deixar el refugi abans de les 12:00 del migdia');
+      es.push('como entra otro grupo esa misma tarde, deberás dejar el refugio antes de las 12:00 del mediodía');
+    }
+    return '<span class="va">⏰ '+va.join('; ')+'.</span><span class="es">⏰ '+es.join('; ')+'.</span>';
+  }
 
   function onDay(ds){
     if(isSummer(ds) || ds < todayStr) return;
@@ -108,6 +127,16 @@
         ? '<b>Entrada:</b> '+fmt(selStart)+' · <b>Salida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> noche'+(nits>1?'s':'')+' · <b>'+preu+'</b>'
         : '<b>Entrada:</b> '+fmt(selStart)+' · <b>Eixida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> nit'+(nits>1?'s':'')+' · <b>'+preu+'</b>');
       if(submitBtn) submitBtn.disabled=false;
+      if(turnoverNotice) {
+        var mustArriveNoon = existingEndsOn(selStart);
+        var mustLeaveNoon = existingStartsOn(selEnd);
+        if(mustArriveNoon || mustLeaveNoon){
+          turnoverNotice.style.display = '';
+          turnoverNotice.innerHTML = turnoverNoticeHTML(mustArriveNoon, mustLeaveNoon);
+        } else {
+          turnoverNotice.style.display = 'none';
+        }
+      }
       if(queueNotice) {
         var queued = inQueuePeriod(queueFrom, selStart, selEnd);
         queueNotice.style.display = queued ? '' : 'none';
@@ -121,6 +150,7 @@
         : (l==='es'?'Elige el día de entrada en el calendario':'Tria el dia d\'entrada al calendari');
       if(submitBtn) submitBtn.disabled=true;
       if(queueNotice) queueNotice.style.display = 'none';
+      if(turnoverNotice) turnoverNotice.style.display = 'none';
     }
   }
   function fmt(ds){ var d=parse(ds); return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear(); }
