@@ -38,7 +38,7 @@ ORG_JSONLD = json.dumps({
     "sameAs": [IG, FB]
 }, ensure_ascii=False)
 
-IMG="img/"
+IMG="/img/"
 HERO_BENCS = IMG+"bb9bb0_fa8879e4ce8d4035b0588d0d1be17435~mv2.jpeg"
 L1 = IMG+"bb9bb0_215ca88e66b746a4bb297d1714c6ccc1~mv2_d_2048_1371_s_2.jpg"
 L2 = IMG+"bb9bb0_83fc4a39cac54e4086907766e7327e78~mv2_d_2048_1371_s_2.jpg"
@@ -199,9 +199,9 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None):
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
     idredirect=('<script>if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(u){if(!u){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}</script>\n' if identity else '')
     extra_js_list = [extra_js] if isinstance(extra_js, str) else (extra_js or [])
-    extra_js_tags = "".join(f'<script src="{s}"></script>\n' for s in extra_js_list)
+    extra_js_tags = "".join(f'<script src="/{s.lstrip(chr(47))}"></script>\n' for s in extra_js_list)
     canon = SITE_URL + "/" + (path if (path and path != "index.html") else "")
-    img_url = SITE_URL + "/" + (image or HERO_BENCS)
+    img_url = SITE_URL + (image or HERO_BENCS)
     return f'''<!DOCTYPE html>
 <html lang="ca-valencia" data-lang="va">
 <head>
@@ -228,12 +228,12 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 {idw}</head>
 <body>
 <div id="avis"></div>
 {body}
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 {extra_js_tags}{idredirect}</body>
 </html>
 '''
@@ -250,8 +250,32 @@ def subhero(bg, kicker, h1va, h1es, pva, pes, pos='center'):
 </section>'''
 
 def write(fn, html):
+    # ---- URL-based idioma: es-net-generate una còpia en /es/ a partir de la
+    # mateixa font (ambdós idiomes ja estan al HTML; CSS mostra un o altre
+    # segons data-lang). Manté canonical, hreflang i og:locale correctes per còpia.
+    canon_va = SITE_URL + "/" + (fn if fn != "index.html" else "")
+    canon_es = SITE_URL + "/es/" + (fn if fn != "index.html" else "")
+    canon_tag_va = f'<link rel="canonical" href="{canon_va}">'
+    hreflang_block = (
+        f'<link rel="alternate" hreflang="ca" href="{canon_va}">\n'
+        f'<link rel="alternate" hreflang="es" href="{canon_es}">\n'
+        f'<link rel="alternate" hreflang="x-default" href="{canon_va}">'
+    )
+    html = html.replace(canon_tag_va, canon_tag_va + "\n" + hreflang_block, 1)
+
     open(os.path.join(OUT,fn),"w",encoding="utf-8").write(html)
     print("·",fn,f"{len(html)//1024}KB")
+
+    es_html = (html
+        .replace('<html lang="ca-valencia" data-lang="va">', '<html lang="es" data-lang="es">', 1)
+        .replace(canon_tag_va, f'<link rel="canonical" href="{canon_es}">', 1)
+        .replace(f'<meta property="og:url" content="{canon_va}">', f'<meta property="og:url" content="{canon_es}">', 1)
+        .replace('<meta property="og:locale" content="ca_ES">\n<meta property="og:locale:alternate" content="es_ES">',
+                  '<meta property="og:locale" content="es_ES">\n<meta property="og:locale:alternate" content="ca_ES">', 1)
+    )
+    es_dir = os.path.join(OUT,"es")
+    os.makedirs(es_dir, exist_ok=True)
+    open(os.path.join(es_dir,fn),"w",encoding="utf-8").write(es_html)
 
 # ======================================================= build pages in a separate module
 import pages
@@ -275,13 +299,20 @@ PRIORITY = {
     "contacte.html":("0.5","yearly"), "soci.html":("0.5","monthly"),
     "avis-legal.html":("0.1","yearly"), "privacitat.html":("0.1","yearly"), "cookies.html":("0.1","yearly"),
 }
-urls = "".join(
-    f'  <url><loc>{SITE_URL}/{("" if p=="index.html" else p)}</loc><lastmod>{today}</lastmod>'
-    f'<changefreq>{PRIORITY[p][1]}</changefreq><priority>{PRIORITY[p][0]}</priority></url>\n'
-    for p in PAGES)
+def _locs(p):
+    slug = "" if p=="index.html" else p
+    return SITE_URL+"/"+slug, SITE_URL+"/es/"+slug
+def _url_entry(loc, p):
+    loc_va, loc_es = _locs(p)
+    alts = (f'<xhtml:link rel="alternate" hreflang="ca" href="{loc_va}"/>'
+            f'<xhtml:link rel="alternate" hreflang="es" href="{loc_es}"/>'
+            f'<xhtml:link rel="alternate" hreflang="x-default" href="{loc_va}"/>')
+    return (f'  <url><loc>{loc}</loc>{alts}<lastmod>{today}</lastmod>'
+            f'<changefreq>{PRIORITY[p][1]}</changefreq><priority>{PRIORITY[p][0]}</priority></url>\n')
+urls = "".join(_url_entry(loc, p) for p in PAGES for loc in _locs(p))
 open(os.path.join(OUT,"sitemap.xml"),"w",encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n'
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
     + urls + '</urlset>\n')
 
 print("OK")

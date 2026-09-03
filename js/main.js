@@ -2,26 +2,21 @@
 (function(){
   var root = document.documentElement;
 
-  /* ---------- IDIOMA: Valencià per defecte, opció Español ---------- */
-  var saved=null; try{ saved=localStorage.getItem('cepego-lang'); }catch(e){}
-  setLang(saved==='es'?'es':'va');
-  function setLang(l){
-    root.setAttribute('data-lang',l);
-    root.setAttribute('lang', l==='es'?'es':'ca-valencia');
-    try{ localStorage.setItem('cepego-lang',l); }catch(e){}
-    document.querySelectorAll('[data-lang-btn]').forEach(function(b){
-      b.textContent = (l==='va')?'ES':'VA';
-      b.setAttribute('aria-label',(l==='va')?'Cambiar a Español':'Canviar a Valencià');
-      b.classList.toggle('flag-es', l==='va');
-      b.classList.toggle('flag-va', l==='es');
-    });
-  }
+  /* ---------- IDIOMA: per URL — / = valencià, /es/ = espanyol ---------- */
+  var curLang = root.getAttribute('data-lang')==='es' ? 'es' : 'va';
+  document.querySelectorAll('[data-lang-btn]').forEach(function(b){
+    b.textContent = (curLang==='va')?'ES':'VA';
+    b.setAttribute('aria-label',(curLang==='va')?'Cambiar a Español':'Canviar a Valencià');
+    b.classList.toggle('flag-es', curLang==='va');
+    b.classList.toggle('flag-va', curLang==='es');
+  });
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-lang-btn]');
     if(b){
-      setLang(root.getAttribute('data-lang')==='va'?'es':'va');
-      var openNav=document.querySelector('.nav.open');
-      if(openNav && openNav.contains(b)) openNav.classList.remove('open');
+      var path=window.location.pathname, target;
+      if(curLang==='va'){ target = '/es'+(path==='/'?'/':path); }
+      else { target = path.replace(/^\/es\/?/,'/'); }
+      window.location.href = target + window.location.search + window.location.hash;
     }
   });
 
@@ -40,7 +35,7 @@
   document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent=new Date().getFullYear(); });
 
   /* ---------- AJUSTOS DEL CLUB (data/site.json) ---------- */
-  fetch('data/site.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(s){
+  fetch('/data/site.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(s){
     if(!s) return;
     document.querySelectorAll('[data-cms]').forEach(function(el){ var k=el.getAttribute('data-cms'); if(s[k]!=null&&s[k]!=='') el.textContent=s[k]; });
     document.querySelectorAll('[data-cms-href]').forEach(function(el){ var k=el.getAttribute('data-cms-href'),v=s[k]; if(v==null||v==='')return;
@@ -51,7 +46,7 @@
 
   /* ---------- AVÍS (data/avis.json) ---------- */
   var avisBox=document.getElementById('avis');
-  if(avisBox){ fetch('data/avis.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(a){
+  if(avisBox){ fetch('/data/avis.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(a){
     if(!a||!a.actiu) return; var va=a.text_va||'',es=a.text_es||''; if(!va&&!es) return;
     avisBox.innerHTML='<div class="avis"><span class="va">'+(va||es)+'</span><span class="es">'+(es||va)+'</span><button class="avis__x" aria-label="Tancar">&times;</button></div>';
     avisBox.querySelector('.avis__x').addEventListener('click',function(){ avisBox.style.display='none'; });
@@ -93,7 +88,7 @@
 
   /* ---------- CALENDARI (data/calendari.json): 1 principal + arxiu ---------- */
   var feat=document.getElementById('cal-featured'), arch=document.getElementById('cal-archive');
-  if(feat){ fetch('data/calendari.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():{fotos:[]};}).then(function(d){
+  if(feat){ fetch('/data/calendari.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():{fotos:[]};}).then(function(d){
     var f=(d&&d.fotos)||[];
     if(!f.length){ feat.innerHTML='<p class="note">Encara no hi ha calendaris publicats.</p>'; return; }
     var vigent = !!(d&&d.vigent);
