@@ -40,6 +40,21 @@
   to = "/meteo.html"
   status = 301
 
+# Redireccions d'URLs de la web anterior (Wix), per a que Google actualitze
+# l'índex cap a les URLs noves en lloc de deixar-les caure a poc a poc.
+[[redirects]]
+  from = "/refugi-la-figuereta"
+  to = "/es/refugi.html"
+  status = 301
+  force = true
+  [redirects.query]
+    lang = "es"
+[[redirects]]
+  from = "/refugi-la-figuereta"
+  to = "/refugi.html"
+  status = 301
+  force = true
+
 # Cau curt per als índexs de dades editables
 [[headers]]
   for = "/data/*"
