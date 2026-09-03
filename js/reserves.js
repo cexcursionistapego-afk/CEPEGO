@@ -29,7 +29,7 @@
   // al calendari; 'queueFromPromise' és la font autoritativa que s'espera
   // sempre abans d'enviar, per si encara no ha arribat quan es trie la data.
   var queueFrom = '';
-  var queueFromPromise = fetch('data/site.json',{cache:'no-store'})
+  var queueFromPromise = fetch('/data/site.json',{cache:'no-store'})
     .then(function(r){ return r.ok?r.json():null; })
     .then(function(s){ return (s && s.reserves_cua_desde) ? String(s.reserves_cua_desde).slice(0,10) : ''; })
     .catch(function(){ return ''; })
@@ -166,7 +166,6 @@
     .then(function(r){ return r.ok?r.json():null; })
     .then(function(d){ loaded=true; if(d&&d.reserves) expand(d.reserves); render(); })
     .catch(function(){ loaded=true; render(); });
-  document.addEventListener('click',function(e){ if(e.target.closest('[data-lang-btn]')){ setTimeout(function(){ sync(); render(); },0); } });
 
   /* -------- formulari -------- */
   var form = document.getElementById('reserva-form');
