@@ -52,6 +52,10 @@
     return false;
   }
 
+  // Excepcions puntuals: dies concrets en què ningú pot eixir (checkout).
+  // Es pot seguir entrant eixe dia, només queda bloquejat com a dia d'eixida.
+  var BLOCKED_EXIT = {'2026-11-08': true};
+
   var grid = document.createElement('div'); grid.className='rcal';
   var legend = document.createElement('div'); legend.className='rcal-legend';
   cal.appendChild(grid);
@@ -132,6 +136,7 @@
       if(busy[ds]) return;
       selStart=ds; selEnd=null;
     } else {
+      if(BLOCKED_EXIT[ds]) return;
       // ds és el dia d'eixida: pot coincidir amb l'entrada d'una altra reserva
       // (eixida abans de les 12, entrada eixa mateixa vesprada), només cal que
       // les nits pròpies (de selStart a ds, sense incloure ds) estiguen lliures.
@@ -206,16 +211,17 @@
     for(var day=1; day<=days; day++){
       var ds=y+'-'+pad(m+1)+'-'+pad(day);
       var cls=[];
-      var isBlocked = busy[ds] || isSummer(ds);
       // Un dia ocupat encara pot triar-se com a eixida (checkout abans de les
       // 12) mentre estem seleccionant l'eixida i no siga un dia de tancament.
       var pickableAsExit = selStart && !selEnd && ds>selStart && !isSummer(ds);
+      var blockedAsExit = !!BLOCKED_EXIT[ds] && pickableAsExit;
+      var isBlocked = busy[ds] || isSummer(ds) || blockedAsExit;
       if(ds<todayStr) cls.push('past');
       else if(isBlocked) cls.push('busy');
       else cls.push('free');
       if(ds===selStart||ds===selEnd) cls.push('sel');
       else if(selStart&&selEnd&&ds>selStart&&ds<selEnd) cls.push('inrange');
-      var disabled = ds<todayStr || isSummer(ds) || (busy[ds] && !pickableAsExit);
+      var disabled = ds<todayStr || isSummer(ds) || (busy[ds] && !pickableAsExit) || blockedAsExit;
       h+='<button type="button" class="'+cls.join(' ')+'" data-d="'+ds+'" '+(disabled?'disabled':'')+'>'+day+'</button>';
     }
     h+='</div></div>';
