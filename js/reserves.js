@@ -85,11 +85,23 @@
   // algú altre entra eixa vesprada (hem d'eixir abans de les 12).
   function existingEndsOn(ds){ return reservesList.some(function(r){ return r.end===ds; }); }
   function existingStartsOn(ds){ return reservesList.some(function(r){ return r.start===ds; }); }
-  function turnoverNoticeHTML(mustArriveNoon, mustLeaveNoon){
+  // 'definite': el dia anterior ja està reservat (eixida eixe matí, dissabte).
+  // 'possible': entrada en dissabte encara lliure el divendres — algú el
+  // podria reservar més avant i llavors sí caldria entrar a partir de les 12.
+  function arriveNoonState(ds){
+    if(!ds) return 'none';
+    if(existingEndsOn(ds)) return 'definite';
+    if(parse(ds).getDay()===6) return 'possible';
+    return 'none';
+  }
+  function turnoverNoticeHTML(arriveState, mustLeaveNoon){
     var va=[], es=[];
-    if(mustArriveNoon){
+    if(arriveState==='definite'){
       va.push('com el grup anterior ix eixe mateix matí, podràs entrar a partir de les 12:00 del migdia');
       es.push('como el grupo anterior sale esa misma mañana, podrás entrar a partir de las 12:00 del mediodía');
+    } else if(arriveState==='possible'){
+      va.push('si algú reserva el dia anterior (divendres), és possible que hages d\'entrar a partir de les 12:00 del migdia; t\'ho comunicaríem si fóra el cas');
+      es.push('si alguien reserva el día anterior (viernes), es posible que tengas que entrar a partir de las 12:00 del mediodía; te lo comunicaríamos si fuera el caso');
     }
     if(mustLeaveNoon){
       va.push('com entra un altre grup eixe mateix dia, hauràs de deixar el refugi abans de les 12:00 del migdia');
@@ -132,11 +144,11 @@
         : '<b>Entrada:</b> '+fmt(selStart)+' · <b>Eixida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> nit'+(nits>1?'s':'')+' · <b>'+preu+'</b>');
       if(submitBtn) submitBtn.disabled=false;
       if(turnoverNotice) {
-        var mustArriveNoon = existingEndsOn(selStart);
+        var arriveState = arriveNoonState(selStart);
         var mustLeaveNoon = existingStartsOn(selEnd);
-        if(mustArriveNoon || mustLeaveNoon){
+        if(arriveState!=='none' || mustLeaveNoon){
           turnoverNotice.style.display = '';
-          turnoverNotice.innerHTML = turnoverNoticeHTML(mustArriveNoon, mustLeaveNoon);
+          turnoverNotice.innerHTML = turnoverNoticeHTML(arriveState, mustLeaveNoon);
         } else {
           turnoverNotice.style.display = 'none';
         }
@@ -157,9 +169,10 @@
       if(turnoverNotice) {
         // Amb només l'entrada triada ja sabem si toca "pots entrar a partir
         // de les 12:00" (l'eixida encara no s'ha triat, no cal esperar-la).
-        if(selStart && existingEndsOn(selStart)){
+        var arriveStateOnly = arriveNoonState(selStart);
+        if(arriveStateOnly!=='none'){
           turnoverNotice.style.display = '';
-          turnoverNotice.innerHTML = turnoverNoticeHTML(true, false);
+          turnoverNotice.innerHTML = turnoverNoticeHTML(arriveStateOnly, false);
         } else {
           turnoverNotice.style.display = 'none';
         }
