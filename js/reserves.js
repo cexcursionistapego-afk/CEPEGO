@@ -88,8 +88,8 @@
       es.push('como el grupo anterior sale esa misma mañana, podrás entrar a partir de las 12:00 del mediodía');
     }
     if(mustLeaveNoon){
-      va.push('com entra un altre grup eixa mateixa vesprada, hauràs de deixar el refugi abans de les 12:00 del migdia');
-      es.push('como entra otro grupo esa misma tarde, deberás dejar el refugio antes de las 12:00 del mediodía');
+      va.push('com entra un altre grup eixe mateix dia, hauràs de deixar el refugi abans de les 12:00 del migdia');
+      es.push('como entra otro grupo ese mismo día, deberás dejar el refugio antes de las 12:00 del mediodía');
     }
     return '<span class="va">⏰ '+va.join('; ')+'.</span><span class="es">⏰ '+es.join('; ')+'.</span>';
   }
