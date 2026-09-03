@@ -304,7 +304,8 @@ def build(g):
      ("Cabuda màxima de 21 persones.","Cabida máxima de 21 personas."),
      ("Portar utensilis de cuina i sac de dormir.","Traer utensilios de cocina y saco de dormir."),
      ("L'aigua és d'una cava natural: millor porta la teua per a consumir.","El agua es de una cava natural: mejor trae la tuya para consumir."),
-     ("Eixida: 12:00 h dissabtes i 17:00 h diumenges.","Salida: 12:00 h sábados y 17:00 h domingos.")]
+     ("Eixida: 12:00 h dissabtes i 17:00 h diumenges.","Salida: 12:00 h sábados y 17:00 h domingos."),
+     ("Si un altre grup pernocta la nit anterior a la teua entrada, potser hages d'esperar fins a les 12:00 h per a entrar; en eixe cas t'ho comunicarem.","Si otro grupo pernocta la noche anterior a tu entrada, es posible que tengas que esperar hasta las 12:00 h para entrar; en ese caso te lo comunicaremos.")]
     rl="".join(f'      <li><span class="va">{va}</span><span class="es">{es}</span></li>\n' for va,es in rules)
     reservar=header("reservar")+subhero(REFUGI[5],'<span class="va">Refugi La Figuereta</span><span class="es">Refugio La Figuereta</span>',
         "Reservar","Reservar",
