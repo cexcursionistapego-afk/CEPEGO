@@ -335,6 +335,7 @@ def build(g):
       <div class="card">
         <h3 style="font-size:1.4rem"><span class="va">La teua sol·licitud</span><span class="es">Tu solicitud</span></h3>
         <p id="r-resum"></p>
+        <div id="r-turnover-notice" class="avis" style="display:none;border-radius:var(--r);margin-bottom:16px"></div>
         <div id="r-queue-notice" class="avis" style="display:none;border-radius:var(--r);margin-bottom:16px"></div>
         <form id="reserva-form" novalidate>
           <input type="hidden" id="r-entrada" name="entrada">
