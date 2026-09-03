@@ -67,13 +67,17 @@
 
   function expand(reserves){
     // Les nits ocupades són [start, end) — el dia de eixida (end) no compta
-    // com a nit ocupada, ja que eixa mateixa vesprada pot entrar-hi algú altre.
+    // com a nit ocupada, ja que eixa mateixa vesprada pot entrar-hi algú altre
+    // (eixida dissabte a les 12:00). Excepció: si l'eixida cau en diumenge
+    // (eixida a les 17:00), no hi ha marge per a que entre un altre grup eixe
+    // mateix dia, així que el diumenge també queda bloquejat.
     reservesList = reserves || [];
     busy = {};
     reservesList.forEach(function(r){
       if(!r.start||!r.end) return;
       var d=r.start, guard=0;
       while(d<r.end && guard<400){ busy[d]=true; d=addDays(d,1); guard++; }
+      if(parse(r.end).getDay()===0) busy[r.end]=true;
     });
   }
   function rangeHasBusy(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(busy[d]||isSummer(d)) return true; d=addDays(d,1); guard++; } return false; }
