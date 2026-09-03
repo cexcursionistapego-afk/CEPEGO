@@ -376,7 +376,7 @@ def build(g):
   </div>
 </section>
 '''+footer()
-    write("reservar.html", doc("Reservar | Refugi La Figuereta — CEPEGO",
+    write("reservar.html", doc("Reservar La Figuereta | CEPEGO",
         "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, path="reservar.html", extra_js="js/reserves.js"))
 
     # ============================================= METEO
@@ -493,7 +493,7 @@ def build(g):
   </div>
 </section>
 '''+footer()
-    write("escalada.html", doc("Escalada a Pego | Escola del Barranc de les Coves — CEPEGO",
+    write("escalada.html", doc("Escalada a Pego | CEPEGO",
         "Escola d'escalada del Barranc de les Coves a Pego: sectors Iniciació i Placa del Sol, 28 vies.", escalada, path="escalada.html"))
 
     # ============================================= ESPELEO
@@ -510,7 +510,7 @@ def build(g):
   </div>
 </section>
 '''+footer()
-    write("espeleo.html", doc("Espeleologia a Pego | Avencs i coves — CEPEGO",
+    write("espeleo.html", doc("Espeleologia a Pego | CEPEGO",
         "Les principals cavitats i avencs de la zona de Pego, amb les seues topografies.", espeleo, path="espeleo.html"))
 
     # ============================================= BARRANCS
