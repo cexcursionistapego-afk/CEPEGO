@@ -71,11 +71,9 @@ em{font-style:italic}
 .lead-dark{color:#c9ccd6}
 
 /* eyebrow / kicker */
-.kicker{display:inline-flex;align-items:center;gap:.6em;font-family:var(--font-body);
+.kicker{display:inline-flex;align-items:center;font-family:var(--font-body);
   font-weight:600;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember)}
-.kicker::before{content:"";width:26px;height:1.5px;background:var(--ember);display:inline-block}
 .kicker.on-photo{color:#f3c98a}
-.kicker.on-photo::before{background:#f3c98a}
 .kicker.center-k{justify-content:center}
 
 /* language visibility */
@@ -587,7 +585,7 @@ html[data-lang="es"] .va{display:none}
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='rgba(0,0,0,.18)' d='M0,80 L0,62 L180,24 L340,58 L540,10 L740,54 L940,30 L1140,60 L1320,18 L1440,44 L1440,80 Z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
   pointer-events:none}
 .prefooter .wrap{display:flex;align-items:center;justify-content:space-between;gap:clamp(20px,4vw,48px);flex-wrap:wrap;position:relative;z-index:1}
-.prefooter__text .kicker{color:#f3c98a}.prefooter__text .kicker::before{background:#f3c98a}
+.prefooter__text .kicker{color:#f3c98a}
 .prefooter__text h2{color:#fff;margin:.4em 0 .5em;font-size:clamp(1.8rem,3.4vw,2.8rem)}
 .prefooter__text p{color:rgba(255,255,255,.7);max-width:44ch;margin:0;font-size:1.05rem}
 .prefooter__cta{display:flex;gap:14px;flex-shrink:0;flex-wrap:wrap}
