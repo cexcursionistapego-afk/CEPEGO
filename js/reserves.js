@@ -64,20 +64,36 @@
   var queueNotice = document.getElementById('r-queue-notice');
 
   function expand(reserves){
+    // Les nits ocupades són [start, end) — el dia de eixida (end) no compta
+    // com a nit ocupada, ja que eixa mateixa vesprada pot entrar-hi algú altre.
     busy = {};
     (reserves||[]).forEach(function(r){
       if(!r.start||!r.end) return;
       var d=r.start, guard=0;
-      while(d<=r.end && guard<400){ busy[d]=true; d=addDays(d,1); guard++; }
+      while(d<r.end && guard<400){ busy[d]=true; d=addDays(d,1); guard++; }
     });
   }
-  function rangeHasBusy(a,b){ var d=a,guard=0; while(d<=b&&guard<400){ if(busy[d]||isSummer(d)) return true; d=addDays(d,1); guard++; } return false; }
+  function rangeHasBusy(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(busy[d]||isSummer(d)) return true; d=addDays(d,1); guard++; } return false; }
 
   function onDay(ds){
-    if(busy[ds] || isSummer(ds) || ds < todayStr) return;
-    if(!selStart || (selStart && selEnd)){ selStart=ds; selEnd=null; }
-    else if(ds <= selStart){ selStart=ds; selEnd=null; }
-    else { if(rangeHasBusy(selStart, ds)){ selStart=ds; selEnd=null; } else { selEnd=ds; } }
+    if(isSummer(ds) || ds < todayStr) return;
+    if(!selStart || (selStart && selEnd)){
+      if(busy[ds]) return;
+      selStart=ds; selEnd=null;
+    } else if(ds <= selStart){
+      if(busy[ds]) return;
+      selStart=ds; selEnd=null;
+    } else {
+      // ds és el dia d'eixida: pot coincidir amb l'entrada d'una altra reserva
+      // (eixida abans de les 12, entrada eixa mateixa vesprada), només cal que
+      // les nits pròpies (de selStart a ds, sense incloure ds) estiguen lliures.
+      if(rangeHasBusy(selStart, ds)){
+        if(busy[ds]) return;
+        selStart=ds; selEnd=null;
+      } else {
+        selEnd=ds;
+      }
+    }
     sync(); render();
   }
 
@@ -122,12 +138,16 @@
       var ds=y+'-'+pad(m+1)+'-'+pad(day);
       var cls=[];
       var isBlocked = busy[ds] || isSummer(ds);
+      // Un dia ocupat encara pot triar-se com a eixida (checkout abans de les
+      // 12) mentre estem seleccionant l'eixida i no siga un dia de tancament.
+      var pickableAsExit = selStart && !selEnd && ds>selStart && !isSummer(ds);
       if(ds<todayStr) cls.push('past');
       else if(isBlocked) cls.push('busy');
       else cls.push('free');
       if(ds===selStart||ds===selEnd) cls.push('sel');
       else if(selStart&&selEnd&&ds>selStart&&ds<selEnd) cls.push('inrange');
-      h+='<button type="button" class="'+cls.join(' ')+'" data-d="'+ds+'" '+((ds<todayStr||isBlocked)?'disabled':'')+'>'+day+'</button>';
+      var disabled = ds<todayStr || isSummer(ds) || (busy[ds] && !pickableAsExit);
+      h+='<button type="button" class="'+cls.join(' ')+'" data-d="'+ds+'" '+(disabled?'disabled':'')+'>'+day+'</button>';
     }
     h+='</div></div>';
     return h;

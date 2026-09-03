@@ -452,8 +452,10 @@ html[data-lang="es"] .va{display:none}
 .rcal-d button{aspect-ratio:1;border:0;border-radius:9px;background:#d6ecd8;color:#1a4a1e;font:inherit;font-size:.86rem;cursor:pointer;transition:.12s;padding:0}
 .rcal-d button.free:hover{background:var(--navy);color:#fff}
 .rcal-d button.past{background:transparent;color:#c9c3b4;cursor:not-allowed}
-.rcal-d button.busy{background:repeating-linear-gradient(45deg,#f2d9da,#f2d9da 5px,#efcccd 5px,#efcccd 10px);color:#a13;cursor:not-allowed;text-decoration:line-through;opacity:.9}
-.rcal-d button.sel{background:var(--ember);color:#fff;font-weight:600}
+.rcal-d button.busy{background:repeating-linear-gradient(45deg,#f2d9da,#f2d9da 5px,#efcccd 5px,#efcccd 10px);color:#a13;text-decoration:line-through;opacity:.9}
+.rcal-d button.busy:disabled{cursor:not-allowed}
+.rcal-d button.busy:not(:disabled){cursor:pointer;text-decoration:none}
+.rcal-d button.sel{background:var(--ember);color:#fff;font-weight:600;cursor:pointer}
 .rcal-d button.inrange{background:#c8d9f5;color:var(--navy)}
 .rcal-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:.8rem;color:var(--muted);align-items:center}
 .rcal-legend i.lg{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px}
