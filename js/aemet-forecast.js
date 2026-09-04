@@ -37,12 +37,18 @@
     return '🌡️';
   }
 
-  // Nivell d'avís AEMET → color, a partir del text (p.ex. "Sin peligro",
-  // "Aviso amarillo por...", "Aviso naranja por...", "Aviso rojo por...").
+  // Nivell d'avís AEMET → color. El text pot vindre com a color explícit
+  // ("Aviso amarillo por...") o com a nivell de risc ("Bajo - Temperaturas
+  // máximas", "Moderado - ...", "Alto - ...", "Extremo - ..."), que és el
+  // format real que fa servir la pàgina de predicció municipal.
   function alertColor(text) {
     var t = (text || '').toLowerCase();
-    if (t.indexOf('rojo') !== -1) return 'red';
-    if (t.indexOf('naranja') !== -1) return 'orange';
+    var nivell = t.split(' - ')[0].trim();
+    if (nivell === 'rojo' || nivell === 'alto' || nivell === 'extremo') return 'red';
+    if (nivell === 'naranja' || nivell === 'moderado' || nivell === 'importante') return 'orange';
+    if (nivell === 'amarillo' || nivell === 'bajo') return 'yellow';
+    if (t.indexOf('rojo') !== -1 || t.indexOf('extremo') !== -1) return 'red';
+    if (t.indexOf('naranja') !== -1 || t.indexOf('moderado') !== -1) return 'orange';
     if (t.indexOf('amarillo') !== -1) return 'yellow';
     return 'green';
   }
