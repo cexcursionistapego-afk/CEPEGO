@@ -289,6 +289,7 @@ html[data-lang="es"] .va{display:none}
 .reunions li b,.noticies li b{display:block;font-family:var(--font-body);font-weight:700;margin-bottom:2px}
 .reunions li b{color:var(--navy)}
 .noticies li b{color:var(--ember)}
+.reunions li.empty,.noticies li.empty{border-left-color:var(--hair);color:var(--muted)}
 .iban{font-family:var(--font-mono);background:var(--navy);color:#fff;display:inline-block;padding:11px 18px;border-radius:12px;letter-spacing:.06em}
 .note{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:18px 22px;color:var(--muted);font-size:.94rem}
 .avamet-credit{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}

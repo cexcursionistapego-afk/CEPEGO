@@ -52,6 +52,27 @@
     avisBox.querySelector('.avis__x').addEventListener('click',function(){ avisBox.style.display='none'; });
   }).catch(function(){}); }
 
+  /* ---------- NOTÍCIES / REUNIONS (Racó del soci) ----------
+     Editables des de /admin (data/noticies.json i data/reunions.json)
+     sense necessitat de tocar codi ni refer el build. */
+  function escInfo(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function renderInfoList(el,url,key,emptyVa,emptyEs){
+    if(!el) return;
+    fetch(url,{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
+      var items=(d&&d[key])||[];
+      if(!items.length){ el.innerHTML='<li class="empty"><span class="va">'+emptyVa+'</span><span class="es">'+emptyEs+'</span></li>'; return; }
+      el.innerHTML=items.map(function(it){
+        var dva=escInfo(it.data_va), des=escInfo(it.data_es||it.data_va);
+        var tva=escInfo(it.text_va), tes=escInfo(it.text_es||it.text_va);
+        return '<li><b><span class="va">'+dva+'</span><span class="es">'+des+'</span></b><span class="va">'+tva+'</span><span class="es">'+tes+'</span></li>';
+      }).join('');
+    }).catch(function(){});
+  }
+  renderInfoList(document.getElementById('noticies-list'),'/data/noticies.json','noticies',
+    'Encara no hi ha notícies.','Todavía no hay noticias.');
+  renderInfoList(document.getElementById('reunions-list'),'/data/reunions.json','reunions',
+    'Encara no hi ha reunions previstes.','Todavía no hay reuniones previstas.');
+
   /* ---------- LIGHTBOX ---------- */
   var lb,lbImg,items=[],idx=0;
   function ensureLB(){ if(lb) return;
