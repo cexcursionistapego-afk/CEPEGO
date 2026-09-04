@@ -613,7 +613,7 @@ def build(g):
         "Contacta amb el Centre Excursionista de Pego: correu, adreça i formulari de contacte.", contacte, path="contacte.html", extra_js="js/contacte.js", turnstile=True))
 
     # ============================================= SOCI (ALTA / BAIXA)
-    # Notícies i reunions es gestionen des de /admin (data/noticies.json i
+    # Notícies i reunions es gestionen des de /juansa (data/noticies.json i
     # data/reunions.json) i es carreguen en temps real amb JS (main.js),
     # perquè el soci puga afegir-ne sense necessitat de tocar codi.
     info_html='''<section class="section" id="info" style="padding-bottom:clamp(28px,3.5vw,48px)">

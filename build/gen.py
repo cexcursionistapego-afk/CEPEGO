@@ -21,7 +21,7 @@ FB = "https://www.facebook.com/share/17fdDSFxDx"
 TURNSTILE_SITEKEY = "0x4AAAAAAEnLi6VUobypX4-L"
 
 # Content-Security-Policy. Va com a <meta> dins de cada pàgina generada i no
-# com a capçalera global a netlify.toml: així no toca mai /admin/index.html
+# com a capçalera global a netlify.toml: així no toca mai /juansa/index.html
 # (escrit a mà, carrega Decap CMS des d'unpkg) i no hi ha risc de trencar el
 # panell d'edició. 'frame-ancestors' no funciona en <meta>, però eixa
 # protecció ja la dona X-Frame-Options: DENY des de netlify.toml.

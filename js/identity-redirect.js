@@ -6,7 +6,7 @@ if (window.netlifyIdentity) {
   window.netlifyIdentity.on('init', function (u) {
     if (!u) {
       window.netlifyIdentity.on('login', function () {
-        document.location.href = '/admin/';
+        document.location.href = '/juansa/';
       });
     }
   });
