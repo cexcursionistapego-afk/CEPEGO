@@ -598,14 +598,12 @@ def build(g):
   <div class="wrap">
     <div class="grid cols-2">
       <div class="reveal" style="text-align:center">
-        <div class="kicker center-k"><span class="va">Notícies</span><span class="es">Noticias</span></div>
-        <h2 style="font-size:1.6rem"><span class="va">Notícies</span><span class="es">Noticias</span></h2>
+        <h2 style="font-size:1.6rem;color:var(--ember)"><span class="va">Notícies</span><span class="es">Noticias</span></h2>
         <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Últimes notícies del club.</span><span class="es">Últimas noticias del club.</span></p>
         <ul class="noticies" id="noticies-list" style="text-align:left"></ul>
       </div>
       <div class="reveal" style="text-align:center">
-        <div class="kicker center-k"><span class="va">Junta directiva</span><span class="es">Junta directiva</span></div>
-        <h2 style="font-size:1.6rem"><span class="va">Reunions</span><span class="es">Reuniones</span></h2>
+        <h2 style="font-size:1.6rem;color:var(--ember)"><span class="va">Reunions</span><span class="es">Reuniones</span></h2>
         <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Pròximes reunions de la junta directiva del club.</span><span class="es">Próximas reuniones de la junta directiva del club.</span></p>
         <ul class="reunions" id="reunions-list" style="text-align:left"></ul>
       </div>
