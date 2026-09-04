@@ -2,6 +2,8 @@
 (function () {
   function lang() { return document.documentElement.getAttribute('data-lang') === 'es' ? 'es' : 'va'; }
   function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
+  // El testimoni de Turnstile només val per a un enviament.
+  function resetCaptcha() { try { if (window.turnstile) window.turnstile.reset('#ts-contacte'); } catch (e) {} }
 
   var form = document.getElementById('contacte-form');
   var msg = document.getElementById('c-msg');
@@ -35,19 +37,19 @@
       .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
       .then(function (res) {
         if (res && res.ok) {
-          form.reset();
+          form.reset(); resetCaptcha();
           show(l === 'es'
             ? '¡Mensaje enviado! Te responderemos lo antes posible.'
             : 'Missatge enviat! Et respondrem al més aviat possible.', 'ok');
         } else {
-          btn.disabled = false;
+          btn.disabled = false; resetCaptcha();
           show(l === 'es'
             ? 'No se ha podido enviar. Escríbenos a cexcursionistapego@gmail.com'
             : 'No s\'ha pogut enviar. Escriu-nos a cexcursionistapego@gmail.com', 'err');
         }
       })
       .catch(function () {
-        btn.disabled = false;
+        btn.disabled = false; resetCaptcha();
         show(l === 'es' ? 'Error de conexión.' : 'Error de connexió.', 'err');
       });
   });

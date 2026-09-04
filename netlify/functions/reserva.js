@@ -3,7 +3,7 @@
 // El club la revisa a Airtable i, si la confirma, la passa a "RESERVAT" (i llavors
 // bloqueja el calendari web). Cap número de compte s'exposa a la web.
 
-const { isAllowedOrigin } = require('./_security');
+const { isAllowedOrigin, verifyTurnstile, clientIp } = require('./_security');
 const { isValidEmail } = require('./_validators');
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
@@ -26,6 +26,9 @@ exports.handler = async function (event) {
 
   // honeypot anti-spam: si el camp ocult ve ple, ignorem silenciosament
   if (b.website) return res(200, { ok: true });
+
+  const captcha = await verifyTurnstile(b['cf-turnstile-response'], clientIp(event));
+  if (!captcha.ok) return res(400, { ok: false, error: 'captcha', message: 'Verificació anti-robots fallida. Torna-ho a provar.' });
 
   const nom = (b.nom || '').trim();
   const email = (b.email || '').trim();

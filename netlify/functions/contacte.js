@@ -2,7 +2,7 @@
 // Crea una consulta general a la taula CONTACTE amb TIPO DE CONSULTA = "DUBTES I SUGGERÈNCIES"
 // i ESTADO = "PENDENT GESTIONAR". El club la revisa a Airtable.
 
-const { isAllowedOrigin } = require('./_security');
+const { isAllowedOrigin, verifyTurnstile, clientIp } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = process.env.AIRTABLE_TABLE || 'tblAD8ZeIKmNwNRm9';
@@ -25,6 +25,9 @@ exports.handler = async function (event) {
 
   // honeypot anti-spam: si el camp ocult ve ple, ignorem silenciosament
   if (b.website) return res(200, { ok: true });
+
+  const captcha = await verifyTurnstile(b['cf-turnstile-response'], clientIp(event));
+  if (!captcha.ok) return res(400, { ok: false, error: 'captcha', message: 'Verificació anti-robots fallida. Torna-ho a provar.' });
 
   const nom = (b.nom || '').trim();
   const email = (b.email || '').trim();

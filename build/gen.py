@@ -16,6 +16,9 @@ METEO = "https://www.avamet.org/mxo-i.php?id=c30m135e02"
 METEO_PEGO = "https://www.avamet.org/mxo-i.php?id=c30m102e14"
 IG = "https://www.instagram.com/refugifiguereta"
 FB = "https://www.facebook.com/share/17fdDSFxDx"
+# Clau pública del widget anti-bots de Cloudflare Turnstile (la clau secreta
+# viu només com a variable d'entorn TURNSTILE_SECRET_KEY a Netlify).
+TURNSTILE_SITEKEY = "0x4AAAAAAEnLi6VUobypX4-L"
 FEMECV="https://www.femecv.com/va"; AJPEGO="https://www.pego.org/"; PIV="https://www.pegoilesvalls.es/"
 
 ORG_JSONLD = json.dumps({
@@ -195,8 +198,9 @@ def footer():
   </div>
 </footer>'''
 
-def doc(title, desc, body, path="", identity=False, extra_js=None, image=None):
+def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, turnstile=False):
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
+    ts='<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>\n' if turnstile else ''
     idredirect=('<script>if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(u){if(!u){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}</script>\n' if identity else '')
     extra_js_list = [extra_js] if isinstance(extra_js, str) else (extra_js or [])
     extra_js_tags = "".join(f'<script src="/{s.lstrip(chr(47))}"></script>\n' for s in extra_js_list)
@@ -229,7 +233,7 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
-{idw}</head>
+{idw}{ts}</head>
 <body>
 <div id="avis"></div>
 {body}

@@ -6,7 +6,15 @@ def build(g):
     IMG=g['IMG']; REFUGI=g['REFUGI']; L1=g['L1']; L2=g['L2']; HERO=g['HERO_BENCS']; CREST=g['CREST']
     ALTA=g['ALTA']; BAIXA=g['BAIXA']; RESERVA=g['RESERVA']; GCAL=g['GCAL']; METEO=g['METEO']; METEO_PEGO=g['METEO_PEGO']
     IG=g['IG']; FB=g['FB']; IG_SVG=g['IG_SVG']
+    TS_KEY=g['TURNSTILE_SITEKEY']
     RESERVA_EMBED="https://airtable.com/embed/appkuKVxHSMyDElfh/pagsRVRH1Oa9zgKka/form"
+
+    # Widget anti-bots de Cloudflare Turnstile. Turnstile injecta tot sol un
+    # <input name="cf-turnstile-response"> dins del formulari, així que el
+    # testimoni viatja ja amb la resta de camps al FormData.
+    def turnstile(wid):
+        return (f'<div class="cf-turnstile" id="{wid}" data-sitekey="{TS_KEY}" '
+                f'data-language="auto" data-appearance="interaction-only"></div>')
 
     def gallery_imgs(files, alt):
         return "".join(
@@ -358,6 +366,7 @@ def build(g):
           </div>
           <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span> *</label><textarea name="missatge" required></textarea></div>
           <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          {turnstile('ts-reserva')}
           <button type="submit" id="r-submit" class="btn btn-primary" disabled><span class="va">Enviar sol·licitud</span><span class="es">Enviar solicitud</span></button>
           <div id="r-msg" class="r-msg"></div>
         </form>
@@ -379,7 +388,7 @@ def build(g):
 </section>
 '''+footer()
     write("reservar.html", doc("Reservar La Figuereta | CEPEGO",
-        "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, path="reservar.html", extra_js="js/reserves.js"))
+        "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, path="reservar.html", extra_js="js/reserves.js", turnstile=True))
 
     # ============================================= METEO
     meteo_dash=f'''<section class="section" style="padding:clamp(28px,3.5vw,48px) 0">
@@ -574,6 +583,7 @@ def build(g):
           </div>
           <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span> *</label><textarea name="missatge" required></textarea></div>
           <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          {turnstile('ts-contacte')}
           <button type="submit" id="c-submit" class="btn btn-primary"><span class="va">Enviar missatge</span><span class="es">Enviar mensaje</span></button>
           <div id="c-msg" class="r-msg"></div>
         </form>
@@ -588,7 +598,7 @@ def build(g):
 </section>
 '''+footer()
     write("contacte.html", doc("Contacte | CEPEGO",
-        "Contacta amb el Centre Excursionista de Pego: correu, adreça i formulari de contacte.", contacte, path="contacte.html", extra_js="js/contacte.js"))
+        "Contacta amb el Centre Excursionista de Pego: correu, adreça i formulari de contacte.", contacte, path="contacte.html", extra_js="js/contacte.js", turnstile=True))
 
     # ============================================= SOCI (ALTA / BAIXA)
     # Notícies i reunions es gestionen des de /admin (data/noticies.json i
@@ -656,6 +666,7 @@ def build(g):
         <div class="field"><label><span class="va">Notes (opcional)</span><span class="es">Notas (opcional)</span></label><textarea name="notas" rows="2"></textarea></div>
 
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        {turnstile('ts-alta')}
         <button type="submit" id="alta-submit" class="btn btn-primary" style="width:100%;margin-top:8px"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
         <p class="note" style="margin:12px 0 0;font-size:.82rem;opacity:.75"><span class="va">* Camps obligatoris. Les teues dades es tracten d'acord amb la normativa RGPD i s'utilitzen exclusivament per a la gestió de la teua pertinença al club.</span><span class="es">* Campos obligatorios. Tus datos se tratan según la normativa RGPD y se utilizan exclusivamente para la gestión de tu pertenencia al club.</span></p>
         <div id="alta-msg" class="r-msg"></div>
@@ -682,6 +693,7 @@ def build(g):
         <div class="field"><label><span class="va">Foto del DNI (opcional)</span><span class="es">Foto del DNI (opcional)</span></label><input type="file" name="dni_foto" accept="image/*"></div>
         <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="2"></textarea></div>
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        {turnstile('ts-baixa')}
         <button type="submit" id="baixa-submit" class="btn btn-ghost" style="width:100%;margin-top:4px"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
         <div id="baixa-msg" class="r-msg"></div>
       </form>
@@ -691,7 +703,7 @@ def build(g):
 </section>
 '''+footer()
     write("soci.html", doc("Racó del soci | CEPEGO",
-        "Gestiona la teua pertinença al Centre Excursionista de Pego: alta de soci, baixa i informació.", soci, path="soci.html", extra_js="js/soci.js"))
+        "Gestiona la teua pertinença al Centre Excursionista de Pego: alta de soci, baixa i informació.", soci, path="soci.html", extra_js="js/soci.js", turnstile=True))
 
     # ============================================= AVÍS LEGAL / PRIVACITAT / COOKIES
     def legal_head(kva,kes,hva,hes):

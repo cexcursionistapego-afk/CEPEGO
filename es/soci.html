@@ -28,6 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <div id="avis"></div>
@@ -131,6 +132,7 @@
         <div class="field"><label><span class="va">Notes (opcional)</span><span class="es">Notas (opcional)</span></label><textarea name="notas" rows="2"></textarea></div>
 
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="cf-turnstile" id="ts-alta" data-sitekey="0x4AAAAAAEnLi6VUobypX4-L" data-language="auto" data-appearance="interaction-only"></div>
         <button type="submit" id="alta-submit" class="btn btn-primary" style="width:100%;margin-top:8px"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
         <p class="note" style="margin:12px 0 0;font-size:.82rem;opacity:.75"><span class="va">* Camps obligatoris. Les teues dades es tracten d'acord amb la normativa RGPD i s'utilitzen exclusivament per a la gestió de la teua pertinença al club.</span><span class="es">* Campos obligatorios. Tus datos se tratan según la normativa RGPD y se utilizan exclusivamente para la gestión de tu pertenencia al club.</span></p>
         <div id="alta-msg" class="r-msg"></div>
@@ -157,6 +159,7 @@
         <div class="field"><label><span class="va">Foto del DNI (opcional)</span><span class="es">Foto del DNI (opcional)</span></label><input type="file" name="dni_foto" accept="image/*"></div>
         <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="2"></textarea></div>
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="cf-turnstile" id="ts-baixa" data-sitekey="0x4AAAAAAEnLi6VUobypX4-L" data-language="auto" data-appearance="interaction-only"></div>
         <button type="submit" id="baixa-submit" class="btn btn-ghost" style="width:100%;margin-top:4px"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
         <div id="baixa-msg" class="r-msg"></div>
       </form>
