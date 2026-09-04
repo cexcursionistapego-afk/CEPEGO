@@ -113,6 +113,91 @@
 
   bindGalleries();
 
+  /* ---------- VALIDACIÓ EN TEMPS REAL DELS FORMULARIS ----------
+     Mostra l'error de seguida (en eixir del camp, i mentre s'escriu si ja
+     s'ha eixit una vegada), en lloc d'esperar a l'enviament del formulari. */
+  (function () {
+    function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
+    function normDigits(v) { return (v || '').replace(/\D/g, ''); }
+    function isValidPhone(v) {
+      var d = normDigits(v);
+      if (d.length === 11 && d.slice(0, 2) === '34') d = d.slice(2);
+      return /^[6789]\d{8}$/.test(d);
+    }
+    function isValidDNI(v) {
+      var t = (v || '').trim().toUpperCase();
+      return /^\d{8}[A-Z]$/.test(t) || /^[XYZ]\d{7}[A-Z]$/.test(t);
+    }
+    function isValidIBAN(v) {
+      var t = (v || '').replace(/\s/g, '').toUpperCase();
+      return /^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(t);
+    }
+    var MSG = {
+      required: { va: 'Camp obligatori.', es: 'Campo obligatorio.' },
+      email:    { va: 'El correu electrònic no és vàlid.', es: 'El correo electrónico no es válido.' },
+      telefon:  { va: 'El telèfon no és vàlid.', es: 'El teléfono no es válido.' },
+      dni:      { va: 'El DNI/NIE no és vàlid.', es: 'El DNI/NIE no es válido.' },
+      iban:     { va: 'L\'IBAN no és vàlid.', es: 'El IBAN no es válido.' },
+      file:     { va: 'L\'arxiu ha de pesar menys de 4MB.', es: 'El archivo debe pesar menos de 4MB.' }
+    };
+    function fLang() { return root.getAttribute('data-lang') === 'es' ? 'es' : 'va'; }
+    function fieldError(field) {
+      var err = field.querySelector('.field-error');
+      if (!err) { err = document.createElement('div'); err.className = 'field-error'; field.appendChild(err); }
+      return err;
+    }
+    function textValidator(input) {
+      var name = (input.getAttribute('name') || '').toLowerCase();
+      var type = (input.getAttribute('type') || '').toLowerCase();
+      if (type === 'email') return { key: 'email', fn: isValidEmail };
+      if (name === 'telefon' || type === 'tel') return { key: 'telefon', fn: isValidPhone };
+      if (name === 'dni') return { key: 'dni', fn: isValidDNI };
+      if (name === 'iban') return { key: 'iban', fn: isValidIBAN };
+      return null;
+    }
+    var SKIP_TYPES = { file: 1, checkbox: 1, radio: 1, hidden: 1, number: 1, submit: 1, button: 1 };
+    var touched = (typeof WeakSet === 'function') ? new WeakSet() : null;
+    function isTouched(el) { return touched ? touched.has(el) : el.dataset.touched === '1'; }
+    function markTouched(el) { if (touched) touched.add(el); else el.dataset.touched = '1'; }
+
+    function checkTextInput(input) {
+      var field = input.closest('.field');
+      if (!field) return true;
+      var v = (input.value || '').trim();
+      var l = fLang();
+      var v8 = textValidator(input);
+      var msgKey = null;
+      if (!v && input.hasAttribute('required')) msgKey = 'required';
+      else if (v && v8 && !v8.fn(v)) msgKey = v8.key;
+      var err = fieldError(field);
+      if (msgKey) { err.textContent = MSG[msgKey][l]; input.classList.add('invalid'); return false; }
+      err.textContent = ''; input.classList.remove('invalid'); return true;
+    }
+    document.querySelectorAll('.field input, .field textarea').forEach(function (input) {
+      var type = (input.getAttribute('type') || '').toLowerCase();
+      if (SKIP_TYPES[type]) return;
+      input.addEventListener('blur', function () { markTouched(input); checkTextInput(input); });
+      input.addEventListener('input', function () { if (isTouched(input)) checkTextInput(input); });
+    });
+
+    var MAX_FILE = 4 * 1024 * 1024;
+    document.querySelectorAll('.field input[type="file"]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        var field = input.closest('.field');
+        if (!field) return;
+        var l = fLang(), err = fieldError(field), f = input.files[0];
+        if (!f) {
+          var req = input.hasAttribute('required');
+          err.textContent = req ? MSG.required[l] : '';
+          input.classList.toggle('invalid', req);
+          return;
+        }
+        if (f.size > MAX_FILE) { err.textContent = MSG.file[l]; input.classList.add('invalid'); return; }
+        err.textContent = ''; input.classList.remove('invalid');
+      });
+    });
+  })();
+
   /* ---------- REVEAL en scroll ---------- */
   var rev=document.querySelectorAll('.reveal');
   if(rev.length && 'IntersectionObserver' in window){
