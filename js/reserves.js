@@ -113,15 +113,15 @@
   function turnoverNoticeHTML(arriveState, leaveState){
     var va=[], es=[];
     if(arriveState==='definite'){
-      va.push('com el grup anterior ix eixe mateix matí, podràs entrar a partir de les 12:00 del migdia');
-      es.push('como el grupo anterior sale esa misma mañana, podrás entrar a partir de las 12:00 del mediodía');
+      va.push('com el grup anterior ix el matí del teu dia d\'entrada, podràs entrar a partir de les 12:00 del migdia');
+      es.push('como el grupo anterior sale la mañana del día de tu entrada, podrás entrar a partir de las 12:00 del mediodía');
     } else if(arriveState==='possible'){
       va.push('si algú reserva el dia anterior (divendres), és possible que hages d\'entrar a partir de les 12:00 del migdia; t\'ho comunicaríem si fóra el cas');
       es.push('si alguien reserva el día anterior (viernes), es posible que tengas que entrar a partir de las 12:00 del mediodía; te lo comunicaríamos si fuera el caso');
     }
     if(leaveState==='definite'){
-      va.push('com entra un altre grup eixe mateix dia, hauràs de deixar el refugi abans de les 12:00 del migdia');
-      es.push('como entra otro grupo ese mismo día, deberás dejar el refugio antes de las 12:00 del mediodía');
+      va.push('com entra un altre grup el teu dia d\'eixida, hauràs de deixar el refugi abans de les 12:00 del migdia');
+      es.push('como entra otro grupo el día de tu salida, deberás dejar el refugio antes de las 12:00 del mediodía');
     } else if(leaveState==='possible'){
       va.push('si algú reserva a partir del teu dia d\'eixida, és possible que hages de deixar el refugi abans de les 12:00 del migdia; t\'ho comunicaríem si fóra el cas');
       es.push('si alguien reserva a partir de tu día de salida, es posible que tengas que dejar el refugio antes de las 12:00 del mediodía; te lo comunicaríamos si fuera el caso');
