@@ -3,6 +3,24 @@
 Web del Centre Excursionista de Pego. Sitio estático generado con Python,
 alojado en Netlify, con funciones serverless que hablan con Airtable.
 
+## Servicios de los que depende la web
+
+El club es de voluntarios y la gente rota, así que conviene tener claro
+qué cuentas existen y qué pasa si se pierde el acceso a cada una. Ninguna
+credencial se guarda aquí: esto es solo el mapa.
+
+| Servicio | Para qué | Si se pierde el acceso |
+|---|---|---|
+| **GitHub** (`cexcursionistapego-afk/CEPEGO`) | El código y el contenido. Todo el historial. | Se conserva la web publicada, pero no se puede cambiar nada. Es la copia de seguridad real del proyecto. |
+| **Netlify** | Publica la web y ejecuta las funciones. Guarda las claves secretas como variables de entorno. | La web deja de poder actualizarse. Las claves de Airtable y Turnstile viven solo ahí. |
+| **Airtable** | **Todos los datos de socios**: nombre, DNI/NIE, teléfono, IBAN y fotos del DNI. También reservas y consultas. | Es lo más sensible que hay. Una brecha aquí es notificable a la AEPD. |
+| **Cloudflare** | Solo la configuración del captcha (Turnstile). | Se podría desactivar el captcha. Impacto bajo. |
+| **Wix** | Donde está registrado el dominio `cepego.com` (la web anterior del club estaba allí). | Quien controle esto puede apuntar el dominio a otro sitio y suplantar la web entera. |
+| **Gmail** (`cexcursionistapego@gmail.com`) | Correo del club y vía de recuperación de todas las demás cuentas. | Da acceso indirecto a casi todo lo anterior. |
+
+Conviene que todas tengan verificación en dos pasos, especialmente
+Airtable y Gmail.
+
 ## Despliegue: leer esto antes de tocar ramas
 
 **Netlify publica `claude/rerun-test-download-site-hjl80a`.** Es la rama de
@@ -72,6 +90,58 @@ La Content-Security-Policy va como `<meta>` en las páginas generadas, no
 como cabecera en `netlify.toml`, precisamente para que no alcance a
 `juansa/index.html`, que carga Decap CMS desde unpkg. Si añades algún
 recurso externo nuevo, actualiza `CSP` en `build/gen.py`.
+
+## Cómo llegan los datos a Airtable
+
+Todo lo que la gente envía por los formularios acaba en la base
+`appkuKVxHSMyDElfh`, en tres tablas:
+
+- **CONTACTE** (`tblAD8ZeIKmNwNRm9`) — reservas y consultas. El campo
+  `TIPO DE CONSULTA` distingue unas de otras.
+- **SOCIS** (`tblNm2FZG9KCdiCDq`) — altas de socio, con las fotos del DNI
+  adjuntas al registro.
+- **BAIXES** (`tblGeQzo49FyjBQJs`) — bajas.
+
+Las reservas entran con `ESTADO = "PENDENT GESTIONAR"`. **El calendario de
+la web solo bloquea los días de los registros que el club pasa a
+`ESTADO = "RESERVAT"`** a mano en Airtable. O sea: una solicitud no ocupa
+fechas hasta que alguien la confirma. Ese es el circuito, y es
+intencionado.
+
+## Reglas del refugio codificadas
+
+Estas son decisiones del club, no detalles técnicos. Están duplicadas en
+el navegador (`js/reserves.js`, para pintar el calendario) y en el
+servidor (`netlify/functions/reserva.js`, que es quien de verdad manda).
+Si cambia alguna, hay que tocar los dos sitios.
+
+- **Cierre de verano**: del 31 de mayo al 1 de octubre no se reserva.
+- **Nochevieja**: la noche del 31 de diciembre no se alquila nunca.
+- **Aforo**: máximo 21 personas.
+- **Cambio de turno**: la salida del sábado es a las 12:00, así que otro
+  grupo puede entrar ese mismo día. La del domingo es a las 17:00, así que
+  no da tiempo: los domingos que son día de salida quedan bloqueados para
+  entrar. Por eso el calendario avisa de que quizá haya que entrar o salir
+  a las 12:00.
+- **Excepciones puntuales**: `BLOCKED_EXIT` en `js/reserves.js` marca días
+  sueltos en los que nadie puede salir (ahora mismo, el 8-11-2026).
+- **Cola de reservas**: si en el panel se pone una fecha en
+  `reserves_cua_desde`, las solicitudes para esa fecha en adelante se
+  aceptan pero avisando de que entran en cola.
+
+## Cosas que ya han dado problemas
+
+- **Turnstile deja pasar todo si falta la clave.** Un envío correcto no
+  distingue "verificado" de "saltado". Solo lo dice el panel de Cloudflare.
+- **Las variables de entorno de Netlify no llegan a las funciones hasta
+  que hay un despliegue nuevo.** Cambiar una y no redesplegar parece que
+  funciona, pero no aplica.
+- **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
+  cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a
+  devolver `parse_failed`. No es un fallo del código: hay que reajustar
+  las expresiones regulares al HTML nuevo.
+- **CSS Grid con `1fr` no da columnas iguales** si el contenido de una es
+  más ancho. Por eso `.cols-2/3/4` usan `minmax(0,1fr)`.
 
 ## Probar los cambios
 
