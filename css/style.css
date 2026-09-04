@@ -281,7 +281,7 @@ html[data-lang="es"] .va{display:none}
 @media(min-width:901px){.rules-top{padding-top:clamp(24px,3vw,48px)}}
 .rules li{background:var(--white);border:1px solid var(--hair);border-left:3px solid var(--ember);
   padding:14px 18px;border-radius:0 12px 12px 0;font-size:.96rem}
-.reunions,.noticies{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.reunions,.noticies{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;flex:1}
 .reunions li,.noticies li{background:var(--white);border:1px solid var(--hair);flex:1;
   padding:14px 18px;border-radius:0 12px 12px 0;font-size:.96rem}
 .reunions li{border-left:3px solid var(--navy)}
