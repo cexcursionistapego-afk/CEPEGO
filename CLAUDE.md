@@ -30,31 +30,32 @@ gestione en cada momento.
 Quien lo lleva a día de hoy es Juansa (`juansa.moll@gmail.com`), y hay un
 segundo miembro de la junta, Ximo, al corriente de cómo funciona.
 
-**La pregunta que decide si el relevo funciona de verdad es esta: si
-mañana falta esa persona, ¿puede otro miembro de la junta entrar en el
-Gmail del club Y generar los códigos del segundo factor?**
+Los códigos del segundo factor están en **Google Authenticator,
+sincronizado con la cuenta de Google del club**. Esto es lo que hace que
+el relevo sea posible, porque Google Authenticator guarda los códigos en
+la cuenta y no solo en el móvil.
 
-- Si la app de autenticación sincroniza con la cuenta de Google del club
-  (Google Authenticator lo hace desde 2023), entonces sí: quien entre en
-  ese Gmail puede restaurar los códigos en su propio móvil. **Continuidad
-  resuelta.**
-- Si la app es solo local en un dispositivo, no. Aunque se conozcan
-  correos y contraseñas, sin ese móvil no se entra en ningún sitio y la
-  web se queda congelada: publicada y funcionando, pero intocable, sin
-  acceso a los datos de los socios ni al dominio.
+**Cómo recuperar el acceso si quien lo gestiona ya no está:**
 
-Si se da el segundo caso, hay dos formas de arreglarlo, y conviene
-hacerlo **antes** de necesitarlo:
+1. Entrar en `cexcursionistapego@gmail.com` (la contraseña la debe
+   conocer alguien más de la junta; si no, se recupera por los medios
+   habituales de Google).
+2. Instalar Google Authenticator en el móvil nuevo e iniciar sesión con
+   esa misma cuenta de Google. Los códigos de todos los servicios
+   aparecen solos.
+3. Con eso ya se puede entrar en Netlify, GitHub, Airtable, Cloudflare y
+   Wix.
 
-1. **Añadir a la segunda persona como administradora** en Netlify, GitHub
-   y Airtable. Los tres permiten varios usuarios, y es la opción más
-   limpia: cada uno entra con su propia cuenta y su propio segundo factor.
-2. **Guardar los códigos de recuperación** de cada servicio en un sitio
-   que controle el club y no una sola persona: un sobre cerrado en poder
-   del secretario o en la caja del club.
+**El punto débil que queda** es la contraseña del Gmail del club: si nadie
+más la sabe ni puede recuperarla, la cadena se rompe en el primer paso.
+Conviene que un segundo miembro de la junta pueda entrar en ese correo, o
+que la contraseña esté guardada en un sitio que controle el club (un sobre
+cerrado en poder del secretario, por ejemplo). Es lo único que hay que
+mantener vivo con el tiempo.
 
 Saber cómo funciona la web (este documento) y poder entrar a cambiarla son
-dos cosas distintas. Esto último es lo que hay que asegurar.
+dos cosas distintas. Ambas están cubiertas mientras se mantenga el acceso
+al correo del club.
 
 ## Despliegue: leer esto antes de tocar ramas
 
