@@ -19,6 +19,27 @@ FB = "https://www.facebook.com/share/17fdDSFxDx"
 # Clau pública del widget anti-bots de Cloudflare Turnstile (la clau secreta
 # viu només com a variable d'entorn TURNSTILE_SECRET_KEY a Netlify).
 TURNSTILE_SITEKEY = "0x4AAAAAAEnLi6VUobypX4-L"
+
+# Content-Security-Policy. Va com a <meta> dins de cada pàgina generada i no
+# com a capçalera global a netlify.toml: així no toca mai /admin/index.html
+# (escrit a mà, carrega Decap CMS des d'unpkg) i no hi ha risc de trencar el
+# panell d'edició. 'frame-ancestors' no funciona en <meta>, però eixa
+# protecció ja la dona X-Frame-Options: DENY des de netlify.toml.
+#   - script-src sense 'unsafe-inline': cap script en línia a les pàgines.
+#   - style-src amb 'unsafe-inline': l'HTML fa servir molts style="..." .
+#   - frame-src: iframe del widget de Turnstile i el mapa de Google.
+CSP = "; ".join([
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "form-action 'self'",
+    "script-src 'self' https://challenges.cloudflare.com https://identity.netlify.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    "img-src 'self' data:",
+    "connect-src 'self' https://identity.netlify.com",
+    "frame-src https://challenges.cloudflare.com https://www.google.com",
+])
 FEMECV="https://www.femecv.com/va"; AJPEGO="https://www.pego.org/"; PIV="https://www.pegoilesvalls.es/"
 
 ORG_JSONLD = json.dumps({
@@ -201,7 +222,7 @@ def footer():
 def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, turnstile=False):
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
     ts='<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>\n' if turnstile else ''
-    idredirect=('<script>if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(u){if(!u){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}</script>\n' if identity else '')
+    idredirect=('<script src="/js/identity-redirect.js"></script>\n' if identity else '')
     extra_js_list = [extra_js] if isinstance(extra_js, str) else (extra_js or [])
     extra_js_tags = "".join(f'<script src="/{s.lstrip(chr(47))}"></script>\n' for s in extra_js_list)
     canon = SITE_URL + "/" + (path if (path and path != "index.html") else "")
@@ -211,6 +232,7 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, t
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="{CSP}">
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canon}">
