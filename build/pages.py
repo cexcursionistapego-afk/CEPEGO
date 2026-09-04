@@ -593,21 +593,23 @@ def build(g):
     # ============================================= SOCI (ALTA / BAIXA)
     noticies=[("19 i 20 de setembre","19 y 20 de septiembre","Acampada al refugi La Figuereta per a posar-lo a punt per a la temporada 2026/27.","Acampada en el refugio La Figuereta para ponerlo a punto para la temporada 2026/27.")]
     noticies_li="".join(f'      <li><b><span class="va">{dva}</span><span class="es">{des}</span></b><span class="va">{tva}</span><span class="es">{tes}</span></li>\n' for dva,des,tva,tes in noticies)
-    reunions=[("9 de setembre","9 de septiembre","Reunió de la junta directiva per a redactar el calendari de tardor.","Reunión de la junta directiva para redactar el calendario de otoño.")]
+    reunions=[("9 de setembre, 20:00 h","9 de septiembre, 20:00 h","Reunió de la junta directiva per a redactar el calendari de tardor.","Reunión de la junta directiva para redactar el calendario de otoño.")]
     reunions_li="".join(f'      <li><b><span class="va">{dva}</span><span class="es">{des}</span></b><span class="va">{tva}</span><span class="es">{tes}</span></li>\n' for dva,des,tva,tes in reunions)
     info_html=f'''<section class="section" id="info">
   <div class="wrap">
     <div class="grid cols-2">
-      <div class="reveal">
-        <div class="kicker"><span class="va">Notícies</span><span class="es">Noticias</span></div>
+      <div class="reveal" style="text-align:center">
+        <div class="kicker center-k"><span class="va">Notícies</span><span class="es">Noticias</span></div>
         <h2 style="font-size:1.6rem"><span class="va">Notícies</span><span class="es">Noticias</span></h2>
-        <ul class="noticies">
+        <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Últimes notícies del club.</span><span class="es">Últimas noticias del club.</span></p>
+        <ul class="noticies" style="text-align:left">
 {noticies_li}        </ul>
       </div>
-      <div class="reveal">
-        <div class="kicker"><span class="va">Junta directiva</span><span class="es">Junta directiva</span></div>
+      <div class="reveal" style="text-align:center">
+        <div class="kicker center-k"><span class="va">Junta directiva</span><span class="es">Junta directiva</span></div>
         <h2 style="font-size:1.6rem"><span class="va">Reunions</span><span class="es">Reuniones</span></h2>
-        <ul class="reunions">
+        <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Pròximes reunions de la junta directiva del club.</span><span class="es">Próximas reuniones de la junta directiva del club.</span></p>
+        <ul class="reunions" style="text-align:left">
 {reunions_li}        </ul>
       </div>
     </div>
@@ -623,9 +625,11 @@ def build(g):
   <div class="wrap">
     <div class="grid cols-2" style="align-items:start">
     <div class="card reveal">
-      <div class="kicker"><span class="va">Uneix-te al club</span><span class="es">Únete al club</span></div>
-      <h3 style="font-size:1.4rem"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></h3>
-      <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">La quota anual és de <strong>35 €</strong>. Ompli el formulari i et contactarem per correu electrònic per confirmar-te l'alta i indicar-te com realitzar el pagament.</span><span class="es">La cuota anual es de <strong>35 €</strong>. Rellena el formulario y te contactaremos por correo electrónico para confirmar el alta e indicarte cómo realizar el pago.</span></p>
+      <div style="text-align:center">
+        <div class="kicker center-k"><span class="va">Uneix-te al club</span><span class="es">Únete al club</span></div>
+        <h3 style="font-size:1.4rem"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></h3>
+        <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">La quota anual és de <strong>35 €</strong>. Ompli el formulari i et contactarem per correu electrònic per confirmar-te l'alta i indicar-te com realitzar el pagament.</span><span class="es">La cuota anual es de <strong>35 €</strong>. Rellena el formulario y te contactaremos por correo electrónico para confirmar el alta e indicarte cómo realizar el pago.</span></p>
+      </div>
       <form id="alta-form" novalidate>
 
         <div class="form-section-label"><span class="va">Dades personals</span><span class="es">Datos personales</span></div>
@@ -664,9 +668,11 @@ def build(g):
     </div>
 
     <div class="card reveal">
-      <div class="kicker"><span class="va">Donar-se de baixa</span><span class="es">Darse de baja</span></div>
-      <h3 style="font-size:1.4rem"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h3>
-      <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Lamentem veure't marxar. Omple el formulari amb les teues dades i processarem la baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario con tus datos y procesaremos la baja. Te confirmaremos por correo electrónico.</span></p>
+      <div style="text-align:center">
+        <div class="kicker center-k"><span class="va">Donar-se de baixa</span><span class="es">Darse de baja</span></div>
+        <h3 style="font-size:1.4rem"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h3>
+        <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Lamentem veure't marxar. Omple el formulari amb les teues dades i processarem la baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario con tus datos y procesaremos la baja. Te confirmaremos por correo electrónico.</span></p>
+      </div>
       <form id="baixa-form" novalidate>
         <div class="select-row">
           <div class="field"><label><span class="va">Nom</span><span class="es">Nombre</span> *</label><input name="nom" required autocomplete="given-name"></div>
