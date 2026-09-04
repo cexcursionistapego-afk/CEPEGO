@@ -65,3 +65,43 @@ collections:
           - { label: "Mostrar l'avís?", name: "actiu", widget: "boolean", default: false }
           - { label: "Text en Valencià", name: "text_va", widget: "string", required: false }
           - { label: "Text en Español", name: "text_es", widget: "string", required: false }
+
+  # ---------- NOTÍCIES (Racó del soci) ----------
+  - name: "noticies"
+    label: "📰 Notícies (Racó del soci)"
+    description: "Notícies que apareixen al Racó del soci (eixides, acampades, obres…). Arrossega per reordenar."
+    files:
+      - name: "noticies"
+        label: "Notícies"
+        file: "data/noticies.json"
+        fields:
+          - label: "Notícies"
+            name: "noticies"
+            label_singular: "Notícia"
+            widget: "list"
+            summary: "{{fields.data_va}} — {{fields.text_va}}"
+            fields:
+              - { label: "Data (Valencià)", name: "data_va", widget: "string", hint: "Ex: 19 i 20 de setembre" }
+              - { label: "Fecha (Español)", name: "data_es", widget: "string", hint: "Ej: 19 y 20 de septiembre" }
+              - { label: "Text (Valencià)", name: "text_va", widget: "text" }
+              - { label: "Texto (Español)", name: "text_es", widget: "text" }
+
+  # ---------- REUNIONS (Racó del soci) ----------
+  - name: "reunions"
+    label: "🗓️ Reunions (Racó del soci)"
+    description: "Pròximes reunions de la junta directiva que apareixen al Racó del soci. Arrossega per reordenar."
+    files:
+      - name: "reunions"
+        label: "Reunions"
+        file: "data/reunions.json"
+        fields:
+          - label: "Reunions"
+            name: "reunions"
+            label_singular: "Reunió"
+            widget: "list"
+            summary: "{{fields.data_va}} — {{fields.text_va}}"
+            fields:
+              - { label: "Data i hora (Valencià)", name: "data_va", widget: "string", hint: "Ex: 9 de setembre, 20:00 h" }
+              - { label: "Fecha y hora (Español)", name: "data_es", widget: "string", hint: "Ej: 9 de septiembre, 20:00 h" }
+              - { label: "Text (Valencià)", name: "text_va", widget: "text" }
+              - { label: "Texto (Español)", name: "text_es", widget: "text" }

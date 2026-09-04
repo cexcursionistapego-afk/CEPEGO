@@ -591,26 +591,23 @@ def build(g):
         "Contacta amb el Centre Excursionista de Pego: correu, adreça i formulari de contacte.", contacte, path="contacte.html", extra_js="js/contacte.js"))
 
     # ============================================= SOCI (ALTA / BAIXA)
-    noticies=[("19 i 20 de setembre","19 y 20 de septiembre","Acampada al refugi La Figuereta per a posar-lo a punt per a la temporada 2026/27.","Acampada en el refugio La Figuereta para ponerlo a punto para la temporada 2026/27.")]
-    noticies_li="".join(f'      <li><b><span class="va">{dva}</span><span class="es">{des}</span></b><span class="va">{tva}</span><span class="es">{tes}</span></li>\n' for dva,des,tva,tes in noticies)
-    reunions=[("9 de setembre, 20:00 h","9 de septiembre, 20:00 h","Reunió de la junta directiva per a redactar el calendari de tardor.","Reunión de la junta directiva para redactar el calendario de otoño.")]
-    reunions_li="".join(f'      <li><b><span class="va">{dva}</span><span class="es">{des}</span></b><span class="va">{tva}</span><span class="es">{tes}</span></li>\n' for dva,des,tva,tes in reunions)
-    info_html=f'''<section class="section" id="info">
+    # Notícies i reunions es gestionen des de /admin (data/noticies.json i
+    # data/reunions.json) i es carreguen en temps real amb JS (main.js),
+    # perquè el soci puga afegir-ne sense necessitat de tocar codi.
+    info_html='''<section class="section" id="info">
   <div class="wrap">
     <div class="grid cols-2">
       <div class="reveal" style="text-align:center">
         <div class="kicker center-k"><span class="va">Notícies</span><span class="es">Noticias</span></div>
         <h2 style="font-size:1.6rem"><span class="va">Notícies</span><span class="es">Noticias</span></h2>
         <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Últimes notícies del club.</span><span class="es">Últimas noticias del club.</span></p>
-        <ul class="noticies" style="text-align:left">
-{noticies_li}        </ul>
+        <ul class="noticies" id="noticies-list" style="text-align:left"></ul>
       </div>
       <div class="reveal" style="text-align:center">
         <div class="kicker center-k"><span class="va">Junta directiva</span><span class="es">Junta directiva</span></div>
         <h2 style="font-size:1.6rem"><span class="va">Reunions</span><span class="es">Reuniones</span></h2>
         <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Pròximes reunions de la junta directiva del club.</span><span class="es">Próximas reuniones de la junta directiva del club.</span></p>
-        <ul class="reunions" style="text-align:left">
-{reunions_li}        </ul>
+        <ul class="reunions" id="reunions-list" style="text-align:left"></ul>
       </div>
     </div>
   </div>
