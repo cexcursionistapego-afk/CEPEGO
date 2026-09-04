@@ -27,4 +27,36 @@ function base64SizeExceeds(b64, maxBytes) {
   return bytes > (maxBytes || MAX_FILE_BYTES);
 }
 
-module.exports = { isAllowedOrigin, base64SizeExceeds, MAX_FILE_BYTES };
+// Verificació del testimoni de Cloudflare Turnstile (anti-bots).
+// Si TURNSTILE_SECRET_KEY no està configurada encara a Netlify, es deixa
+// passar: així el formulari mai es queda trencat mentre s'acaba de muntar.
+// Si Cloudflare no respon (caiguda del seu servei), també es deixa passar —
+// val més acceptar alguna sol·licitud de més que deixar el club sense
+// formularis; l'honeypot i la comprovació d'Origin continuen actives.
+const SITEVERIFY = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
+async function verifyTurnstile(token, remoteIp) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return { ok: true, skipped: true };
+  if (!token) return { ok: false, error: 'captcha' };
+  try {
+    const form = new URLSearchParams({ secret: secret, response: String(token) });
+    if (remoteIp) form.append('remoteip', remoteIp);
+    const r = await fetch(SITEVERIFY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: form.toString(),
+    });
+    const data = await r.json();
+    return data && data.success ? { ok: true } : { ok: false, error: 'captcha' };
+  } catch (e) {
+    return { ok: true, skipped: true };
+  }
+}
+
+function clientIp(event) {
+  const h = event.headers || {};
+  return h['x-nf-client-connection-ip'] || (h['x-forwarded-for'] || '').split(',')[0].trim() || undefined;
+}
+
+module.exports = { isAllowedOrigin, base64SizeExceeds, MAX_FILE_BYTES, verifyTurnstile, clientIp };

@@ -11,6 +11,8 @@
   };
   var DIES = { va: ['Dl','Dt','Dc','Dj','Dv','Ds','Dg'], es: ['Lu','Ma','Mi','Ju','Vi','Sá','Do'] };
   function lang(){ return document.documentElement.getAttribute('data-lang') === 'es' ? 'es' : 'va'; }
+  // El testimoni de Turnstile només val per a un enviament.
+  function resetCaptcha(){ try { if (window.turnstile) window.turnstile.reset('#ts-reserva'); } catch(e){} }
   function pad(n){ return (n<10?'0':'')+n; }
   function iso(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
   function parse(s){ var p=s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
@@ -303,7 +305,7 @@
           var res=results[0], queueFrom=results[1];
           if(res && res.ok){
             var wasQueued = inQueuePeriod(queueFrom, body.entrada, body.salida);
-            form.reset(); selStart=selEnd=null; sync(); render();
+            form.reset(); resetCaptcha(); selStart=selEnd=null; sync(); render();
             if (wasQueued) {
               show(l==='es'
                 ? 'Solicitud recibida. Las reservas para esas fechas aún no están abiertas: tu solicitud entra en una cola por orden de llegada y la gestionaremos a partir del ' + fmt(queueFrom) + '.'
@@ -314,11 +316,11 @@
                 : 'Sol·licitud enviada! La revisarem i ens posarem en contacte amb tu per correu electrònic per confirmar la data.','ok');
             }
           } else {
-            submitBtn.disabled=false;
+            submitBtn.disabled=false; resetCaptcha();
             show(l==='es'?'No se ha podido enviar. Inténtalo de nuevo o escríbenos por email.':'No s\'ha pogut enviar. Torna-ho a provar o escriu-nos per correu.','err');
           }
         })
-        .catch(function(){ submitBtn.disabled=false; show(l==='es'?'Error de conexión.':'Error de connexió.','err'); });
+        .catch(function(){ submitBtn.disabled=false; resetCaptcha(); show(l==='es'?'Error de conexión.':'Error de connexió.','err'); });
     });
   }
   function show(t,cls){ if(!msg) return; msg.textContent=t; msg.className='r-msg '+(cls||''); }

@@ -2,7 +2,7 @@
 // Envia una sol·licitud de baixa a la taula BAIXES CENTRE EXCURSIONISTA PEGO.
 
 const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN } = require('./_validators');
-const { isAllowedOrigin, base64SizeExceeds } = require('./_security');
+const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblGeQzo49FyjBQJs'; // BAIXES CENTRE EXCURSIONISTA PEGO
@@ -22,6 +22,9 @@ exports.handler = async function (event) {
   try { b = JSON.parse(event.body || '{}'); } catch (e) { return res(400, { ok: false, error: 'json' }); }
 
   if (b.website) return res(200, { ok: true }); // honeypot
+
+  const captcha = await verifyTurnstile(b['cf-turnstile-response'], clientIp(event));
+  if (!captcha.ok) return res(400, { ok: false, error: 'captcha', message: 'Verificació anti-robots fallida. Torna-ho a provar.' });
 
   const nom     = s(b.nom);
   const cognoms = s(b.cognoms);

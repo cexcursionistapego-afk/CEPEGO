@@ -28,6 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <div id="avis"></div>
@@ -96,6 +97,7 @@
           </div>
           <div class="field"><label><span class="va">Missatge</span><span class="es">Mensaje</span> *</label><textarea name="missatge" required></textarea></div>
           <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="cf-turnstile" id="ts-contacte" data-sitekey="0x4AAAAAAEnLi6VUobypX4-L" data-language="auto" data-appearance="interaction-only"></div>
           <button type="submit" id="c-submit" class="btn btn-primary"><span class="va">Enviar missatge</span><span class="es">Enviar mensaje</span></button>
           <div id="c-msg" class="r-msg"></div>
         </form>

@@ -2,6 +2,10 @@
 (function () {
   function lang() { return document.documentElement.getAttribute('data-lang') === 'es' ? 'es' : 'va'; }
 
+  // El testimoni de Turnstile només val per a un enviament: després de cada
+  // intent (bo o roín) cal demanar-ne un de nou al widget.
+  function resetCaptcha(id) { try { if (window.turnstile) window.turnstile.reset(id); } catch (e) {} }
+
   function normDigits(v) { return (v || '').replace(/\D/g, ''); }
   function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
   function isValidPhone(v) {
@@ -93,20 +97,20 @@
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
         .then(function (res) {
           if (res && res.ok) {
-            altaForm.reset();
+            altaForm.reset(); resetCaptcha('#ts-alta');
             show(altaMsg, l === 'es'
               ? '¡Solicitud de alta enviada! Te contactaremos por correo electrónico para confirmar el alta e indicarte el pago de la cuota anual.'
               : 'Sol·licitud d\'alta enviada! Et contactarem per correu electrònic per confirmar-te l\'alta i indicar-te el pagament de la quota anual.',
               'ok');
           } else {
-            altaBtn.disabled = false;
+            altaBtn.disabled = false; resetCaptcha('#ts-alta');
             show(altaMsg, l === 'es'
               ? 'No se ha podido enviar. Inténtalo de nuevo o escríbenos a cexcursionistapego@gmail.com'
               : 'No s\'ha pogut enviar. Torna-ho a provar o escriu-nos a cexcursionistapego@gmail.com', 'err');
           }
         })
         .catch(function () {
-          altaBtn.disabled = false;
+          altaBtn.disabled = false; resetCaptcha('#ts-alta');
           show(altaMsg, l === 'es' ? 'Error de conexión.' : 'Error de connexió.', 'err');
         });
     });
@@ -161,20 +165,20 @@
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
         .then(function (res) {
           if (res && res.ok) {
-            baixaForm.reset();
+            baixaForm.reset(); resetCaptcha('#ts-baixa');
             show(baixaMsg, l === 'es'
               ? 'Solicitud de baja enviada. La procesaremos y te confirmaremos por correo electrónico.'
               : 'Sol·licitud de baixa enviada. La processarem i et confirmarem per correu electrònic.',
               'ok');
           } else {
-            baixaBtn.disabled = false;
+            baixaBtn.disabled = false; resetCaptcha('#ts-baixa');
             show(baixaMsg, l === 'es'
               ? 'No se ha podido enviar. Escríbenos a cexcursionistapego@gmail.com'
               : 'No s\'ha pogut enviar. Escriu-nos a cexcursionistapego@gmail.com', 'err');
           }
         })
         .catch(function () {
-          baixaBtn.disabled = false;
+          baixaBtn.disabled = false; resetCaptcha('#ts-baixa');
           show(baixaMsg, l === 'es' ? 'Error de conexión.' : 'Error de connexió.', 'err');
         });
     });
