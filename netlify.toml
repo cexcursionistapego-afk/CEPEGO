@@ -55,6 +55,17 @@
   status = 301
   force = true
 
+# Capçaleres de seguretat bàsiques per a tot el lloc. No s'afig
+# Content-Security-Policy: /admin carrega Decap CMS des d'unpkg.com i el
+# widget de Netlify Identity, i una CSP massa estricta podria trencar el
+# panell d'edició sense poder-ho provar en un desplegament real abans.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
 # Cau curt per als índexs de dades editables
 [[headers]]
   for = "/data/*"

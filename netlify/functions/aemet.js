@@ -82,12 +82,9 @@ exports.handler = async function (event) {
   }
 
   try {
-    const { days, periods } = parseAemet(html);
+    const { days } = parseAemet(html);
     if (!days.length) return res(200, { ok: false, error: 'parse_failed' });
-    const debug = (event.queryStringParameters || {}).debug === '1';
-    const payload = { ok: true, municipi: 'Pego', codi: '03102', font: 'AEMET', days };
-    if (debug) payload._periods = periods;
-    return res(200, payload);
+    return res(200, { ok: true, municipi: 'Pego', codi: '03102', font: 'AEMET', days });
   } catch (e) {
     return res(200, { ok: false, error: 'parse_exception', detail: String(e).slice(0, 200) });
   }

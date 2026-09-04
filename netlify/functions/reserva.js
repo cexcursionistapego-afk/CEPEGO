@@ -3,6 +3,9 @@
 // El club la revisa a Airtable i, si la confirma, la passa a "RESERVAT" (i llavors
 // bloqueja el calendari web). Cap número de compte s'exposa a la web.
 
+const { isAllowedOrigin } = require('./_security');
+const { isValidEmail } = require('./_validators');
+
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = process.env.AIRTABLE_TABLE || 'tblAD8ZeIKmNwNRm9';
 const NEW_STATE = process.env.AIRTABLE_NEW_STATE || 'PENDENT GESTIONAR';
@@ -14,6 +17,7 @@ function isDate(s) { return /^\d{4}-\d{2}-\d{2}$/.test(s || ''); }
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') return res(405, { ok: false, error: 'method' });
+  if (!isAllowedOrigin(event)) return res(403, { ok: false, error: 'origin' });
   const token = process.env.AIRTABLE_TOKEN;
   if (!token) return res(200, { ok: false, error: 'config', message: 'Servei no configurat encara.' });
 
@@ -27,7 +31,7 @@ exports.handler = async function (event) {
   const email = (b.email || '').trim();
   const entrada = (b.entrada || '').trim();
   const salida = (b.salida || '').trim();
-  if (!nom || !email || !isDate(entrada) || !isDate(salida)) return res(400, { ok: false, error: 'camps' });
+  if (!nom || !isValidEmail(email) || !isDate(entrada) || !isDate(salida)) return res(400, { ok: false, error: 'camps' });
   if (salida < entrada) return res(400, { ok: false, error: 'dates' });
 
   const persones = parseInt(b.persones, 10);

@@ -1,6 +1,7 @@
 /* CEPEGO — idioma, navegació, calendari, galeria i micro-interaccions */
 (function(){
   var root = document.documentElement;
+  function escHtml(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
   /* ---------- IDIOMA: per URL — / = valencià, /es/ = espanyol ---------- */
   var curLang = root.getAttribute('data-lang')==='es' ? 'es' : 'va';
@@ -48,22 +49,21 @@
   var avisBox=document.getElementById('avis');
   if(avisBox){ fetch('/data/avis.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(a){
     if(!a||!a.actiu) return; var va=a.text_va||'',es=a.text_es||''; if(!va&&!es) return;
-    avisBox.innerHTML='<div class="avis"><span class="va">'+(va||es)+'</span><span class="es">'+(es||va)+'</span><button class="avis__x" aria-label="Tancar">&times;</button></div>';
+    avisBox.innerHTML='<div class="avis"><span class="va">'+escHtml(va||es)+'</span><span class="es">'+escHtml(es||va)+'</span><button class="avis__x" aria-label="Tancar">&times;</button></div>';
     avisBox.querySelector('.avis__x').addEventListener('click',function(){ avisBox.style.display='none'; });
   }).catch(function(){}); }
 
   /* ---------- NOTÍCIES / REUNIONS (Racó del soci) ----------
      Editables des de /admin (data/noticies.json i data/reunions.json)
      sense necessitat de tocar codi ni refer el build. */
-  function escInfo(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function renderInfoList(el,url,key,emptyVa,emptyEs){
     if(!el) return;
     fetch(url,{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
       var items=(d&&d[key])||[];
       if(!items.length){ el.innerHTML='<li class="empty"><span class="va">'+emptyVa+'</span><span class="es">'+emptyEs+'</span></li>'; return; }
       el.innerHTML=items.map(function(it){
-        var dva=escInfo(it.data_va), des=escInfo(it.data_es||it.data_va);
-        var tva=escInfo(it.text_va), tes=escInfo(it.text_es||it.text_va);
+        var dva=escHtml(it.data_va), des=escHtml(it.data_es||it.data_va);
+        var tva=escHtml(it.text_va), tes=escHtml(it.text_es||it.text_va);
         return '<li><b><span class="va">'+dva+'</span><span class="es">'+des+'</span></b><span class="va">'+tva+'</span><span class="es">'+tes+'</span></li>';
       }).join('');
     }).catch(function(){});

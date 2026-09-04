@@ -2,6 +2,7 @@
 // Envia una sol·licitud de baixa a la taula BAIXES CENTRE EXCURSIONISTA PEGO.
 
 const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN } = require('./_validators');
+const { isAllowedOrigin, base64SizeExceeds } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblGeQzo49FyjBQJs'; // BAIXES CENTRE EXCURSIONISTA PEGO
@@ -13,6 +14,7 @@ function s(v) { return (v || '').trim(); }
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') return res(405, { ok: false, error: 'method' });
+  if (!isAllowedOrigin(event)) return res(403, { ok: false, error: 'origin' });
   const token = process.env.AIRTABLE_TOKEN;
   if (!token) return res(200, { ok: false, error: 'config', message: 'Servei no configurat.' });
 
@@ -37,6 +39,8 @@ exports.handler = async function (event) {
     return res(400, { ok: false, error: 'telefon', message: 'Telèfon no vàlid.' });
   if (s(b.iban) && !isValidIBAN(b.iban))
     return res(400, { ok: false, error: 'iban', message: 'IBAN no vàlid.' });
+  if (base64SizeExceeds(b.dni_foto_b64))
+    return res(400, { ok: false, error: 'foto_gran', message: 'La foto ha de pesar menys de 4MB.' });
 
   const fields = {
     'NOM':     nom,
