@@ -591,11 +591,25 @@ def build(g):
         "Contacta amb el Centre Excursionista de Pego: correu, adreça i formulari de contacte.", contacte, path="contacte.html", extra_js="js/contacte.js"))
 
     # ============================================= SOCI (ALTA / BAIXA)
+    reunions=[("9 de setembre","9 de septiembre","Reunió de la junta directiva per a redactar el calendari de tardor.","Reunión de la junta directiva para redactar el calendario de otoño.")]
+    reunions_li="".join(f'      <li><b><span class="va">{dva}</span><span class="es">{des}</span></b><span class="va">{tva}</span><span class="es">{tes}</span></li>\n' for dva,des,tva,tes in reunions)
+    reunions_html=f'''<section class="section" id="reunions">
+  <div class="wrap narrow">
+    <div class="reveal" style="text-align:center;margin-bottom:clamp(24px,3vw,40px)">
+      <div class="kicker center-k"><span class="va">Junta directiva</span><span class="es">Junta directiva</span></div>
+      <h2><span class="va">Reunions</span><span class="es">Reuniones</span></h2>
+      <p class="lead"><span class="va">Pròximes reunions de la junta directiva del club.</span><span class="es">Próximas reuniones de la junta directiva del club.</span></p>
+    </div>
+    <ul class="reunions">
+{reunions_li}    </ul>
+  </div>
+</section>'''
     soci=header("soci")+subhero(IMG+"soci-cim.jpg",'<span class="va">Centre Excursionista de Pego</span><span class="es">Centre Excursionista de Pego</span>',
         '<span class="va">Racó del soci</span><span class="es">Área del socio</span>',
         '<span class="va">Racó del soci</span><span class="es">Área del socio</span>',
         '<span class="va">Gestiona la teua pertinença al club: alta, baixa i informació per als socis.</span>',
         '<span class="es">Gestiona tu pertenencia al club: alta, baja e información para los socios.</span>')+f'''
+{reunions_html}
 <section class="section" id="alta">
   <div class="wrap narrow">
     <div class="reveal">
