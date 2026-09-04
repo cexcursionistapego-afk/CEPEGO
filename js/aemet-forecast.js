@@ -31,10 +31,15 @@
     if (d.indexOf('lluvia escasa') !== -1 || d.indexOf('chubasco') !== -1) return '🌦️';
     if (d.indexOf('lluvia') !== -1) return '🌧️';
     if (d.indexOf('muy nuboso') !== -1 || d.indexOf('cubierto') !== -1) return '☁️';
-    if (d.indexOf('intervalos nubosos') !== -1 || d.indexOf('nuboso') !== -1) return '⛅';
+    // "poco nuboso" ha d'anar ABANS que la comprovació genèrica de "nuboso",
+    // que altrament la capturaria primer (és una subcadena de "poco nuboso").
     if (d.indexOf('poco nuboso') !== -1) return '🌤️';
+    if (d.indexOf('nubes altas') !== -1) return '🌥️';
+    if (d.indexOf('intervalos nubosos') !== -1 || d.indexOf('nuboso') !== -1 || d.indexOf('nublado') !== -1 || d.indexOf('nubes') !== -1) return '⛅';
     if (d.indexOf('despejado') !== -1) return '☀️';
-    return '🌡️';
+    // Descripció d'AEMET no prevista: millor un cel genèric que un termòmetre
+    // que no diu res sobre si fa sol, núvols, tempesta o boira.
+    return d ? '⛅' : '🌡️';
   }
 
   // Nivell d'avís AEMET → color. El text pot vindre com a color explícit
