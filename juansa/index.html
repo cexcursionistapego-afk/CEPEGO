@@ -9,7 +9,11 @@
 <body>
 <!-- Login segur (Netlify Identity) -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<!-- Panell d'edició Decap CMS -->
-<script src="https://unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js"></script>
+<!-- Panell d'edició Decap CMS.
+     Versió FIXADA a propòsit (sense ^): aquest script té permís d'escriptura
+     sobre el repositori, així que no volem que s'actualitze tot sol a una
+     versió que ningú ha revisat. Es revisa manualment una vegada al mes;
+     si s'actualitza, comprovar després que el panell carrega i desa bé. -->
+<script src="https://unpkg.com/decap-cms@3.8.0/dist/decap-cms.js"></script>
 </body>
 </html>
