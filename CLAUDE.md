@@ -18,8 +18,34 @@ credencial se guarda aquí: esto es solo el mapa.
 | **Wix** | Donde está registrado el dominio `cepego.com` (la web anterior del club estaba allí). | Quien controle esto puede apuntar el dominio a otro sitio y suplantar la web entera. |
 | **Gmail** (`cexcursionistapego@gmail.com`) | Correo del club y vía de recuperación de todas las demás cuentas. | Da acceso indirecto a casi todo lo anterior. |
 
-Conviene que todas tengan verificación en dos pasos, especialmente
-Airtable y Gmail.
+Todas tienen verificación en dos pasos activada.
+
+## Continuidad: qué pasa si quien lo gestiona no está
+
+A día de hoy todas las cuentas de la lista anterior están a nombre de
+**juansa.moll@gmail.com**, y la app de verificación en dos pasos está en
+el móvil de esa persona.
+
+**Saber esto no basta para recuperar el acceso.** Sin ese teléfono no se
+entra en ninguna cuenta, aunque se conozca el correo y la contraseña. Si
+esa persona faltara o dejara el club de un día para otro, la web seguiría
+funcionando y publicada, pero **nadie podría cambiar nada, ni acceder a
+los datos de los socios, ni recuperar el dominio**.
+
+Para que el relevo sea posible de verdad hace falta hacer una de estas dos
+cosas, y conviene hacerla **antes** de necesitarla:
+
+1. **Añadir a una segunda persona de la junta** como administrador en
+   Netlify, GitHub y Airtable. Los tres permiten varios usuarios, y es la
+   opción más limpia: cada uno entra con su propia cuenta y su propio
+   segundo factor.
+2. **Guardar los códigos de recuperación** de cada servicio en un sitio
+   que controle el club y no una sola persona: un sobre cerrado en poder
+   del secretario o en la caja del club, no en un único móvil ni en un
+   correo personal.
+
+Mientras no se haga ninguna de las dos, el proyecto depende de un solo
+dispositivo.
 
 ## Despliegue: leer esto antes de tocar ramas
 
