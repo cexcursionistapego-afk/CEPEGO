@@ -2,6 +2,8 @@
 // Crea una consulta general a la taula CONTACTE amb TIPO DE CONSULTA = "DUBTES I SUGGERÈNCIES"
 // i ESTADO = "PENDENT GESTIONAR". El club la revisa a Airtable.
 
+const { isAllowedOrigin } = require('./_security');
+
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = process.env.AIRTABLE_TABLE || 'tblAD8ZeIKmNwNRm9';
 const NEW_STATE = process.env.AIRTABLE_NEW_STATE || 'PENDENT GESTIONAR';
@@ -14,6 +16,7 @@ function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').tr
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') return res(405, { ok: false, error: 'method' });
+  if (!isAllowedOrigin(event)) return res(403, { ok: false, error: 'origin' });
   const token = process.env.AIRTABLE_TOKEN;
   if (!token) return res(200, { ok: false, error: 'config', message: 'Servei no configurat encara.' });
 

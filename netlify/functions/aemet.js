@@ -48,8 +48,10 @@ function decodeEntities(s) {
     .replace(/&oacute;/g, 'ó').replace(/&iacute;/g, 'í').replace(/&aacute;/g, 'á')
     .replace(/&eacute;/g, 'é').replace(/&uacute;/g, 'ú').replace(/&ntilde;/g, 'ñ')
     .replace(/&Oacute;/g, 'Ó').replace(/&Aacute;/g, 'Á').replace(/&Eacute;/g, 'É')
-    .replace(/&iexcl;/g, '¡').replace(/&ndash;/g, '–')
-    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#176;/g, '°');
+    .replace(/&iexcl;/g, '¡').replace(/&ndash;/g, '–').replace(/&#8211;/g, '–').replace(/&#x2013;/gi, '–')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#176;/g, '°')
+    // Byte 0x96 (en-dash de Windows-1252) maldecodificat com a ISO-8859-15
+    .replace(//g, '–');
 }
 
 function toNumber(raw) {
@@ -61,7 +63,7 @@ function toNumber(raw) {
   return isNaN(n) ? null : n;
 }
 
-exports.handler = async function () {
+exports.handler = async function (event) {
   let html;
   try {
     const r = await fetch(URL, {
@@ -80,7 +82,7 @@ exports.handler = async function () {
   }
 
   try {
-    const days = parseAemet(html);
+    const { days } = parseAemet(html);
     if (!days.length) return res(200, { ok: false, error: 'parse_failed' });
     return res(200, { ok: true, municipi: 'Pego', codi: '03102', font: 'AEMET', days });
   } catch (e) {
@@ -90,7 +92,7 @@ exports.handler = async function () {
 
 function parseAemet(rawHtml) {
   const tStart = rawHtml.indexOf('id="tabla_prediccion"');
-  if (tStart === -1) return [];
+  if (tStart === -1) return { days: [], periods: [] };
   const tableEnd = rawHtml.indexOf('</table>', tStart);
   const table = rawHtml.slice(tStart, tableEnd === -1 ? undefined : tableEnd);
 
@@ -103,7 +105,7 @@ function parseAemet(rawHtml) {
       days.push({ title: decodeEntities(m[1]).trim(), colspan: parseInt(m[2], 10), label: decodeEntities(m[3]).trim() });
     }
   }
-  if (!days.length) return [];
+  if (!days.length) return { days: [], periods: [] };
 
   // --- Períodes (icona/descripció + rang horari), en ordre, dins la primera fila de dades ---
   const periods = [];
@@ -111,7 +113,7 @@ function parseAemet(rawHtml) {
     const niv2Start = table.indexOf('cabecera_loc_niv2');
     const niv2End = niv2Start === -1 ? -1 : table.indexOf('</tr>', niv2Start);
     const niv2 = niv2Start === -1 ? '' : table.slice(niv2Start, niv2End);
-    const thRe = /<th class="borde_izq_dcha_estado_cielo no_wrap">([\s\S]*?)<\/th>/g;
+    const thRe = /<th\s[^>]*class="[^"]*borde_izq_dcha_estado_cielo[^"]*"[^>]*>([\s\S]*?)<\/th>/g;
     let m;
     while ((m = thRe.exec(niv2)) !== null) {
       const block = m[1];
@@ -170,15 +172,17 @@ function parseAemet(rawHtml) {
   }
 
   function bucket(hour) {
-    if (hour === '06–12h' || hour === '00–12h') return 'mati';
-    if (hour === '12–18h' || hour === '12–24h') return 'vesprada';
-    if (hour === '18–24h' || hour === '00–06h') return 'nit';
+    // Normalitza guions: en-dash (–), Windows-1252 0x96 (), hyphen-minus (-)
+    var h = String(hour || '').replace(/[–—−\-]/g, '-');
+    if (h === '06-12h' || h === '00-12h') return 'mati';
+    if (h === '12-18h' || h === '12-24h') return 'vesprada';
+    if (h === '18-24h' || h === '00-06h') return 'nit';
     return null;
   }
 
   // --- Assemblar per dia, agrupant períodes/precipitació pel colspan de la capçalera ---
   let idx = 0;
-  return days.map((d, i) => {
+  const assembledDays = days.map((d, i) => {
     const group = periods.slice(idx, idx + d.colspan);
     const precipGroup = precipVals.slice(idx, idx + d.colspan);
     idx += d.colspan;
@@ -218,4 +222,5 @@ function parseAemet(rawHtml) {
       alert: alerts[i] || null,
     };
   });
+  return { days: assembledDays, periods };
 }

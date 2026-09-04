@@ -4,6 +4,7 @@
 // les fotos del DNI, pujades com a adjunts després de crear el registre).
 
 const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN } = require('./_validators');
+const { isAllowedOrigin, base64SizeExceeds } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblNm2FZG9KCdiCDq'; // SOCIS CENTRE EXCURSIONISTA PEGO
@@ -15,6 +16,7 @@ function s(v) { return (v || '').trim(); }
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') return res(405, { ok: false, error: 'method' });
+  if (!isAllowedOrigin(event)) return res(403, { ok: false, error: 'origin' });
   const token = process.env.AIRTABLE_TOKEN;
   if (!token) return res(200, { ok: false, error: 'config', message: 'Servei no configurat.' });
 
@@ -46,6 +48,8 @@ exports.handler = async function (event) {
 
   if (!b.dni_anvers_b64 || !b.dni_revers_b64)
     return res(400, { ok: false, error: 'documents', message: 'Falten les fotos del DNI.' });
+  if (base64SizeExceeds(b.dni_anvers_b64) || base64SizeExceeds(b.dni_revers_b64))
+    return res(400, { ok: false, error: 'documents_grans', message: 'Cada foto ha de pesar menys de 4MB.' });
 
   const fields = {
     'NOM': nom,
