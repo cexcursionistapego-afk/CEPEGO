@@ -440,6 +440,9 @@ html[data-lang="es"] .va{display:none}
    normalment no es veu: només ocupa espai quan cal interacció de l'usuari. */
 .cf-turnstile{margin:0 0 12px}
 .cf-turnstile:empty{margin:0}
+.form-protected{margin:12px 0 0;font-size:.74rem;line-height:1.5;color:var(--muted);text-align:center;opacity:.8}
+.form-protected a{color:var(--muted);text-decoration:underline}
+.form-protected a:hover{color:var(--navy)}
 .field input.invalid:focus,.field textarea.invalid:focus{outline-color:var(--ember)}
 .field input[type="date"]{-webkit-appearance:none;appearance:none;min-height:48px}
 .field textarea{min-height:130px;resize:vertical}

@@ -16,6 +16,16 @@ def build(g):
         return (f'<div class="cf-turnstile" id="{wid}" data-sitekey="{TS_KEY}" '
                 f'data-language="auto" data-appearance="interaction-only"></div>')
 
+    # Avís al peu de cada formulari. Com que el widget és invisible mentre no
+    # calga interacció, l'usuari no veuria enlloc que les seues dades tècniques
+    # (IP, senyals del navegador) passen per Cloudflare per a filtrar robots.
+    CF_PRIV = "https://www.cloudflare.com/privacypolicy/"
+    def turnstile_note():
+        return ('<p class="form-protected">'
+                f'<span class="va">Formulari protegit contra robots per <a href="{CF_PRIV}" target="_blank" rel="noopener">Cloudflare Turnstile</a>.</span>'
+                f'<span class="es">Formulario protegido contra robots por <a href="{CF_PRIV}" target="_blank" rel="noopener">Cloudflare Turnstile</a>.</span>'
+                '</p>')
+
     def gallery_imgs(files, alt):
         return "".join(
             f'      <a href="{IMG}bb9bb0_{f}"><img loading="lazy" src="{IMG}bb9bb0_{f}" alt="{alt}"></a>\n'
@@ -369,6 +379,7 @@ def build(g):
           {turnstile('ts-reserva')}
           <button type="submit" id="r-submit" class="btn btn-primary" disabled><span class="va">Enviar sol·licitud</span><span class="es">Enviar solicitud</span></button>
           <div id="r-msg" class="r-msg"></div>
+          {turnstile_note()}
         </form>
       </div>
     </div>
@@ -586,6 +597,7 @@ def build(g):
           {turnstile('ts-contacte')}
           <button type="submit" id="c-submit" class="btn btn-primary"><span class="va">Enviar missatge</span><span class="es">Enviar mensaje</span></button>
           <div id="c-msg" class="r-msg"></div>
+          {turnstile_note()}
         </form>
       </div>
     </div>
@@ -670,6 +682,7 @@ def build(g):
         <button type="submit" id="alta-submit" class="btn btn-primary" style="width:100%;margin-top:8px"><span class="va">Enviar sol·licitud d'alta</span><span class="es">Enviar solicitud de alta</span></button>
         <p class="note" style="margin:12px 0 0;font-size:.82rem;opacity:.75"><span class="va">* Camps obligatoris. Les teues dades es tracten d'acord amb la normativa RGPD i s'utilitzen exclusivament per a la gestió de la teua pertinença al club.</span><span class="es">* Campos obligatorios. Tus datos se tratan según la normativa RGPD y se utilizan exclusivamente para la gestión de tu pertenencia al club.</span></p>
         <div id="alta-msg" class="r-msg"></div>
+        {turnstile_note()}
       </form>
     </div>
 
@@ -696,6 +709,7 @@ def build(g):
         {turnstile('ts-baixa')}
         <button type="submit" id="baixa-submit" class="btn btn-ghost" style="width:100%;margin-top:4px"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
         <div id="baixa-msg" class="r-msg"></div>
+        {turnstile_note()}
       </form>
     </div>
     </div>
