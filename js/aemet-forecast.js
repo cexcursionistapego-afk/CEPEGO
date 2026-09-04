@@ -69,6 +69,12 @@
       .replace(/Aviso amarillo/i, 'Avís groc')
       .replace(/Aviso naranja/i, 'Avís taronja')
       .replace(/Aviso rojo/i, 'Avís roig')
+      // Format "Nivell - Fenomen" (p.ex. "Bajo - Temperaturas máximas"),
+      // que és el que fa servir realment la pàgina de predicció municipal.
+      .replace(/^Bajo\b/i, 'Baix')
+      .replace(/^Moderado\b/i, 'Moderat')
+      .replace(/^Alto\b/i, 'Alt')
+      .replace(/^Extremo\b/i, 'Extrem')
       .replace(/por tormentas?/i, 'per tempestes')
       .replace(/por calor/i, 'per calor')
       .replace(/por fr[ií]o/i, 'per fred')
@@ -76,7 +82,16 @@
       .replace(/por precipitaciones/i, 'per precipitacions')
       .replace(/por viento/i, 'per vent')
       .replace(/por nieve/i, 'per neu')
-      .replace(/por niebla/i, 'per boira');
+      .replace(/por niebla/i, 'per boira')
+      .replace(/Temperaturas m[aá]ximas/i, 'Temperatures màximes')
+      .replace(/Temperaturas m[ií]nimas/i, 'Temperatures mínimes')
+      .replace(/Tormentas?/i, 'Tempestes')
+      .replace(/Lluvias?/i, 'Pluges')
+      .replace(/Precipitaciones/i, 'Precipitacions')
+      .replace(/Viento/i, 'Vent')
+      .replace(/Nieve/i, 'Neu')
+      .replace(/Niebla/i, 'Boira')
+      .replace(/Costeros?/i, 'Costaner');
     return { va: va, es: t };
   }
 
