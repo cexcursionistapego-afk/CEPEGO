@@ -54,7 +54,7 @@
   }).catch(function(){}); }
 
   /* ---------- NOTÍCIES / REUNIONS (Racó del soci) ----------
-     Editables des de /admin (data/noticies.json i data/reunions.json)
+     Editables des de /juansa (data/noticies.json i data/reunions.json)
      sense necessitat de tocar codi ni refer el build. */
   function renderInfoList(el,url,key,emptyVa,emptyEs){
     if(!el) return;
