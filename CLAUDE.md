@@ -22,30 +22,39 @@ Todas tienen verificación en dos pasos activada.
 
 ## Continuidad: qué pasa si quien lo gestiona no está
 
-A día de hoy todas las cuentas de la lista anterior están a nombre de
-**juansa.moll@gmail.com**, y la app de verificación en dos pasos está en
-el móvil de esa persona.
+La verificación en dos pasos de todos los servicios está asociada a la
+cuenta del club, **cexcursionistapego@gmail.com**, no a una cuenta
+personal. Eso es lo correcto: la identidad es del club, no de quien lo
+gestione en cada momento.
 
-**Saber esto no basta para recuperar el acceso.** Sin ese teléfono no se
-entra en ninguna cuenta, aunque se conozca el correo y la contraseña. Si
-esa persona faltara o dejara el club de un día para otro, la web seguiría
-funcionando y publicada, pero **nadie podría cambiar nada, ni acceder a
-los datos de los socios, ni recuperar el dominio**.
+Quien lo lleva a día de hoy es Juansa (`juansa.moll@gmail.com`), y hay un
+segundo miembro de la junta, Ximo, al corriente de cómo funciona.
 
-Para que el relevo sea posible de verdad hace falta hacer una de estas dos
-cosas, y conviene hacerla **antes** de necesitarla:
+**La pregunta que decide si el relevo funciona de verdad es esta: si
+mañana falta esa persona, ¿puede otro miembro de la junta entrar en el
+Gmail del club Y generar los códigos del segundo factor?**
 
-1. **Añadir a una segunda persona de la junta** como administrador en
-   Netlify, GitHub y Airtable. Los tres permiten varios usuarios, y es la
-   opción más limpia: cada uno entra con su propia cuenta y su propio
-   segundo factor.
+- Si la app de autenticación sincroniza con la cuenta de Google del club
+  (Google Authenticator lo hace desde 2023), entonces sí: quien entre en
+  ese Gmail puede restaurar los códigos en su propio móvil. **Continuidad
+  resuelta.**
+- Si la app es solo local en un dispositivo, no. Aunque se conozcan
+  correos y contraseñas, sin ese móvil no se entra en ningún sitio y la
+  web se queda congelada: publicada y funcionando, pero intocable, sin
+  acceso a los datos de los socios ni al dominio.
+
+Si se da el segundo caso, hay dos formas de arreglarlo, y conviene
+hacerlo **antes** de necesitarlo:
+
+1. **Añadir a la segunda persona como administradora** en Netlify, GitHub
+   y Airtable. Los tres permiten varios usuarios, y es la opción más
+   limpia: cada uno entra con su propia cuenta y su propio segundo factor.
 2. **Guardar los códigos de recuperación** de cada servicio en un sitio
    que controle el club y no una sola persona: un sobre cerrado en poder
-   del secretario o en la caja del club, no en un único móvil ni en un
-   correo personal.
+   del secretario o en la caja del club.
 
-Mientras no se haga ninguna de las dos, el proyecto depende de un solo
-dispositivo.
+Saber cómo funciona la web (este documento) y poder entrar a cambiarla son
+dos cosas distintas. Esto último es lo que hay que asegurar.
 
 ## Despliegue: leer esto antes de tocar ramas
 
