@@ -479,12 +479,13 @@ html[data-lang="es"] .va{display:none}
 .avis__x:hover{opacity:1}
 
 /* ================= PREVISIO AEMET ================= */
-.aemet-forecast{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:clamp(16px,2.5vw,28px)}
-@media(max-width:760px){.aemet-forecast{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:460px){.aemet-forecast{grid-template-columns:repeat(3,1fr)}}
-.aemet-forecast__msg{grid-column:1/-1;text-align:center;color:var(--muted);padding:20px 0}
+.aemet-forecast{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:clamp(16px,2.5vw,28px)}
+.aemet-forecast .aemet-day{flex:0 0 calc((100% - 60px)/7)}
+@media(max-width:760px){.aemet-forecast .aemet-day{flex-basis:calc((100% - 30px)/4)}}
+@media(max-width:460px){.aemet-forecast .aemet-day{flex-basis:calc((100% - 20px)/3)}}
+.aemet-forecast__msg{width:100%;text-align:center;color:var(--muted);padding:20px 0}
 .aemet-day{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:14px 8px;text-align:center;box-shadow:var(--shadow-sm);
-  display:flex;flex-direction:column;height:100%}
+  display:flex;flex-direction:column;box-sizing:border-box}
 .aemet-day__label{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--navy)}
 .aemet-day__alert{margin-top:6px;font-size:.62rem;font-weight:600;letter-spacing:.01em;
   padding:3px 6px;border-radius:20px;line-height:1.2;display:inline-block}
