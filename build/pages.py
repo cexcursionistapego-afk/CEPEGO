@@ -594,7 +594,7 @@ def build(g):
     # Notícies i reunions es gestionen des de /admin (data/noticies.json i
     # data/reunions.json) i es carreguen en temps real amb JS (main.js),
     # perquè el soci puga afegir-ne sense necessitat de tocar codi.
-    info_html='''<section class="section" id="info">
+    info_html='''<section class="section" id="info" style="padding-bottom:clamp(28px,3.5vw,48px)">
   <div class="wrap">
     <div class="grid cols-2">
       <div class="reveal" style="text-align:center">
@@ -616,7 +616,7 @@ def build(g):
         '<span class="va">Gestiona la teua pertinença al club: alta, baixa i informació per als socis.</span>',
         '<span class="es">Gestiona tu pertenencia al club: alta, baja e información para los socios.</span>')+f'''
 {info_html}
-<section class="section bg-paper2" id="formularis">
+<section class="section bg-paper2" id="formularis" style="padding-top:clamp(28px,3.5vw,48px)">
   <div class="wrap">
     <div class="grid cols-2" style="align-items:start">
     <div class="card reveal">
