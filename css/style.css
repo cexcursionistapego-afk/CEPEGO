@@ -491,6 +491,11 @@ html[data-lang="es"] .va{display:none}
 .aemet-day__alert--yellow{background:#fbf0d2;color:#8a6d0c}
 .aemet-day__alert--orange{background:#fbe4d2;color:#9a4a10}
 .aemet-day__alert--red{background:#fbdcdc;color:#8f1d1d}
+@keyframes aemet-alert-blink{0%,100%{opacity:1}50%{opacity:.4}}
+.aemet-day__alert--yellow,.aemet-day__alert--orange,.aemet-day__alert--red{animation:aemet-alert-blink 1.3s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){
+  .aemet-day__alert--yellow,.aemet-day__alert--orange,.aemet-day__alert--red{animation:none}
+}
 .aemet-day__period{margin-top:8px}
 .aemet-day__period-l{font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .aemet-day__ic{font-size:1.5rem;line-height:1.2}
