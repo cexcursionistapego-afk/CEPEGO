@@ -425,7 +425,7 @@ def build(g):
   </div>
 </section>
 '''
-    meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'AVAMET',
+    meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'METEO',
         "El temps","El tiempo",
         "Estacions meteorològiques a La Figuereta i a Pego connectades a la xarxa AVAMET, més la previsió del temps i els avisos d'alertes meteorològiques d'AEMET.","Estaciones meteorológicas en La Figuereta y en Pego conectadas a la red AVAMET, más la previsión del tiempo y los avisos de alertas meteorológicas de AEMET.",
         pos='18%')+meteo_dash+footer()
