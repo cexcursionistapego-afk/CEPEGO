@@ -31,7 +31,7 @@
     return {
       dowVa: (DOW_VA[dow] || m[1]) + '.',
       dowEs: m[1] + '.',
-      num: m[2],
+      num: m[2].replace(/^0+(?=\d)/, ''),
     };
   }
 
@@ -203,15 +203,29 @@
     return { va: va, es: t };
   }
 
-  // Enllaç a la pàgina d'avisos d'AEMET. Els paràmetres ?w=hoy / mna / pmna
-  // són els que fa servir la seua pròpia capçalera per als tres primers dies,
-  // que són els únics per als quals AEMET dona avisos. Allí es veu l'hora
-  // exacta de començament i final de cada avís, que la pàgina de predicció
-  // municipal (d'on ixen estes dades) no dona.
+  // Enllaç a la pàgina d'avisos d'AEMET, que és on estan les hores exactes de
+  // començament i final de cada avís. La pàgina de predicció municipal, d'on
+  // ixen estes dades, només dona el nivell i el fenomen.
+  //
+  // Els paràmetres són els que fa servir la mateixa pàgina de Pego als seus
+  // enllaços d'avisos: ?w=hoy / mna / pmna per als tres primers dies (els
+  // únics per als quals AEMET dona avisos) i l=770301, que és el codi de la
+  // ZONA D'AVISOS de Pego. Amb el codi, el mapa d'AEMET s'obri ja centrat en
+  // la zona; sense ell, s'obri a tota Espanya.
+  //
+  // OJO amb la zona: Pego és "Litoral nord d'Alacant" (770301), i el refugi
+  // de la Vall d'Ebo cau a "Interior d'Alacant" (770302). Els avisos que es
+  // pinten ací són els del poble, no els de la muntanya. Si algun dia es vol
+  // canviar, ho diu la mateixa pàgina d'AEMET en el camp "Zona de avisos".
   var AVISOS_BASE = 'https://www.aemet.es/es/eltiempo/prediccion/avisos';
-  var AVISOS_W = ['?w=hoy', '?w=mna', '?w=pmna'];
-  var AVISOS_TITLE = "Veure l'avís a AEMET (hores i detall) · Ver el aviso en AEMET (horas y detalle)";
-  function avisosUrl(idx) { return AVISOS_BASE + (AVISOS_W[idx] || ''); }
+  var AVISOS_ZONA = '770301';
+  var AVISOS_W = ['hoy', 'mna', 'pmna'];
+  var AVISOS_TITLE = "Avís d'AEMET per a la zona Litoral nord d'Alacant. Obri la pàgina d'avisos, on estan les hores. · " +
+    "Aviso de AEMET para la zona Litoral norte de Alicante. Abre la página de avisos, donde están las horas.";
+  function avisosUrl(idx) {
+    var w = AVISOS_W[idx];
+    return AVISOS_BASE + (w ? '?w=' + w + '&l=' + AVISOS_ZONA : '');
+  }
 
   /* ------------------------------------------------------------- muntatge */
 
