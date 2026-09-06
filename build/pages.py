@@ -404,7 +404,7 @@ def build(g):
     # ============================================= METEO
     meteo_dash=f'''<section class="section" style="padding:clamp(28px,3.5vw,48px) 0">
   <div class="wrap">
-    <div class="kicker center-k" style="justify-content:center"><span class="va">Temps en directe</span><span class="es">Tiempo en directo</span></div>
+    <div class="kicker center-k"><span class="va">Temps en directe</span><span class="es">Tiempo en directo</span></div>
     <div class="meteo-dash-grid reveal" style="margin-top:clamp(16px,2.5vw,28px)">
       <div id="meteo-dash-figuereta"></div>
       <div id="meteo-dash-pego"></div>
@@ -417,9 +417,9 @@ def build(g):
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="kicker center-k" style="justify-content:center"><span class="va">Previsió pròxims dies</span><span class="es">Previsión próximos días</span></div>
+    <div class="kicker center-k"><span class="va">Previsió pròxims dies</span><span class="es">Previsión próximos días</span></div>
     <div id="aemet-forecast" class="reveal"></div>
-    <p class="note center avamet-credit" style="margin-top:14px">
+    <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
       <img src="{IMG}aemet-logo.jpg" alt="AEMET" class="avamet-credit__logo">
     </p>
   </div>
@@ -707,7 +707,7 @@ def build(g):
         <div class="field"><label><span class="va">Motiu de la baixa (opcional)</span><span class="es">Motivo de la baja (opcional)</span></label><textarea name="missatge" rows="2"></textarea></div>
         <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
         {turnstile('ts-baixa')}
-        <button type="submit" id="baixa-submit" class="btn btn-ghost" style="width:100%;margin-top:4px"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
+        <button type="submit" id="baixa-submit" class="btn btn-outline-ember" style="width:100%;margin-top:4px"><span class="va">Enviar sol·licitud de baixa</span><span class="es">Enviar solicitud de baja</span></button>
         <div id="baixa-msg" class="r-msg"></div>
         {turnstile_note()}
       </form>
