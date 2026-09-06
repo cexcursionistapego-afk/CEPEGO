@@ -559,16 +559,32 @@ html[data-lang="es"] .va{display:none}
 
 /* Avis d'AEMET. Nomes es pinta quan n'hi ha un de real: "Sin peligro" no
    s'ensenya, perque repetit set vegades no aporta res. */
-.fc-row--alert{border-left:3px solid transparent;padding-left:calc(clamp(12px,2vw,20px) - 3px)}
-.fc-row--yellow{border-left-color:#E0B33A}
-.fc-row--orange{border-left-color:#D9762C}
-.fc-row--red{border-left-color:var(--ember)}
+
 .fc-alert{grid-area:alert;display:flex;align-items:center;gap:6px;margin:6px 0 0;
-  padding:4px 9px;border-radius:20px;font-size:.68rem;font-weight:600;line-height:1.35;justify-self:start}
+  padding:4px 9px;border-radius:20px;font-size:.68rem;font-weight:600;line-height:1.35;
+  justify-self:start;text-decoration:none;transition:filter .2s var(--ease)}
+.fc-alert:hover{filter:brightness(.94)}
 .fc-alert__i{width:11px;height:11px;flex:0 0 auto}
-.fc-alert--yellow{background:#fbf0d2;color:#8a6d0c}
-.fc-alert--orange{background:#fbe4d2;color:#9a4a10}
-.fc-alert--red{background:#fbdcdc;color:#8f1d1d}
+.fc-alert__go{font-size:1rem;line-height:1;opacity:.55;margin-left:1px}
+.fc-alert--yellow,.fc-alert--yellow:hover{background:#fbf0d2;color:#8a6d0c}
+.fc-alert--orange,.fc-alert--orange:hover{background:#fbe4d2;color:#9a4a10}
+.fc-alert--red,.fc-alert--red:hover{background:#fbdcdc;color:#8f1d1d}
+
+/* L'avis parpelleja per a que es note. El text no baixa mai per davall del
+   55% d'opacitat i passa mes temps a plena opacitat que apagat, aixi es pot
+   llegir sense esperar al pols. */
+@keyframes fc-alert-blink{0%,45%,100%{opacity:1}72%{opacity:.45}}
+.fc-alert{animation:fc-alert-blink 1.5s ease-in-out infinite}
+/* La vora esquerra de la fila acompanya el mateix pols. */
+@keyframes fc-alert-edge{0%,45%,100%{opacity:1}72%{opacity:.3}}
+.fc-row--alert::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--fc-edge);animation:fc-alert-edge 1.5s ease-in-out infinite}
+.fc-row--yellow{--fc-edge:#E0B33A}
+.fc-row--orange{--fc-edge:#D9762C}
+.fc-row--red{--fc-edge:var(--ember)}
+@media(prefers-reduced-motion:reduce){
+  .fc-alert,.fc-row--alert::before{animation:none}
+}
 
 /* La targeta te 760px de maxim, aixi que per davall d'uns 820px de finestra
    ja va encongint-se: els talls d'aci van ajustant columnes i cos de lletra
@@ -600,7 +616,6 @@ html[data-lang="es"] .va{display:none}
   .fc-h{font-size:.54rem;letter-spacing:.02em}
   .fc-h__l{display:none}
   .fc-h__s{display:inline}
-  .fc-row--alert{padding-left:6px}
   .fc-p .wi{width:26px;height:26px}
   .fc-p{min-height:40px}
   .fc-p__pr{font-size:.58rem}

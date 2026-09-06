@@ -203,6 +203,16 @@
     return { va: va, es: t };
   }
 
+  // Enllaç a la pàgina d'avisos d'AEMET. Els paràmetres ?w=hoy / mna / pmna
+  // són els que fa servir la seua pròpia capçalera per als tres primers dies,
+  // que són els únics per als quals AEMET dona avisos. Allí es veu l'hora
+  // exacta de començament i final de cada avís, que la pàgina de predicció
+  // municipal (d'on ixen estes dades) no dona.
+  var AVISOS_BASE = 'https://www.aemet.es/es/eltiempo/prediccion/avisos';
+  var AVISOS_W = ['?w=hoy', '?w=mna', '?w=pmna'];
+  var AVISOS_TITLE = "Veure l'avís a AEMET (hores i detall) · Ver el aviso en AEMET (horas y detalle)";
+  function avisosUrl(idx) { return AVISOS_BASE + (AVISOS_W[idx] || ''); }
+
   /* ------------------------------------------------------------- muntatge */
 
   // Una cel·la de tram. `desc` buit vol dir que AEMET no dona eixe tram
@@ -219,7 +229,7 @@
       pr + '</div>';
   }
 
-  function rowHTML(d, range, todayNum) {
+  function rowHTML(d, range, todayNum, idx) {
     var lb = splitDayLabel(d.label);
     var isToday = todayNum != null && lb.num !== '' && parseInt(lb.num, 10) === todayNum;
 
@@ -250,9 +260,11 @@
     // soroll: si no ix res, és que no hi ha avís.
     if (color && color !== 'green') {
       var tr = translateAlert(d.alert);
-      alertRow = '<div class="fc-alert fc-alert--' + color + '">' +
+      alertRow = '<a class="fc-alert fc-alert--' + color + '" href="' + esc(avisosUrl(idx)) + '" ' +
+        'target="_blank" rel="noopener" title="' + esc(AVISOS_TITLE) + '">' +
         '<svg class="fc-alert__i" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1.2 15.2 14H.8zM7.1 6v4h1.8V6zm0 5.2v1.6h1.8v-1.6z"/></svg>' +
-        '<span>' + bi(esc(tr.va), esc(tr.es)) + '</span></div>';
+        '<span>' + bi(esc(tr.va), esc(tr.es)) + '</span>' +
+        '<span class="fc-alert__go" aria-hidden="true">&rsaquo;</span></a>';
     }
 
     return '<li class="fc-row' + (isToday ? ' fc-row--today' : '') + (color && color !== 'green' ? ' fc-row--alert fc-row--' + color : '') + '">' +
@@ -294,7 +306,7 @@
         '</div>' +
         '<div class="fc-temps"><span class="fc-h">' + bi('Mín / Màx', 'Mín / Máx') + '</span></div>' +
       '</div>' +
-      '<ol class="fc-list">' + days.map(function (d) { return rowHTML(d, range, todayNum); }).join('') + '</ol>' +
+      '<ol class="fc-list">' + days.map(function (d, i) { return rowHTML(d, range, todayNum, i); }).join('') + '</ol>' +
       '</div>';
   }
 
