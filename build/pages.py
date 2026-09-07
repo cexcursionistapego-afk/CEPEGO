@@ -443,7 +443,7 @@ def build(g):
   </div>
 </section>
 
-<section class="section" style="padding-top:0">
+<section class="section" style="padding:0 0 clamp(28px,3.5vw,48px)">
   <div class="wrap">
     <div class="kicker center-k"><span class="va">Previsió pròxims dies</span><span class="es">Previsión próximos días</span></div>
     <div id="aemet-forecast" class="reveal"></div>
@@ -453,7 +453,7 @@ def build(g):
   </div>
 </section>
 
-<section class="section bg-paper2">
+<section class="section bg-paper2" style="padding-top:0">
   <div class="wrap">
     <div class="narrow center reveal" style="margin-bottom:clamp(24px,3vw,40px)">
       <div class="kicker center-k">⚠️ <span class="va">Avisos meteorològics</span><span class="es">Avisos meteorológicos</span></div>
