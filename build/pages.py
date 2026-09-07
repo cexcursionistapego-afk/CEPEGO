@@ -116,7 +116,7 @@ def build(g):
     <img class="crest" src="{CREST}" alt="Escut CEPEGO">
     <div class="kicker on-photo"><span class="va">Pego · Alacant · Des de 1973</span><span class="es">Pego · Alicante · Desde 1973</span></div>
     <h1><span class="va">Vivim la muntanya,<br><em>compartim</em> l'aventura</span><span class="es">Vivimos la montaña,<br><em>compartimos</em> la aventura</span></h1>
-    <p><span class="va">El Centre Excursionista de Pego és un club sense ànim de lucre format per gent de totes les edats unida per la natura i els esports de muntanya.</span><span class="es">El Centro Excursionista de Pego es un club sin ánimo de lucro formado por gente de todas las edades unida por la naturaleza y los deportes de montaña.</span></p>
+    <p><span class="va">El Centre Excursionista de Pego és un club de muntanya sense ànim de lucre, format per gent de totes les edats unida per la natura i l'aventura.</span><span class="es">El Centro Excursionista de Pego es un club de montaña sin ánimo de lucro, formado por gente de todas las edades unida por la naturaleza y la aventura.</span></p>
     <div class="hero__actions">
       <a href="soci.html" class="btn btn-primary"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></a>
       <a href="refugi.html" class="btn btn-ghost"><span class="va">El refugi La Figuereta</span><span class="es">El refugio La Figuereta</span></a>
