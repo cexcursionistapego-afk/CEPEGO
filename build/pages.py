@@ -616,6 +616,13 @@ def build(g):
     # Notícies i reunions es gestionen des de /juansa (data/noticies.json i
     # data/reunions.json) i es carreguen en temps real amb JS (main.js),
     # perquè el soci puga afegir-ne sense necessitat de tocar codi.
+    #
+    # Els formularis d'alta i baixa viuen en pàgines pròpies (soci-alta.html /
+    # soci-baixa.html) en lloc d'ací: així el Racó del soci no ix carregat de
+    # camps a l'obrir-lo, i cadascú només veu el formulari que vol omplir. Les
+    # dos pàgines no s'afigen al menú (NAV/FIG_SUB/ACT_SUB): només s'hi arriba
+    # pels botons d'esta pàgina, però continuen marcant "Racó del soci" com a
+    # actiu al menú (header("soci")) perquè formen part d'eixa secció.
     info_html='''<section class="section" id="info" style="padding-bottom:clamp(28px,3.5vw,48px)">
   <div class="wrap">
     <div class="grid cols-2">
@@ -640,13 +647,36 @@ def build(g):
 {info_html}
 <section class="section bg-paper2" id="formularis" style="padding-top:clamp(28px,3.5vw,48px)">
   <div class="wrap">
-    <div class="grid cols-2" style="align-items:start">
-    <div class="card reveal">
-      <div style="text-align:center">
+    <div class="grid cols-2">
+      <div class="card reveal" style="text-align:center;display:flex;flex-direction:column">
         <div class="kicker center-k"><span class="va">Uneix-te al club</span><span class="es">Únete al club</span></div>
         <h3 style="font-size:1.4rem"><span class="va">Alta de soci</span><span class="es">Alta de socio</span></h3>
-        <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">La quota anual és de <strong>35 €</strong>. Ompli el formulari i et contactarem per correu electrònic per confirmar-te l'alta i indicar-te com realitzar el pagament.</span><span class="es">La cuota anual es de <strong>35 €</strong>. Rellena el formulario y te contactaremos por correo electrónico para confirmar el alta e indicarte cómo realizar el pago.</span></p>
+        <p class="lead" style="font-size:1rem;margin-bottom:20px;flex:1"><span class="va">La quota anual és de <strong>35 €</strong>. Omple el formulari amb les teues dades i et contactarem per correu electrònic per confirmar-te l'alta i indicar-te com realitzar el pagament.</span><span class="es">La cuota anual es de <strong>35 €</strong>. Rellena el formulario con tus datos y te contactaremos por correo electrónico para confirmar el alta e indicarte cómo realizar el pago.</span></p>
+        <a href="soci-alta.html" class="btn btn-primary" style="justify-content:center"><span class="va">Fer-me soci</span><span class="es">Hacerme socio</span></a>
       </div>
+      <div class="card reveal" style="text-align:center;display:flex;flex-direction:column">
+        <div class="kicker center-k"><span class="va">Donar-se de baixa</span><span class="es">Darse de baja</span></div>
+        <h3 style="font-size:1.4rem"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h3>
+        <p class="lead" style="font-size:1rem;margin-bottom:20px;flex:1"><span class="va">Lamentem veure't marxar. Omple el formulari amb les teues dades i processarem la baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario con tus datos y procesaremos la baja. Te confirmaremos por correo electrónico.</span></p>
+        <a href="soci-baixa.html" class="btn btn-primary" style="justify-content:center"><span class="va">Donar-me de baixa</span><span class="es">Darme de baja</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+'''+footer()
+    write("soci.html", doc("Racó del soci | CEPEGO",
+        "Gestiona la teua pertinença al Centre Excursionista de Pego: alta de soci, baixa i informació.", soci, path="soci.html", extra_js="js/soci.js"))
+
+    # ------------------------------------- SOCI · ALTA (pàgina pròpia)
+    soci_alta=header("soci")+subhero(IMG+"soci-cim.jpg",'<span class="va">Racó del soci</span><span class="es">Área del socio</span>',
+        '<span class="va">Alta de soci</span><span class="es">Alta de socio</span>',
+        '<span class="va">Alta de soci</span><span class="es">Alta de socio</span>',
+        '<span class="va">La quota anual és de 35 €. Ompli el formulari i et contactarem per correu electrònic.</span>',
+        '<span class="es">La cuota anual es de 35 €. Rellena el formulario y te contactaremos por correo electrónico.</span>')+f'''
+<section class="section" style="padding-top:clamp(28px,3.5vw,48px)">
+  <div class="wrap narrow">
+    <a href="soci.html" class="reveal" style="display:inline-flex;align-items:center;gap:.4em;font-weight:600;color:var(--navy);margin-bottom:20px"><span aria-hidden="true">&larr;</span> <span class="va">Torna al racó del soci</span><span class="es">Volver al área del socio</span></a>
+    <div class="card reveal">
       <form id="alta-form" novalidate>
 
         <div class="form-section-label"><span class="va">Dades personals</span><span class="es">Datos personales</span></div>
@@ -685,13 +715,22 @@ def build(g):
         {turnstile_note()}
       </form>
     </div>
+  </div>
+</section>
+'''+footer()
+    write("soci-alta.html", doc("Alta de soci | CEPEGO",
+        "Fes-te soci del Centre Excursionista de Pego: omple el formulari d'alta.", soci_alta, path="soci-alta.html", extra_js="js/soci.js", turnstile=True))
 
+    # ------------------------------------- SOCI · BAIXA (pàgina pròpia)
+    soci_baixa=header("soci")+subhero(IMG+"soci-cim.jpg",'<span class="va">Racó del soci</span><span class="es">Área del socio</span>',
+        '<span class="va">Baixa de soci</span><span class="es">Baja de socio</span>',
+        '<span class="va">Baixa de soci</span><span class="es">Baja de socio</span>',
+        '<span class="va">Lamentem veure\'t marxar. Omple el formulari i processarem la baixa.</span>',
+        '<span class="es">Lamentamos verte partir. Rellena el formulario y procesaremos la baja.</span>')+f'''
+<section class="section" style="padding-top:clamp(28px,3.5vw,48px)">
+  <div class="wrap narrow">
+    <a href="soci.html" class="reveal" style="display:inline-flex;align-items:center;gap:.4em;font-weight:600;color:var(--navy);margin-bottom:20px"><span aria-hidden="true">&larr;</span> <span class="va">Torna al racó del soci</span><span class="es">Volver al área del socio</span></a>
     <div class="card reveal">
-      <div style="text-align:center">
-        <div class="kicker center-k"><span class="va">Donar-se de baixa</span><span class="es">Darse de baja</span></div>
-        <h3 style="font-size:1.4rem"><span class="va">Baixa de soci</span><span class="es">Baja de socio</span></h3>
-        <p class="lead" style="font-size:1rem;margin-bottom:20px"><span class="va">Lamentem veure't marxar. Omple el formulari amb les teues dades i processarem la baixa. Et confirmarem per correu electrònic.</span><span class="es">Lamentamos verte partir. Rellena el formulario con tus datos y procesaremos la baja. Te confirmaremos por correo electrónico.</span></p>
-      </div>
       <form id="baixa-form" novalidate>
         <div class="select-row">
           <div class="field"><label><span class="va">Nom</span><span class="es">Nombre</span> *</label><input name="nom" required autocomplete="given-name"></div>
@@ -712,12 +751,12 @@ def build(g):
         {turnstile_note()}
       </form>
     </div>
-    </div>
   </div>
 </section>
 '''+footer()
-    write("soci.html", doc("Racó del soci | CEPEGO",
-        "Gestiona la teua pertinença al Centre Excursionista de Pego: alta de soci, baixa i informació.", soci, path="soci.html", extra_js="js/soci.js", turnstile=True))
+    write("soci-baixa.html", doc("Baixa de soci | CEPEGO",
+        "Dona't de baixa del Centre Excursionista de Pego mitjançant el formulari de baixa.", soci_baixa, path="soci-baixa.html", extra_js="js/soci.js", turnstile=True))
+
 
     # ============================================= AVÍS LEGAL / PRIVACITAT / COOKIES
     def legal_head(kva,kes,hva,hes):
