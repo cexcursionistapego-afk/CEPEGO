@@ -402,6 +402,34 @@ def build(g):
         "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, path="reservar.html", extra_js="js/reserves.js", turnstile=True))
 
     # ============================================= METEO
+    alert_levels=[
+        ("green","Verda","Verde","Sense risc","Sin riesgo",
+         "Temps normal. Condicions habituals segons l'època de l'any.",
+         "Tiempo normal. Condiciones habituales según la época del año.",
+         "Es pot eixir planificant la ruta habitualment.",
+         "Se puede salir planificando la ruta con normalidad."),
+        ("yellow","Groga","Amarilla","Risc moderat","Riesgo moderado",
+         "Condicions que poden ser perilloses per a activitats concretes (vents forts, tempestes locals, calor/fred intens).",
+         "Condiciones que pueden ser peligrosas para actividades concretas (vientos fuertes, tormentas locales, calor/frío intenso).",
+         "Evita zones exposades (crestes, barrancs). Revisa constantment el radar del temps. Si no tens experiència, queda't a casa.",
+         "Evita zonas expuestas (crestas, barrancos). Revisa constantemente el radar del tiempo. Si no tienes experiencia, quédate en casa."),
+        ("orange","Taronja","Naranja","Risc important","Riesgo importante",
+         "Fenòmens meteorològics no habituals i amb un alt grau de perill (ratxes de vent destructives, pluges torrencials, nevades severes).",
+         "Fenómenos meteorológicos no habituales y con un alto grado de peligro (rachas de viento destructivas, lluvias torrenciales, nevadas severas).",
+         "No l'hauries de xafar la muntanya. El risc de caiguda d'arbres, esllavissades, relliscar o patir hipotèrmia/cop de calor és molt alt.",
+         "No deberías pisar la montaña. El riesgo de caída de árboles, desprendimientos, resbalar o sufrir hipotermia/golpe de calor es muy alto."),
+        ("red","Roja","Roja","Risc extrem","Riesgo extremo",
+         "Fenòmens meteorològics excepcionals d'una intensitat extraordinària. Risc molt alt per a la població.",
+         "Fenómenos meteorológicos excepcionales de una intensidad extraordinaria. Riesgo muy alto para la población.",
+         "Prohibició implícita. Evita eixir de casa: és una situació d'emergència. Eixir a la muntanya és una imprudència greu que posa en perill la teua vida i la dels equips de rescat.",
+         "Prohibición implícita. Evita salir de casa: es una situación de emergencia. Salir a la montaña es una imprudencia grave que pone en peligro tu vida y la de los equipos de rescate."),
+    ]
+    alert_legend_li="".join(f'''      <li class="alert-legend__item alert-legend__item--{cls}">
+        <div class="alert-legend__head"><span class="alert-legend__dot"></span><span class="alert-legend__name"><span class="va">{nva}</span><span class="es">{nes}</span></span><span class="alert-legend__level"><span class="va">{lva}</span><span class="es">{les}</span></span></div>
+        <p class="alert-legend__impact"><span class="va">{iva}</span><span class="es">{ies}</span></p>
+        <p class="alert-legend__rec"><span class="va">{rva}</span><span class="es">{res}</span></p>
+      </li>
+''' for cls,nva,nes,lva,les,iva,ies,rva,res in alert_levels)
     meteo_dash=f'''<section class="section" style="padding:clamp(28px,3.5vw,48px) 0">
   <div class="wrap">
     <div class="kicker center-k"><span class="va">Temps en directe</span><span class="es">Tiempo en directo</span></div>
@@ -422,6 +450,18 @@ def build(g):
     <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
       <img src="{IMG}aemet-logo.jpg" alt="AEMET" class="avamet-credit__logo">
     </p>
+  </div>
+</section>
+
+<section class="section bg-paper2">
+  <div class="wrap">
+    <div class="narrow center reveal" style="margin-bottom:clamp(24px,3vw,40px)">
+      <div class="kicker center-k">⚠️ <span class="va">Avisos meteorològics</span><span class="es">Avisos meteorológicos</span></div>
+      <h2><span class="va">Quan no eixir a la muntanya</span><span class="es">Cuándo no salir a la montaña</span></h2>
+      <p class="lead"><span class="va">Què vol dir cada color d'avís d'AEMET i com afecta si vas al refugi o de ruta.</span><span class="es">Qué significa cada color de aviso de AEMET y cómo afecta si vas al refugio o de ruta.</span></p>
+    </div>
+    <ul class="alert-legend reveal">
+{alert_legend_li}    </ul>
   </div>
 </section>
 '''

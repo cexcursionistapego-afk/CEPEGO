@@ -586,6 +586,24 @@ html[data-lang="es"] .va{display:none}
   .fc-alert,.fc-row--alert::before{animation:none}
 }
 
+/* Llegenda dels 4 nivells d'avis (verd/groc/taronja/roig): mateixos colors
+   que .fc-alert/.fc-row de dalt, perque siga evident que parlen del mateix. */
+.alert-legend{list-style:none;margin:0 auto;padding:0;max-width:var(--prose);
+  display:flex;flex-direction:column;gap:14px}
+.alert-legend__item{background:var(--al-bg);border-left:4px solid var(--al-c);
+  border-radius:var(--r);padding:16px 20px}
+.alert-legend__head{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
+.alert-legend__dot{width:11px;height:11px;border-radius:50%;background:var(--al-c);flex:0 0 auto}
+.alert-legend__name{font-weight:700;text-transform:uppercase;font-size:.72rem;
+  letter-spacing:.05em;color:var(--al-c)}
+.alert-legend__level{font-weight:700;color:var(--ink)}
+.alert-legend__impact{color:var(--muted);font-size:.95rem;margin:0 0 6px}
+.alert-legend__rec{font-weight:600;color:var(--ink);font-size:.95rem;margin:0}
+.alert-legend__item--green{--al-bg:#eaf3e6;--al-c:#3f6b2f}
+.alert-legend__item--yellow{--al-bg:#fbf0d2;--al-c:#8a6d0c}
+.alert-legend__item--orange{--al-bg:#fbe4d2;--al-c:#9a4a10}
+.alert-legend__item--red{--al-bg:#fbdcdc;--al-c:#8f1d1d}
+
 /* La targeta te 760px de maxim, aixi que per davall d'uns 820px de finestra
    ja va encongint-se: els talls d'aci van ajustant columnes i cos de lletra
    abans que res es quede estret. */
