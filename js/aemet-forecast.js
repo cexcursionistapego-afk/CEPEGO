@@ -181,6 +181,7 @@
       // que és el que fa servir realment la pàgina de predicció municipal.
       .replace(/^Bajo\b/i, 'Baix')
       .replace(/^Moderado\b/i, 'Moderat')
+      .replace(/^Importante\b/i, 'Important')
       .replace(/^Alto\b/i, 'Alt')
       .replace(/^Extremo\b/i, 'Extrem')
       .replace(/por tormentas?/i, 'per tempestes')
