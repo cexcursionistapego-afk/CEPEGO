@@ -697,12 +697,6 @@ html[data-lang="es"] .va{display:none}
 .meteo-dash__precip .v{font-family:var(--font-mono);font-weight:700;color:var(--navy);font-size:.96rem}
 .meteo-dash__precip .l{font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:2px}
 
-@media(max-width:480px){
-  .meteo-dash__temp-row{flex-wrap:wrap}
-  .meteo-dash__minmax{margin-left:0;width:100%;justify-content:flex-start;gap:22px}
-  .meteo-dash__minmax div{align-items:flex-start}
-}
-
 /* skeleton (loading) */
 .meteo-dash__body--loading{padding:22px 24px 26px}
 .meteo-skel{background:linear-gradient(90deg,var(--paper-2) 25%,var(--hair) 37%,var(--paper-2) 63%);
