@@ -141,9 +141,32 @@
     function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
     function normDigits(v) { return (v || '').replace(/\D/g, ''); }
     function isValidPhone(v) {
-      var d = normDigits(v);
+      var t = (v || '').trim();
+      if (t.charAt(0) === '+') {
+        var d = normDigits(t);
+        if (d.length === 11 && d.slice(0, 2) === '34') return /^[6789]\d{8}$/.test(d.slice(2));
+        return d.length >= 8 && d.length <= 15;
+      }
+      var d = normDigits(t);
       if (d.length === 11 && d.slice(0, 2) === '34') d = d.slice(2);
       return /^[6789]\d{8}$/.test(d);
+    }
+    // Sols dígits, i un "+" inicial per al prefix internacional (res
+    // d'espais ni altres caràcters). Es neteja mentre s'escriu, no sols en
+    // validar, per a que no es puga escriure un espai per començar.
+    function sanitizePhoneInput(input) {
+      var before = input.value;
+      var hasPlus = before.charAt(0) === '+';
+      var digits = before.replace(/\D/g, '').slice(0, 15);
+      var after = (hasPlus ? '+' : '') + digits;
+      if (after === before) return;
+      var pos = input.selectionStart;
+      input.value = after;
+      if (pos != null) {
+        pos -= (before.length - after.length);
+        if (pos < 0) pos = 0;
+        try { input.setSelectionRange(pos, pos); } catch (e) {}
+      }
     }
     function isValidDNI(v) {
       var t = (v || '').trim().toUpperCase();
@@ -197,6 +220,9 @@
     document.querySelectorAll('.field input, .field textarea').forEach(function (input) {
       var type = (input.getAttribute('type') || '').toLowerCase();
       if (SKIP_TYPES[type]) return;
+      var name = (input.getAttribute('name') || '').toLowerCase();
+      var isPhone = name === 'telefon' || type === 'tel';
+      if (isPhone) input.addEventListener('input', function () { sanitizePhoneInput(input); });
       input.addEventListener('blur', function () { markTouched(input); checkTextInput(input); });
       input.addEventListener('input', function () { if (isTouched(input)) checkTextInput(input); });
     });

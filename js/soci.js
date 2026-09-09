@@ -9,7 +9,13 @@
   function normDigits(v) { return (v || '').replace(/\D/g, ''); }
   function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
   function isValidPhone(v) {
-    var d = normDigits(v);
+    var t = (v || '').trim();
+    if (t.charAt(0) === '+') {
+      var d = normDigits(t);
+      if (d.length === 11 && d.slice(0, 2) === '34') return /^[6789]\d{8}$/.test(d.slice(2));
+      return d.length >= 8 && d.length <= 15;
+    }
+    var d = normDigits(t);
     if (d.length === 11 && d.slice(0, 2) === '34') d = d.slice(2);
     return /^[6789]\d{8}$/.test(d);
   }
