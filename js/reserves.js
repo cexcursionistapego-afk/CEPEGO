@@ -70,6 +70,8 @@
   var submitBtn= document.getElementById('r-submit');
   var queueNotice = document.getElementById('r-queue-notice');
   var turnoverNotice = document.getElementById('r-turnover-notice');
+  var sociSelect = document.getElementById('r-soci');
+  var sociNotice = document.getElementById('r-soci-notice');
 
   function expand(reserves){
     // Les nits ocupades són [start, end) — el dia de eixida (end) no compta
@@ -158,7 +160,10 @@
       var nits = Math.round((parse(selEnd)-parse(selStart))/86400000);
       if(fEntrada) fEntrada.value=selStart;
       if(fSalida) fSalida.value=selEnd;
-      var preu = nits===1?'190 €':nits===2?'250 €':nits===3?'350 €':(l==='es'?'a consultar':'a consultar');
+      var isSoci = sociSelect && sociSelect.value === 'Si';
+      var preu = isSoci
+        ? (nits*60)+' €'
+        : (nits===1?'190 €':nits===2?'250 €':nits===3?'350 €':(l==='es'?'a consultar':'a consultar'));
       if(resum) resum.innerHTML = (l==='es'
         ? '<b>Entrada:</b> '+fmt(selStart)+' · <b>Salida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> noche'+(nits>1?'s':'')+' · <b>'+preu+'</b>'
         : '<b>Entrada:</b> '+fmt(selStart)+' · <b>Eixida:</b> '+fmt(selEnd)+' · <b>'+nits+'</b> nit'+(nits>1?'s':'')+' · <b>'+preu+'</b>');
@@ -286,6 +291,22 @@
   if(personesInput){
     personesInput.addEventListener('input',checkPersones);
     personesInput.addEventListener('change',checkPersones);
+  }
+  if(sociSelect){
+    sociSelect.addEventListener('change',function(){
+      var l=lang();
+      if(sociNotice){
+        if(sociSelect.value==='Si'){
+          sociNotice.style.display='';
+          sociNotice.innerHTML = l==='es'
+            ? '💶 Como eres socio/a, el precio es de <b>60 €/noche</b>.'
+            : '💶 Com que ets soci/a, el preu és de <b>60 €/nit</b>.';
+        } else {
+          sociNotice.style.display='none';
+        }
+      }
+      sync();
+    });
   }
   if(form){
     form.addEventListener('submit',function(e){
