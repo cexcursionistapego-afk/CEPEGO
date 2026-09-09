@@ -34,6 +34,13 @@
   /* ---------- ANY ---------- */
   document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent=new Date().getFullYear(); });
 
+  /* ---------- TELÈFON: només xifres, sense espais, 9 dígits ---------- */
+  document.querySelectorAll('input[name="telefon"]').forEach(function(el){
+    el.setAttribute('inputmode','numeric');
+    el.setAttribute('maxlength','9');
+    el.addEventListener('input',function(){ el.value = el.value.replace(/\D/g,'').slice(0,9); });
+  });
+
   /* ---------- AJUSTOS DEL CLUB (data/site.json) ---------- */
   fetch('/data/site.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(s){
     if(!s) return;
