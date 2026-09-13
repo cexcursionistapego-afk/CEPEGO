@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 <title>CEPEGO · Panell d'administració</title>
+<style>
+  /* El panell es fa servir sobretot des del mòbil. Amb menys de 16px, iOS fa
+     zoom tot sol en tocar un camp i després el panell es queda descentrat. */
+  #nc-root input, #nc-root textarea, #nc-root select, #nc-root button { font-size: 16px; }
+  /* Els botons de pujar imatge i els de la llista queden molt xicotets per al
+     dit; ací se'ls dona una alçària mínima còmoda sense tocar la maquetació. */
+  #nc-root [role="button"], #nc-root button { min-height: 40px; }
+</style>
 </head>
 <body>
 <!-- Login segur (Netlify Identity) -->
@@ -15,5 +23,54 @@
      versió que ningú ha revisat. Es revisa manualment una vegada al mes;
      si s'actualitza, comprovar després que el panell carrega i desa bé. -->
 <script src="https://unpkg.com/decap-cms@3.8.0/dist/decap-cms.js"></script>
+<script>
+/* Auto-arxiu del calendari.
+   Al panell només es puja el cartell actual. Quan se'n puja un de nou, ací es
+   fica el que hi havia al principi de la llista d'anteriors, així ningú ha de
+   reordenar res a mà (des del mòbil era pràcticament impossible).
+   El cartell publicat es llig en arrancar i s'actualitza després de cada
+   desat correcte; si la lectura falla, simplement no s'arxiva res. */
+(function () {
+  var publicat = null;
+
+  function cartellActual(dades) {
+    var actual = dades && dades.actual;
+    if (!actual || !actual.image) return null;
+    return { image: actual.image, caption: actual.caption || '' };
+  }
+
+  fetch('/data/calendari.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { publicat = cartellActual(d); })
+    .catch(function () {});
+
+  window.CMS.registerEventListener({
+    name: 'preSave',
+    handler: function (props) {
+      var dades = props.entry.get('data');
+      var actual = dades.get('actual');
+      var anteriors = dades.get('anteriors');
+      // Només la fitxa del calendari porta estos dos camps.
+      if (!actual || !anteriors) return;
+      var anterior = publicat;
+      if (!anterior || anterior.image === actual.get('image')) return;
+      var jaHiEs = anteriors.some(function (x) { return x.get('image') === anterior.image; });
+      if (jaHiEs) return;
+      // Es clona el mapa d'"actual", que ja té estos mateixos camps, perquè el
+      // panell no exposa Immutable per a construir-ne un de nou.
+      var fitxa = actual.set('image', anterior.image).set('caption', anterior.caption);
+      return dades.set('anteriors', anteriors.unshift(fitxa));
+    }
+  });
+
+  window.CMS.registerEventListener({
+    name: 'postSave',
+    handler: function (props) {
+      var dades = props.entry.get('data');
+      if (dades && dades.get('actual')) publicat = cartellActual(dades.toJS());
+    }
+  });
+})();
+</script>
 </body>
 </html>

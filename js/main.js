@@ -107,14 +107,12 @@
         idx=items.indexOf(a); show(idx); lb.classList.add('open'); }); });
   }
 
-  /* ---------- CALENDARI (data/calendari.json): 1 principal + arxiu ---------- */
+  /* ---------- CALENDARI (data/calendari.json): cartell actual + arxiu ---------- */
   var feat=document.getElementById('cal-featured'), arch=document.getElementById('cal-archive');
-  if(feat){ fetch('/data/calendari.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():{fotos:[]};}).then(function(d){
-    var f=(d&&d.fotos)||[];
-    if(!f.length){ feat.innerHTML='<p class="note">Encara no hi ha calendaris publicats.</p>'; return; }
-    var vigent = !!(d&&d.vigent);
-    var main = vigent ? f[0] : null;
-    var rest = vigent ? f.slice(1) : f;
+  if(feat){ fetch('/data/calendari.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
+    var main = (d&&d.actual&&d.actual.image) ? d.actual : null;
+    var rest = (d&&d.anteriors)||[];
+    if(!main && !rest.length){ feat.innerHTML='<p class="note">Encara no hi ha calendaris publicats.</p>'; return; }
     if(main){
       feat.innerHTML='<a href="'+main.image+'"><img loading="lazy" src="'+main.image+'" alt="'+(main.caption||'Calendari actual').replace(/"/g,'&quot;')+'"></a>'+
         '<div class="prose"><div class="kicker"><span class="va">Enguany</span><span class="es">Este año</span></div>'+

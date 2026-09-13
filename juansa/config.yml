@@ -13,20 +13,36 @@ publish_mode: simple
 
 collections:
   # ---------- CALENDARI ----------
+  # Només es puja el cartell actual: l'anterior baixa sol a "Anteriors" en
+  # desar (ho fa el guió d'auto-arxiu de juansa/index.html). Abans era una
+  # llista única on calia arrossegar el cartell nou fins a dalt de tot,
+  # cosa pràcticament impossible des del mòbil.
   - name: "calendari"
-    label: "📅 Calendari — cartells i fotos"
-    description: "Afig, reordena o elimina els cartells i fotos del calendari d'activitats."
+    label: "📅 Calendari — cartell actual"
+    description: "Puja ací el cartell del calendari que està en vigor."
     files:
       - name: "fotos"
-        label: "Fotos del calendari"
+        label: "Cartell del calendari"
         file: "data/calendari.json"
-        description: "Puja la imatge del cartell i, opcionalment, un text. Arrossega per reordenar."
+        description: "Tria la imatge del cartell actual i desa. El cartell que hi havia passa sol a la llista d'anteriors: no cal reordenar res."
         fields:
-          - label: "Fotos"
-            name: "fotos"
-            label_singular: "Cartell / foto"
+          - label: "Cartell actual"
+            name: "actual"
+            widget: "object"
+            required: false
+            hint: "És el cartell gran que ix a dalt de la pàgina del calendari. Si el deixes sense imatge, la web dirà que el pròxim calendari està en camí."
+            fields:
+              - { label: "Imatge del cartell", name: "image", widget: "image", required: false, hint: "Des del mòbil pots fer-li una foto o triar-la de la galeria." }
+              - { label: "Títol", name: "caption", widget: "string", required: false, hint: "Ex.: Calendari d'activitats 2026" }
+          - label: "Anteriors (arxiu)"
+            name: "anteriors"
+            label_singular: "Cartell anterior"
             widget: "list"
+            required: false
+            collapsed: true
+            minimize_collapsed: true
             summary: "{{fields.caption}}"
+            hint: "Ací baixen sols els cartells antics en pujar-ne un de nou. Només cal obrir-ho si en vols esborrar algun."
             fields:
               - { label: "Imatge", name: "image", widget: "image" }
               - { label: "Text (opcional)", name: "caption", widget: "string", required: false }
