@@ -328,7 +328,8 @@ html[data-lang="es"] .va{display:none}
    entre les dos imatges i pareix que encapçale els calendaris anteriors. */
 @media(max-width:820px){
   .cal-featured{grid-template-columns:1fr}
-  .cal-featured .prose{order:-1}
+  /* Centrat com la capçalera de l'arxiu, que va just davall. */
+  .cal-featured .prose{order:-1;text-align:center}
 }
 .cal-archive{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:start}
 .cal-archive a{display:block;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm);cursor:zoom-in}
