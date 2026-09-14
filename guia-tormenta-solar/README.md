@@ -32,8 +32,10 @@ en España y en casi toda la UE fuera de una emergencia declarada.
 
 ## Versión protegida
 
-`semanas-sin-red-protegido.pdf` es la misma guía con permisos de PDF que bloquean copiar texto, editar y extraer páginas en lectores que respetan esos permisos (Adobe Reader, Vista Previa, la mayoría de apps móviles). Se abre sin contraseña y la búsqueda funciona con normalidad.
+`semanas-sin-red-protegido.pdf` es la misma guía cifrada con AES-256. Hace falta contraseña para abrirla (facilitada aparte, no se guarda en este repositorio); una vez abierta, la búsqueda funciona con normalidad pero copiar texto, editar y extraer páginas quedan bloqueados en lectores que respetan esos permisos (Adobe Reader, Vista Previa, la mayoría de apps móviles). Imprimir sí está permitido.
 
-**Límite real, sin adornos:** esto no es cifrado de contenido ni DRM. Es una señal que los lectores conformes respetan, pero que herramientas comunes —incluida la propia librería con la que se generó este PDF— pueden ignorar y extraer el texto igualmente. Tampoco existe forma de impedir una captura de pantalla desde ningún formato de documento: es una función del sistema operativo del lector, no del archivo. Trátalo como una barrera de cortesía, no como seguridad real.
+Esta versión usa contraseñas distintas para abrir el archivo y para gestionar sus permisos, a propósito: si fueran la misma, muchos lectores tratarían esa contraseña como la de propietario y desbloquearían la copia en cuanto se introdujera, anulando la protección.
 
-`semanas-sin-red.pdf` es el máster sin proteger; es el que hay que editar para futuras revisiones. La contraseña de propietario de la versión protegida (necesaria para quitarle los permisos con una herramienta como Acrobat) no se guarda en este repositorio.
+**Límite real, sin adornos:** al estar cifrado con contraseña de apertura, el contenido no se puede extraer sin conocerla — es cifrado de verdad, no solo una bandera de permisos (se comprobó: sin contraseña, ni siquiera la librería con la que se generó el PDF puede tocar el contenido). Pero sigue sin existir forma de impedir una captura de pantalla desde ningún formato de documento: es una función del sistema operativo del lector, no del archivo.
+
+`semanas-sin-red.pdf` es el máster sin proteger y sin contraseña; es el que hay que editar para futuras revisiones. Ni la contraseña de apertura ni la de propietario de la versión protegida se guardan en este repositorio.
