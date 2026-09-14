@@ -120,7 +120,7 @@ Un solo generador portátil emite tanto monóxido de carbono como **cientos de c
 - **Síntomas:** dolor de cabeza, náuseas, mareo, debilidad, confusión, somnolencia, visión borrosa. **Es exactamente una gripe sin fiebre.** Señal de alarma definitiva: **varias personas de la casa tienen "gripe" a la vez y mejoran al salir a la calle.** Si eso pasa, salid todos inmediatamente, dejad las puertas abiertas y no volváis a entrar hasta que haya ventilado.
 - **Niveles:** por debajo de 70 ppm la mayoría no nota nada; **sostenido por encima de 70 ppm** aparecen dolor de cabeza, fatiga y náuseas; **entre 150 y 200 ppm** o más hay desorientación, pérdida de consciencia y muerte.
 - **Por qué mata dormido:** el CO es incoloro, inodoro y no irrita. Su primer efecto neurológico es la somnolencia, así que la víctima se duerme más profundamente en vez de despertarse y salir. Una familia entera puede no llegar a enterarse.
-- **El detector de CO a pilas (15–30 €) es el objeto más barato que salva vidas de toda esta lista.** Uno en cada habitación donde duerma gente o haya una llama encendida. Comprueba hoy la pila y **la fecha de caducidad del sensor** (7–10 años desde fabricación: un detector viejo es un adorno). Compra dos; sigue siendo más barato que casi cualquier otra cosa de la sección 3.8.
+- **El detector de CO a pilas (15–30 €) es el objeto más barato que salva vidas de toda esta lista.** Uno en cada habitación donde duerma gente o haya una llama encendida. Comprueba hoy la pila y **la fecha de caducidad del sensor** (7–10 años desde fabricación: un detector viejo es un adorno). Compra dos; sigue siendo más barato que casi cualquier otra cosa de la sección 3.9.
 
 #### Calor extremo (el mismo apagón, en agosto)
 
@@ -129,6 +129,8 @@ Sombra y **ventilación cruzada**: persianas y toldos cerrados durante el día, 
 ---
 
 ### 3.4 Energía
+
+**Si ya tienes placas en el tejado o un coche eléctrico, lee antes §3.5**: puede que tengas mucha más energía de la que crees, o —lo más probable— ninguna, y conviene saber cuál de las dos cosas antes de gastar un euro en lo que viene aquí.
 
 #### Jerarquía sensata, de barato a caro (compra en este orden)
 
@@ -153,12 +155,12 @@ Sombra y **ventilación cruzada**: persianas y toldos cerrados durante el día, 
 | Cargar 2 móviles | — | — | **35** |
 | Portátil | 45 W | 3 | **135** |
 
-**Cómo leer la tabla.** Una persona con CPAP, router, luz y móviles necesita **unos 700 Wh/día**: perfectamente alcanzable. Añadir la nevera **lo duplica largo** (1.400–1.500 Wh/día). Un concentrador de oxígeno 24 h está en otra liga y no se resuelve con equipo doméstico (ver 3.7).
+**Cómo leer la tabla.** Una persona con CPAP, router, luz y móviles necesita **unos 700 Wh/día**: perfectamente alcanzable. Añadir la nevera **lo duplica largo** (1.400–1.500 Wh/día). Un concentrador de oxígeno 24 h está en otra liga y no se resuelve con equipo doméstico (ver 3.8).
 
 **Dimensionado realista en España.** Un panel de 200 W no da 200 W: entre horas de sol pico, orientación, suciedad y pérdidas del regulador, cuenta **≈450–600 Wh/día en invierno** (3 h de sol pico equivalentes) y **≈800–1.000 Wh/día en verano**. Una estación de 1.000 Wh nominales entrega unos 900 Wh útiles.
 
 - **Combinación sensata y asequible: estación de 500–1.000 Wh + panel de 100–200 W.** Cubre luz, comunicaciones, CPAP y carga de dispositivos **indefinidamente**, que es lo que importa en una crisis de semanas. **No cubre la nevera.**
-- Mantener una nevera en marcha exige **~2.000 Wh de batería y 400–600 W de panel**, presupuesto de cuatro cifras. **No intentes salvar la nevera: cómetela** (3.5). Es la decisión más rentable de esta sección.
+- Mantener una nevera en marcha exige **~2.000 Wh de batería y 400–600 W de panel**, presupuesto de cuatro cifras. **No intentes salvar la nevera: cómetela** (3.6). Es la decisión más rentable de esta sección.
 
 **Prioridad de enchufe**, en este orden y sin debate: **1)** equipos médicos (CPAP, concentrador, nebulizador, bomba de insulina) → **2)** comunicaciones (móvil, radio, router mientras la red aguante) → **3)** luz → **4)** todo lo demás. La nevera, solo si sobra energía, y nunca antes de un equipo médico.
 
@@ -166,7 +168,52 @@ Sombra y **ventilación cruzada**: persianas y toldos cerrados durante el día, 
 
 ---
 
-### 3.5 Comida almacenada
+### 3.5 Si ya tienes placas en el tejado, o un coche eléctrico
+
+**Empecemos por la mala noticia, porque es la que más gente descubre tarde: una instalación de autoconsumo normal no te da ni un vatio durante un apagón.** Aunque sea mediodía de julio, aunque no haya una nube y aunque tengas 5 kWp en el tejado. El inversor conectado a red necesita "ver" la red para sincronizarse con ella, y la norma europea EN 50549 y el reglamento español de autoconsumo le **obligan** a desconectarse en segundos cuando la red se cae. Es la protección anti-isla, y no es un defecto: existe para que no metas corriente en una línea que un operario cree muerta y está tocando. Los microinversores hacen exactamente lo mismo.
+
+Así que la pregunta no es si tienes placas. Es **qué tipo de instalación tienes**.
+
+| Lo que tienes | ¿Funciona sin red? | Qué te da |
+|---|---|---|
+| Autoconsumo sin batería (lo más común) | **No** | Nada. Cero, con sol o sin él |
+| Autoconsumo con batería, **sin** función de respaldo | **No** | Nada. La batería existe para tu factura, no para un apagón |
+| Inversor **híbrido con salida de respaldo** (EPS/*backup*) y batería | **Sí** | Solo los circuitos cableados al cuadro de respaldo |
+| Toma de respaldo del inversor (*PV Point*, *Secure Power Supply*) | Sí, limitada | Un único enchufe, en torno a 3 kW, **solo mientras haya sol** y sin batería |
+| Instalación aislada de red (*off-grid*) | **Sí** | Todo lo que aguante tu batería |
+
+La cuarta fila es la sorpresa agradable: **muchos inversores de string traen una toma de respaldo que casi nadie sabe que existe**, no necesita batería y da para una nevera y unas cargas mientras el sol pega. Búscala en el manual de tu inversor esta semana, no el día del apagón.
+
+**Averígualo hoy y apúntalo en el cuadro eléctrico:**
+
+- [ ] Modelo exacto de mi inversor, y si tiene función de respaldo o toma de emergencia
+- [ ] Si hay batería: kWh **útiles**, no nominales (suele reservarse un 10-20 % que no puedes usar)
+- [ ] Qué circuitos concretos cuelgan del cuadro de respaldo. Escríbelo en la tapa
+- [ ] Potencia máxima de respaldo en kW, y si arranca el compresor de la nevera (el pico de arranque triplica el consumo nominal)
+- [ ] Dónde está el conmutador y cómo se maniobra, probado una vez conmigo delante
+- [ ] Teléfono del instalador, en papel
+
+**Sin red, la gestión se invierte.** Con red, lo que sobra se vierte y se compensa. Sin red, **lo que no gastas se pierde**: cuando la batería se llena, el inversor recorta producción y el sol de la tarde no vale nada. Así que las cargas pesadas se pasan al mediodía —lavadora, bomba de agua, cargar todo lo que tenga batería, hacer hielo— y la noche se deja para lo imprescindible.
+
+Y aquí está el problema de fondo, que conviene ver con números de aquí: en la Marina Alta un tejado de **4 kWp** ronda los **20-25 kWh/día en junio** y baja a **8-11 kWh/día en diciembre**, justo cuando la demanda de calor es máxima. Una batería doméstica de **10 kWh** da de sobra para nevera, luz LED, móviles y router —unos 2,5-3 kWh/día— durante tres días sin sol. Lo que **no** va a hacer, ni de lejos, es mover calefacción eléctrica, termo eléctrico, vitrocerámica o aire acondicionado más que unos minutos. Para el calor, sigue mandando la sección 3.3: una habitación, aislamiento y combustible.
+
+**La tormenta no te rompe las placas.** Vale el mismo razonamiento que con el coche (§1.3): las corrientes inducidas se acoplan a conductores de cientos de kilómetros, y tu tejado tiene decenas de metros. El riesgo real no es la tormenta, es **la vuelta de la luz**: durante una reposición por fases hay huecos de tensión y transitorios. Ten protección contra sobretensiones en el cuadro, y cuando vuelva la red no reconectes todo de golpe: deja que se estabilice y ve subiendo cargas poco a poco.
+
+#### El coche eléctrico es la batería más grande que tienes en casa
+
+Y casi nadie la cuenta. Una batería de coche son **40-80 kWh**: entre cinco y diez veces una batería doméstica, y cincuenta veces una estación eléctrica portátil de las buenas.
+
+- **V2L (*vehicle to load*)** es la vía accesible y no necesita obra: el coche trae un enchufe, o un adaptador para el puerto de carga, que da **1,5-3,6 kW** según modelo. Lo tienen Hyundai Ioniq 5 y 6, Kia EV6 y EV9, varios MG y BYD, y el Leaf con adaptador. Enchufas un alargador y tienes nevera, luces y cargas durante días. Algunos híbridos enchufables también lo llevan.
+- **V2H (*vehicle to home*)**, alimentar la casa entera, exige cargador bidireccional y conmutador: en España es raro y caro, y la regulación va por detrás.
+- **Cuidado con dos cosas:** el V2L se corta por debajo de cierto nivel de carga (en torno al 20 %), y el inversor de a bordo tiene consumo propio en vacío, así que no lo dejes encendido para alimentar 20 W.
+
+Las cuentas, frugalmente: nevera, LED, móviles y router son unos **100 W de media, 2,4 kWh/día**. Un coche de 60 kWh, dejando el 20 % para conducir, te da unos 48 kWh, o sea **dos o tres semanas** de lo esencial. Es, con diferencia, la mayor reserva de energía de la mayoría de las casas.
+
+Pero tiene un precio, y es el mismo dilema del depósito de gasolina al revés: **cada kWh que gastas en la casa es un kilómetro que no vas a conducir**, y sin red no lo recargas —salvo que tu fotovoltaica sepa funcionar en isla, que es justo lo que casi ninguna hace—. Decide pronto para qué es el coche: reserva de energía o medio de salida. No es las dos cosas.
+
+> **La regla de seguridad que no se salta.** No metas corriente en el cableado de casa desde un generador, un inversor o un coche sin un **conmutador de red homologado** instalado por un profesional. Enchufar un generador a una toma de pared para "alimentar la casa" retro-alimenta la línea de la calle, puede matar a un operario y es ilegal. Sin conmutador, se alimenta cada aparato con su alargador, y ya está.
+
+### 3.6 Comida almacenada
 
 #### Estrategia: "come primero lo que se estropea"
 
@@ -178,7 +225,7 @@ Sombra y **ventilación cruzada**: persianas y toldos cerrados durante el día, 
 
 - **Rellena los huecos del congelador con botellas de agua congeladas.** Aumentan la inercia térmica, hacen que aguante el doble, y al fundirse son agua potable. Un congelador lleno dura literalmente el doble que uno medio vacío: mantenlo lleno todo el año.
 - **El truco de la moneda.** Congela un vaso de agua y, cuando esté sólido, deja una moneda encima del hielo. Si vuelves y la moneda está **en el fondo del vaso**, el congelador se descongeló por completo y volvió a congelar: **tira la comida**, aunque ahora esté dura como una piedra. Si la moneda sigue arriba, todo bien. Cuesta cero y resuelve la duda imposible de "¿se ha descongelado esto mientras no estaba?".
-- **En la duda, tírala.** Una gastroenteritis sin agua corriente, sin lavadora y sin hospital accesible no es una molestia: es la emergencia descrita en 3.6.
+- **En la duda, tírala.** Una gastroenteritis sin agua corriente, sin lavadora y sin hospital accesible no es una molestia: es la emergencia descrita en 3.7.
 
 #### Qué almacenar de verdad para 30 días
 
@@ -206,9 +253,9 @@ Comer arroz hervido catorce días seguidos hunde la moral y, literalmente, hace 
 
 ---
 
-### 3.6 Higiene y saneamiento
+### 3.7 Higiene y saneamiento
 
-**Sin bombeo eléctrico el alcantarillado deja de funcionar**, y en edificios altos el contenido de las columnas puede retornar a las plantas bajas. A la vez desaparecen el agua corriente, la lavadora y el agua caliente, justo cuando más gente convive en menos espacio. Esa combinación es la razón por la que, **como afirma la portada de este manual, la diarrea es la causa histórica de muerte número uno en los desastres**, por encima del suceso que los originó: en un apagón largo no te mata la tormenta solar, te mata una gastroenteritis banal que en condiciones normales se resuelve en dos días con un suero y una lavadora. **Esta subsección salva más vidas que todo el botiquín de 3.7.**
+**Sin bombeo eléctrico el alcantarillado deja de funcionar**, y en edificios altos el contenido de las columnas puede retornar a las plantas bajas. A la vez desaparecen el agua corriente, la lavadora y el agua caliente, justo cuando más gente convive en menos espacio. Esa combinación es la razón por la que, **como afirma la portada de este manual, la diarrea es la causa histórica de muerte número uno en los desastres**, por encima del suceso que los originó: en un apagón largo no te mata la tormenta solar, te mata una gastroenteritis banal que en condiciones normales se resuelve en dos días con un suero y una lavadora. **Esta subsección salva más vidas que todo el botiquín de 3.8.**
 
 - **Váter de cubo, sistema de dos cubos.** Cubo A para orina, cubo B para heces. Cada uno: **cubo de 20 L + doble bolsa de basura resistente + tabla o asiento de inodoro encima + tapa hermética**. Después de cada uso, cubrir los sólidos con un puñado de **serrín, arena de gato, ceniza fría, tierra seca o virutas de madera**, y cerrar la tapa. **Separar orina y sólidos elimina en torno al 90 % del olor** y es la diferencia entre un sistema que la familia usa y uno que abandona al tercer día. La orina es prácticamente estéril y, diluida, se puede verter en el jardín o el desagüe.
 - **Gestión de residuos.** Saca la bolsa cuando esté a dos tercios (a lleno no se puede cerrar ni levantar), ciérrala bien y guárdala en un contenedor con tapa **lejos de la vivienda y de cualquier fuente de agua**. Si la crisis se alarga y tienes terreno: letrina de zanja a **30 m mínimo de cualquier pozo, arroyo o captación**, 50 cm de profundidad, cubriendo con tierra cada uso.
@@ -223,7 +270,7 @@ Comer arroz hervido catorce días seguidos hunde la moral y, literalmente, hace 
 
 ---
 
-### 3.7 Botiquín y salud
+### 3.8 Botiquín y salud
 
 **La amenaza médica real de un apagón largo no es el drama traumatológico que imagina todo el mundo: es la infección de una herida banal, la deshidratación por diarrea y la interrupción de la medicación crónica.** Monta el botiquín para eso, por niveles.
 
@@ -272,7 +319,7 @@ Cortar leña, mover escombros, forzar puertas, apañar instalaciones y clavar pl
 
 ---
 
-### 3.8 Lista maestra de compra por presupuesto
+### 3.9 Lista maestra de compra por presupuesto
 
 | Nivel | Artículo | Función |
 |---|---|---|
