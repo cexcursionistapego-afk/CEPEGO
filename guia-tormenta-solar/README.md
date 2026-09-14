@@ -1,6 +1,6 @@
 # Semanas sin red — guía de tormenta solar
 
-Manual de emergencia (58 páginas, A4) sobre cómo prepararse y sobrevivir a un apagón
+Manual de emergencia (60 páginas, A4) sobre cómo prepararse y sobrevivir a un apagón
 prolongado provocado por una tormenta geomagnética severa. **No forma parte de la web
 del club**: es un documento independiente pensado para imprimirse y guardarse en papel.
 

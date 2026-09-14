@@ -93,20 +93,15 @@ COVER = """<section class="cover">
   <p class="sub">Cómo prepararse y sobrevivir a un apagón prolongado<br>provocado por una tormenta solar severa</p>
   <p class="stand">Qué hacer con las <strong>18–72 horas de aviso</strong>, cómo preparar el cuerpo
    durante los meses previos, cómo conseguir agua, calor y comida cuando la electricidad no vuelve
-   el martes, y cómo proteger a los tuyos sin convertir tu casa en un búnker. Seis dominios,
-   un consejo de especialistas, <strong>una sola conclusión que casi todo el mundo tiene
-   invertida</strong>:</p>
-  <div class="rule"></div>
-  <ol class="cover__prio">
-   <li><span class="k">Prioridad 1</span><span class="v">Temperatura</span>
-       <span class="d">Sin calor en invierno el plazo es de días. Es lo que de verdad mata en los apagones.</span></li>
-   <li><span class="k">Prioridad 2</span><span class="v">Agua</span>
-       <span class="d">Tres días. Y el saneamiento cae con ella: la diarrea es la causa histórica número uno.</span></li>
-   <li><span class="k">Prioridad 3</span><span class="v">Sueño y refugio</span>
-       <span class="d">El primer sistema que se degrada y el que peores decisiones te hace tomar.</span></li>
-   <li><span class="k">Prioridad 4</span><span class="v">Comida</span>
-       <span class="d">Semanas de margen. Es donde todo el mundo empieza y donde menos se juega.</span></li>
-  </ol>
+   el martes, y cómo proteger a los tuyos sin convertir tu casa en un búnker. Seis dominios, un
+   consejo de especialistas y un documento pensado para leerse antes, no durante.</p>
+  <div class="cover__illo">%ILLO%</div>
+ </div>
+
+ <div class="cover__by">
+  <span class="k">Redacción y edición</span>
+  <span class="n">Juan Salvador Moll Garcia</span>
+  <span class="p">Centre Excursionista de Pego · Pego, Alacant</span>
  </div>
  <div class="cover__foot">
   <span>Documento para imprimir y guardar en papel</span>
@@ -136,6 +131,18 @@ PROLOGO = """<section class="prologo">
    atención exactamente al revés, y por eso las víctimas reales de los apagones largos mueren de
    frío, de monóxido de carbono y de diarrea, no de hambre.</p>
  </aside>
+ <p><strong>Y de ahí sale el orden de trabajo de todo el manual.</strong> Si sólo te llevas una
+  cosa de estas cincuenta y ocho páginas, que sea esta tabla:</p>
+ <ol class="prio">
+   <li><span class="k">Prioridad 1</span><span class="v">Temperatura</span>
+       <span class="d">Sin calor en invierno el plazo es de días. Es lo que de verdad mata en los apagones.</span></li>
+   <li><span class="k">Prioridad 2</span><span class="v">Agua</span>
+       <span class="d">Tres días. Y el saneamiento cae con ella: la diarrea es la causa histórica número uno.</span></li>
+   <li><span class="k">Prioridad 3</span><span class="v">Sueño y refugio</span>
+       <span class="d">El primer sistema que se degrada y el que peores decisiones te hace tomar.</span></li>
+   <li><span class="k">Prioridad 4</span><span class="v">Comida</span>
+       <span class="d">Semanas de margen. Es donde todo el mundo empieza y donde menos se juega.</span></li>
+  </ol>
  %FIG%
 </section>"""
 
@@ -172,10 +179,15 @@ COLOFON = """<section class="colophon">
    asegúrate de que todos saben el punto de encuentro sin mirar el móvil. Si encuentras un error
    en estas páginas, corrígelo a mano: es un documento de trabajo, no una lápida.</p>
  </div>
- <div class="signoff">
-  Semanas sin red · Manual de emergencia ante un apagón prolongado por tormenta solar<br>
-  Revisión 1.0 — septiembre de 2026 · Preparado para el Centre Excursionista de Pego<br>
-  Documento pensado para imprimirse a doble cara y guardarse con la documentación de casa.
+ <div class="endplate">%EMBLEMA%
+  <div class="t">Semanas sin red</div>
+  <div class="s">Manual de emergencia ante un apagón prolongado provocado por una tormenta
+   solar severa</div>
+  <div class="hr"></div>
+  <div class="n">Juan Salvador Moll Garcia</div>
+  <div class="p">Centre Excursionista de Pego · Pego, Alacant<br>
+   Revisión 1.0 · septiembre de 2026<br>
+   Para imprimir a doble cara y guardar con la documentación de casa</div>
  </div>
 </section>"""
 
@@ -204,8 +216,9 @@ def document(toc, secs, pages=None):
     css = io.open(os.path.join(B, "print.css"), encoding="utf-8").read()
     fonts = io.open(os.path.join(B, "fonts.css"), encoding="utf-8").read()
     fonts = fonts.replace("url(fonts/", "url(file://" + B + "/fonts/")
-    body = (COVER + toc_html(toc, pages) + PROLOGO.replace("%FIG%", figure.html())
-            + "".join(secs) + COLOFON)
+    body = (COVER.replace("%ILLO%", figure.cover_illustration())
+            + toc_html(toc, pages) + PROLOGO.replace("%FIG%", figure.html())
+            + "".join(secs) + COLOFON.replace("%EMBLEMA%", figure.emblem()))
     if pages is not None:                       # 2a pasada: fuera los marcadores
         body = re.sub(r'<span class="pmk">PMK\d+S\d+Z</span>', "", body)
     return ("<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"utf-8\">"
