@@ -93,8 +93,8 @@ COVER = """<section class="cover">
   <p class="sub">Cómo prepararse y sobrevivir a un apagón prolongado<br>provocado por una tormenta solar severa</p>
   <p class="stand">Qué hacer con las <strong>18–72 horas de aviso</strong>, cómo preparar el cuerpo
    durante los meses previos, cómo conseguir agua, calor y comida cuando la electricidad no vuelve
-   el martes, y cómo proteger a los tuyos sin convertir tu casa en un búnker. Seis dominios, un
-   consejo de especialistas y un documento pensado para leerse antes, no durante.</p>
+   el martes, y cómo proteger a los tuyos sin convertir tu casa en un búnker. Seis áreas de información que he reunido y contrastado en un solo documento
+   pensado para leerse antes, no durante.</p>
   <div class="cover__illo">%ILLO%</div>
  </div>
 
@@ -119,10 +119,10 @@ PROLOGO = """<section class="prologo">
   muy alta tensión que se dañan tardan entre dos y cinco años en fabricarse y no existe stock.
   Todo lo demás —el agua que deja de llegar al quinto piso, el alcantarillado que no bombea, la
   farmacia sin refrigeración, el cajero muerto— se deriva de ahí.</p>
- <p>Está escrita por un consejo de seis especialistas, cada uno responsable de un dominio, y
-  editada para que las seis partes no se contradigan. Las cifras llevan fuente y distinguen lo
-  bien establecido de lo especulativo; las recomendaciones operativas son criterio, y el criterio
-  se discute.</p>
+ <p>Es una gestión de información: la he reunido, contrastado y canalizado en formato de manual,
+  área por área, para que las seis partes no se contradigan entre sí. Las cifras llevan fuente y
+  distinguen lo bien establecido de lo especulativo; las recomendaciones operativas son
+  criterio, y el criterio se discute.</p>
  <aside class="callout callout--key">
   <p><strong>La única idea que hay que llevarse.</strong> Acumular comida es la <em>última</em>
    de tus cuatro prioridades, no la primera. Sin calefacción en invierno el plazo es de días; sin
@@ -146,9 +146,10 @@ PROLOGO = """<section class="prologo">
 </section>"""
 
 COLOFON = """<section class="colophon">
- <h2>El consejo, y cómo usar esto</h2>
- <p class="lede">Seis dominios, seis responsables. Cada sección se redactó por separado y se editó
-  después para eliminar contradicciones entre ellas.</p>
+ <h2>Cómo he hecho esto, y cómo usarlo</h2>
+ <p class="lede">Seis áreas de información que he gestionado y canalizado en formato de manual.
+  Trabajé cada sección por separado y la revisé después para eliminar contradicciones entre
+  ellas.</p>
  <div class="council">
   <div><span class="cn">01</span><span class="ct">Clima espacial e infraestructura crítica</span></div>
   <div><span class="cn">02</span><span class="ct">Fisiología del trabajo y acondicionamiento</span></div>

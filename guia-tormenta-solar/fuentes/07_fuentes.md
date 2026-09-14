@@ -1,20 +1,20 @@
 ## 7. Fuentes y verificación
 
-De un documento así puede depender la vida de alguien, así que esta sección dice exactamente de dónde sale cada cifra, **cuáles se han comprobado y cuáles no**. Un manual que no distingue esas dos cosas no es un manual: es una opinión con tablas.
+De un documento así puede depender la vida de alguien, así que en esta sección digo exactamente de dónde sale cada cifra, **cuáles he comprobado y cuáles no**. Un manual que no distingue esas dos cosas no es un manual: es una opinión con tablas.
 
-### 7.1 Cómo se ha verificado, y qué límite tiene esta verificación
+### 7.1 Cómo lo he verificado, y qué límite tiene esta verificación
 
-El manual lo redactó un consejo de seis especialistas, uno por dominio, cada uno con la obligación de citar fuente para las cifras y de distinguir lo establecido de lo especulativo. Después hubo una segunda pasada de cierre, sección por sección, y una tercera centrada sólo en **las afirmaciones que pueden hacer daño si están mal**: dosis, temperaturas, umbrales y plazos.
+Este manual es mi gestión de la información: la he reunido y organizado, área por área, con la obligación que me impuse de citar fuente para las cifras y de distinguir lo establecido de lo especulativo. Después hice una segunda pasada de cierre, sección por sección, y una tercera centrada sólo en **las afirmaciones que pueden hacer daño si están mal**: dosis, temperaturas, umbrales y plazos.
 
-Hay que decir con claridad cuál es el límite de esa tercera pasada. El acceso directo a los dominios de las fuentes primarias —`cdc.gov`, `who.int`, `epa.gov`, `boe.es`, `swpc.noaa.gov`— **estaba bloqueado** desde el entorno donde se redactó. La comprobación se hizo con búsquedas que devuelven extractos de esas mismas páginas y con fuentes secundarias que las citan. Para las cifras de la tabla siguiente eso es suficiente para detectar un error grueso, y de hecho detectó varios. **No es lo mismo que haber leído el documento oficial.**
+Tengo que decir con claridad cuál es el límite de esa tercera pasada. No tuve acceso directo a los dominios de las fuentes primarias —`cdc.gov`, `who.int`, `epa.gov`, `boe.es`, `swpc.noaa.gov`— desde donde trabajé. Hice la comprobación con búsquedas que devuelven extractos de esas mismas páginas y con fuentes secundarias que las citan. Para las cifras de la tabla siguiente eso es suficiente para detectar un error grueso, y de hecho detecté varios. **No es lo mismo que haber leído el documento oficial.**
 
-Lo que se deduce de esto es sencillo y conviene tomárselo en serio:
+De esto se deduce algo sencillo, y me lo tomo muy en serio:
 
 > **Antes de actuar sobre una cifra de este manual que pueda dañar a alguien —una dosis, una temperatura de cocción, un umbral de gas— confírmala en la fuente primaria.** Están todas nombradas en §7.4 y se encuentran en un minuto con el móvil, hoy, que es cuando hay internet. Ese es justo el trabajo que no vas a poder hacer el día del apagón.
 
 ### 7.2 Verificación de las afirmaciones que pueden hacer daño
 
-`Verificada` = confirmada contra la fuente. `En parte` = confirmada a medias, con lo que falta anotado. `CORREGIDA` = estaba mal y se ha cambiado en esta revisión. `Sin verificar` = no se ha comprobado en esta pasada.
+`Verificada` = confirmada contra la fuente. `En parte` = confirmada a medias, con lo que falta anotado. `CORREGIDA` = estaba mal y lo he cambiado en esta revisión. `Sin verificar` = no lo he comprobado en esta pasada.
 
 | Afirmación | Lo que dice el manual | Estado | Contra qué |
 |---|---|---|---|
@@ -52,11 +52,11 @@ Lo que se deduce de esto es sencillo y conviene tomárselo en serio:
 
 ### 7.3 Lo que sigue sin verificar, dicho sin adornos
 
-Tras la última pasada queda **un** punto abierto (la frecuencia de G4 ya se ha confirmado; el real decreto de telecos pasa de «no verificable» a «verificado por prensa, no por BOE»; la salazón y cecina de §4.8 quedan corregidas y verificadas; y el marco legal de §5 queda cerrado por completo, ver más abajo). No sostiene una recomendación que pueda matar a nadie por sí sola, pero conviene saber cuál es:
+Tras mi última pasada me queda **un** punto abierto (la frecuencia de G4 ya se ha confirmado; el real decreto de telecos pasa de «no verificable» a «verificado por prensa, no por BOE»; la salazón y cecina de §4.8 quedan corregidas y verificadas; y el marco legal de §5 queda cerrado por completo, ver más abajo). No sostiene una recomendación que pueda matar a nadie por sí sola, pero conviene saber cuál es:
 
-1. **El real decreto de 2026 sobre respaldo eléctrico de telecomunicaciones**: su existencia y contenido (≥4 h, 75 % de población) están respaldados por varias fuentes periodísticas independientes, pero no se ha contrastado contra el texto publicado en el BOE. Se cita como apoyo, nunca como base de un argumento.
+1. **El real decreto de 2026 sobre respaldo eléctrico de telecomunicaciones**: su existencia y contenido (≥4 h, 75 % de población) están respaldados por varias fuentes periodísticas independientes, pero no he podido contrastarlo contra el texto publicado en el BOE. Lo cito como apoyo, nunca como base de un argumento.
 
-**El marco legal de §5 queda ya completo y verificado.** Los arts. 20.4 y 21.1 del Código Penal y el régimen del spray de defensa ya estaban confirmados; en esta pasada se han verificado además el traslado de armas del art. 149 del Reglamento de Armas y la Resolución de la Guardia Civil de 2024 sobre armeros (BOE-A-2025-387), ambos tal como los describía el manual. Los límites de las licencias D y E sí tenían un error, ya **corregido**: el manual les asignaba el mismo tope («hasta seis de cada clase y doce en total») cuando son cifras distintas y no acumulables — la licencia D permite hasta 5 armas de caza mayor, la E hasta 12 en total (máximo 6 escopetas y 6 rifles de tiro).
+**El marco legal de §5 queda ya completo y verificado.** Los arts. 20.4 y 21.1 del Código Penal y el régimen del spray de defensa ya estaban confirmados; en esta pasada he verificado además el traslado de armas del art. 149 del Reglamento de Armas y la Resolución de la Guardia Civil de 2024 sobre armeros (BOE-A-2025-387), ambos tal como los describía el manual. Los límites de las licencias D y E sí tenían un error, ya **corregido**: el manual les asignaba el mismo tope («hasta seis de cada clase y doce en total») cuando son cifras distintas y no acumulables — la licencia D permite hasta 5 armas de caza mayor, la E hasta 12 en total (máximo 6 escopetas y 6 rifles de tiro).
 
 ### 7.4 Fuentes, por secciones
 
