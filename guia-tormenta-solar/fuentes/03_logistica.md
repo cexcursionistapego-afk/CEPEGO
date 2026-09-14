@@ -118,7 +118,7 @@ No intentes calentar la casa: no puedes, y morirás de frío intentándolo. **Ca
 Un solo generador portátil emite tanto monóxido de carbono como **cientos de coches al ralentí**, y en un espacio cerrado las mediciones alcanzan **1.000 ppm en minutos**. No es una advertencia legal de fabricante: es la causa número uno de muertes evitables en todos los apagones prolongados documentados.
 
 - **Síntomas:** dolor de cabeza, náuseas, mareo, debilidad, confusión, somnolencia, visión borrosa. **Es exactamente una gripe sin fiebre.** Señal de alarma definitiva: **varias personas de la casa tienen "gripe" a la vez y mejoran al salir a la calle.** Si eso pasa, salid todos inmediatamente, dejad las puertas abiertas y no volváis a entrar hasta que haya ventilado.
-- **Niveles:** por debajo de 70 ppm la mayoría no nota nada; **sostenido por encima de 70 ppm** aparecen dolor de cabeza, fatiga y náuseas; **entre 150 y 200 ppm** o más hay desorientación, pérdida de consciencia y muerte.
+- **Niveles y efectos** (referencias de OSHA y NIOSH y tablas de efectos): el límite laboral para jornada completa está en **35-50 ppm**; en torno a **100 ppm** aparece dolor de cabeza leve; a **200 ppm**, dolor de cabeza, fatiga, mareo y náuseas tras unas horas; a **400 ppm** el dolor es intenso en 1-2 h y la situación pasa a ser peligrosa para la vida si sigues allí; a **800 ppm** se pierde la consciencia en minutos; **1.200 ppm** es el umbral de peligro inmediato para la vida (IDLH) y por encima de **1.600 ppm** la muerte puede llegar en unos 20 minutos. **No memorices ppm: pon un detector.** Un brasero en una habitación cerrada pasa de cero a cuatro cifras en minutos, y el envenenamiento da sueño antes que miedo.
 - **Por qué mata dormido:** el CO es incoloro, inodoro y no irrita. Su primer efecto neurológico es la somnolencia, así que la víctima se duerme más profundamente en vez de despertarse y salir. Una familia entera puede no llegar a enterarse.
 - **El detector de CO a pilas (15–30 €) es el objeto más barato que salva vidas de toda esta lista.** Uno en cada habitación donde duerma gente o haya una llama encendida. Comprueba hoy la pila y **la fecha de caducidad del sensor** (7–10 años desde fabricación: un detector viejo es un adorno). Compra dos; sigue siendo más barato que casi cualquier otra cosa de la sección 3.9.
 
@@ -170,7 +170,7 @@ Sombra y **ventilación cruzada**: persianas y toldos cerrados durante el día, 
 
 ### 3.5 Si ya tienes placas en el tejado, o un coche eléctrico
 
-**Empecemos por la mala noticia, porque es la que más gente descubre tarde: una instalación de autoconsumo normal no te da ni un vatio durante un apagón.** Aunque sea mediodía de julio, aunque no haya una nube y aunque tengas 5 kWp en el tejado. El inversor conectado a red necesita "ver" la red para sincronizarse con ella, y la norma europea EN 50549 y el reglamento español de autoconsumo le **obligan** a desconectarse en segundos cuando la red se cae. Es la protección anti-isla, y no es un defecto: existe para que no metas corriente en una línea que un operario cree muerta y está tocando. Los microinversores hacen exactamente lo mismo.
+**Empecemos por la mala noticia, porque es la que más gente descubre tarde: una instalación de autoconsumo normal no te da ni un vatio durante un apagón.** Aunque sea mediodía de julio, aunque no haya una nube y aunque tengas 5 kWp en el tejado. El inversor conectado a red necesita "ver" la red para sincronizarse con ella, y la norma europea **EN 50549**, que rige la conexión de generación en paralelo con las redes de distribución, le **obliga** a desconectarse en un par de segundos cuando la red se cae. Es la protección anti-isla, y no es un defecto: existe para que no metas corriente en una línea que un operario cree muerta y está tocando. Los microinversores hacen exactamente lo mismo.
 
 Así que la pregunta no es si tienes placas. Es **qué tipo de instalación tienes**.
 
@@ -296,6 +296,8 @@ Antisépticos (**clorhexidina acuosa** o povidona yodada), **suero fisiológico 
 
 > **1 litro de agua potable + 6 cucharaditas rasas de azúcar + ½ cucharadita rasa de sal.**
 > Remover hasta disolver. Beber a **sorbos pequeños y continuos** (un vaso pequeño cada 15 minutos; en niños, a cucharaditas). **Preparar cada día y desechar lo sobrante a las 24 h.**
+
+**Mide la sal con precisión.** Pasarse de azúcar empeora la diarrea, y pasarse de sal es peligroso: en lactantes y niños pequeños una preparación demasiado salada puede causar **hipernatremia**, que es una urgencia grave. Si tienes sobres comerciales de suero oral, úsalos antes que la receta casera; la casera es el recurso cuando no hay sobres.
 > **Medir con precisión: pasarse de sal es peligroso**, sobre todo en niños y lactantes. Si tienes dudas, es mejor quedarse corto de sal que pasarse.
 
 Esta receta, que cuesta céntimos, es la intervención que ha salvado más vidas en desastres en el último medio siglo. Ténla escrita en papel y pegada dentro de la tapa del botiquín.

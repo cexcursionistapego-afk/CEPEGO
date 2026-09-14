@@ -132,7 +132,7 @@ PROLOGO = """<section class="prologo">
    frío, de monóxido de carbono y de diarrea, no de hambre.</p>
  </aside>
  <p><strong>Y de ahí sale el orden de trabajo de todo el manual.</strong> Si sólo te llevas una
-  cosa de estas cincuenta y ocho páginas, que sea esta tabla:</p>
+  cosa de todo el manual, que sea esta tabla:</p>
  <ol class="prio">
    <li><span class="k">Prioridad 1</span><span class="v">Temperatura</span>
        <span class="d">Sin calor en invierno el plazo es de días. Es lo que de verdad mata en los apagones.</span></li>
@@ -208,8 +208,10 @@ def toc_html(toc, pages=None):
                   + '<span class="pg">' + pg("PMK%dS0Z" % n) + '</span></div>'
                   + "<ol>" + subs + "</ol></li>")
     return ('<section class="toc"><h2>Índice</h2>'
-            '<p class="lede">Seis secciones. Las tres primeras son las que hay que leer antes de '
-            'que pase nada; las tres últimas son las que se consultan cuando ya está pasando.</p>'
+            '<p class="lede">Seis dominios y una séptima sección de fuentes. Las tres primeras '
+            'hay que leerlas antes de que pase nada; las tres siguientes se consultan cuando ya '
+            'está pasando, y la última dice de dónde sale cada cifra y cuáles están sin '
+            'confirmar.</p>'
             f'<ol>{"".join(li)}</ol></section>')
 
 def document(toc, secs, pages=None):
