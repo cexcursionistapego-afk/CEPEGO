@@ -229,8 +229,9 @@ def document(toc, secs, pages=None):
 
 # ───────────────────────── render ─────────────────────────
 FOOT = ('<div style="width:100%;font-family:Arial,Helvetica,sans-serif;font-size:7.5pt;'
-        'color:#5C636C;padding:0 18mm;display:flex;justify-content:space-between;">'
-        '<span>Semanas sin red · manual de emergencia</span>'
+        'color:#5C636C;padding:0 18mm;display:flex;justify-content:space-between;gap:8pt;">'
+        '<span>Semanas sin red</span>'
+        '<span>Juan Salvador Moll Garcia</span>'
         '<span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>')
 
 def render(html_path, pdf_path):
