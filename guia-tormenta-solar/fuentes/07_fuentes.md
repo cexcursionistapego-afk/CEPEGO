@@ -74,6 +74,6 @@ Tras la última pasada queda **un** punto abierto (la frecuencia de G4 ya se ha 
 
 ### 7.5 Esto se corrige a mano
 
-Este manual no es una lápida. Si encuentras un error, **táchalo en el papel y escribe la corrección al lado**, con la fecha y de dónde sacaste el dato bueno. Si el documento circula por el club, que circule también la corrección: un error repetido en veinte copias impresas es peor que no tener manual, porque la gente confía en lo que está impreso.
+Este manual no es una lápida. Si encuentras un error, **táchalo en el papel y escribe la corrección al lado**, con la fecha y de dónde sacaste el dato bueno. Si el documento circula entre más gente, que circule también la corrección: un error repetido en veinte copias impresas es peor que no tener manual, porque la gente confía en lo que está impreso.
 
 Y si una cifra de aquí contradice lo que te dice tu médico, tu farmacéutico, tu veterinario o el técnico que te montó las placas, **hazles caso a ellos**. Ellos conocen tu caso; este papel no.

@@ -100,7 +100,7 @@ COVER = """<section class="cover">
 
  <div class="cover__by">
   <span class="n"><span class="lead">Creado y organizado por</span> Juan Salvador Moll Garcia</span>
-  <span class="p">Centre Excursionista de Pego · Pego, Alacant</span>
+  <span class="p">Mitjà natural, climatologia i supervivència</span>
  </div>
  <div class="cover__foot">
   <span>Documento para imprimir y guardar en papel</span>
@@ -184,7 +184,7 @@ COLOFON = """<section class="colophon">
    solar severa</div>
   <div class="hr"></div>
   <div class="n"><span class="lead">Creado y organizado por</span> Juan Salvador Moll Garcia</div>
-  <div class="p">Centre Excursionista de Pego · Pego, Alacant<br>
+  <div class="p">Mitjà natural, climatologia i supervivència<br>
    Revisión 1.0 · septiembre de 2026<br>
    Para imprimir a doble cara y guardar con la documentación de casa</div>
  </div>
