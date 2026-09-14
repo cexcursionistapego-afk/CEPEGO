@@ -35,7 +35,13 @@ def pre(md):
     return md
 
 def post(h, n):
-    h = h.replace("<table>", '<div class="tw"><table>').replace("</table>", "</table></div>")
+    # Tablas: las cortas no se parten nunca; las largas se parten con cabecera repetida
+    def wrap_table(m):
+        tbl = m.group(0)
+        rows = tbl.count("<tr>")
+        cls = "tw tw--keep" if rows <= 14 else "tw tw--split"
+        return '<div class="%s">%s</div>' % (cls, tbl)
+    h = re.sub(r"<table>.*?</table>", wrap_table, h, flags=re.S)
     # casillas imprimibles
     h = re.sub(r"<li>\s*" + CB + r"\s*", '<li class="ck"><span class="box"></span><span>', h)
     h = re.sub(r'(<li class="ck">.*?)</li>', lambda m: m.group(1) + "</span></li>", h, flags=re.S)

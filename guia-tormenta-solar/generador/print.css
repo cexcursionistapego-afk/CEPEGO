@@ -51,7 +51,8 @@ p,li,td,th,dd{orphans:2;widows:2}
 .cover__by .n{display:block;font-family:var(--f-disp);font-weight:700;font-size:14.5pt;
   letter-spacing:-.015em;color:var(--ink);margin-bottom:3pt}
 .cover__by .p{display:block;font-family:var(--f-disp);font-size:9pt;color:var(--muted)}
-.prio{margin:14pt 0 0}
+.prio{margin:14pt 0 0;page-break-inside:avoid;break-inside:avoid}
+.council{page-break-inside:avoid;break-inside:avoid}
 .endplate{page-break-before:always;margin:78mm 0 0;padding:16pt 18pt 18pt;border:.7pt solid var(--rule);
   border-radius:1pt;text-align:center;page-break-inside:avoid}
 .endplate svg{display:block;margin:0 auto 9pt}
@@ -126,7 +127,14 @@ code{font-family:var(--f-mono);font-size:.84em;background:var(--tint);padding:.0
 hr{border:0;border-top:.7pt solid var(--rule);margin:12pt 0;max-width:var(--prose)}
 
 /* ============ TABLAS ============ */
-.tw{margin:9pt 0;border:.7pt solid var(--rule);border-radius:1pt;page-break-inside:auto}
+.tw{margin:9pt 0;border-radius:1pt}
+/* tablas cortas: nunca se parten, se van enteras a la página siguiente */
+.tw--keep{border:.7pt solid var(--rule);page-break-inside:avoid;break-inside:avoid}
+/* tablas largas: se parten, pero sin borde de caja que quede cortado a medias;
+   la cabecera se repite en cada página y cada fila cierra con su propia línea */
+.tw--split{page-break-inside:auto;border-top:.7pt solid var(--rule-2)}
+.tw--split table{border-left:.7pt solid var(--rule);border-right:.7pt solid var(--rule)}
+.tw--split tbody tr:last-child td{border-bottom:.7pt solid var(--rule)}
 table{border-collapse:collapse;width:100%;font-family:var(--f-disp);font-size:8.3pt;
   line-height:1.34;font-variant-numeric:tabular-nums lining-nums}
 th,td{text-align:left;padding:3.6pt 5pt;border-bottom:.5pt solid var(--rule);
@@ -135,7 +143,7 @@ th{overflow-wrap:normal}
 thead{display:table-header-group}
 thead th{background:var(--tint);font-weight:700;font-size:7.3pt;letter-spacing:.05em;
   text-transform:uppercase;color:var(--ink-2);border-bottom:.7pt solid var(--rule-2)}
-tbody tr:last-child td{border-bottom:0}
+.tw--keep tbody tr:last-child td{border-bottom:0}
 td:first-child{font-weight:600}
 tr{page-break-inside:avoid}
 
@@ -152,7 +160,8 @@ tr{page-break-inside:avoid}
 
 /* ============ CASILLAS ============ */
 .checklist{list-style:none;padding-left:0;margin:8pt 0;max-width:var(--prose);
-  border:.7pt solid var(--rule);border-radius:1pt}
+  border:.7pt solid var(--rule);border-radius:1pt;
+  page-break-inside:avoid;break-inside:avoid}
 .checklist li.ck{margin:0;display:flex;gap:6pt;padding:4.4pt 8pt;align-items:flex-start;
   border-bottom:.5pt solid var(--rule);font-size:9.6pt;line-height:1.4;
   page-break-inside:avoid}
