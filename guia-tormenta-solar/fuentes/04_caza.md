@@ -160,7 +160,7 @@ Y una advertencia que salva piezas: **poca sangre no significa mal tiro**. Un pu
 | Cecina y biltong | Tiras de 5-10 mm, sal (+vinagre en biltong), aire, HR <60 %, 3-7 días | Meses | Bajo en clima seco |
 | Secado al sol y viento | Tiras finas, malla antimosca | Meses | Alto con humedad o moscas |
 | Ahumado **en caliente** (60-80 °C) | Fuego y humo, 4-8 h | **Días** | **Cocina, no conserva** |
-| Ahumado **en frío** (<30 °C) | Carne **salada antes**, humo separado del fuego, 12-48 h | Meses | Peligroso sin salazón previa |
+| Ahumado **en frío** (<30 °C) | Carne **curada antes con sal nitrificante**, humo separado del fuego, 12-48 h | Meses | **Alto: no cuece, y el frío activa la espora** |
 | Confitado en grasa | Carne cocida cubierta con 2 cm de grasa fundida en tarro | 2-6 meses en fresco | Medio |
 | **Pemmican** | Carne seca molida + sebo fundido **50:50 en peso** | **Años** | Muy bajo |
 | Nevero enterrado | Pozo a la sombra de 60-80 cm, nieve o corriente de agua | Días | Carroñeros |
@@ -169,6 +169,7 @@ Y una advertencia que salva piezas: **poca sangre no significa mal tiro**. Un pu
 - **La sal es el recurso crítico que nadie almacena:** 1 kg conserva 5-10 kg de carne. **Guarda 5-10 kg de sal gorda**; es el artículo más rentable de la despensa.
 - **Cecina y biltong:** corta **contra la fibra** en tiras de 5-10 mm. La clave es aire en movimiento y humedad baja: en la meseta en verano funciona, en la costa cantábrica en otoño se pudre. El biltong (vinagre, sal gruesa, cilantro y pimienta, 3-5 días colgado) es rápido; la cecina tradicional tarda meses y no sirve de emergencia.
 - **Ahumadero improvisado:** bidón o cajón con la carne colgada arriba y la hoguera a 2-3 m, conectada por una zanja tapada con chapa y tierra para que el humo llegue frío. Encina, roble, haya o frutales; **nunca coníferas** ni madera tratada.
+- **⚠ El ahumado en frío no cuece nada, y es la técnica de más riesgo de este apartado.** Mantiene la carne por debajo de 30 °C en un medio sin oxígeno: exactamente las condiciones en las que *Clostridium botulinum* sale de la espora y produce toxina. Lo que lo impide no es la sal común, es el **nitrito** de la sal de cura o sal nitrificante (la industria trabaja del orden de 120 ppm de nitrito sódico en productos curados). **Sin sal nitrificante no ahúmes en frío.** Ahúma en caliente por encima de 60 °C, que cuece aunque conserve menos, o seca al aire como la cecina, que es la técnica segura de esta tabla.
 - **Pemmican:** seca la carne magra hasta que se quiebre (no que se doble), muélela, funde y cuela el sebo, y mezcla **1:1 en peso**. Salen unas **430-450 kcal/100 g** con el 70-80 % de las calorías en forma de grasa: exactamente lo que corrige el defecto de la carne salvaje. Dura años seco.
 - **⚠ Botulismo.** *Clostridium botulinum* prolifera sin oxígeno en medio poco ácido (pH >4,6): carne, legumbre, espárrago, champiñón. **Hervir a 100 °C no mata la espora**; hace falta autoclave. **Sin autoclave, no envases carne ni verdura en tarro**: sala, seca o encurte en vinagre al 5 %. La toxina no huele ni sabe. Tarro abombado, con burbujas o que sale a presión: tirar sin probar.
 

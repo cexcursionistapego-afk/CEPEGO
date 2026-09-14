@@ -34,23 +34,27 @@ Lo que se deduce de esto es sencillo y conviene tomárselo en serio:
 | «La cocción concentra las biotoxinas» | *retirada en esta revisión* | **CORREGIDA** | No se pudo sostener; sustituida por que el caldo queda igual de tóxico |
 | Anti-isla del inversor fotovoltaico | EN 50549 obliga a desconectar en segundos | Verificada en parte | EN 50549 sí impone anti-isla, con desconexión típica ≤ 2 s. **El artículo concreto del reglamento español no se ha verificado**, y se ha retirado esa atribución |
 | Autonomía real de la red móvil | horas, no días | Verificada en parte | Apagón ibérico del 28-IV-2025. La cifra nominal de 4-8 h es de especificación |
-| Escalas NOAA G, S y R | frecuencias por ciclo de 11 años | Verificada en parte | G1-G3 por fuente secundaria; **G4 y G5 no verificables** con el acceso disponible |
-| Nevera 4 h, congelador 24-48 h | afirmado | Sin verificar en esta pasada | Pendiente del consejo |
-| Insulina 28 días a temperatura ambiente | afirmado | Sin verificar en esta pasada | Pendiente; consúltalo con tu farmacia |
-| Botulismo: pH y autoclave en conservas | afirmado | Sin verificar en esta pasada | Pendiente del consejo |
-| Salazón, cecina y ahumado en frío | tiempos y concentraciones | Sin verificar en esta pasada | **El ahumado en frío sin curado con nitrito es la técnica de más riesgo de la sección 4** |
-| Marco legal de §5 | arts. 20.4 y 21.1 CP, Reglamento de Armas, Orden de 1994 | Sin verificar en esta pasada | La propia sección ya retiró un artículo que no pudo sostener |
+| Escalas NOAA G, S y R | frecuencias por ciclo de 11 años | Verificada en parte | Confirmados G1 (1.700/ciclo), G2 (~360 días), G3 (~130 días) y **G5 (~4 por ciclo)**. **La frecuencia de G4 sigue sin confirmar** |
+| Nevera 4 h, congelador 24-48 h | 4 h; 48 h lleno, 24 h medio | **Verificada** | USDA y FoodSafety.gov dan exactamente esas cifras, con la puerta cerrada |
+| Insulina en uso: 28 días | 28 días entre 15 y 30 °C; nunca congelar | **Verificada** | Indicación de fabricantes: en uso, hasta 28 días por debajo de 30 °C. Congelada se destruye |
+| Botulismo en conservas | pH > 4,6 exige autoclave a 116-121 °C; hervir a 100 °C no mata la espora | **Verificada** | pH 4,6 es el umbral reconocido; los alimentos poco ácidos exigen olla a presión a 240-250 °F (116-121 °C), inalcanzable en baño de agua |
+| Ahumado en frío | decía «peligroso sin salazón previa» | **CORREGIDA** | La sal común no basta: lo que inhibe a *C. botulinum* es el **nitrito** de la sal de cura, del orden de 120 ppm en la industria. El frío mantiene justo el medio en que la espora germina. Fila y aviso rehechos |
+| Salazón y cecina: tiempos y concentraciones | 200-250 g/L de salmuera, 3-7 días, HR < 60 % | Sin verificar | Pendiente |
+| Ilegalidad de lazo y cepo en España | Ley 42/2007, art. 65.3 y Anexo VII | **Verificada** | El art. 65.3 prohíbe los procedimientos masivos o no selectivos del Anexo VII; las comunidades autónomas pueden autorizar excepciones |
+| Legítima defensa, art. 20.4 CP | agresión ilegítima, necesidad racional del medio, falta de provocación suficiente | **Verificada** | Los tres requisitos, con el matiz confirmado de que la «necesidad racional» no es igualdad de armas sino racionalidad según las circunstancias |
+| Eximente incompleta, art. 21.1 CP | opera si falta alguno de los otros dos requisitos; rebaja de uno o dos grados | **Verificada** | Confirmado, y añadida la consecuencia que faltaba: sin agresión ilegítima no hay eximente ni completa ni incompleta |
+| Spray de defensa personal | Orden de 3 de octubre de 1994 y aprobación del Ministerio de Sanidad con informe de la CIPAE | **Verificada** | BOE-A-1994-21767. Venta en armerías a mayores de edad, informe de la CIPAE en 30 días y prohibición expresa de venta por catálogo |
+| Resto del marco legal de §5 | RD 137/1993 art. 149, BOE-A-2025-387, licencias B, D y E | Sin verificar | Pendiente |
 | Real decreto de respaldo de telecos, 2026 | citado como apoyo secundario | **No verificable** | Posterior al corte de conocimiento y con las fuentes bloqueadas |
 
-### 7.3 Lo que no hemos podido verificar, dicho sin adornos
+### 7.3 Lo que sigue sin verificar, dicho sin adornos
 
-Cinco cosas quedan pendientes, y las dos primeras son las que pediríamos confirmar antes de repartir el manual:
+Tras la última pasada quedan **cuatro** puntos abiertos. Ninguno de ellos sostiene una recomendación que pueda matar a nadie por sí solo, pero conviene saber cuáles son:
 
-1. **El bloque de conservación de carne de §4.8.** Tiempos de salazón, condiciones de cecina y sobre todo el **ahumado en frío**, que sin curado con nitrito puede permitir desarrollo de *Clostridium botulinum*. Trátalo como orientación histórica, no como protocolo sanitario.
-2. **El umbral de pH y las condiciones de autoclave para conservas caseras.** La advertencia general —no envases alimentos de baja acidez sin autoclave— es sólida y basta para no matar a nadie. Las cifras concretas, no confirmadas.
-3. **Las referencias legales de §5**, que no se han vuelto a comprobar en esta pasada, aunque la sección ya corrigió dos errores por su cuenta.
-4. **Las frecuencias de G4 y G5** en la tabla de escalas NOAA.
-5. **El real decreto de 2026 sobre respaldo eléctrico de telecomunicaciones**, que se cita como apoyo y no como base de ningún argumento.
+1. **Los tiempos y concentraciones de salazón y cecina de §4.8.** La concentración de salmuera, los días de curado y la humedad relativa son valores de práctica tradicional que no se han confirmado contra una fuente técnica. El riesgo mayor de ese apartado —el ahumado en frío— sí se ha corregido: exige sal nitrificante, no sal común.
+2. **Parte del marco legal de §5**: el art. 149 del Reglamento de Armas, la Resolución de la Guardia Civil de 2024 sobre armeros y los límites concretos de las licencias B, D y E. Lo esencial de la sección —los arts. 20.4 y 21.1 del Código Penal y el régimen del spray de defensa— sí está verificado, igual que la ilegalidad de lazos y cepos de §4.
+3. **La frecuencia de las tormentas G4** en la tabla de escalas NOAA. Las otras cuatro están confirmadas.
+4. **El real decreto de 2026 sobre respaldo eléctrico de telecomunicaciones**, posterior al corte de conocimiento disponible y con las fuentes oficiales bloqueadas. Se cita como apoyo, nunca como base de un argumento.
 
 ### 7.4 Fuentes, por secciones
 
@@ -58,9 +62,9 @@ Cinco cosas quedan pendientes, y las dos primeras son las que pediríamos confir
 
 **§2. Preparación física.** Ecuación de Pandolf y modelos derivados de coste metabólico de la marcha con carga. Literatura de aclimatación al calor y de adaptación al frío. Datos de pérdida de masa muscular y fuerza con la edad. Fisiología del límite de aprovechamiento proteico (*rabbit starvation*).
 
-**§3. Agua, calor, energía y comida.** CDC, *How to Make Water Safe in an Emergency* (hervido y desinfección con cloro). EPA, *Emergency Disinfection of Drinking Water*. OMS, formulación de sales de rehidratación oral y receta casera. OSHA y NIOSH, límites de exposición y tablas de efectos del monóxido de carbono. Especificaciones de fabricante de filtros de membrana de fibra hueca. Protocolo SODIS de desinfección solar. Norma **EN 50549** sobre conexión de instalaciones de generación en paralelo con redes de distribución (protección anti-isla).
+**§3. Agua, calor, energía y comida.** CDC, *How to Make Water Safe in an Emergency* (hervido y desinfección con cloro). EPA, *Emergency Disinfection of Drinking Water*. OMS, formulación de sales de rehidratación oral y receta casera. OSHA y NIOSH, límites de exposición y tablas de efectos del monóxido de carbono. Especificaciones de fabricante de filtros de membrana de fibra hueca. Protocolo SODIS de desinfección solar. USDA y FoodSafety.gov, seguridad alimentaria durante cortes de suministro. Fichas de almacenamiento de insulina de los fabricantes y de la FDA. Norma **EN 50549** sobre conexión de instalaciones de generación en paralelo con redes de distribución (protección anti-isla).
 
-**§4. Obtención de alimento.** USDA/FSIS, guía de prevención y control de *Trichinella* y temperaturas de cocción de carne de caza. Estudios de prevalencia de *Trichinella spiralis* y *T. britovi* en jabalí en España. FAO, *Aquatic biotoxins* (termoestabilidad de las toxinas PSP, DSP y ASP). Ley 42/2007 del Patrimonio Natural y de la Biodiversidad, régimen de métodos de captura prohibidos.
+**§4. Obtención de alimento.** USDA/FSIS, guía de prevención y control de *Trichinella* y temperaturas de cocción de carne de caza. Estudios de prevalencia de *Trichinella spiralis* y *T. britovi* en jabalí en España. FAO, *Aquatic biotoxins* (termoestabilidad de las toxinas PSP, DSP y ASP). Ley 42/2007 del Patrimonio Natural y de la Biodiversidad, art. 65.3 y Anexo VII, métodos masivos o no selectivos prohibidos. USDA/FSIS sobre *Clostridium botulinum* y botulismo. Servicios de extensión universitaria (Clemson, Penn State) sobre el umbral de pH 4,6 y las condiciones de autoclave en conservas caseras. Literatura sobre el papel del nitrito en el control del botulismo en carnes curadas.
 
 **§5. Seguridad y comunidad.** Disaster Research Center de la Universidad de Delaware (fundado en 1963 en Ohio State, en Delaware desde 1985), *Preliminary Papers*. E. L. Quarantelli, *Common Misconceptions about Disasters: Panic, the "Disaster Syndrome," and Looting*. K. Tierney, C. Bevc y E. Kuligowski, *Metaphors Matter: Disaster Myths, Media Frames, and Their Consequences in Hurricane Katrina*, Annals of the AAPSS, 2006. R. Solnit, *A Paradise Built in Hell*, 2009. Recuentos oficiales de los apagones de Nueva York de 1965, 1977 y 2003 recopilados en NYCdata (CUNY Baruch College). Environment Canada y literatura médica sobre la tormenta de hielo de Quebec de 1998. Cifras oficiales japonesas sobre marzo de 2011. Red Eléctrica, Gobierno de España y ENTSO-E sobre el apagón ibérico del 28 de abril de 2025. Desmentidos de *The Times-Picayune* y NPR, *Anatomy of a Rumor*, sobre Katrina. Ley Orgánica 10/1995 del Código Penal, arts. 20.4 y 21.1. Reglamento de Armas, RD 137/1993, régimen de licencias, custodia y traslado (art. 149). Resolución de la Dirección General de la Guardia Civil de 4 de diciembre de 2024, medidas mínimas de seguridad de armeros en domicilios (BOE-A-2025-387). Orden de 3 de octubre de 1994, sprays de defensa de venta permitida en armerías.
 

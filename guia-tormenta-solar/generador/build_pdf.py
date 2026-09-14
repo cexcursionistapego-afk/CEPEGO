@@ -99,8 +99,7 @@ COVER = """<section class="cover">
  </div>
 
  <div class="cover__by">
-  <span class="k">Redacción y edición</span>
-  <span class="n">Juan Salvador Moll Garcia</span>
+  <span class="n"><span class="lead">Creado y organizado por</span> Juan Salvador Moll Garcia</span>
   <span class="p">Centre Excursionista de Pego · Pego, Alacant</span>
  </div>
  <div class="cover__foot">
@@ -184,7 +183,7 @@ COLOFON = """<section class="colophon">
   <div class="s">Manual de emergencia ante un apagón prolongado provocado por una tormenta
    solar severa</div>
   <div class="hr"></div>
-  <div class="n">Juan Salvador Moll Garcia</div>
+  <div class="n"><span class="lead">Creado y organizado por</span> Juan Salvador Moll Garcia</div>
   <div class="p">Centre Excursionista de Pego · Pego, Alacant<br>
    Revisión 1.0 · septiembre de 2026<br>
    Para imprimir a doble cara y guardar con la documentación de casa</div>

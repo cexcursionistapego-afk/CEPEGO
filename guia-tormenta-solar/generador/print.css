@@ -47,7 +47,8 @@ p,li,td,th,dd{orphans:2;widows:2}
 .cover__by{border-top:1.2pt solid var(--ink);padding-top:8pt;margin-bottom:9pt}
 .cover__by .k{display:block;font-family:var(--f-mono);font-size:7pt;letter-spacing:.13em;
   text-transform:uppercase;color:var(--ember);margin-bottom:5pt}
-.cover__by .n{display:block;font-family:var(--f-disp);font-weight:700;font-size:17pt;
+.cover__by .lead,.endplate .lead{font-weight:500;color:var(--muted)}
+.cover__by .n{display:block;font-family:var(--f-disp);font-weight:700;font-size:14.5pt;
   letter-spacing:-.015em;color:var(--ink);margin-bottom:3pt}
 .cover__by .p{display:block;font-family:var(--f-disp);font-size:9pt;color:var(--muted)}
 .prio{margin:14pt 0 0}
@@ -59,7 +60,7 @@ p,li,td,th,dd{orphans:2;widows:2}
 .endplate .s{font-family:var(--f-disp);font-size:9.6pt;color:var(--muted);line-height:1.4;
   max-width:118mm;margin:0 auto 12pt}
 .endplate .hr{width:52pt;height:1.2pt;background:var(--ember);margin:0 auto 11pt}
-.endplate .n{font-family:var(--f-disp);font-weight:700;font-size:15pt;color:var(--ink);
+.endplate .n{font-family:var(--f-disp);font-weight:700;font-size:13.5pt;color:var(--ink);
   letter-spacing:-.012em;margin-bottom:4pt}
 .endplate .p{font-family:var(--f-mono);font-size:7.8pt;color:var(--muted);line-height:1.6}
 .cover__foot{border-top:.7pt solid var(--rule);padding-top:7pt;
