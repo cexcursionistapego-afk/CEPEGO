@@ -29,3 +29,11 @@ especulativo; las recomendaciones operativas son criterio. No sustituye a formac
 presencial en primeros auxilios, ni a la licencia de armas o de caza, ni al consejo
 médico. Las técnicas de trampeo y caza de la sección 4 están reguladas o prohibidas
 en España y en casi toda la UE fuera de una emergencia declarada.
+
+## Versión protegida
+
+`semanas-sin-red-protegido.pdf` es la misma guía con permisos de PDF que bloquean copiar texto, editar y extraer páginas en lectores que respetan esos permisos (Adobe Reader, Vista Previa, la mayoría de apps móviles). Se abre sin contraseña y la búsqueda funciona con normalidad.
+
+**Límite real, sin adornos:** esto no es cifrado de contenido ni DRM. Es una señal que los lectores conformes respetan, pero que herramientas comunes —incluida la propia librería con la que se generó este PDF— pueden ignorar y extraer el texto igualmente. Tampoco existe forma de impedir una captura de pantalla desde ningún formato de documento: es una función del sistema operativo del lector, no del archivo. Trátalo como una barrera de cortesía, no como seguridad real.
+
+`semanas-sin-red.pdf` es el máster sin proteger; es el que hay que editar para futuras revisiones. La contraseña de propietario de la versión protegida (necesaria para quitarle los permisos con una herramienta como Acrobat) no se guarda en este repositorio.
