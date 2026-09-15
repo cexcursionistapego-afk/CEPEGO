@@ -210,6 +210,16 @@
     return { va: va, es: t };
   }
 
+  // La píndola porta un triangle d'avís, però si el que avisen són
+  // tempestes ix un llamp: es reconeix abans de llegir res.
+  var ICO_WARN = '<path fill="currentColor" d="M8 1.2 15.2 14H.8zM7.1 6v4h1.8V6zm0 5.2v1.6h1.8v-1.6z"/>';
+  var ICO_BOLT = '<path fill="currentColor" d="M9.6 1 3.6 9.2h3.3L6.2 15 12.4 6.6H8.9z"/>';
+  function alertIcon(list) {
+    var tempesta = (list || []).some(function (t) { return /tormenta/i.test(String(t)); });
+    return '<svg class="fc-alert__i" viewBox="0 0 16 16" aria-hidden="true">' +
+      (tempesta ? ICO_BOLT : ICO_WARN) + '</svg>';
+  }
+
   // Un dia pot portar més d'un avís alhora (ací és molt comú "pluges" i
   // "tempestes" el mateix dia). La fila es pinta del color del més greu.
   var RANK = { green: 0, yellow: 1, orange: 2, red: 3 };
@@ -330,7 +340,7 @@
       var tr = joinAlerts(d.alerts);
       alertRow = '<a class="fc-alert fc-alert--' + color + '" href="' + esc(avisosUrl(idx)) + '" ' +
         'target="_blank" rel="noopener" title="' + esc(AVISOS_TITLE) + '">' +
-        '<svg class="fc-alert__i" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1.2 15.2 14H.8zM7.1 6v4h1.8V6zm0 5.2v1.6h1.8v-1.6z"/></svg>' +
+        alertIcon(d.alerts) +
         '<span>' + bi(esc(tr.va), esc(tr.es)) + '</span>' +
         '<span class="fc-alert__go" aria-hidden="true">&rsaquo;</span></a>';
     }
