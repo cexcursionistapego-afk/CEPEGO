@@ -157,7 +157,16 @@ function parseAemet(rawHtml) {
     }
   }
 
-  // --- Avisos: un <a title="..."> per cel·la amb avís, només als primers dies ---
+  // --- Avisos: una cel·la per dia, amb un <a title="..."> per cada avís ---
+  //
+  // Un mateix dia pot portar més d'un avís (el cas típic ací: pluges i
+  // tempestes alhora), i llavors la cel·la porta dos <a>. Es recorren les
+  // cel·les una per una i de cada una s'agarren TOTS els títols: abans només
+  // s'agarrava el primer i el segon avís desapareixia de la web.
+  //
+  // Es manté una entrada per cel·la encara que estiga buida (els dies més
+  // llunyans no porten avís), així l'índex de la cel·la segueix casant amb
+  // el del dia i un dia sense avís no descol·loca els de darrere.
   const alerts = [];
   {
     const secStart = table.indexOf('Avisos');
@@ -165,9 +174,18 @@ function parseAemet(rawHtml) {
     const rowEnd = rowStart === -1 ? -1 : table.indexOf('</tr>', rowStart);
     if (rowStart !== -1) {
       const row = table.slice(rowStart, rowEnd);
-      const re = /<td class="comunes alinear_texto_centro"[^>]*>\s*<a[^>]*title="([^"]*)"/g;
-      let m;
-      while ((m = re.exec(row)) !== null) alerts.push(decodeEntities(m[1]).trim());
+      const cellRe = /<td class="comunes alinear_texto_centro"[^>]*>([\s\S]*?)<\/td>/g;
+      let cell;
+      while ((cell = cellRe.exec(row)) !== null) {
+        const titles = [];
+        const linkRe = /<a[^>]*title="([^"]*)"/g;
+        let link;
+        while ((link = linkRe.exec(cell[1])) !== null) {
+          const t = decodeEntities(link[1]).trim();
+          if (t && titles.indexOf(t) === -1) titles.push(t);
+        }
+        alerts.push(titles);
+      }
     }
   }
 
@@ -219,7 +237,7 @@ function parseAemet(rawHtml) {
       precip_max: precipDefined.length ? Math.max(...precipDefined) : null,
       temp_min: tempPairs[i] ? tempPairs[i].min : null,
       temp_max: tempPairs[i] ? tempPairs[i].max : null,
-      alert: alerts[i] || null,
+      alerts: alerts[i] || [],
     };
   });
   return { days: assembledDays, periods };

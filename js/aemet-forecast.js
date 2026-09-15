@@ -177,8 +177,14 @@
       .replace(/Aviso amarillo/i, 'Avís groc')
       .replace(/Aviso naranja/i, 'Avís taronja')
       .replace(/Aviso rojo/i, 'Avís roig')
-      // Format "Nivell - Fenomen" (p.ex. "Bajo - Temperaturas máximas"),
-      // que és el que fa servir realment la pàgina de predicció municipal.
+      // Format "Nivell - Fenomen", que és el que fa servir realment la
+      // pàgina de predicció municipal. El nivell pot vindre com a color
+      // ("Amarillo - Lluvias") o com a paraula ("Bajo - Temperaturas
+      // máximas"): alertColor() reconeix les dos formes, així que ací
+      // també s'han de traduir les dos.
+      .replace(/^Amarillo\b/i, 'Groc')
+      .replace(/^Naranja\b/i, 'Taronja')
+      .replace(/^Rojo\b/i, 'Roig')
       .replace(/^Bajo\b/i, 'Baix')
       .replace(/^Moderado\b/i, 'Moderat')
       .replace(/^Importante\b/i, 'Important')
@@ -202,6 +208,53 @@
       .replace(/Niebla/i, 'Boira')
       .replace(/Costeros?/i, 'Costaner');
     return { va: va, es: t };
+  }
+
+  // Un dia pot portar més d'un avís alhora (ací és molt comú "pluges" i
+  // "tempestes" el mateix dia). La fila es pinta del color del més greu.
+  var RANK = { green: 0, yellow: 1, orange: 2, red: 3 };
+  function worstColor(list) {
+    if (!list || !list.length) return null;
+    var pitjor = 'green';
+    list.forEach(function (t) {
+      var c = alertColor(t);
+      if (RANK[c] > RANK[pitjor]) pitjor = c;
+    });
+    return pitjor;
+  }
+
+  // Els avisos venen com "Nivell - Fenomen" ("Amarillo - Lluvias"). Quan
+  // n'hi ha dos del mateix nivell es diu el nivell una vegada i s'ajunten
+  // els fenòmens ("Groc - Pluges i tempestes"); si són de nivells distints
+  // es deixen sencers i separats, que si no es perdria quin és quin.
+  function joinAlerts(list) {
+    if (!list || !list.length) return { va: '', es: '' };
+    var trad = list.map(translateAlert);
+    if (trad.length === 1) return trad[0];
+    var parts = list.map(function (t) { return String(t).split(' - ')[0].trim().toLowerCase(); });
+    var mateixNivell = parts.every(function (p) { return p === parts[0]; });
+    if (!mateixNivell) {
+      return {
+        va: trad.map(function (x) { return x.va; }).join(' · '),
+        es: trad.map(function (x) { return x.es; }).join(' · ')
+      };
+    }
+    function fenomen(txt) {
+      var i = txt.indexOf(' - ');
+      return i === -1 ? txt : txt.slice(i + 3).trim();
+    }
+    function ajunta(arr, conj) {
+      var f = arr.map(fenomen).map(function (x, i) {
+        return i === 0 ? x : x.charAt(0).toLowerCase() + x.slice(1);
+      });
+      return f.length > 1 ? f.slice(0, -1).join(', ') + ' ' + conj + ' ' + f[f.length - 1] : f[0];
+    }
+    var nivellVa = trad[0].va.indexOf(' - ') === -1 ? '' : trad[0].va.split(' - ')[0].trim() + ' - ';
+    var nivellEs = trad[0].es.indexOf(' - ') === -1 ? '' : trad[0].es.split(' - ')[0].trim() + ' - ';
+    return {
+      va: nivellVa + ajunta(trad.map(function (x) { return x.va; }), 'i'),
+      es: nivellEs + ajunta(trad.map(function (x) { return x.es; }), 'y')
+    };
   }
 
   // Enllaç a la pàgina d'avisos d'AEMET, que és on estan les hores exactes de
@@ -268,13 +321,13 @@
       bar = '<span class="fc-bar"></span>';
     }
 
-    var color = d.alert ? alertColor(d.alert) : null;
+    var color = worstColor(d.alerts);
     var alertRow = '';
     // Només es pinta l'avís quan n'hi ha un de real. AEMET marca "Sin
     // peligro" la major part dels dies i repetir-ho set vegades només fa
     // soroll: si no ix res, és que no hi ha avís.
     if (color && color !== 'green') {
-      var tr = translateAlert(d.alert);
+      var tr = joinAlerts(d.alerts);
       alertRow = '<a class="fc-alert fc-alert--' + color + '" href="' + esc(avisosUrl(idx)) + '" ' +
         'target="_blank" rel="noopener" title="' + esc(AVISOS_TITLE) + '">' +
         '<svg class="fc-alert__i" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1.2 15.2 14H.8zM7.1 6v4h1.8V6zm0 5.2v1.6h1.8v-1.6z"/></svg>' +
