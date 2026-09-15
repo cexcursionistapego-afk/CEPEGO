@@ -449,7 +449,7 @@ def build(g):
     <div class="kicker center-k"><span class="va">Previsió pròxims dies</span><span class="es">Previsión próximos días</span></div>
     <div id="aemet-forecast" class="reveal"></div>
     <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
-      <img src="{IMG}aemet-logo.jpg" alt="AEMET" class="avamet-credit__logo">
+      <img src="{IMG}aemet-logo.png" alt="AEMET" class="avamet-credit__logo">
     </p>
   </div>
 </section>
@@ -462,8 +462,8 @@ def build(g):
       <p class="lead"><span class="va">El Sol també té el seu temps. Quan hi ha una tempesta geomagnètica (escala G), el GPS i la ràdio poden fallar a la muntanya.</span><span class="es">El Sol también tiene su tiempo. Cuando hay una tormenta geomagnética (escala G), el GPS y la radio pueden fallar en la montaña.</span></p>
     </div>
     <div id="solar-now" class="reveal"></div>
-    <p class="note center avamet-credit--narrow" style="margin-top:14px;font-size:.8rem">
-      <span class="va">Dades del </span><span class="es">Datos del </span><a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener">NOAA Space Weather Prediction Center</a>
+    <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
+      <a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener"><img src="{IMG}swpc-logo.png" alt="NOAA Space Weather Prediction Center" class="avamet-credit__logo avamet-credit__logo--swpc"></a>
     </p>
   </div>
 </section>

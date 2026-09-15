@@ -21,25 +21,54 @@
   /* --------------------------------------------------------- escala G
      NOAA dona G0..G5. Ací cada nivell porta el nom, el color (un dels
      quatre de la pàgina) i què implica per a qui va a la muntanya. */
+  // imp: els efectes que descriu la mateixa NOAA per a cada nivell
+  // (swpc.noaa.gov/noaa-scales-explanation), resumits: [etiqueta va, es,
+  // text va, text es]. A partir de G1 els animals migratoris ja se'n
+  // ressenten, que és de les coses que més cride l'atenció de l'escala.
   var G = [
     { c: 'green',  va: 'Sense tempesta',   es: 'Sin tormenta',
       dVa: 'El camp magnètic de la Terra està tranquil. Res a tindre en compte.',
       dEs: 'El campo magnético de la Tierra está tranquilo. Nada a tener en cuenta.' },
     { c: 'yellow', va: 'Tempesta menor',   es: 'Tormenta menor',
       dVa: 'Pot haver-hi xicotetes errades de GPS i la ràdio HF va una miqueta pitjor. Aurores només a latituds molt altes.',
-      dEs: 'Puede haber pequeños fallos de GPS y la radio HF va algo peor. Auroras solo en latitudes muy altas.' },
+      dEs: 'Puede haber pequeños fallos de GPS y la radio HF va algo peor. Auroras solo en latitudes muy altas.',
+      imp: [
+        ['Xarxa elèctrica', 'Red eléctrica', 'fluctuacions dèbils.', 'fluctuaciones débiles.'],
+        ['Satèl·lits i GPS', 'Satélites y GPS', 'afecció menor.', 'afección menor.'],
+        ['Aus i animals migratoris', 'Aves y animales migratorios', 'ja se’n ressenten a partir d’este nivell.', 'ya se resienten a partir de este nivel.']
+      ] },
     { c: 'orange', va: 'Tempesta moderada', es: 'Tormenta moderada',
       dVa: 'El GPS pot perdre precisió a estones i la ràdio HF falla a latituds altes.',
-      dEs: 'El GPS puede perder precisión a ratos y la radio HF falla en latitudes altas.' },
+      dEs: 'El GPS puede perder precisión a ratos y la radio HF falla en latitudes altas.',
+      imp: [
+        ['Xarxa elèctrica', 'Red eléctrica', 'avisos de tensió a latituds altes.', 'avisos de tensión en latitudes altas.'],
+        ['Satèl·lits i GPS', 'Satélites y GPS', 'pot caldre corregir l’orientació dels satèl·lits.', 'puede hacer falta corregir la orientación de los satélites.'],
+        ['Aus i animals migratoris', 'Aves y animales migratorios', 'afectats. Aurores visibles més al sud.', 'afectados. Auroras visibles más al sur.']
+      ] },
     { c: 'orange', va: 'Tempesta forta',   es: 'Tormenta fuerte',
       dVa: 'El GPS pot fallar durant hores i la ràdio HF queda tocada. Si tires de navegador a la muntanya, porta mapa i brúixola.',
-      dEs: 'El GPS puede fallar durante horas y la radio HF queda tocada. Si tiras de navegador en la montaña, lleva mapa y brújula.' },
+      dEs: 'El GPS puede fallar durante horas y la radio HF queda tocada. Si tiras de navegador en la montaña, lleva mapa y brújula.',
+      imp: [
+        ['Xarxa elèctrica', 'Red eléctrica', 'cal corregir tensions i salten falses alarmes.', 'hay que corregir tensiones y saltan falsas alarmas.'],
+        ['Satèl·lits i GPS', 'Satélites y GPS', 'navegació per satèl·lit intermitent.', 'navegación por satélite intermitente.'],
+        ['Aus i animals migratoris', 'Aves y animales migratorios', 'afectats. Aurores encara més al sud.', 'afectados. Auroras aún más al sur.']
+      ] },
     { c: 'red',    va: 'Tempesta severa',  es: 'Tormenta severa',
       dVa: 'GPS i ràdio HF poc fiables durant hores. No et refies del mòbil ni del rellotge GPS per a orientar-te.',
-      dEs: 'GPS y radio HF poco fiables durante horas. No te fíes del móvil ni del reloj GPS para orientarte.' },
+      dEs: 'GPS y radio HF poco fiables durante horas. No te fíes del móvil ni del reloj GPS para orientarte.',
+      imp: [
+        ['Xarxa elèctrica', 'Red eléctrica', 'problemes estesos de control de tensió.', 'problemas extendidos de control de tensión.'],
+        ['Satèl·lits i GPS', 'Satélites y GPS', 'navegació degradada durant hores.', 'navegación degradada durante horas.'],
+        ['Aus i animals migratoris', 'Aves y animales migratorios', 'afectats. Aurores a latituds mitjanes.', 'afectados. Auroras en latitudes medias.']
+      ] },
     { c: 'red',    va: 'Tempesta extrema', es: 'Tormenta extrema',
       dVa: 'Situació excepcional: GPS i ràdio poden estar caiguts, i fins i tot la xarxa elèctrica se\'n pot ressentir.',
-      dEs: 'Situación excepcional: GPS y radio pueden estar caídos, e incluso la red eléctrica puede resentirse.' }
+      dEs: 'Situación excepcional: GPS y radio pueden estar caídos, e incluso la red eléctrica puede resentirse.',
+      imp: [
+        ['Xarxa elèctrica', 'Red eléctrica', 'apagades generals i danys als transformadors.', 'apagones generales y daños en los transformadores.'],
+        ['Satèl·lits i GPS', 'Satélites y GPS', 'navegació degradada durant dies.', 'navegación degradada durante días.'],
+        ['Ràdio HF', 'Radio HF', 'pot ser impossible durant un o dos dies.', 'puede ser imposible durante uno o dos días.']
+      ] }
   ];
   function gInfo(n) { return (n != null && G[n]) ? G[n] : null; }
   function gLabel(n) { return n ? 'G' + n : 'G'; }
@@ -69,10 +98,22 @@
       esc(gLabel(n)) + '</span>';
   }
 
+  // NOAA marca l'hora en UTC. Ací es passa a l'hora del rellotge de qui
+  // mira la pàgina, que en estiu va dos hores per davant d'UTC i en hivern
+  // una: fent-ho amb Date, el canvi d'hora ja se'l menja el navegador.
+  function localTime(data, hora) {
+    var d = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(data || ''));
+    var h = /^(\d{1,2}):(\d{2})/.exec(String(hora || ''));
+    if (!d || !h) return null;
+    var t = new Date(Date.UTC(+d[1], +d[2] - 1, +d[3], +h[1], +h[2]));
+    if (isNaN(t.getTime())) return null;
+    return ('0' + t.getHours()).slice(-2) + ':' + ('0' + t.getMinutes()).slice(-2);
+  }
+
   function nowHTML(a, vent) {
     var info = gInfo(a.g);
     var color = info ? info.c : 'green';
-    var hora = a.hora ? String(a.hora).slice(0, 5) : null;
+    var hora = localTime(a.data, a.hora);
     return '<div class="solar-now solar-now--' + color + '">' +
       '<div class="solar-now__head">' +
         badge(a.g, 'big') +
@@ -82,25 +123,40 @@
         '</div>' +
       '</div>' +
       (info ? '<p class="solar-now__desc">' + bi(info.dVa, info.dEs) + '</p>' : '') +
+      impactsHTML(info) +
       '<div class="solar-now__meta">' +
         secondary(a) +
-        (hora ? '<span class="solar-now__time">' + bi('Dada de les ', 'Dato de las ') + esc(hora) + ' UTC</span>' : '') +
+        (hora ? '<span class="solar-now__time">' + bi('Dada de les ', 'Dato de las ') + esc(hora) + ' h</span>' : '') +
       '</div>' +
       windHTML(vent) +
       '</div>';
   }
 
-  // R i S no es noten ací baix com la G, però formen part de l'escala de
-  // NOAA i donen context: es mostren xicotets i només amb el nivell.
+  // Els efectes que descriu NOAA per al nivell que hi ha ara mateix. Amb
+  // G0 no se'n pinta cap: no hi ha res a contar i la targeta queda neta.
+  function impactsHTML(info) {
+    if (!info || !info.imp || !info.imp.length) return '';
+    return '<ul class="solar-imp">' + info.imp.map(function (x) {
+      return '<li><b>' + bi(x[0], x[1]) + ':</b> ' + bi(x[2], x[3]) + '</li>';
+    }).join('') +
+      '<li class="solar-imp__more"><a href="https://www.swpc.noaa.gov/noaa-scales-explanation" target="_blank" rel="noopener">' +
+      bi('Què vol dir cada nivell (NOAA)', 'Qué significa cada nivel (NOAA)') + '</a></li></ul>';
+  }
+
+  // R i S no es noten ací baix tant com la G, però completen l'escala de
+  // NOAA. Es diu la cosa i com està ("Ràdio HF: sense apagades"), no el codi
+  // a seques: "R0" tot sol no li diu res a ningú. El codi queda al title.
   function secondary(a) {
-    function pill(lletra, n, va, es) {
-      var txt = (n != null && n > 0) ? lletra + n : lletra + '0';
-      return '<span class="solar-mini" title="' + esc(va + ' · ' + es) + '">' +
-        '<b>' + esc(txt) + '</b> ' + bi(va, es) + '</span>';
+    function pill(lletra, n, quiVa, quiEs, beVa, beEs, malVa, malEs) {
+      var txt = n == null
+        ? bi('sense dades', 'sin datos')
+        : (n > 0 ? bi(malVa + ' ' + lletra + n, malEs + ' ' + lletra + n) : bi(beVa, beEs));
+      return '<span class="solar-mini" title="' + esc(lletra + (n == null ? '?' : n) + ' · escala NOAA') + '">' +
+        bi(quiVa, quiEs) + ' <b>' + txt + '</b></span>';
     }
     return '<span class="solar-minis">' +
-      pill('R', a.r, 'apagades de ràdio', 'apagones de radio') +
-      pill('S', a.s, 'radiació solar', 'radiación solar') +
+      pill('R', a.r, 'Ràdio HF:', 'Radio HF:', 'sense apagades', 'sin apagones', 'apagades', 'apagones') +
+      pill('S', a.s, 'Radiació solar:', 'Radiación solar:', 'normal', 'normal', 'tempesta', 'tormenta') +
       '</span>';
   }
 

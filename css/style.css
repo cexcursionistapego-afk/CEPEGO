@@ -301,8 +301,11 @@ html[data-lang="es"] .va{display:none}
 .note{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:18px 22px;color:var(--muted);font-size:.94rem}
 .avamet-credit{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
 .avamet-credit--narrow{max-width:760px;margin-left:auto;margin-right:auto;padding:12px 18px}
-.avamet-credit--narrow .avamet-credit__logo{height:38px}
+/* A 38px el "Agencia Estatal de Meteorologia" d'AEMET no es llegia. */
+.avamet-credit--narrow .avamet-credit__logo{height:52px}
 .avamet-credit__logo{height:48px;width:auto;border-radius:4px}
+/* El de NOAA son dos escuts redons, sense text xicotet: cap mes alt. */
+.avamet-credit--narrow .avamet-credit__logo--swpc{height:78px;border-radius:0}
 .avamet-credit__logo--avamet{height:80px}
 
 /* price row */
@@ -627,6 +630,10 @@ html[data-lang="es"] .va{display:none}
 .solar-now__kicker{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .solar-now__level{font-family:var(--font-display);font-size:clamp(1.3rem,3.2vw,1.7rem);font-weight:560;color:var(--ink);line-height:1.2}
 .solar-now__desc{margin:12px 22px 0;color:var(--muted);font-size:.95rem;line-height:1.5}
+.solar-imp{list-style:none;margin:12px 22px 0;padding:12px 0 0;border-top:1px solid var(--hair);
+  display:flex;flex-direction:column;gap:5px;font-size:.84rem;color:var(--muted);line-height:1.45}
+.solar-imp b{color:var(--ink);font-weight:600}
+.solar-imp__more{margin-top:3px;font-size:.78rem}
 .solar-now__meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:14px 22px 18px}
 .solar-minis{display:flex;flex-wrap:wrap;gap:8px}
 .solar-mini{background:var(--paper-2);border-radius:20px;padding:4px 10px;font-size:.72rem;color:var(--muted);white-space:nowrap}
@@ -652,6 +659,7 @@ html[data-lang="es"] .va{display:none}
 @media(max-width:480px){
   .solar-now__head{gap:12px;padding:16px 16px 0}
   .solar-now__desc{margin:10px 16px 0;font-size:.9rem}
+  .solar-imp{margin:10px 16px 0;font-size:.8rem}
   .solar-now__meta{padding:12px 16px 14px}
   .solar-now__time{margin-left:0}
   .solar-day{padding:12px 6px}
