@@ -204,6 +204,20 @@
       }).join('') + '</ol></div>';
   }
 
+  // Llegenda de G1 a G5 (G0 no es llista: no passa res). Ix de la mateixa
+  // taula G de dalt, així el nom i la descripció d'un nivell només estan
+  // escrits en un lloc.
+  function scaleHTML() {
+    return '<div class="solar-scale">' +
+      '<div class="solar-days__t">' + bi('Què vol dir cada nivell', 'Qué significa cada nivel') + '</div>' +
+      '<ul class="solar-scale__l">' + G.slice(1).map(function (info, i) {
+        return '<li class="solar-scale__i solar-scale__i--' + info.c + '">' +
+          '<span class="solar-badge solar-badge--' + info.c + '">G' + (i + 1) + '</span>' +
+          '<div><b>' + bi(info.va, info.es) + '</b>' +
+          '<span>' + bi(info.dVa, info.dEs) + '</span></div></li>';
+      }).join('') + '</ul></div>';
+  }
+
   function msgHTML(va, es) { return '<p class="fc-msg">' + bi(va, es) + '</p>'; }
 
   el.innerHTML = msgHTML('Carregant l’activitat solar…', 'Cargando la actividad solar…');
@@ -213,7 +227,7 @@
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (json) {
       if (!json || json.ok === false || !json.actual) throw new Error('bad response');
-      el.innerHTML = nowHTML(json.actual, json.vent, json.max24h) + daysHTML(json.dies || []);
+      el.innerHTML = nowHTML(json.actual, json.vent, json.max24h) + daysHTML(json.dies || []) + scaleHTML();
     })
     .catch(function () {
       el.innerHTML = msgHTML(

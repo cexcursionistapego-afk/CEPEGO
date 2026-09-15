@@ -660,6 +660,20 @@ html[data-lang="es"] .va{display:none}
 .solar-day__n{font-size:.76rem;color:var(--muted);line-height:1.3}
 .solar-day__p{display:flex;flex-direction:column;gap:2px;font-size:.66rem;color:var(--muted);margin-top:auto}
 .solar-day__p b{font-family:var(--font-mono);color:var(--ink)}
+
+/* Llegenda didactica de G1..G5, amb la mateixa forma que la d'avisos. */
+.solar-scale{max-width:760px;margin:clamp(20px,2.6vw,30px) auto 0}
+.solar-scale__l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.solar-scale__i{--ss-bg:#eaf3e6;--ss-c:#3f6b2f;display:flex;align-items:flex-start;gap:11px;
+  background:var(--ss-bg);border-left:3px solid var(--ss-c);border-radius:var(--r);padding:11px 14px}
+.solar-scale__i--yellow{--ss-bg:#fbf0d2;--ss-c:#8a6d0c}
+.solar-scale__i--orange{--ss-bg:#fbe4d2;--ss-c:#9a4a10}
+.solar-scale__i--red{--ss-bg:#fbdcdc;--ss-c:#8f1d1d}
+/* Damunt del fons pastel de la fila, la pastilla es posa blanca per a que
+   el numero de nivell no es perda. */
+.solar-scale__i .solar-badge{background:var(--white);font-size:.82rem;padding:4px 9px}
+.solar-scale__i b{display:block;color:var(--ink);font-size:.86rem;margin-bottom:2px}
+.solar-scale__i div>span{font-size:.8rem;color:var(--muted);line-height:1.45}
 @media(max-width:480px){
   .solar-now__head{gap:12px;padding:16px 16px 0}
   .solar-now__desc{margin:10px 16px 0;font-size:.9rem}

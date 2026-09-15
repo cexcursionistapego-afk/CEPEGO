@@ -482,10 +482,10 @@ def build(g):
 '''
     meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'METEO',
         "El temps","El tiempo",
-        "Estacions meteorològiques a La Figuereta i a Pego connectades a la xarxa AVAMET, més la previsió del temps i els avisos d'alertes meteorològiques d'AEMET.","Estaciones meteorológicas en La Figuereta y en Pego conectadas a la red AVAMET, más la previsión del tiempo y los avisos de alertas meteorológicas de AEMET.",
+        "Estacions meteorològiques a La Figuereta i a Pego connectades a la xarxa AVAMET, la previsió del temps i els avisos d'alertes meteorològiques d'AEMET, i les tempestes solars de NOAA.","Estaciones meteorológicas en La Figuereta y en Pego conectadas a la red AVAMET, la previsión del tiempo y los avisos de alertas meteorológicas de AEMET, y las tormentas solares de NOAA.",
         pos='18%')+meteo_dash+footer()
     write("meteo.html", doc("El temps a Pego i la Figuereta | CEPEGO",
-        "Estacions meteorològiques del refugi La Figuereta i de Pego connectades a la xarxa AVAMET, i previsió AEMET.", meteo, path="meteo.html", extra_js=["js/meteo-dashboard.js","js/aemet-forecast.js","js/solar.js"]))
+        "Estacions meteorològiques del refugi La Figuereta i de Pego connectades a la xarxa AVAMET, previsió d'AEMET i activitat solar de NOAA.", meteo, path="meteo.html", extra_js=["js/meteo-dashboard.js","js/aemet-forecast.js","js/solar.js"]))
 
     # ============================================= RUTES
     routes=[("Circular Figuereta – Tossal","2,97 km","+154 m","673 m","facil","Fàcil","Fácil",
