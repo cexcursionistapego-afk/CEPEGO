@@ -106,7 +106,7 @@ COVER = """<section class="cover">
 
  <div class="cover__by">
   <span class="n"><span class="lead">Creado y organizado por</span> Juan Salvador Moll Garcia</span>
-  <span class="p">Mitjà natural, climatologia i supervivència</span>
+  <span class="p">Medio natural, climatología y supervivencia</span>
  </div>
  <div class="cover__foot">
   <span>Documento para imprimir y guardar en papel</span>
@@ -191,7 +191,7 @@ COLOFON = """<section class="colophon">
    solar severa</div>
   <div class="hr"></div>
   <div class="n"><span class="lead">Creado y organizado por</span> Juan Salvador Moll Garcia</div>
-  <div class="p">Mitjà natural, climatologia i supervivència<br>
+  <div class="p">Medio natural, climatología y supervivencia<br>
    Revisión 1.0 · septiembre de 2026<br>
    Para imprimir a doble cara y guardar con la documentación de casa</div>
  </div>
