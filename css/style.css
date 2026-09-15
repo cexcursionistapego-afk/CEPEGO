@@ -610,6 +610,54 @@ html[data-lang="es"] .va{display:none}
 .alert-legend__item--orange{--al-bg:#fbe4d2;--al-c:#9a4a10}
 .alert-legend__item--red{--al-bg:#fbdcdc;--al-c:#8f1d1d}
 
+/* ---------- Activitat solar (NOAA) ----------
+   Mateixos quatre colors que la llegenda d'avisos de dalt: les dos seccions
+   van juntes a meteo.html i han de llegir-se com una mateixa cosa. */
+.solar-badge{--sb-bg:#eaf3e6;--sb-c:#3f6b2f;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--sb-bg);color:var(--sb-c);font-family:var(--font-mono);font-weight:700;
+  border-radius:12px;padding:5px 11px;font-size:.95rem;line-height:1;flex:0 0 auto}
+.solar-badge--yellow{--sb-bg:#fbf0d2;--sb-c:#8a6d0c}
+.solar-badge--orange{--sb-bg:#fbe4d2;--sb-c:#9a4a10}
+.solar-badge--red{--sb-bg:#fbdcdc;--sb-c:#8f1d1d}
+.solar-badge--big{font-size:1.9rem;padding:14px 18px;border-radius:var(--r)}
+
+.solar-now{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);
+  box-shadow:var(--shadow-sm);overflow:hidden;max-width:760px;margin:0 auto}
+.solar-now__head{display:flex;align-items:center;gap:16px;padding:20px 22px 0}
+.solar-now__kicker{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.solar-now__level{font-family:var(--font-display);font-size:clamp(1.3rem,3.2vw,1.7rem);font-weight:560;color:var(--ink);line-height:1.2}
+.solar-now__desc{margin:12px 22px 0;color:var(--muted);font-size:.95rem;line-height:1.5}
+.solar-now__meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:14px 22px 18px}
+.solar-minis{display:flex;flex-wrap:wrap;gap:8px}
+.solar-mini{background:var(--paper-2);border-radius:20px;padding:4px 10px;font-size:.72rem;color:var(--muted);white-space:nowrap}
+.solar-mini b{font-family:var(--font-mono);color:var(--ink)}
+.solar-now__time{font-size:.72rem;color:var(--muted);margin-left:auto}
+
+.solar-wind{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--hair);background:var(--paper-2)}
+.solar-wind__i{padding:12px 8px;text-align:center;border-right:1px solid var(--hair)}
+.solar-wind__i:last-child{border-right:0}
+.solar-wind__v{font-family:var(--font-mono);font-weight:700;color:var(--navy);font-size:.92rem}
+.solar-wind__l{font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:3px}
+
+.solar-days{max-width:760px;margin:clamp(18px,2.4vw,26px) auto 0}
+.solar-days__t{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;text-align:center;margin-bottom:10px}
+.solar-days__l{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.solar-day{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);
+  padding:14px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px}
+.solar-day__d{font-weight:700;color:var(--ink);font-size:.82rem}
+.solar-day__n{font-size:.76rem;color:var(--muted);line-height:1.3}
+.solar-day__p{display:flex;flex-direction:column;gap:2px;font-size:.66rem;color:var(--muted);margin-top:auto}
+.solar-day__p b{font-family:var(--font-mono);color:var(--ink)}
+@media(max-width:480px){
+  .solar-now__head{gap:12px;padding:16px 16px 0}
+  .solar-now__desc{margin:10px 16px 0;font-size:.9rem}
+  .solar-now__meta{padding:12px 16px 14px}
+  .solar-now__time{margin-left:0}
+  .solar-day{padding:12px 6px}
+  .solar-day__n{font-size:.7rem}
+}
+
 /* La targeta te 760px de maxim, aixi que per davall d'uns 820px de finestra
    ja va encongint-se: els talls d'aci van ajustant columnes i cos de lletra
    abans que res es quede estret. */

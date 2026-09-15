@@ -454,6 +454,20 @@ def build(g):
   </div>
 </section>
 
+<section class="section" style="padding:0 0 clamp(28px,3.5vw,48px)">
+  <div class="wrap">
+    <div class="narrow center reveal" style="margin-bottom:clamp(20px,2.6vw,32px)">
+      <div class="kicker center-k">☀️ <span class="va">Activitat solar</span><span class="es">Actividad solar</span></div>
+      <h2><span class="va">Tempestes solars</span><span class="es">Tormentas solares</span></h2>
+      <p class="lead"><span class="va">El Sol també té el seu temps. Quan hi ha una tempesta geomagnètica (escala G), el GPS i la ràdio poden fallar a la muntanya.</span><span class="es">El Sol también tiene su tiempo. Cuando hay una tormenta geomagnética (escala G), el GPS y la radio pueden fallar en la montaña.</span></p>
+    </div>
+    <div id="solar-now" class="reveal"></div>
+    <p class="note center avamet-credit--narrow" style="margin-top:14px;font-size:.8rem">
+      <span class="va">Dades del </span><span class="es">Datos del </span><a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener">NOAA Space Weather Prediction Center</a>
+    </p>
+  </div>
+</section>
+
 <section class="section bg-paper2" style="padding-top:0">
   <div class="wrap">
     <div class="narrow center reveal" style="margin-bottom:clamp(24px,3vw,40px)">
@@ -471,7 +485,7 @@ def build(g):
         "Estacions meteorològiques a La Figuereta i a Pego connectades a la xarxa AVAMET, més la previsió del temps i els avisos d'alertes meteorològiques d'AEMET.","Estaciones meteorológicas en La Figuereta y en Pego conectadas a la red AVAMET, más la previsión del tiempo y los avisos de alertas meteorológicas de AEMET.",
         pos='18%')+meteo_dash+footer()
     write("meteo.html", doc("El temps a Pego i la Figuereta | CEPEGO",
-        "Estacions meteorològiques del refugi La Figuereta i de Pego connectades a la xarxa AVAMET, i previsió AEMET.", meteo, path="meteo.html", extra_js=["js/meteo-dashboard.js","js/aemet-forecast.js"]))
+        "Estacions meteorològiques del refugi La Figuereta i de Pego connectades a la xarxa AVAMET, i previsió AEMET.", meteo, path="meteo.html", extra_js=["js/meteo-dashboard.js","js/aemet-forecast.js","js/solar.js"]))
 
     # ============================================= RUTES
     routes=[("Circular Figuereta – Tossal","2,97 km","+154 m","673 m","facil","Fàcil","Fácil",
