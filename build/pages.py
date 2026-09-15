@@ -439,7 +439,7 @@ def build(g):
       <div id="meteo-dash-pego"></div>
     </div>
     <p class="note center avamet-credit" style="margin-top:14px">
-      <img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo avamet-credit__logo--avamet">
+      <a href="https://www.avamet.org/" target="_blank" rel="noopener"><img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo avamet-credit__logo--avamet"></a>
     </p>
   </div>
 </section>
@@ -449,7 +449,7 @@ def build(g):
     <div class="kicker center-k"><span class="va">Previsió pròxims dies</span><span class="es">Previsión próximos días</span></div>
     <div id="aemet-forecast" class="reveal"></div>
     <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
-      <img src="{IMG}aemet-logo.png" alt="AEMET" class="avamet-credit__logo">
+      <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/pego-id03102" target="_blank" rel="noopener"><img src="{IMG}aemet-logo.png" alt="AEMET" class="avamet-credit__logo"></a>
     </p>
   </div>
 </section>
