@@ -85,6 +85,7 @@ def sections():
                    h, count=1, flags=re.S)
         subs = [plain(t) for t in re.findall(r"<h3[^>]*>(.*?)</h3>", h, flags=re.S)]
         toc.append({"n": i, "title": title, "subs": subs})
+        h = h.replace("<p>%FIG_ZONAVITAL%</p>", figure.zona_vital_html())
         out.append(f'<section class="sec">{h}</section>')
     return out, toc
 

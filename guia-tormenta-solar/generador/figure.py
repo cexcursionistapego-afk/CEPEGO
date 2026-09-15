@@ -156,3 +156,98 @@ def emblem(size=104):
     p.append(f'<circle cx="92" cy="{cy:.0f}" r="4.6" fill="{NAV}"/>')
     p.append("</svg>")
     return "".join(p)
+
+
+# ─────────────────── §4.6 zona vital: ciervo frente a jabalí ───────────────────
+def zona_vital():
+    """Cuerpo y patas por separado para que la silueta se lea; la información es la
+    POSICIÓN de la zona vital respecto a la pata y al tercio inferior del pecho."""
+    SIL = "#EDE8DC"
+    p = ['<svg viewBox="0 0 740 350" role="img" aria-label="Comparación de la zona vital '
+         'entre ciervo y jabalí: detrás del codillo y en el tercio inferior del pecho en el '
+         'ciervo; más adelantada y más baja en el jabalí">']
+    p.append(f'<defs><pattern id="zvh" width="7" height="7" patternUnits="userSpaceOnUse" '
+             f'patternTransform="rotate(45)"><rect width="7" height="7" fill="#fff"/>'
+             f'<line x1="0" y1="0" x2="0" y2="7" stroke="{EMB}" stroke-width="1.5"/></pattern></defs>')
+
+    def panel(ox, titulo, cuerpo, patas, patax, tercio, belly, lomo, vital, hueco, error=None):
+        q = [f'<g transform="translate({ox},0)">']
+        q.append(f'<text x="165" y="26" text-anchor="middle" font-family="Archivo,Arial,sans-serif" '
+                 f'font-size="17" font-weight="800" fill="{INK}">{titulo}</text>')
+        for pt in patas:
+            q.append(f'<path d="{pt}" fill="{SIL}" stroke="{INK}" stroke-width="1.7"/>')
+        q.append(f'<path d="{cuerpo}" fill="{SIL}" stroke="{INK}" stroke-width="2"/>')
+        q.append(f'<ellipse cx="{hueco[0]}" cy="{hueco[1]}" rx="{hueco[2]}" ry="{hueco[3]}" '
+                 f'fill="url(#zvh)" stroke="{EMB}" stroke-width="1.4" stroke-dasharray="4 3"/>')
+        q.append(f'<ellipse cx="{vital[0]}" cy="{vital[1]}" rx="{vital[2]}" ry="{vital[3]}" '
+                 f'fill="{AUR}" fill-opacity="0.88" stroke="{AUR}" stroke-width="2"/>')
+        # referencias
+        q.append(f'<line x1="{patax}" y1="{lomo-10}" x2="{patax}" y2="{belly+40}" stroke="{NAV}" '
+                 f'stroke-width="1.6" stroke-dasharray="5 4"/>')
+        q.append(f'<line x1="{patax-70}" y1="{tercio}" x2="{patax+74}" y2="{tercio}" stroke="{NAV}" '
+                 f'stroke-width="1.6" stroke-dasharray="5 4"/>')
+        q.append(f'<text x="{patax-72}" y="{tercio-7}" font-family="JetBrains Mono,monospace" '
+                 f'font-size="11" stroke="#ffffff" stroke-width="3.4" paint-order="stroke" fill="{NAV}">tercio inferior</text>')
+        q.append(f'<text x="{patax}" y="{belly+54}" text-anchor="middle" '
+                 f'font-family="JetBrains Mono,monospace" font-size="11" stroke="#ffffff" stroke-width="3.4" paint-order="stroke" fill="{NAV}">'
+                 f'borde trasero de la pata</text>')
+        # etiquetas sin solapes
+        q.append(f'<text x="{vital[0]}" y="{vital[1]+4}" text-anchor="middle" '
+                 f'font-family="Archivo,Arial,sans-serif" font-size="12" font-weight="800" '
+                 f'fill="#fff">VITAL</text>')
+        q.append(f'<text x="{hueco[0]}" y="{hueco[1]-hueco[3]-9}" text-anchor="middle" '
+                 f'font-family="Archivo,Arial,sans-serif" font-size="11.5" font-weight="700" '
+                 f'stroke="#ffffff" stroke-width="3.4" paint-order="stroke" fill="{EMB}">hueco muerto</text>')
+        if error:
+            ex, ey, txt = error
+            q.append(f'<path d="M{ex-9},{ey-9} L{ex+9},{ey+9} M{ex+9},{ey-9} L{ex-9},{ey+9}" '
+                     f'stroke="{EMB}" stroke-width="3.4" stroke-linecap="round"/>')
+            q.append(f'<text x="{ex}" y="{ey-19}" text-anchor="middle" '
+                     f'font-family="Archivo,Arial,sans-serif" font-size="11.5" font-weight="800" '
+                     f'stroke="#ffffff" stroke-width="3.4" paint-order="stroke" fill="{EMB}">{txt}</text>')
+        q.append("</g>")
+        return "".join(q)
+
+    # Ciervo: cabeza alta, cruz sobre las delanteras, patas largas
+    c_cuerpo = ("M50,146 L78,122 L88,106 L97,88 L107,110 L128,104 L152,98 L234,102 L274,108 "
+                "L288,120 L284,144 L266,172 L178,180 L148,178 L132,166 L118,146 L94,136 Z")
+    c_patas = ["M156,170 L169,170 L166,214 L170,262 L157,262 L154,214 Z",
+               "M260,166 L273,166 L280,210 L271,262 L258,262 L265,210 Z"]
+    # Jabalí: cruz alta y muy adelantada, cabeza baja, pecho profundo, patas cortas
+    j_cuerpo = ("M42,182 L62,152 L88,130 L114,110 L144,99 L180,106 L236,124 L276,140 "
+                "L286,162 L276,190 L212,199 L168,196 L132,184 L94,188 Z")
+    j_patas = ["M174,188 L187,188 L185,224 L188,258 L175,258 L172,224 Z",
+               "M256,186 L269,186 L275,220 L267,258 L254,258 L261,220 Z"]
+
+    p.append(panel(6, "Ciervo y corzo", c_cuerpo, c_patas,
+                   patax=176, tercio=160, belly=180, lomo=98,
+                   vital=(196, 172, 32, 26), hueco=(202, 128, 25, 15)))
+    p.append(panel(378, "Jabalí", j_cuerpo, j_patas,
+                   patax=186, tercio=172, belly=196, lomo=99,
+                   vital=(174, 188, 30, 24), hueco=(192, 142, 23, 14),
+                   error=(146, 116, "disparo alto")))
+
+    p.append(f'<text x="370" y="340" text-anchor="middle" font-family="Archivo,Arial,sans-serif" '
+             f'font-size="12.5" fill="{MUT}">En el jabalí la zona vital queda '
+             f'<tspan font-weight="800" fill="{INK}">más adelantada y más baja</tspan>: el omóplato '
+             f'va inclinado y la cruz alta engaña.</text>')
+    p.append("</svg>")
+    return "".join(p)
+
+def zona_vital_html():
+    return f'''<figure><div class="fig">
+<p class="fig-t">Dónde está la zona vital, y por qué el jabalí engaña</p>
+<p class="fig-s">Sube una vertical por el borde trasero de la pata delantera y detente en el
+ <strong>tercio inferior</strong> del pecho contando desde el vientre. Los pulmones ocupan la mitad
+ alta y el corazón cuelga bajo; por encima, entre pulmón y espina, hay un <strong>hueco muerto</strong>
+ que no mata pero condena al animal a morir lejos.</p>
+{zona_vital()}
+<div class="fig-key">
+ <span><i style="background:{AUR}"></i>Zona vital: corazón y pulmones</span>
+ <span><i style="background:#fff;border:1pt solid {EMB};background-image:repeating-linear-gradient(45deg,{EMB} 0 1.2pt,#fff 1.2pt 3.6pt)"></i>Hueco muerto</span>
+ <span><i style="background:#fff;border-top:1.6pt dashed {NAV};height:0"></i>Referencias de puntería</span>
+</div>
+</div>
+<figcaption>Zona útil aproximada: 20 cm en ciervo, 12-15 cm en corzo, 15-20 cm en jabalí. Con la
+ pata adelantada el pulmón queda limpio; atrasada, la escápula tapa — espera el paso.</figcaption>
+</figure>'''

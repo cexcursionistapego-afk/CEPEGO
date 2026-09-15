@@ -13,6 +13,21 @@
 - **Probabilístico, 18-72 h.** Los coronógrafos ven salir la CME; los modelos estiman la llegada con error de ±6-12 h. Sobre todo, **la orientación del campo (Bz), que determina la severidad, no se conoce hasta el final**: sabes que viene algo, no si será G2 o G5.
 - **Firme, 15-60 min.** Los satélites en L1 (DSCOVR, ACE) miden velocidad y Bz reales justo antes del impacto.
 
+**Dónde vigilar esto tú mismo, antes que lo cuenten los medios.** Los medios generalistas
+publican con horas de retraso porque copian de aquí:
+
+- **[swpc.noaa.gov](https://www.swpc.noaa.gov)** — la fuente oficial (NOAA/NWS). Emite las
+  alertas, avisos y vigilancias en el momento en que se detectan, y tiene un **servicio de
+  email gratuito** ([spaceweather.gov/content/subscription-services](https://www.spaceweather.gov/content/subscription-services))
+  que te las manda al instante: suscríbete ahora, no el día que haga falta.
+- **[spaceweatherlive.com](https://www.spaceweatherlive.com)** — agrega los mismos datos de la
+  NOAA en un panel en vivo (Kp, viento solar, rayos X), con app propia y alertas push; es donde
+  la comunidad que persigue auroras lo ve minutos después de pasar, no horas. **[spaceweather.com](https://www.spaceweather.com)**
+  añade contexto y fotos en un boletín diario.
+
+Con cualquiera de las dos primeras tienes la misma información que un meteorólogo espacial,
+gratis y antes que el telediario.
+
 > **Operativamente:** tu margen útil es la ventana de 18-72 h, gastada asumiendo que lo más probable es que no pase nada. Actuar cuesta medio día y unos 200 €; esperar al aviso firme es llegar 40 minutos tarde.
 
 ### 1.2 Las escalas NOAA
