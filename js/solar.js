@@ -110,7 +110,7 @@
     return ('0' + t.getHours()).slice(-2) + ':' + ('0' + t.getMinutes()).slice(-2);
   }
 
-  function nowHTML(a, vent) {
+  function nowHTML(a, vent, max24h) {
     var info = gInfo(a.g);
     var color = info ? info.c : 'green';
     var hora = localTime(a.data, a.hora);
@@ -125,7 +125,7 @@
       (info ? '<p class="solar-now__desc">' + bi(info.dVa, info.dEs) + '</p>' : '') +
       impactsHTML(info) +
       '<div class="solar-now__meta">' +
-        secondary(a) +
+        secondary(a, max24h) +
         (hora ? '<span class="solar-now__time">' + bi('Dada de les ', 'Dato de las ') + esc(hora) + ' h</span>' : '') +
       '</div>' +
       windHTML(vent) +
@@ -146,7 +146,7 @@
   // R i S no es noten ací baix tant com la G, però completen l'escala de
   // NOAA. Es diu la cosa i com està ("Ràdio HF: sense apagades"), no el codi
   // a seques: "R0" tot sol no li diu res a ningú. El codi queda al title.
-  function secondary(a) {
+  function secondary(a, max24h) {
     function pill(lletra, n, quiVa, quiEs, beVa, beEs, malVa, malEs) {
       var txt = n == null
         ? bi('sense dades', 'sin datos')
@@ -154,9 +154,16 @@
       return '<span class="solar-mini" title="' + esc(lletra + (n == null ? '?' : n) + ' · escala NOAA') + '">' +
         bi(quiVa, quiEs) + ' <b>' + txt + '</b></span>';
     }
+    // El màxim de les últimes 24 h és el que aclarix si una tempesta que
+    // figura a la previsió d'hui ja ha passat mentre ara està tot tranquil.
+    var maxG = max24h ? max24h.g : null;
+    var maxPill = maxG == null ? '' :
+      '<span class="solar-mini">' + bi('Màxim últimes 24 h:', 'Máximo últimas 24 h:') +
+      ' <b>' + (maxG > 0 ? esc('G' + maxG) : bi('cap', 'ninguna')) + '</b></span>';
     return '<span class="solar-minis">' +
       pill('R', a.r, 'Ràdio HF:', 'Radio HF:', 'sense apagades', 'sin apagones', 'apagades', 'apagones') +
       pill('S', a.s, 'Radiació solar:', 'Radiación solar:', 'normal', 'normal', 'tempesta', 'tormenta') +
+      maxPill +
       '</span>';
   }
 
@@ -176,7 +183,10 @@
   function daysHTML(dies) {
     if (!dies.length) return '';
     return '<div class="solar-days">' +
-      '<div class="solar-days__t">' + bi('Pròxims dies', 'Próximos días') + '</div>' +
+      '<div class="solar-days__t">' + bi('Pròxims dies', 'Próximos días') +
+        '<span class="solar-days__s">' +
+        bi('màxim previst per a cada dia, a qualsevol hora', 'máximo previsto para cada día, a cualquier hora') +
+        '</span></div>' +
       '<ol class="solar-days__l">' + dies.map(function (d) {
         var lb = dayLabel(d.data);
         var info = gInfo(d.g);
@@ -203,7 +213,7 @@
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (json) {
       if (!json || json.ok === false || !json.actual) throw new Error('bad response');
-      el.innerHTML = nowHTML(json.actual, json.vent) + daysHTML(json.dies || []);
+      el.innerHTML = nowHTML(json.actual, json.vent, json.max24h) + daysHTML(json.dies || []);
     })
     .catch(function () {
       el.innerHTML = msgHTML(

@@ -649,6 +649,10 @@ html[data-lang="es"] .va{display:none}
 .solar-days{max-width:760px;margin:clamp(18px,2.4vw,26px) auto 0}
 .solar-days__t{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
   font-weight:600;text-align:center;margin-bottom:10px}
+/* Sense esta aclaracio es confonia amb l'estat d'ara mateix: pot posar G1
+   a "hui" i estar tot tranquil, perque la tempesta ja ha passat o encara ve. */
+.solar-days__s{display:block;text-transform:none;letter-spacing:0;font-weight:400;
+  font-size:.74rem;margin-top:4px}
 .solar-days__l{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .solar-day{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);
   padding:14px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px}
