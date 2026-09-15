@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /guia-tormenta-solar/
 Sitemap: https://cepego.com/sitemap.xml

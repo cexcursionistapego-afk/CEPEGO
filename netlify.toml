@@ -4,6 +4,15 @@
   command = ""
   functions = "netlify/functions"
 
+# /guia-tormenta-solar es guarda al repositori per a l'autor (Juan Salvador),
+# però no és contingut del club: es bloqueja perquè el desplegament estàtic
+# (publish = ".") no el serveixi mai com a part de la web pública.
+[[redirects]]
+  from = "/guia-tormenta-solar/*"
+  to = "/"
+  status = 404
+  force = true
+
 # Rutes curtes per a l'API de reserves
 [[redirects]]
   from = "/api/disponibilitat"

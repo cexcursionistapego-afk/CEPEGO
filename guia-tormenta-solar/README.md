@@ -2,7 +2,11 @@
 
 Manual de emergencia (55 páginas, A4) sobre cómo prepararse y sobrevivir a un apagón
 prolongado provocado por una tormenta geomagnética severa. **No forma parte de la web
-del club**: es un documento independiente pensado para imprimirse y guardarse en papel.
+del club**: es un documento personal de Juan Salvador Moll García, pensado para
+imprimirse y guardarse en papel. Se guarda en este repositorio como copia de
+seguridad con historial, no para publicarse: `netlify.toml` bloquea con un 404
+forzado cualquier petición a `/guia-tormenta-solar/*`, así que el sitio desplegado
+nunca lo sirve aunque el archivo viva dentro del repo.
 
 - `semanas-sin-red.pdf` — el documento final, listo para imprimir a doble cara.
 - `fuentes/` — las seis secciones en Markdown, una por dominio.
