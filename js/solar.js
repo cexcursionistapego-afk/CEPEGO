@@ -25,11 +25,16 @@
   // (swpc.noaa.gov/noaa-scales-explanation), resumits: [etiqueta va, es,
   // text va, text es]. A partir de G1 els animals migratoris ja se'n
   // ressenten, que és de les coses que més cride l'atenció de l'escala.
+  // El color va pel número de nivell i val per a les tres escales: 1 groc,
+  // 2-3 taronja, 4-5 roig. Són els quatre de la llegenda d'avisos d'AEMET.
+  var COLORS = ['green', 'yellow', 'orange', 'orange', 'red', 'red'];
+  function colorOf(n) { return (n != null && COLORS[n]) ? COLORS[n] : 'green'; }
+
   var G = [
-    { c: 'green',  va: 'Sense tempesta',   es: 'Sin tormenta',
+    { va: 'Sense tempesta',   es: 'Sin tormenta',
       dVa: 'El camp magnètic de la Terra està tranquil. Res a tindre en compte.',
       dEs: 'El campo magnético de la Tierra está tranquilo. Nada a tener en cuenta.' },
-    { c: 'yellow', va: 'Tempesta menor',   es: 'Tormenta menor',
+    { va: 'Tempesta menor',   es: 'Tormenta menor',
       dVa: 'Pot haver-hi xicotetes errades de GPS i la ràdio HF va una miqueta pitjor. Aurores només a latituds molt altes.',
       dEs: 'Puede haber pequeños fallos de GPS y la radio HF va algo peor. Auroras solo en latitudes muy altas.',
       imp: [
@@ -37,7 +42,7 @@
         ['Satèl·lits i GPS', 'Satélites y GPS', 'afecció menor.', 'afección menor.'],
         ['Aus i animals migratoris', 'Aves y animales migratorios', 'ja se’n ressenten a partir d’este nivell.', 'ya se resienten a partir de este nivel.']
       ] },
-    { c: 'orange', va: 'Tempesta moderada', es: 'Tormenta moderada',
+    { va: 'Tempesta moderada', es: 'Tormenta moderada',
       dVa: 'El GPS pot perdre precisió a estones i la ràdio HF falla a latituds altes.',
       dEs: 'El GPS puede perder precisión a ratos y la radio HF falla en latitudes altas.',
       imp: [
@@ -45,7 +50,7 @@
         ['Satèl·lits i GPS', 'Satélites y GPS', 'pot caldre corregir l’orientació dels satèl·lits.', 'puede hacer falta corregir la orientación de los satélites.'],
         ['Aus i animals migratoris', 'Aves y animales migratorios', 'afectats. Aurores visibles més al sud.', 'afectados. Auroras visibles más al sur.']
       ] },
-    { c: 'orange', va: 'Tempesta forta',   es: 'Tormenta fuerte',
+    { va: 'Tempesta forta',   es: 'Tormenta fuerte',
       dVa: 'El GPS pot fallar durant hores i la ràdio HF queda tocada. Si tires de navegador a la muntanya, porta mapa i brúixola.',
       dEs: 'El GPS puede fallar durante horas y la radio HF queda tocada. Si tiras de navegador en la montaña, lleva mapa y brújula.',
       imp: [
@@ -53,7 +58,7 @@
         ['Satèl·lits i GPS', 'Satélites y GPS', 'navegació per satèl·lit intermitent.', 'navegación por satélite intermitente.'],
         ['Aus i animals migratoris', 'Aves y animales migratorios', 'afectats. Aurores encara més al sud.', 'afectados. Auroras aún más al sur.']
       ] },
-    { c: 'red',    va: 'Tempesta severa',  es: 'Tormenta severa',
+    { va: 'Tempesta severa',  es: 'Tormenta severa',
       dVa: 'GPS i ràdio HF poc fiables durant hores. No et refies del mòbil ni del rellotge GPS per a orientar-te.',
       dEs: 'GPS y radio HF poco fiables durante horas. No te fíes del móvil ni del reloj GPS para orientarte.',
       imp: [
@@ -61,7 +66,7 @@
         ['Satèl·lits i GPS', 'Satélites y GPS', 'navegació degradada durant hores.', 'navegación degradada durante horas.'],
         ['Aus i animals migratoris', 'Aves y animales migratorios', 'afectats. Aurores a latituds mitjanes.', 'afectados. Auroras en latitudes medias.']
       ] },
-    { c: 'red',    va: 'Tempesta extrema', es: 'Tormenta extrema',
+    { va: 'Tempesta extrema', es: 'Tormenta extrema',
       dVa: 'Situació excepcional: GPS i ràdio poden estar caiguts, i fins i tot la xarxa elèctrica se\'n pot ressentir.',
       dEs: 'Situación excepcional: GPS y radio pueden estar caídos, e incluso la red eléctrica puede resentirse.',
       imp: [
@@ -72,6 +77,47 @@
   ];
   function gInfo(n) { return (n != null && G[n]) ? G[n] : null; }
   function gLabel(n) { return n ? 'G' + n : 'G'; }
+
+  /* ------------------------------------------- escales R i S (nivells 1-5)
+     Les altres dos escales de NOAA. No es noten ací baix com la G, però van
+     a la llegenda per a que es puga entendre què són quan ixen a la targeta.
+     R: apagades de ràdio HF per fulguracions solars (entre parèntesis, la
+     classe de la fulguració que marca el nivell). S: tempesta de radiació,
+     que afecta sobretot satèl·lits, vols polars i astronautes. */
+  var R = [
+    { va: 'Apagada menor', es: 'Apagón menor',
+      dVa: 'Fulguració de classe M1. La ràdio HF es degrada a la cara de dia i es pot perdre el contacte uns minuts.',
+      dEs: 'Fulguración de clase M1. La radio HF se degrada en la cara de día y se puede perder el contacto unos minutos.' },
+    { va: 'Apagada moderada', es: 'Apagón moderado',
+      dVa: 'Classe M5. Apagada de ràdio HF limitada a la cara de dia, amb pèrdues de contacte de desenes de minuts.',
+      dEs: 'Clase M5. Apagón de radio HF limitado en la cara de día, con pérdidas de contacto de decenas de minutos.' },
+    { va: 'Apagada forta', es: 'Apagón fuerte',
+      dVa: 'Classe X1. Apagada de ràdio HF d\'aproximadament una hora en tota la cara de dia.',
+      dEs: 'Clase X1. Apagón de radio HF de aproximadamente una hora en toda la cara de día.' },
+    { va: 'Apagada severa', es: 'Apagón severo',
+      dVa: 'Classe X10. Apagada de ràdio HF d\'una a dues hores i errades de navegació durant hores.',
+      dEs: 'Clase X10. Apagón de radio HF de una a dos horas y fallos de navegación durante horas.' },
+    { va: 'Apagada extrema', es: 'Apagón extremo',
+      dVa: 'Classe X20. Apagada total de ràdio HF en tota la cara de dia durant hores.',
+      dEs: 'Clase X20. Apagón total de radio HF en toda la cara de día durante horas.' }
+  ];
+  var S = [
+    { va: 'Radiació menor', es: 'Radiación menor',
+      dVa: 'Sense efectes biològics. Alguna interferència xicoteta en la ràdio HF de les zones polars.',
+      dEs: 'Sin efectos biológicos. Alguna interferencia pequeña en la radio HF de las zonas polares.' },
+    { va: 'Radiació moderada', es: 'Radiación moderada',
+      dVa: 'Risc baix d\'exposició extra per als passatgers i la tripulació dels vols polars.',
+      dEs: 'Riesgo bajo de exposición extra para los pasajeros y la tripulación de los vuelos polares.' },
+    { va: 'Radiació forta', es: 'Radiación fuerte',
+      dVa: 'Ja es desvien vols polars i els astronautes de l\'ISS es refugien a la zona blindada. Els satèl·lits acumulen soroll i errades de memòria.',
+      dEs: 'Ya se desvían vuelos polares y los astronautas de la ISS se refugian en la zona blindada. Los satélites acumulan ruido y fallos de memoria.' },
+    { va: 'Radiació severa', es: 'Radiación severa',
+      dVa: 'Dany real a l\'electrònica dels satèl·lits i risc de radiació sever per als astronautes.',
+      dEs: 'Daño real a la electrónica de los satélites y riesgo de radiación severo para los astronautas.' },
+    { va: 'Radiació extrema', es: 'Radiación extrema',
+      dVa: 'Astronautes en perill greu, satèl·lits inutilitzables i apagada de ràdio HF a les zones polars durant dies.',
+      dEs: 'Astronautas en peligro grave, satélites inutilizables y apagón de radio HF en las zonas polares durante días.' }
+  ];
 
   /* ------------------------------------------------------------ dates
      NOAA dona la data com "2026-09-15". El dia de la setmana es munta ací
@@ -92,8 +138,7 @@
   }
 
   function badge(n, mida) {
-    var info = gInfo(n);
-    var color = info ? info.c : 'green';
+    var color = colorOf(n);
     return '<span class="solar-badge solar-badge--' + color + (mida ? ' solar-badge--' + mida : '') + '">' +
       esc(gLabel(n)) + '</span>';
   }
@@ -112,7 +157,7 @@
 
   function nowHTML(a, vent, max24h) {
     var info = gInfo(a.g);
-    var color = info ? info.c : 'green';
+    var color = colorOf(a.g);
     var hora = localTime(a.data, a.hora);
     return '<div class="solar-now solar-now--' + color + '">' +
       '<div class="solar-now__head">' +
@@ -204,18 +249,37 @@
       }).join('') + '</ol></div>';
   }
 
-  // Llegenda de G1 a G5 (G0 no es llista: no passa res). Ix de la mateixa
-  // taula G de dalt, així el nom i la descripció d'un nivell només estan
-  // escrits en un lloc.
+  // Llegenda de les tres escales de NOAA, de nivell 1 a 5 (el 0 no es
+  // llista: vol dir que no passa res). Els noms i les descripcions ixen de
+  // les mateixes taules que fa servir la targeta, així només estan escrits
+  // en un lloc. La G va oberta, que és la que es nota ací; R i S van
+  // plegades per a no soltar un mur de text a qui només vullga vore l'estat.
+  function scaleBlock(lletra, titolVa, titolEs, subVa, subEs, taula, obert) {
+    return '<details class="solar-scale__g"' + (obert ? ' open' : '') + '>' +
+      '<summary><b>' + bi(titolVa, titolEs) + ' (' + lletra + ')</b>' +
+      '<span>' + bi(subVa, subEs) + '</span></summary>' +
+      '<ul class="solar-scale__l">' + taula.map(function (info, i) {
+        var c = colorOf(i + 1);
+        return '<li class="solar-scale__i solar-scale__i--' + c + '">' +
+          '<span class="solar-badge solar-badge--' + c + '">' + lletra + (i + 1) + '</span>' +
+          '<div><b>' + bi(info.va, info.es) + '</b>' +
+          '<span>' + bi(info.dVa, info.dEs) + '</span></div></li>';
+      }).join('') + '</ul></details>';
+  }
+
   function scaleHTML() {
     return '<div class="solar-scale">' +
       '<div class="solar-days__t">' + bi('Què vol dir cada nivell', 'Qué significa cada nivel') + '</div>' +
-      '<ul class="solar-scale__l">' + G.slice(1).map(function (info, i) {
-        return '<li class="solar-scale__i solar-scale__i--' + info.c + '">' +
-          '<span class="solar-badge solar-badge--' + info.c + '">G' + (i + 1) + '</span>' +
-          '<div><b>' + bi(info.va, info.es) + '</b>' +
-          '<span>' + bi(info.dVa, info.dEs) + '</span></div></li>';
-      }).join('') + '</ul></div>';
+      scaleBlock('G', 'Tempestes geomagnètiques', 'Tormentas geomagnéticas',
+        'el que es nota ací baix: GPS, ràdio i aurores', 'lo que se nota aquí abajo: GPS, radio y auroras',
+        G.slice(1), true) +
+      scaleBlock('R', 'Apagades de ràdio', 'Apagones de radio',
+        'fulguracions solars que tomben la ràdio HF', 'fulguraciones solares que tumban la radio HF',
+        R, false) +
+      scaleBlock('S', 'Tempestes de radiació solar', 'Tormentas de radiación solar',
+        'satèl·lits, vols polars i astronautes', 'satélites, vuelos polares y astronautas',
+        S, false) +
+      '</div>';
   }
 
   function msgHTML(va, es) { return '<p class="fc-msg">' + bi(va, es) + '</p>'; }
