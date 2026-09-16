@@ -221,16 +221,26 @@
   }
 
   // Un dia pot portar més d'un avís alhora (ací és molt comú "pluges" i
-  // "tempestes" el mateix dia). La fila es pinta del color del més greu.
+  // "tempestes" el mateix dia), i no tenen per què ser del mateix nivell:
+  // pot haver-hi pluges "importants" i tempestes "baixes". Per això els
+  // avisos s'agrupen PER NIVELL i cada grup ix en una píndola del seu color;
+  // pintar-los tots igual donava a entendre que eren igual de greus.
+  // Els grups van del més greu al menys, i el més greu marca la fila.
   var RANK = { green: 0, yellow: 1, orange: 2, red: 3 };
-  function worstColor(list) {
-    if (!list || !list.length) return null;
-    var pitjor = 'green';
-    list.forEach(function (t) {
+  function alertGroups(list) {
+    var grups = [];
+    (list || []).forEach(function (t) {
       var c = alertColor(t);
-      if (RANK[c] > RANK[pitjor]) pitjor = c;
+      // "Sin peligro" (verd) no es pinta: seria soroll a quasi tots els dies.
+      if (c === 'green') return;
+      var clau = String(t).split(' - ')[0].trim().toLowerCase();
+      var g = null;
+      grups.forEach(function (x) { if (x.clau === clau) g = x; });
+      if (!g) { g = { clau: clau, color: c, items: [] }; grups.push(g); }
+      g.items.push(t);
     });
-    return pitjor;
+    grups.sort(function (a, b) { return RANK[b.color] - RANK[a.color]; });
+    return grups;
   }
 
   // Els avisos venen com "Nivell - Fenomen" ("Amarillo - Lluvias"). Quan
@@ -307,16 +317,34 @@
       pr + '</div>';
   }
 
+  // Quan el dia porta un sol tram, l'etiqueta ix del rang horari d'eixe
+  // tram i no d'un "Tot el dia" fix: al dia en curs AEMET ja ha llevat els
+  // trams que han passat, i a mitja vesprada el que queda és la nit, no el
+  // dia sencer. Els dies llunyans sí que venen amb el dia complet.
+  function generalLabel(hour) {
+    var h = String(hour || '').replace(/[–—−]/g, '-').replace(/\s+/g, '');
+    if (!h || h === '00-24h') return { va: 'Tot el dia', es: 'Todo el día', night: false };
+    if (h === '00-12h' || h === '06-12h') return { va: 'De matí', es: 'Por la mañana', night: false };
+    if (h === '12-18h') return { va: 'De vesprada', es: 'Por la tarde', night: false };
+    if (h === '12-24h') return { va: 'Vesprada i nit', es: 'Tarde y noche', night: false };
+    if (h === '18-24h') return { va: 'De nit', es: 'Por la noche', night: true };
+    if (h === '00-06h') return { va: 'De matinada', es: 'De madrugada', night: true };
+    // Qualsevol altre rang que AEMET es traga: es diu tal qual, que sempre
+    // serà més cert que inventar-se una etiqueta.
+    return { va: h, es: h, night: false };
+  }
+
   function rowHTML(d, range, todayNum, idx) {
     var lb = splitDayLabel(d.label);
     var isToday = todayNum != null && lb.num !== '' && parseInt(lb.num, 10) === todayNum;
 
     var hasSplit = !!(d.desc_mati || d.desc_vesprada || d.desc_nit);
+    var gen = generalLabel(d.hora_general);
     var periods = hasSplit
       ? periodCell(d.desc_mati, d.precip_mati, false) +
         periodCell(d.desc_vesprada, d.precip_vesprada, false) +
         periodCell(d.desc_nit, d.precip_nit, true)
-      : periodCell(d.desc_general, d.precip_max, false, true, 'Tot el dia', 'Todo el día');
+      : periodCell(d.desc_general, d.precip_max, gen.night, true, gen.va, gen.es);
 
     // Barra de rang: on cau la mínima i la màxima del dia dins del rang de
     // tota la setmana. Deixa vore d'un colp d'ull quins dies refresquen.
@@ -331,21 +359,24 @@
       bar = '<span class="fc-bar"></span>';
     }
 
-    var color = worstColor(d.alerts);
-    var alertRow = '';
     // Només es pinta l'avís quan n'hi ha un de real. AEMET marca "Sin
     // peligro" la major part dels dies i repetir-ho set vegades només fa
     // soroll: si no ix res, és que no hi ha avís.
-    if (color && color !== 'green') {
-      var tr = joinAlerts(d.alerts);
-      alertRow = '<a class="fc-alert fc-alert--' + color + '" href="' + esc(avisosUrl(idx)) + '" ' +
-        'target="_blank" rel="noopener" title="' + esc(AVISOS_TITLE) + '">' +
-        alertIcon(d.alerts) +
-        '<span>' + bi(esc(tr.va), esc(tr.es)) + '</span>' +
-        '<span class="fc-alert__go" aria-hidden="true">&rsaquo;</span></a>';
+    var grups = alertGroups(d.alerts);
+    var color = grups.length ? grups[0].color : null;
+    var alertRow = '';
+    if (grups.length) {
+      alertRow = '<div class="fc-alerts">' + grups.map(function (g) {
+        var tr = joinAlerts(g.items);
+        return '<a class="fc-alert fc-alert--' + g.color + '" href="' + esc(avisosUrl(idx)) + '" ' +
+          'target="_blank" rel="noopener" title="' + esc(AVISOS_TITLE) + '">' +
+          alertIcon(g.items) +
+          '<span>' + bi(esc(tr.va), esc(tr.es)) + '</span>' +
+          '<span class="fc-alert__go" aria-hidden="true">&rsaquo;</span></a>';
+      }).join('') + '</div>';
     }
 
-    return '<li class="fc-row' + (isToday ? ' fc-row--today' : '') + (color && color !== 'green' ? ' fc-row--alert fc-row--' + color : '') + '">' +
+    return '<li class="fc-row' + (isToday ? ' fc-row--today' : '') + (color ? ' fc-row--alert fc-row--' + color : '') + '">' +
       '<div class="fc-day">' +
         (isToday
           ? '<span class="fc-day__today">' + bi('Hui', 'Hoy') + '</span>'

@@ -210,7 +210,7 @@ function parseAemet(rawHtml) {
     // es pot dir que siga només de vesprada — es deixa com a previsió
     // general sense etiqueta. Només als dies amb 2+ trams (on sí que hi ha
     // una separació real matí/vesprada/nit) es fa la distinció.
-    let mati = null, vesprada = null, nit = null, general = null;
+    let mati = null, vesprada = null, nit = null, general = null, generalHour = null;
     if (group.length > 1) {
       mati = group.find((p) => bucket(p.hour) === 'mati') || null;
       vesprada = group.find((p) => bucket(p.hour) === 'vesprada') || null;
@@ -218,9 +218,14 @@ function parseAemet(rawHtml) {
       // prioritza el de 18–24h (la nit que ve) per damunt de la matinada.
       const nitCandidates = group.filter((p) => bucket(p.hour) === 'nit');
       nit = nitCandidates.length ? nitCandidates[nitCandidates.length - 1] : null;
-      if (!mati && !vesprada && !nit) general = group[0].desc || null;
+      if (!mati && !vesprada && !nit) { general = group[0].desc || null; generalHour = group[0].hour || null; }
     } else if (group.length === 1) {
       general = group[0].desc || null;
+      // El rang horari del tram únic importa: al dia en curs AEMET ja ha
+      // llevat els trams que han passat, així que eixe rang diu què queda
+      // de dia. Sense ell, hui eixia com "Tot el dia" a les 4 de la
+      // vesprada, que no és cert.
+      generalHour = group[0].hour || null;
     }
     const precipDefined = precipGroup.filter((v) => v != null);
     const precipOf = (p) => (p ? precipVals[p.idx] : null);
@@ -231,6 +236,7 @@ function parseAemet(rawHtml) {
       desc_vesprada: (vesprada && vesprada.desc) || null,
       desc_nit: (nit && nit.desc) || null,
       desc_general: general,
+      hora_general: generalHour,
       precip_mati: precipOf(mati),
       precip_vesprada: precipOf(vesprada),
       precip_nit: precipOf(nit),

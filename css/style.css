@@ -569,9 +569,12 @@ html[data-lang="es"] .va{display:none}
 /* Avis d'AEMET. Nomes es pinta quan n'hi ha un de real: "Sin peligro" no
    s'ensenya, perque repetit set vegades no aporta res. */
 
-.fc-alert{grid-area:alert;display:flex;align-items:center;gap:6px;margin:6px 0 0;
-  padding:4px 9px;border-radius:20px;font-size:.68rem;font-weight:600;line-height:1.35;
-  justify-self:start;text-decoration:none;transition:filter .2s var(--ease)}
+/* Un avis per nivell, cada un del seu color. Quan n'hi ha mes d'un es
+   separen i, si no caben, baixen a la linia de baix en lloc d'estretir-se. */
+.fc-alerts{grid-area:alert;display:flex;flex-wrap:wrap;gap:7px;margin:9px 0 2px;min-width:0}
+.fc-alert{display:inline-flex;align-items:center;gap:6px;max-width:100%;
+  padding:5px 10px;border-radius:20px;font-size:.68rem;font-weight:600;line-height:1.35;
+  text-decoration:none;transition:filter .2s var(--ease)}
 .fc-alert:hover{filter:brightness(.94)}
 .fc-alert__i{width:11px;height:11px;flex:0 0 auto}
 .fc-alert__go{font-size:1rem;line-height:1;opacity:.55;margin-left:1px}
