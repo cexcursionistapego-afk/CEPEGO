@@ -132,6 +132,29 @@
 
   bindGalleries();
 
+  /* ---------- MAPA DE GOOGLE A PETICIÓ ----------
+     El mapa de Contacte no es carrega en obrir la pàgina: Google posa les
+     seues cookies en el moment que apareix l'iframe, i això és l'única cosa
+     de tota la web que caldria consentir. Deixant-lo darrere d'un botó, qui
+     no el toca no rep cap cookie, i així el lloc no necessita el típic avís
+     que salta en entrar.
+     No es recorda la decisió a propòsit: guardar-ho seria tornar a escriure
+     al navegador de la gent, just el que volem evitar. */
+  document.querySelectorAll('.map-ask[data-map]').forEach(function (box) {
+    var btn = box.querySelector('.map-ask__btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = box.getAttribute('data-map');
+      f.height = 380;
+      f.title = 'Mapa CEPEGO';
+      f.loading = 'lazy';
+      box.classList.remove('map-ask');
+      box.innerHTML = '';
+      box.appendChild(f);
+    });
+  });
+
   /* ---------- VALIDACIÓ EN TEMPS REAL DELS FORMULARIS ----------
      Mostra l'error de seguida (en eixir del camp, i mentre s'escriu si ja
      s'ha eixit una vegada), en lloc d'esperar a l'enviament del formulari. */

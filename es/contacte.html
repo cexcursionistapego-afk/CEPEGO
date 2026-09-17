@@ -109,7 +109,20 @@
 </section>
 <section class="section-sm" style="padding-top:0">
   <div class="wrap narrow">
-    <div class="embed reveal"><iframe src="https://www.google.com/maps?q=Centre%20Excursionista%20Pego&output=embed" height="380" title="Mapa CEPEGO" loading="lazy"></iframe></div>
+    <!-- El mapa no es carrega tot sol: és de Google i posa les seues cookies
+         en el moment que apareix. Ací només hi ha un cartell, i l'iframe el
+         munta js/main.js si el visitant el demana. Així la web no necessita
+         cap avís de cookies en entrar, perquè no n'hi ha cap fins que algú
+         decidix que sí. -->
+    <div class="embed map-ask reveal" data-map="https://www.google.com/maps?q=Centre%20Excursionista%20Pego&amp;output=embed">
+      <div class="map-ask__in">
+        <svg class="map-ask__pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.1 6.3 12.4 6.6 12.7a.6.6 0 0 0 .9 0C12.7 21.4 19 14.1 19 9a7 7 0 0 0-7-7m0 9.6A2.6 2.6 0 1 1 14.6 9 2.6 2.6 0 0 1 12 11.6"/></svg>
+        <p class="map-ask__t"><span class="va">Ací tens el mapa per a arribar</span><span class="es">Aquí tienes el mapa para llegar</span></p>
+        <p class="map-ask__d"><span class="va">És un mapa de Google i, en carregar-lo, Google pot instal·lar les seues cookies al teu navegador. Per això no l'obrim sense preguntar.</span><span class="es">Es un mapa de Google y, al cargarlo, Google puede instalar sus cookies en tu navegador. Por eso no lo abrimos sin preguntar.</span></p>
+        <button type="button" class="btn btn-primary map-ask__btn"><span class="va">Carregar el mapa</span><span class="es">Cargar el mapa</span></button>
+        <a class="map-ask__alt" href="https://www.google.com/maps/search/?api=1&amp;query=Centre+Excursionista+Pego" target="_blank" rel="noopener"><span class="va">o obri'l en Google Maps</span><span class="es">o ábrelo en Google Maps</span></a>
+      </div>
+    </div>
   </div>
 </section>
 <div class="prefooter">

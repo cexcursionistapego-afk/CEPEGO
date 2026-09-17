@@ -660,7 +660,20 @@ def build(g):
 </section>
 <section class="section-sm" style="padding-top:0">
   <div class="wrap narrow">
-    <div class="embed reveal"><iframe src="https://www.google.com/maps?q=Centre%20Excursionista%20Pego&output=embed" height="380" title="Mapa CEPEGO" loading="lazy"></iframe></div>
+    <!-- El mapa no es carrega tot sol: és de Google i posa les seues cookies
+         en el moment que apareix. Ací només hi ha un cartell, i l'iframe el
+         munta js/main.js si el visitant el demana. Així la web no necessita
+         cap avís de cookies en entrar, perquè no n'hi ha cap fins que algú
+         decidix que sí. -->
+    <div class="embed map-ask reveal" data-map="https://www.google.com/maps?q=Centre%20Excursionista%20Pego&amp;output=embed">
+      <div class="map-ask__in">
+        <svg class="map-ask__pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.1 6.3 12.4 6.6 12.7a.6.6 0 0 0 .9 0C12.7 21.4 19 14.1 19 9a7 7 0 0 0-7-7m0 9.6A2.6 2.6 0 1 1 14.6 9 2.6 2.6 0 0 1 12 11.6"/></svg>
+        <p class="map-ask__t"><span class="va">Ací tens el mapa per a arribar</span><span class="es">Aquí tienes el mapa para llegar</span></p>
+        <p class="map-ask__d"><span class="va">És un mapa de Google i, en carregar-lo, Google pot instal·lar les seues cookies al teu navegador. Per això no l'obrim sense preguntar.</span><span class="es">Es un mapa de Google y, al cargarlo, Google puede instalar sus cookies en tu navegador. Por eso no lo abrimos sin preguntar.</span></p>
+        <button type="button" class="btn btn-primary map-ask__btn"><span class="va">Carregar el mapa</span><span class="es">Cargar el mapa</span></button>
+        <a class="map-ask__alt" href="https://www.google.com/maps/search/?api=1&amp;query=Centre+Excursionista+Pego" target="_blank" rel="noopener"><span class="va">o obri'l en Google Maps</span><span class="es">o ábrelo en Google Maps</span></a>
+      </div>
+    </div>
   </div>
 </section>
 '''+footer()
@@ -885,11 +898,11 @@ def build(g):
     <h2><span class="va">1. Què usem</span><span class="es">1. Qué usamos</span></h2>
     <p><span class="va">Este lloc web no utilitza cookies pròpies d'analítica o publicitat. L'idioma es determina directament per la URL que visites (per exemple, /es/ per al castellà), sense necessitat de cap cookie ni dada guardada al teu navegador.</span><span class="es">Este sitio web no utiliza cookies propias de analítica o publicidad. El idioma se determina directamente por la URL que visitas (por ejemplo, /es/ para el castellano), sin necesidad de ninguna cookie ni dato guardado en tu navegador.</span></p>
     <h2><span class="va">2. Contingut de tercers</span><span class="es">2. Contenido de terceros</span></h2>
-    <p><span class="va">Algunes pàgines inclouen contingut incrustat de tercers que pot instal·lar les seues pròpies cookies quan es carrega:</span><span class="es">Algunas páginas incluyen contenido incrustado de terceros que puede instalar sus propias cookies cuando se carga:</span></p>
+    <p><span class="va">Estos serveis de tercers es carreguen des dels seus propis servidors:</span><span class="es">Estos servicios de terceros se cargan desde sus propios servidores:</span></p>
     <ul>
-      <li><b>Google Maps</b> — <span class="va">mapa a la pàgina de Contacte.</span><span class="es">mapa en la página de Contacto.</span></li>
-      <li><b>AVAMET</b> — <span class="va">estacions meteorològiques a les pàgines de Meteo.</span><span class="es">estaciones meteorológicas en las páginas de Meteo.</span></li>
-      <li><b>Google Fonts</b> — <span class="va">tipografies del lloc, carregades des dels servidors de Google.</span><span class="es">tipografías del sitio, cargadas desde los servidores de Google.</span></li>
+      <li><b>Google Maps</b> — <span class="va">mapa de la pàgina de Contacte. <b>No es carrega tot sol</b>: en el seu lloc ix un botó, i el mapa (i les cookies de Google) només apareixen si tu el demanes.</span><span class="es">mapa de la página de Contacto. <b>No se carga solo</b>: en su lugar aparece un botón, y el mapa (y las cookies de Google) solo aparecen si tú lo pides.</span></li>
+      <li><b>Cloudflare Turnstile</b> — <span class="va">comprovació antirobots dels formularis. És una mesura de seguretat necessària per a que funcionen, i no s'utilitza per a seguir-te.</span><span class="es">comprobación antirrobots de los formularios. Es una medida de seguridad necesaria para que funcionen, y no se utiliza para seguirte.</span></li>
+      <li><b>Google Fonts</b> — <span class="va">tipografies del lloc. No instal·len cookies, però Google rep l'adreça IP des de la qual es descarreguen.</span><span class="es">tipografías del sitio. No instalan cookies, pero Google recibe la dirección IP desde la que se descargan.</span></li>
     </ul>
     <p><span class="va">Estos serveis es regeixen per les seues pròpies polítiques de privacitat i cookies, alienes al Centre Excursionista de Pego.</span><span class="es">Estos servicios se rigen por sus propias políticas de privacidad y cookies, ajenas al Centro Excursionista de Pego.</span></p>
     <h2><span class="va">3. Com gestionar-les</span><span class="es">3. Cómo gestionarlas</span></h2>

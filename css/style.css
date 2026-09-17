@@ -441,6 +441,18 @@ html[data-lang="es"] .va{display:none}
 .embed{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--hair);background:var(--white)}
 .embed iframe{display:block;width:100%;border:0}
 
+/* Cartell que ocupa el lloc del mapa fins que el visitant el demana (vore
+   js/main.js). Te la mateixa alcaria que l'iframe per a que la pagina no
+   pegue un bot quan es carrega. */
+.map-ask{display:flex;align-items:center;justify-content:center;min-height:380px;
+  background:var(--paper-2);text-align:center}
+.map-ask__in{padding:26px 22px;max-width:44ch}
+.map-ask__pin{width:34px;height:34px;color:var(--ember);opacity:.85}
+.map-ask__t{font-family:var(--font-display);font-size:1.15rem;font-weight:560;color:var(--ink);margin:8px 0 6px}
+.map-ask__d{font-size:.86rem;color:var(--muted);line-height:1.5;margin:0 0 16px}
+.map-ask__alt{display:block;margin-top:12px;font-size:.8rem;color:var(--muted);text-decoration:underline}
+.map-ask__alt:hover{color:var(--ink)}
+
 /* contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,60px)}
 @media(max-width:840px){.contact-grid{grid-template-columns:1fr}}
