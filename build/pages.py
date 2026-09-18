@@ -515,6 +515,9 @@ def build(g):
      ("Circular Pous de Neu","13,49 km","+362 m","813 m","facil","Fàcil","Fácil",
       "Vall d'Alcalà · Pous de neu · Mas de Capa · Mona · Vall d'Alcalà.",
       IMG+"ruta-pous-de-neu-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-neveres-i-mas-de-capa-i-mona-de-la-vall-dalcala-69664783", "Vall d'Alcalà"),
+     ("Barranc de l'Infern – La Catedral del Senderisme","16,73 km","+1.294 m","589 m","dificil","Difícil","Difícil",
+      "Vall d'Ebo · Cova Santa · Barranc de l'Infern (els 6.000 escalons) · Vall d'Ebo.",
+      IMG+"ruta-barranc-infern-qr.png", "https://es.wikiloc.com/rutas-senderismo/barranc-de-linfern-barranco-del-infierno-i-cova-santa-ruta-catedral-del-senderismo-6000-escalones-p-58074129", "Vall d'Ebo"),
      ("Circular Vall de Gallinera","16,96 km","+884 m","901 m","dificil","Difícil","Difícil",
       "Font Vella de Benissili · Castell de Benissili · Coll del Castell · Tossal de la Creu · Tossal dels Quartesos · Penyal Gros · Penya Foradà · Corral de l'Urbà · Cova de Moragues · Llavador de Benissivà · Font de Baix · Font d'en Pere · Font de l'Orenga · Font Vella · Església de Nostra Senyora de l'Assumpció.",
       IMG+"ruta-vall-gallinera-qr.png", "https://es.wikiloc.com/rutas-senderismo/vall-de-gallinera-penya-foradada-castell-de-benisili-penyal-gros-tossal-de-la-creu-desde-benisili-140293922", "Vall de Gallinera")]
