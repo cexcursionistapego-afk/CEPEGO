@@ -543,7 +543,7 @@ def build(g):
     rutes=header("rutes")+subhero(IMG+"senderisme-grup.jpg",'Wikiloc',
         "Rutes i entorn","Rutas y entorno",
         "Les principals rutes per Pego i les Valls, amb distància, desnivell i itinerari.","Las principales rutas por Pego y sus valles, con distancia, desnivel e itinerario.")+f'''
-<section class="section">
+<section class="section" style="padding-top:clamp(28px,3.5vw,48px)">
   <div class="wrap">
     <!-- El filtre ix amagat i el desplega js/rutes.js: les opcions han d'anar
          en l'idioma de la pàgina i dins d'un <option> no valen els <span> de
