@@ -512,6 +512,9 @@ def build(g):
      ("Circular Pego – Figuereta","11,57 km","+563 m","587 m","moderada","Moderada","Moderada",
       "Pego · Calvari · Escola d'Escalada · Barranc de les Coves · Font del Lliberet · Bodoix · La Figuereta · Senda del Xical · Barranc de la Canal · Calvari.",
       IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png", "https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd"),
+     ("Circular Pous de Neu","13,49 km","+362 m","813 m","facil","Fàcil","Fácil",
+      "Vall d'Alcalà · Pous de neu · Mas de Capa · Mona · Vall d'Alcalà.",
+      IMG+"ruta-pous-de-neu-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-neveres-i-mas-de-capa-i-mona-de-la-vall-dalcala-69664783"),
      ("Circular Vall de Gallinera","16,96 km","+884 m","901 m","dificil","Difícil","Difícil",
       "Font Vella de Benissili · Castell de Benissili · Coll del Castell · Tossal de la Creu · Tossal dels Quartesos · Penyal Gros · Penya Foradà · Corral de l'Urbà · Cova de Moragues · Llavador de Benissivà · Font de Baix · Font d'en Pere · Font de l'Orenga · Font Vella · Església de Nostra Senyora de l'Assumpció.",
       IMG+"ruta-vall-gallinera-qr.png", "https://es.wikiloc.com/rutas-senderismo/vall-de-gallinera-penya-foradada-castell-de-benisili-penyal-gros-tossal-de-la-creu-desde-benisili-140293922")]
