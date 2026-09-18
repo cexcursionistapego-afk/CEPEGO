@@ -494,12 +494,18 @@ def build(g):
      ("Circular Figuereta – Ebo","8,4 km","+294 m","598 m","moderada","Moderada","Moderada",
       "Figuereta · Travessia del Maset · Avenc Estret i del Mig · Riu Girona · Font del Gili · Ebo · Camí Vell d'Atzúbia · Tossal Gran · Figuereta.",
       IMG+"bb9bb0_08ee550eeae74d7fbc28b76279017f00~mv2.png", "https://loc.wiki/t/196024884?h=jpy94v53z8&wa=sd"),
+     ("Circular Passet i Castell de Gallinera","9,37 km","+546 m","610 m","moderada","Moderada","Moderada",
+      "Benirrama · Passet · Bassa de Benirrama o d'Ebo · Castell de Gallinera · Benirrama.",
+      IMG+"ruta-passet-benirrama-qr.png", "https://es.wikiloc.com/rutas-senderismo/passet-i-castell-de-benirrama-benirrama-passet-bassa-de-benirrama-o-debo-castell-de-gallinera-benir-99820992"),
      ("Circular Serra de Mostalla","10,93 km","+334 m","298 m","moderada","Moderada","Moderada",
       "Carritxar · Cova de l'Ase · Cim de Mostalla · Camí de Mostalla.",
       IMG+"ruta-mostalla-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-circular-de-la-serra-de-mostalla-pego-74089013"),
      ("Circular Pego – Figuereta","11,57 km","+563 m","587 m","moderada","Moderada","Moderada",
       "Pego · Calvari · Escola d'Escalada · Barranc de les Coves · Font del Lliberet · Bodoix · La Figuereta · Senda del Xical · Barranc de la Canal · Calvari.",
-      IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png", "https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd")]
+      IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png", "https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd"),
+     ("Circular Vall de Gallinera","16,96 km","+884 m","901 m","dificil","Difícil","Difícil",
+      "Font Vella de Benissili · Castell de Benissili · Coll del Castell · Tossal de la Creu · Tossal dels Quartesos · Penyal Gros · Penya Foradà · Corral de l'Urbà · Cova de Moragues · Llavador de Benissivà · Font de Baix · Font d'en Pere · Font de l'Orenga · Font Vella · Església de Nostra Senyora de l'Assumpció.",
+      IMG+"ruta-vall-gallinera-qr.png", "https://es.wikiloc.com/rutas-senderismo/vall-de-gallinera-penya-foradada-castell-de-benisili-penyal-gros-tossal-de-la-creu-desde-benisili-140293922")]
     rc=""
     for name,dist,desn,alt,tc,tva,tes,itin,img,wikiloc in routes:
         rc+=f'''      <div class="route reveal">
