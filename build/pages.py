@@ -161,7 +161,7 @@ def build(g):
     <div class="junta reveal">
       <div class="junta__item"><span class="junta__carrec"><span class="va">Presid&#232;ncia</span><span class="es">Presidencia</span></span><span class="junta__nom">Ximo Sala</span></div>
       <div class="junta__item"><span class="junta__carrec"><span class="va">Vicepresid&#232;ncia</span><span class="es">Vicepresidencia</span></span><span class="junta__nom">Pablo T&#233;llez</span></div>
-      <div class="junta__item"><span class="junta__carrec"><span class="va">Secretaria, Tresoreria i refugi La Figuereta</span><span class="es">Secretar&#237;a, Tesorer&#237;a y refugio La Figuereta</span></span><span class="junta__nom">Juansa Moll</span></div>
+      <div class="junta__item"><span class="junta__carrec"><span class="va">Secretaria i Tresoreria</span><span class="es">Secretar&#237;a y Tesorer&#237;a</span></span><span class="junta__nom">Juansa Moll</span></div>
       <div class="junta__item"><span class="junta__carrec"><span class="va">Vocal</span><span class="es">Vocal</span></span><span class="junta__nom">Carmen Bordes</span></div>
       <div class="junta__item"><span class="junta__carrec"><span class="va">Vocal</span><span class="es">Vocal</span></span><span class="junta__nom">Mari Carmen Lloren&#231;</span></div>
     </div>
