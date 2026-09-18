@@ -141,6 +141,16 @@ def build(g):
   </div>
 </section>
 
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="center"><div class="kicker center-k"><span class="va">El nostre territori</span><span class="es">Nuestro territorio</span></div></div>
+    <div class="skyline reveal">
+{skyline_svg(PEAKS, W=1200, baseline=400, min_px=64, max_px=220, vertical=False, top=128, view_top=64)}
+{skyline_svg(PEAKS, W=440, baseline=500, min_px=36, max_px=110, vertical=True, top=340, view_top=230)}
+    </div>
+  </div>
+</section>
+
 <section class="section bg-paper2" style="padding-top:clamp(40px,5vw,70px);padding-bottom:clamp(40px,5vw,70px)">
   <div class="wrap">
     <div class="narrow center reveal" style="margin-bottom:clamp(18px,2.6vw,30px)">
@@ -152,22 +162,12 @@ def build(g):
       <div class="junta__item"><span class="junta__carrec"><span class="va">Presid&#232;ncia</span><span class="es">Presidencia</span></span><span class="junta__nom">Ximo Sala</span></div>
       <div class="junta__item"><span class="junta__carrec"><span class="va">Vicepresid&#232;ncia</span><span class="es">Vicepresidencia</span></span><span class="junta__nom">Pablo T&#233;llez</span></div>
       <div class="junta__item"><span class="junta__carrec"><span class="va">Secretaria, Tresoreria i refugi La Figuereta</span><span class="es">Secretar&#237;a, Tesorer&#237;a y refugio La Figuereta</span></span><span class="junta__nom">Juansa Moll</span></div>
-      <div class="junta__item"><span class="junta__carrec"><span class="va">Vocal 1</span><span class="es">Vocal 1</span></span><span class="junta__nom">Carmen Bordes</span></div>
-      <div class="junta__item"><span class="junta__carrec"><span class="va">Vocal 2</span><span class="es">Vocal 2</span></span><span class="junta__nom">Mari Carmen Lloren&#231;</span></div>
+      <div class="junta__item"><span class="junta__carrec"><span class="va">Vocal</span><span class="es">Vocal</span></span><span class="junta__nom">Carmen Bordes</span></div>
+      <div class="junta__item"><span class="junta__carrec"><span class="va">Vocal</span><span class="es">Vocal</span></span><span class="junta__nom">Mari Carmen Lloren&#231;</span></div>
     </div>
     <p class="center" style="margin:clamp(18px,2.4vw,26px) 0 0">
       <a href="contacte.html" class="link-arrow"><span class="va">Contacta amb la junta</span><span class="es">Contacta con la junta</span></a>
     </p>
-  </div>
-</section>
-
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div class="center"><div class="kicker center-k"><span class="va">El nostre territori</span><span class="es">Nuestro territorio</span></div></div>
-    <div class="skyline reveal">
-{skyline_svg(PEAKS, W=1200, baseline=400, min_px=64, max_px=220, vertical=False, top=128, view_top=64)}
-{skyline_svg(PEAKS, W=440, baseline=500, min_px=36, max_px=110, vertical=True, top=340, view_top=230)}
-    </div>
   </div>
 </section>
 
