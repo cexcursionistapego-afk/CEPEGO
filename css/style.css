@@ -932,3 +932,19 @@ html[data-lang="es"] .va{display:none}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}
   .reveal{opacity:1;transform:none}.band__bg{background-attachment:scroll}
   .hero .crest,.hero__brand,.hero__place-title,.hero p,.hero__actions{animation:none;opacity:1;transform:none}}
+
+/* Junta directiva (portada). Va en flex i no en .cols-3 perque son cinc
+   carrecs: amb una graella de tres l'ultima fila quedava penjant a l'esquerra;
+   aixi les dos fitxes que sobren queden centrades. */
+.junta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.junta__item{flex:0 1 calc(33.333% - 10px);min-width:230px;
+  background:var(--white);border:1px solid var(--hair);border-radius:var(--r);
+  box-shadow:var(--shadow-sm);padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.junta__carrec{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;line-height:1.35}
+/* El carrec de Juansa ocupa dos linies: amb l'auto els noms queden alineats
+   entre ells i no a diferent altura segons la llargaria del carrec. */
+.junta__nom{margin-top:auto;font-family:var(--font-display);color:var(--navy);
+  font-size:1.12rem;font-weight:580;line-height:1.2}
+@media(max-width:860px){.junta__item{flex-basis:calc(50% - 7px)}}
+@media(max-width:520px){.junta__item{flex-basis:100%;min-width:0}}
