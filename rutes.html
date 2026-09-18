@@ -78,12 +78,37 @@
 </section>
 <section class="section">
   <div class="wrap">
-    <div class="grid cols-3">
-      <div class="route reveal">
+    <!-- El filtre ix amagat i el desplega js/rutes.js: les opcions han d'anar
+         en l'idioma de la pàgina i dins d'un <option> no valen els <span> de
+         va/es, així que les escriu el JS. Si no hi ha JS, no ix cap filtre
+         però es veuen totes les rutes, que és el que importa. -->
+    <div class="rutes-filtre reveal" id="rutes-filtre" hidden>
+      <div class="select-row">
+        <div class="field">
+          <label for="f-dif"><span class="va">Dificultat</span><span class="es">Dificultad</span></label>
+          <select id="f-dif"></select>
+        </div>
+        <div class="field">
+          <label for="f-km"><span class="va">Distància</span><span class="es">Distancia</span></label>
+          <select id="f-km"></select>
+        </div>
+        <div class="field">
+          <label for="f-pobl"><span class="va">Població</span><span class="es">Población</span></label>
+          <select id="f-pobl"><option value=""></option><option value="La Figuereta">La Figuereta</option><option value="Pego">Pego</option><option value="Vall d'Alcalà">Vall d'Alcalà</option><option value="Vall d'Ebo">Vall d'Ebo</option><option value="Vall de Gallinera">Vall de Gallinera</option></select>
+        </div>
+      </div>
+      <div class="rutes-filtre__peu">
+        <span class="rutes-filtre__n" id="f-compte"></span>
+        <button type="button" class="rutes-filtre__neteja" id="f-neteja" hidden><span class="va">Llevar filtres</span><span class="es">Quitar filtros</span></button>
+      </div>
+    </div>
+    <div class="grid cols-3" id="rutes-llista">
+      <div class="route reveal" data-dif="facil" data-km="2.97" data-pobl="La Figuereta">
         <a class="route__img" href="https://loc.wiki/t/18485253?h=jpy94v53z8&wa=sd" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/bb9bb0_7e2efa67934342c2974582cae5147165~mv2.png" alt="Codi QR i mapa Circular Figuereta – Tossal — Wikiloc"></a>
         <div class="route__b">
           <span class="tag facil"><span class="va">Fàcil</span><span class="es">Fácil</span></span>
           <h3 style="margin-top:10px">Circular Figuereta – Tossal</h3>
+          <p class="route__pobl">La Figuereta</p>
           <div class="route__stats">
             <div><b>2,97 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+154 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -92,11 +117,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Figuereta · Cova Blanca · Tossal Gran · Despoblat Beniqueis · Camí de la Figuereta · Coveta de Llúcia · Figuereta.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="facil" data-km="4.5" data-pobl="Vall d'Ebo">
         <a class="route__img" href="https://es.wikiloc.com/rutas-senderismo/ebo-els-tolls-ebo-98329260" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/ruta-tolls-ebo-qr.png" alt="Codi QR i mapa Circular els Tolls d'Ebo — Wikiloc"></a>
         <div class="route__b">
           <span class="tag facil"><span class="va">Fàcil</span><span class="es">Fácil</span></span>
           <h3 style="margin-top:10px">Circular els Tolls d'Ebo</h3>
+          <p class="route__pobl">Vall d'Ebo</p>
           <div class="route__stats">
             <div><b>4,5 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+109 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -105,11 +131,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Ebo · Els Tolls · Ebo.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="moderada" data-km="7.2" data-pobl="Pego">
         <a class="route__img" href="https://es.wikiloc.com/rutas-senderismo/barranc-de-la-canal-senda-de-marroco-almisera-pego-203881518" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/ruta-marroco-qr.png" alt="Codi QR i mapa Circular del Marroco — Wikiloc"></a>
         <div class="route__b">
           <span class="tag moderada"><span class="va">Moderada</span><span class="es">Moderada</span></span>
           <h3 style="margin-top:10px">Circular del Marroco</h3>
+          <p class="route__pobl">Pego</p>
           <div class="route__stats">
             <div><b>7,2 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+291 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -118,11 +145,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Pego · Barranc de la Canal · Senda del Marroco · Almiserà · Pego.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="moderada" data-km="8.4" data-pobl="La Figuereta">
         <a class="route__img" href="https://loc.wiki/t/196024884?h=jpy94v53z8&wa=sd" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/bb9bb0_08ee550eeae74d7fbc28b76279017f00~mv2.png" alt="Codi QR i mapa Circular Figuereta – Ebo — Wikiloc"></a>
         <div class="route__b">
           <span class="tag moderada"><span class="va">Moderada</span><span class="es">Moderada</span></span>
           <h3 style="margin-top:10px">Circular Figuereta – Ebo</h3>
+          <p class="route__pobl">La Figuereta</p>
           <div class="route__stats">
             <div><b>8,4 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+294 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -131,11 +159,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Figuereta · Travessia del Maset · Avenc Estret i del Mig · Riu Girona · Font del Gili · Ebo · Camí Vell d'Atzúbia · Tossal Gran · Figuereta.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="moderada" data-km="9.37" data-pobl="Vall de Gallinera">
         <a class="route__img" href="https://es.wikiloc.com/rutas-senderismo/passet-i-castell-de-benirrama-benirrama-passet-bassa-de-benirrama-o-debo-castell-de-gallinera-benir-99820992" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/ruta-passet-benirrama-qr.png" alt="Codi QR i mapa Circular Passet i Castell de Gallinera — Wikiloc"></a>
         <div class="route__b">
           <span class="tag moderada"><span class="va">Moderada</span><span class="es">Moderada</span></span>
           <h3 style="margin-top:10px">Circular Passet i Castell de Gallinera</h3>
+          <p class="route__pobl">Vall de Gallinera</p>
           <div class="route__stats">
             <div><b>9,37 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+546 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -144,11 +173,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Benirrama · Passet · Bassa de Benirrama o d'Ebo · Castell de Gallinera · Benirrama.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="facil" data-km="10.29" data-pobl="Pego">
         <a class="route__img" href="https://es.wikiloc.com/rutas-senderismo/pego-tormos-159060707" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/ruta-pego-tormos-qr.png" alt="Codi QR i mapa Pego – Tormos — Wikiloc"></a>
         <div class="route__b">
           <span class="tag facil"><span class="va">Fàcil</span><span class="es">Fácil</span></span>
           <h3 style="margin-top:10px">Pego – Tormos</h3>
+          <p class="route__pobl">Pego</p>
           <div class="route__stats">
             <div><b>10,29 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+590 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -157,11 +187,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Només anada: de Pego a Tormos. Cal tornar pel mateix camí o deixar un cotxe a l'arribada.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="moderada" data-km="10.93" data-pobl="Pego">
         <a class="route__img" href="https://es.wikiloc.com/rutas-senderismo/ruta-circular-de-la-serra-de-mostalla-pego-74089013" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/ruta-mostalla-qr.png" alt="Codi QR i mapa Circular Serra de Mostalla — Wikiloc"></a>
         <div class="route__b">
           <span class="tag moderada"><span class="va">Moderada</span><span class="es">Moderada</span></span>
           <h3 style="margin-top:10px">Circular Serra de Mostalla</h3>
+          <p class="route__pobl">Pego</p>
           <div class="route__stats">
             <div><b>10,93 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+334 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -170,11 +201,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Carritxar · Cova de l'Ase · Cim de Mostalla · Camí de Mostalla.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="moderada" data-km="11.57" data-pobl="Pego">
         <a class="route__img" href="https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png" alt="Codi QR i mapa Circular Pego – Figuereta — Wikiloc"></a>
         <div class="route__b">
           <span class="tag moderada"><span class="va">Moderada</span><span class="es">Moderada</span></span>
           <h3 style="margin-top:10px">Circular Pego – Figuereta</h3>
+          <p class="route__pobl">Pego</p>
           <div class="route__stats">
             <div><b>11,57 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+563 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -183,11 +215,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Pego · Calvari · Escola d'Escalada · Barranc de les Coves · Font del Lliberet · Bodoix · La Figuereta · Senda del Xical · Barranc de la Canal · Calvari.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="facil" data-km="13.49" data-pobl="Vall d'Alcalà">
         <a class="route__img" href="https://es.wikiloc.com/rutas-senderismo/ruta-neveres-i-mas-de-capa-i-mona-de-la-vall-dalcala-69664783" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/ruta-pous-de-neu-qr.png" alt="Codi QR i mapa Circular Pous de Neu — Wikiloc"></a>
         <div class="route__b">
           <span class="tag facil"><span class="va">Fàcil</span><span class="es">Fácil</span></span>
           <h3 style="margin-top:10px">Circular Pous de Neu</h3>
+          <p class="route__pobl">Vall d'Alcalà</p>
           <div class="route__stats">
             <div><b>13,49 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+362 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -196,11 +229,12 @@
           <p style="font-size:.9rem;color:var(--muted)">Vall d'Alcalà · Pous de neu · Mas de Capa · Mona · Vall d'Alcalà.</p>
         </div>
       </div>
-      <div class="route reveal">
+      <div class="route reveal" data-dif="dificil" data-km="16.96" data-pobl="Vall de Gallinera">
         <a class="route__img" href="https://es.wikiloc.com/rutas-senderismo/vall-de-gallinera-penya-foradada-castell-de-benisili-penyal-gros-tossal-de-la-creu-desde-benisili-140293922" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="/img/ruta-vall-gallinera-qr.png" alt="Codi QR i mapa Circular Vall de Gallinera — Wikiloc"></a>
         <div class="route__b">
           <span class="tag dificil"><span class="va">Difícil</span><span class="es">Difícil</span></span>
           <h3 style="margin-top:10px">Circular Vall de Gallinera</h3>
+          <p class="route__pobl">Vall de Gallinera</p>
           <div class="route__stats">
             <div><b>16,96 km</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>+884 m</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -210,6 +244,7 @@
         </div>
       </div>
     </div>
+    <p class="note center" id="rutes-buit" hidden><span class="va">Cap ruta amb estos filtres. Prova a ampliar-los.</span><span class="es">Ninguna ruta con estos filtros. Prueba a ampliarlos.</span></p>
   </div>
 </section>
 <div class="prefooter">
@@ -286,5 +321,6 @@
   </div>
 </footer>
 <script src="/js/main.js"></script>
+<script src="/js/rutes.js"></script>
 </body>
 </html>

@@ -431,6 +431,22 @@ html[data-lang="es"] .va{display:none}
 .route__img img{width:100%;height:100%;object-fit:contain;padding:12px;box-sizing:border-box}
 .route__b{padding:22px}
 .route h3{color:var(--navy);margin-bottom:.3em}
+/* Poble d'on ix la ruta: es diu a la fitxa perque el filtre de dalt te sentit
+   nomes si despres es veu a quin poble correspon cada una. */
+.route__pobl{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin:0 0 10px}
+.route--off{display:none}
+
+/* Filtre de rutes. El desplega js/rutes.js; sense JS no ix. */
+.rutes-filtre{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);
+  box-shadow:var(--shadow-sm);padding:16px 18px;margin-bottom:clamp(20px,2.6vw,30px)}
+.rutes-filtre .field{margin-bottom:0}
+.rutes-filtre__peu{display:flex;align-items:center;justify-content:space-between;
+  gap:10px;flex-wrap:wrap;margin-top:12px}
+.rutes-filtre__n{font-size:.78rem;color:var(--muted);font-weight:600}
+.rutes-filtre__neteja{background:none;border:0;padding:0;font:inherit;font-size:.78rem;
+  color:var(--navy);text-decoration:underline;cursor:pointer}
+.rutes-filtre__neteja:hover{color:var(--ember)}
 .route__stats{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0;font-size:.82rem}
 .route__stats b{display:block;font-family:var(--font-display);font-size:1.3rem;color:var(--ink)}
 .route__stats span{color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:.68rem}

@@ -490,41 +490,45 @@ def build(g):
     # ============================================= RUTES
     routes=[("Circular Figuereta – Tossal","2,97 km","+154 m","673 m","facil","Fàcil","Fácil",
       "Figuereta · Cova Blanca · Tossal Gran · Despoblat Beniqueis · Camí de la Figuereta · Coveta de Llúcia · Figuereta.",
-      IMG+"bb9bb0_7e2efa67934342c2974582cae5147165~mv2.png", "https://loc.wiki/t/18485253?h=jpy94v53z8&wa=sd"),
+      IMG+"bb9bb0_7e2efa67934342c2974582cae5147165~mv2.png", "https://loc.wiki/t/18485253?h=jpy94v53z8&wa=sd", "La Figuereta"),
      ("Circular els Tolls d'Ebo","4,5 km","+109 m","457 m","facil","Fàcil","Fácil",
       "Ebo · Els Tolls · Ebo.",
-      IMG+"ruta-tolls-ebo-qr.png", "https://es.wikiloc.com/rutas-senderismo/ebo-els-tolls-ebo-98329260"),
+      IMG+"ruta-tolls-ebo-qr.png", "https://es.wikiloc.com/rutas-senderismo/ebo-els-tolls-ebo-98329260", "Vall d'Ebo"),
      ("Circular del Marroco","7,2 km","+291 m","366 m","moderada","Moderada","Moderada",
       "Pego · Barranc de la Canal · Senda del Marroco · Almiserà · Pego.",
-      IMG+"ruta-marroco-qr.png", "https://es.wikiloc.com/rutas-senderismo/barranc-de-la-canal-senda-de-marroco-almisera-pego-203881518"),
+      IMG+"ruta-marroco-qr.png", "https://es.wikiloc.com/rutas-senderismo/barranc-de-la-canal-senda-de-marroco-almisera-pego-203881518", "Pego"),
      ("Circular Figuereta – Ebo","8,4 km","+294 m","598 m","moderada","Moderada","Moderada",
       "Figuereta · Travessia del Maset · Avenc Estret i del Mig · Riu Girona · Font del Gili · Ebo · Camí Vell d'Atzúbia · Tossal Gran · Figuereta.",
-      IMG+"bb9bb0_08ee550eeae74d7fbc28b76279017f00~mv2.png", "https://loc.wiki/t/196024884?h=jpy94v53z8&wa=sd"),
+      IMG+"bb9bb0_08ee550eeae74d7fbc28b76279017f00~mv2.png", "https://loc.wiki/t/196024884?h=jpy94v53z8&wa=sd", "La Figuereta"),
      ("Circular Passet i Castell de Gallinera","9,37 km","+546 m","610 m","moderada","Moderada","Moderada",
       "Benirrama · Passet · Bassa de Benirrama o d'Ebo · Castell de Gallinera · Benirrama.",
-      IMG+"ruta-passet-benirrama-qr.png", "https://es.wikiloc.com/rutas-senderismo/passet-i-castell-de-benirrama-benirrama-passet-bassa-de-benirrama-o-debo-castell-de-gallinera-benir-99820992"),
+      IMG+"ruta-passet-benirrama-qr.png", "https://es.wikiloc.com/rutas-senderismo/passet-i-castell-de-benirrama-benirrama-passet-bassa-de-benirrama-o-debo-castell-de-gallinera-benir-99820992", "Vall de Gallinera"),
      ("Pego – Tormos","10,29 km","+590 m","504 m","facil","Fàcil","Fácil",
       "Només anada: de Pego a Tormos. Cal tornar pel mateix camí o deixar un cotxe a l'arribada.",
-      IMG+"ruta-pego-tormos-qr.png", "https://es.wikiloc.com/rutas-senderismo/pego-tormos-159060707"),
+      IMG+"ruta-pego-tormos-qr.png", "https://es.wikiloc.com/rutas-senderismo/pego-tormos-159060707", "Pego"),
      ("Circular Serra de Mostalla","10,93 km","+334 m","298 m","moderada","Moderada","Moderada",
       "Carritxar · Cova de l'Ase · Cim de Mostalla · Camí de Mostalla.",
-      IMG+"ruta-mostalla-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-circular-de-la-serra-de-mostalla-pego-74089013"),
+      IMG+"ruta-mostalla-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-circular-de-la-serra-de-mostalla-pego-74089013", "Pego"),
      ("Circular Pego – Figuereta","11,57 km","+563 m","587 m","moderada","Moderada","Moderada",
       "Pego · Calvari · Escola d'Escalada · Barranc de les Coves · Font del Lliberet · Bodoix · La Figuereta · Senda del Xical · Barranc de la Canal · Calvari.",
-      IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png", "https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd"),
+      IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png", "https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd", "Pego"),
      ("Circular Pous de Neu","13,49 km","+362 m","813 m","facil","Fàcil","Fácil",
       "Vall d'Alcalà · Pous de neu · Mas de Capa · Mona · Vall d'Alcalà.",
-      IMG+"ruta-pous-de-neu-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-neveres-i-mas-de-capa-i-mona-de-la-vall-dalcala-69664783"),
+      IMG+"ruta-pous-de-neu-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-neveres-i-mas-de-capa-i-mona-de-la-vall-dalcala-69664783", "Vall d'Alcalà"),
      ("Circular Vall de Gallinera","16,96 km","+884 m","901 m","dificil","Difícil","Difícil",
       "Font Vella de Benissili · Castell de Benissili · Coll del Castell · Tossal de la Creu · Tossal dels Quartesos · Penyal Gros · Penya Foradà · Corral de l'Urbà · Cova de Moragues · Llavador de Benissivà · Font de Baix · Font d'en Pere · Font de l'Orenga · Font Vella · Església de Nostra Senyora de l'Assumpció.",
-      IMG+"ruta-vall-gallinera-qr.png", "https://es.wikiloc.com/rutas-senderismo/vall-de-gallinera-penya-foradada-castell-de-benisili-penyal-gros-tossal-de-la-creu-desde-benisili-140293922")]
+      IMG+"ruta-vall-gallinera-qr.png", "https://es.wikiloc.com/rutas-senderismo/vall-de-gallinera-penya-foradada-castell-de-benisili-penyal-gros-tossal-de-la-creu-desde-benisili-140293922", "Vall de Gallinera")]
     rc=""
-    for name,dist,desn,alt,tc,tva,tes,itin,img,wikiloc in routes:
-        rc+=f'''      <div class="route reveal">
+    for name,dist,desn,alt,tc,tva,tes,itin,img,wikiloc,pobl in routes:
+        # La distància es guarda també com a número per a poder filtrar per
+        # trams ("2,97 km" -> 2.97): el text el llig la gent, el número el JS.
+        km=float(dist.split()[0].replace(",","."))
+        rc+=f'''      <div class="route reveal" data-dif="{tc}" data-km="{km}" data-pobl="{pobl}">
         <a class="route__img" href="{wikiloc}" target="_blank" rel="noopener" title="Obrir a Wikiloc"><img loading="lazy" src="{img}" alt="Codi QR i mapa {name} — Wikiloc"></a>
         <div class="route__b">
           <span class="tag {tc}"><span class="va">{tva}</span><span class="es">{tes}</span></span>
           <h3 style="margin-top:10px">{name}</h3>
+          <p class="route__pobl">{pobl}</p>
           <div class="route__stats">
             <div><b>{dist}</b><span><span class="va">Distància</span><span class="es">Distancia</span></span></div>
             <div><b>{desn}</b><span><span class="va">Desnivell</span><span class="es">Desnivel</span></span></div>
@@ -533,18 +537,46 @@ def build(g):
           <p style="font-size:.9rem;color:var(--muted)">{itin}</p>
         </div>
       </div>\n'''
+    # Els pobles ixen de les mateixes rutes, així no cal mantindre cap llista
+    # a banda: si demà s'afig una ruta d'un poble nou, ix sola al filtre.
+    pobles="".join(f'<option value="{p}">{p}</option>' for p in sorted({r[10] for r in routes}))
     rutes=header("rutes")+subhero(IMG+"senderisme-grup.jpg",'Wikiloc',
         "Rutes i entorn","Rutas y entorno",
         "Les principals rutes per Pego i les Valls, amb distància, desnivell i itinerari.","Las principales rutas por Pego y sus valles, con distancia, desnivel e itinerario.")+f'''
 <section class="section">
   <div class="wrap">
-    <div class="grid cols-3">
+    <!-- El filtre ix amagat i el desplega js/rutes.js: les opcions han d'anar
+         en l'idioma de la pàgina i dins d'un <option> no valen els <span> de
+         va/es, així que les escriu el JS. Si no hi ha JS, no ix cap filtre
+         però es veuen totes les rutes, que és el que importa. -->
+    <div class="rutes-filtre reveal" id="rutes-filtre" hidden>
+      <div class="select-row">
+        <div class="field">
+          <label for="f-dif"><span class="va">Dificultat</span><span class="es">Dificultad</span></label>
+          <select id="f-dif"></select>
+        </div>
+        <div class="field">
+          <label for="f-km"><span class="va">Distància</span><span class="es">Distancia</span></label>
+          <select id="f-km"></select>
+        </div>
+        <div class="field">
+          <label for="f-pobl"><span class="va">Població</span><span class="es">Población</span></label>
+          <select id="f-pobl"><option value=""></option>{pobles}</select>
+        </div>
+      </div>
+      <div class="rutes-filtre__peu">
+        <span class="rutes-filtre__n" id="f-compte"></span>
+        <button type="button" class="rutes-filtre__neteja" id="f-neteja" hidden><span class="va">Llevar filtres</span><span class="es">Quitar filtros</span></button>
+      </div>
+    </div>
+    <div class="grid cols-3" id="rutes-llista">
 {rc}    </div>
+    <p class="note center" id="rutes-buit" hidden><span class="va">Cap ruta amb estos filtres. Prova a ampliar-los.</span><span class="es">Ninguna ruta con estos filtros. Prueba a ampliarlos.</span></p>
   </div>
 </section>
 '''+footer()
     write("rutes.html", doc("Rutes de senderisme per Pego | CEPEGO",
-        "Rutes de senderisme per Pego i les Valls amb el seu perfil i itinerari.", rutes, path="rutes.html"))
+        "Rutes de senderisme per Pego i les Valls amb el seu perfil i itinerari.", rutes, path="rutes.html", extra_js="js/rutes.js"))
 
     # ============================================= ESCALADA
     inic=[("1","Diedre","V"),("2","Placa","V"),("3","Plaqueta","IV"),("4","Mosquera","V"),("5","Ximet","V"),
