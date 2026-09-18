@@ -494,6 +494,9 @@ def build(g):
      ("Circular Figuereta – Ebo","8,4 km","+294 m","598 m","moderada","Moderada","Moderada",
       "Figuereta · Travessia del Maset · Avenc Estret i del Mig · Riu Girona · Font del Gili · Ebo · Camí Vell d'Atzúbia · Tossal Gran · Figuereta.",
       IMG+"bb9bb0_08ee550eeae74d7fbc28b76279017f00~mv2.png", "https://loc.wiki/t/196024884?h=jpy94v53z8&wa=sd"),
+     ("Circular Serra de Mostalla","10,93 km","+334 m","298 m","moderada","Moderada","Moderada",
+      "Carritxar · Cova de l'Ase · Cim de Mostalla · Camí de Mostalla.",
+      IMG+"ruta-mostalla-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-circular-de-la-serra-de-mostalla-pego-74089013"),
      ("Circular Pego – Figuereta","11,57 km","+563 m","587 m","moderada","Moderada","Moderada",
       "Pego · Calvari · Escola d'Escalada · Barranc de les Coves · Font del Lliberet · Bodoix · La Figuereta · Senda del Xical · Barranc de la Canal · Calvari.",
       IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png", "https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd")]
