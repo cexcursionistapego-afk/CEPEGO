@@ -563,7 +563,7 @@ def build(g):
           <select id="f-km"></select>
         </div>
         <div class="field">
-          <label for="f-pobl"><span class="va">Població</span><span class="es">Población</span></label>
+          <label for="f-pobl"><span class="va">Territori</span><span class="es">Territorio</span></label>
           <select id="f-pobl"><option value=""></option>{pobles}</select>
         </div>
       </div>
