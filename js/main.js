@@ -193,9 +193,9 @@
       var t = (v || '').trim().toUpperCase();
       return /^\d{8}[A-Z]$/.test(t) || /^[XYZ]\d{7}[A-Z]$/.test(t);
     }
+    function normIBAN(v) { return (v || '').replace(/\s/g, '').toUpperCase(); }
     function isValidIBAN(v) {
-      var t = (v || '').replace(/\s/g, '').toUpperCase();
-      return /^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(t);
+      return /^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(normIBAN(v));
     }
     var MSG = {
       required: { va: 'Camp obligatori.', es: 'Campo obligatorio.' },
@@ -244,6 +244,10 @@
       var name = (input.getAttribute('name') || '').toLowerCase();
       var isPhone = name === 'telefon' || type === 'tel';
       if (isPhone) input.addEventListener('input', function () { sanitizePhoneInput(input); });
+      // L'IBAN s'ajunta en eixir del camp i no mentre s'escriu: qui el copia
+      // del banc el porta agrupat de quatre en quatre i no cal barallar-se amb
+      // el cursor. El que s'envia ja va sense espais de totes formes.
+      if (name === 'iban') input.addEventListener('blur', function () { input.value = normIBAN(input.value); });
       input.addEventListener('blur', function () { markTouched(input); checkTextInput(input); });
       input.addEventListener('input', function () { if (isTouched(input)) checkTextInput(input); });
     });

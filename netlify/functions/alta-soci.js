@@ -3,7 +3,7 @@
 // d'Airtable, replicant els camps del "FORMULARI D'ALTA" oficial (incloent
 // les fotos del DNI, pujades com a adjunts després de crear el registre).
 
-const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN } = require('./_validators');
+const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN, normIBAN } = require('./_validators');
 const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE || 'appkuKVxHSMyDElfh';
@@ -35,7 +35,7 @@ exports.handler = async function (event) {
   const telefon   = s(b.telefon);
   const email     = s(b.email);
   const localitat = s(b.localitat);
-  const iban      = s(b.iban);
+  const iban      = normIBAN(b.iban);
 
   if (!nom || !cognoms || !dni || !naixement || !telefon || !email || !localitat || !iban)
     return res(400, { ok: false, error: 'camps', message: 'Falten camps obligatoris.' });

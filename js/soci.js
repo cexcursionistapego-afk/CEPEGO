@@ -23,9 +23,11 @@
     var t = (v || '').trim().toUpperCase();
     return /^\d{8}[A-Z]$/.test(t) || /^[XYZ]\d{7}[A-Z]$/.test(t);
   }
+  // L'IBAN es teclegeja agrupat pero s'envia d'una peca i en majuscules: aixi
+  // arriba a Airtable sempre igual escrit.
+  function normIBAN(v) { return (v || '').replace(/\s/g, '').toUpperCase(); }
   function isValidIBAN(v) {
-    var t = (v || '').replace(/\s/g, '').toUpperCase();
-    return /^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(t);
+    return /^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(normIBAN(v));
   }
   var MSG = {
     dni:     { va: 'El DNI/NIE no és vàlid.',        es: 'El DNI/NIE no es válido.' },
@@ -70,6 +72,7 @@
       if (!isValidPhone(body.telefon)) { show(altaMsg, MSG.telefon[l], 'err'); return; }
       if (!isValidEmail(body.email))   { show(altaMsg, MSG.email[l], 'err'); return; }
       if (!isValidIBAN(body.iban))     { show(altaMsg, MSG.iban[l], 'err'); return; }
+      body.iban = normIBAN(body.iban);
 
       var fAnvers = altaForm.querySelector('[name="dni_anvers"]').files[0];
       var fRevers = altaForm.querySelector('[name="dni_revers"]').files[0];
@@ -146,6 +149,7 @@
       if (!isValidEmail(body.email)) { show(baixaMsg, MSG.email[l], 'err'); return; }
       if ((body.telefon || '').trim() && !isValidPhone(body.telefon)) { show(baixaMsg, MSG.telefon[l], 'err'); return; }
       if ((body.iban || '').trim() && !isValidIBAN(body.iban)) { show(baixaMsg, MSG.iban[l], 'err'); return; }
+      body.iban = normIBAN(body.iban);
 
       var fDni = baixaForm.querySelector('[name="dni_foto"]').files[0];
       if (fDni && fDni.size > MAX_FILE) {

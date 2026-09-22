@@ -1,7 +1,7 @@
 // POST /api/baixa-soci
 // Envia una sol·licitud de baixa a la taula BAIXES CENTRE EXCURSIONISTA PEGO.
 
-const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN } = require('./_validators');
+const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN, normIBAN } = require('./_validators');
 const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
@@ -52,7 +52,7 @@ exports.handler = async function (event) {
     'EMAIL':   email,
   };
   if (s(b.telefon)) fields['TELÈFON']        = s(b.telefon);
-  if (s(b.iban))    fields['BANC DEVOLUCIÓ'] = s(b.iban);
+  if (s(b.iban))    fields['BANC DEVOLUCIÓ'] = normIBAN(b.iban);
   if (s(b.missatge))fields['NOTAS']          = s(b.missatge);
 
   try {
