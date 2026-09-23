@@ -44,16 +44,22 @@
 
 # Camí curt per al registre de viatgers del refugi. És l'enllaç que es passa a
 # qui ve a dormir (i el que anirà al QR del refugi), així que ha de ser fàcil
-# de dictar: cepego.com/huespedes. Són rewrites (200), no redireccions, per a
-# que la URL es quede bonica a la barra del navegador.
+# de dictar: cepego.com/hostes. Són rewrites (200), no redireccions, per a que
+# la URL es quede bonica a la barra del navegador.
+[[redirects]]
+  from = "/hostes"
+  to = "/hostes.html"
+  status = 200
+[[redirects]]
+  from = "/es/hostes"
+  to = "/es/hostes.html"
+  status = 200
+
+# Qui reba l'enllaç amb el nom en castellà acaba a la versió castellana.
 [[redirects]]
   from = "/huespedes"
-  to = "/huespedes.html"
-  status = 200
-[[redirects]]
-  from = "/es/huespedes"
-  to = "/es/huespedes.html"
-  status = 200
+  to = "/es/hostes"
+  status = 301
 
 # Redirecció de l'antiga pàgina de meteo de Pego, ara unificada en una sola
 [[redirects]]

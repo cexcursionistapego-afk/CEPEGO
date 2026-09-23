@@ -19,8 +19,22 @@
   var selTipus = document.getElementById('v-tipus');
   var MAX_FILE = 4 * 1024 * 1024;
 
-  var es = document.documentElement.getAttribute('data-lang') === 'es';
-  function t(va, txtEs) { return es ? txtEs : va; }
+  /* ---------- idioma ---------- */
+  // Esta pàgina porta tres idiomes i la resta del lloc dos, així que ací
+  // l'idioma es canvia al vol: es toca data-lang i el CSS ja ensenya els
+  // <span> que toquen. No es navega enlloc perquè no hi ha cap /en/ del lloc
+  // sencer i el menú es quedaria a mitges.
+  var root = document.documentElement;
+  function lang() {
+    var l = root.getAttribute('data-lang');
+    return (l === 'es' || l === 'en') ? l : 'va';
+  }
+  function t(va, txtEs, txtEn) {
+    var l = lang();
+    if (l === 'es') return txtEs;
+    if (l === 'en') return txtEn !== undefined ? txtEn : txtEs;
+    return va;
+  }
 
   function show(text, cls) {
     if (!msg) return;
@@ -34,19 +48,43 @@
       return '<option value="' + o[0] + '">' + o[1] + '</option>';
     }).join('');
   }
-  omple(selSexe, [
-    ['', t('Tria una opció', 'Elige una opción')],
-    ['Masculino', t('Home', 'Hombre')],
-    ['Femenino', t('Dona', 'Mujer')],
-    ['Trans', 'Trans'],
-    ['No binario', t('No binari', 'No binario')]
-  ]);
-  omple(selTipus, [
-    ['', t('Tria una opció', 'Elige una opción')],
-    ['DNI', t('DNI o NIE', 'DNI o NIE')],
-    ['PASSAPORTE', t('Passaport', 'Pasaporte')],
-    ['TIE', t('TIE (targeta d\'estranger)', 'TIE (tarjeta de extranjero)')]
-  ]);
+  // Es tornen a pintar en canviar d'idioma, però guardant el que ja estiguera
+  // triat: qui ompli mig formulari i canvia a anglés no ha de tornar a triar.
+  function pintaSelects() {
+    var sexe = selSexe.value, tipus = selTipus.value;
+    omple(selSexe, [
+      ['', t('Tria una opció', 'Elige una opción', 'Choose an option')],
+      ['Masculino', t('Home', 'Hombre', 'Male')],
+      ['Femenino', t('Dona', 'Mujer', 'Female')],
+      ['Trans', t('Trans', 'Trans', 'Trans')],
+      ['No binario', t('No binari', 'No binario', 'Non-binary')]
+    ]);
+    omple(selTipus, [
+      ['', t('Tria una opció', 'Elige una opción', 'Choose an option')],
+      ['DNI', t('DNI o NIE', 'DNI o NIE', 'DNI or NIE (Spanish ID)')],
+      ['PASSAPORTE', t('Passaport', 'Pasaporte', 'Passport')],
+      ['TIE', t('TIE (targeta d\'estranger)', 'TIE (tarjeta de extranjero)', 'TIE (foreigner ID card)')]
+    ]);
+    selSexe.value = sexe; selTipus.value = tipus;
+  }
+  pintaSelects();
+
+  var botons = [].slice.call(document.querySelectorAll('[data-set-lang]'));
+  function marcaBotons() {
+    botons.forEach(function (b) {
+      b.setAttribute('aria-current', b.getAttribute('data-set-lang') === lang() ? 'true' : 'false');
+    });
+  }
+  botons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      root.setAttribute('data-lang', b.getAttribute('data-set-lang'));
+      marcaBotons();
+      pintaSelects();
+      // El missatge d'error es quedaria en l'idioma anterior i confondria.
+      show('', '');
+    });
+  });
+  marcaBotons();
 
   /* ---------- el camp del número canvia segons el document ---------- */
   var CAMPS = {
@@ -155,42 +193,45 @@
                        'tipo_doc', 'calle', 'municipio', 'provincia', 'pais', 'telefono'];
     for (var i = 0; i < obligatoris.length; i++) {
       if (!(body[obligatoris[i]] || '').trim()) {
-        show(t('Falten camps obligatoris (*).', 'Faltan campos obligatorios (*).'), 'err');
+        show(t('Falten camps obligatoris (*).', 'Faltan campos obligatorios (*).', 'Some required fields (*) are missing.'), 'err');
         return;
       }
     }
 
     var NOMS = [
-      ['nombre',    t('El nom no és vàlid.', 'El nombre no es válido.')],
-      ['apellidos', t('Els cognoms no són vàlids.', 'Los apellidos no son válidos.')],
-      ['municipio', t('El municipi no és vàlid.', 'El municipio no es válido.')],
-      ['provincia', t('La província no és vàlida.', 'La provincia no es válida.')],
-      ['pais',      t('El país no és vàlid.', 'El país no es válido.')]
+      ['nombre',    t('El nom no és vàlid.', 'El nombre no es válido.', 'The first name is not valid.')],
+      ['apellidos', t('Els cognoms no són vàlids.', 'Los apellidos no son válidos.', 'The surname is not valid.')],
+      ['municipio', t('El municipi no és vàlid.', 'El municipio no es válido.', 'The town or city is not valid.')],
+      ['provincia', t('La província no és vàlida.', 'La provincia no es válida.', 'The province or region is not valid.')],
+      ['pais',      t('El país no és vàlid.', 'El país no es válido.', 'The country is not valid.')]
     ];
     for (var j = 0; j < NOMS.length; j++) {
       if (!validaNom(body[NOMS[j][0]])) { show(NOMS[j][1], 'err'); return; }
     }
     if (!validaAdreca(body.calle)) {
       show(t('L\'adreça no és vàlida: posa el carrer i el número.',
-             'La dirección no es válida: pon la calle y el número.'), 'err');
+             'La dirección no es válida: pon la calle y el número.',
+             'The address is not valid: enter the street and number.'), 'err');
       return;
     }
 
     var entrada = dia(body.entrada), salida = dia(body.salida);
     if (!entrada || !salida) {
-      show(t('Les dates no són vàlides.', 'Las fechas no son válidas.'), 'err');
+      show(t('Les dates no són vàlides.', 'Las fechas no son válidas.', 'The dates are not valid.'), 'err');
       return;
     }
     if (salida <= entrada) {
       show(t('El dia d\'eixida ha de ser posterior al d\'entrada.',
-             'El día de salida debe ser posterior al de entrada.'), 'err');
+             'El día de salida debe ser posterior al de entrada.',
+             'The check-out date must be after the check-in date.'), 'err');
       return;
     }
     // Una estada llarguíssima quasi sempre és un any mal teclejat.
     var nits = Math.round((salida - entrada) / 86400000);
     if (nits > MAX_NITS) {
       show(t('L\'estada és massa llarga. Comprova les dates.',
-             'La estancia es demasiado larga. Comprueba las fechas.'), 'err');
+             'La estancia es demasiado larga. Comprueba las fechas.',
+             'That stay is too long. Please check the dates.'), 'err');
       return;
     }
 
@@ -199,50 +240,53 @@
       numero = normDoc(body.dni);
       if (!validaDniNie(numero)) {
         show(t('El DNI o NIE no és vàlid. Comprova el número i la lletra.',
-               'El DNI o NIE no es válido. Comprueba el número y la letra.'), 'err');
+               'El DNI o NIE no es válido. Comprueba el número y la letra.',
+               'The DNI or NIE is not valid. Check the number and the letter.'), 'err');
         return;
       }
       body.dni = numero;
     } else if (tipus === 'PASSAPORTE') {
       numero = normDoc(body.pasaporte);
       if (!validaPassaport(numero)) {
-        show(t('El número de passaport no és vàlid.', 'El número de pasaporte no es válido.'), 'err');
+        show(t('El número de passaport no és vàlid.', 'El número de pasaporte no es válido.', 'The passport number is not valid.'), 'err');
         return;
       }
       body.pasaporte = numero;
     } else if (tipus === 'TIE') {
       numero = normDoc(body.tie);
       if (!validaTie(numero)) {
-        show(t('El número de TIE no és vàlid.', 'El número de TIE no es válido.'), 'err');
+        show(t('El número de TIE no és vàlid.', 'El número de TIE no es válido.', 'The TIE number is not valid.'), 'err');
         return;
       }
       body.tie = numero;
     }
 
     if (!validaTelefon(body.telefono)) {
-      show(t('El telèfon no és vàlid.', 'El teléfono no es válido.'), 'err');
+      show(t('El telèfon no és vàlid.', 'El teléfono no es válido.', 'The phone number is not valid.'), 'err');
       return;
     }
 
     if (!body.acepto) {
       show(t('Cal acceptar les condicions per a poder enviar el registre.',
-             'Hay que aceptar las condiciones para poder enviar el registro.'), 'err');
+             'Hay que aceptar las condiciones para poder enviar el registro.',
+             'You must accept the conditions to submit the record.'), 'err');
       return;
     }
 
     var foto = form.querySelector('[name="doc_foto"]').files[0];
     if (foto && foto.size > MAX_FILE) {
-      show(t('La foto ha de pesar menys de 4MB.', 'La foto debe pesar menos de 4MB.'), 'err');
+      show(t('La foto ha de pesar menys de 4MB.', 'La foto debe pesar menos de 4MB.', 'The photo must be smaller than 4MB.'), 'err');
       return;
     }
     if (foto && !/^image\//.test(foto.type || '')) {
       show(t('El document ha de ser una imatge (foto o captura).',
-             'El documento debe ser una imagen (foto o captura).'), 'err');
+             'El documento debe ser una imagen (foto o captura).',
+             'The document must be an image (photo or screenshot).'), 'err');
       return;
     }
 
     btn.disabled = true;
-    show(t('Enviant…', 'Enviando…'), '');
+    show(t('Enviant…', 'Enviando…', 'Sending…'), '');
 
     (foto ? fileToBase64(foto) : Promise.resolve(null)).then(function (b64) {
       if (b64) {
@@ -262,16 +306,19 @@
         form.reset();
         mostraCamp();
         show(t('Registre enviat. Gràcies, ja està tot en regla: bona estada al refugi!',
-               'Registro enviado. Gracias, ya está todo en regla: ¡buena estancia en el refugio!'), 'ok');
+               'Registro enviado. Gracias, ya está todo en regla: ¡buena estancia en el refugio!',
+               'Record submitted. Thank you, everything is in order: enjoy your stay!'), 'ok');
         if (window.turnstile) { try { window.turnstile.reset(); } catch (err) {} }
       } else {
         show(t('No s\'ha pogut enviar el registre. Torna-ho a provar en uns minuts.',
-               'No se ha podido enviar el registro. Inténtalo de nuevo en unos minutos.'), 'err');
+               'No se ha podido enviar el registro. Inténtalo de nuevo en unos minutos.',
+               'The record could not be sent. Please try again in a few minutes.'), 'err');
       }
       btn.disabled = false;
     }).catch(function () {
       show(t('No s\'ha pogut enviar el registre. Comprova la connexió.',
-             'No se ha podido enviar el registro. Comprueba la conexión.'), 'err');
+             'No se ha podido enviar el registro. Comprueba la conexión.',
+             'The record could not be sent. Please check your connection.'), 'err');
       btn.disabled = false;
     });
   });

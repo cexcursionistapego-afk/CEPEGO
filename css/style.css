@@ -79,6 +79,11 @@ em{font-style:italic}
 /* language visibility */
 html[data-lang="va"] .es{display:none}
 html[data-lang="es"] .va{display:none}
+/* L'anglés només s'usa al registre de viatgers (/hostes), on ve gent de fora.
+   La resta del lloc no en porta, per aixo .en va amagat sempre que l'idioma no
+   siga eixe: aixi no ix res a mitges en cap pagina. */
+html[data-lang="va"] .en,html[data-lang="es"] .en{display:none}
+html[data-lang="en"] .va,html[data-lang="en"] .es{display:none}
 
 /* ================= HEADER ================= */
 .site-header{position:sticky;top:0;z-index:100;background:rgba(245,241,233,.82);
@@ -966,3 +971,14 @@ html[data-lang="es"] .va{display:none}
 .qui__l li{margin-bottom:.55em;font-size:.94rem;line-height:1.6}
 .qui__l li:last-child{margin-bottom:0}
 @media(max-width:760px){.llei{border-left-width:3px}}
+/* Selector de tres idiomes del registre de viatgers. Va dins de la pagina i no
+   al menu perque nomes esta pagina te angles: el boto del menu segueix fent
+   valencia/castella com a la resta del lloc. */
+.lang3{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;
+  margin:0 0 clamp(18px,2.4vw,26px)}
+.lang3__b{font-family:var(--font-body);font-size:.82rem;font-weight:600;
+  letter-spacing:.02em;color:var(--muted);background:var(--white);
+  border:1px solid var(--hair);border-radius:999px;padding:7px 16px;
+  cursor:pointer;transition:color .2s,background .2s,border-color .2s}
+.lang3__b:hover{color:var(--navy);border-color:var(--navy)}
+.lang3__b[aria-current="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
