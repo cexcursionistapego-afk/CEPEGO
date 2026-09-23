@@ -454,11 +454,18 @@
         // que es veu, així que els calendaris es tornen a posar a zero ací.
         calEntrada.buida(); calSalida.buida();
         mostraCamp();
-        show(t('Registre enviat. Gràcies, ja està tot en regla: bona estada al refugi!',
-               'Registro enviado. Gracias, ya está todo en regla: ¡buena estancia en el refugio!',
-               'Record submitted. Thank you, everything is in order: enjoy your stay!',
-               "Enregistrement envoyé. Merci, tout est en règle : bon séjour au refuge !"), 'ok');
+        show(t('Registre enviat. Gràcies, ja està tot en regla: bona estada al refugi! Tornant a la pàgina del club…',
+               'Registro enviado. Gracias, ya está todo en regla: ¡buena estancia en el refugio! Volviendo a la página del club…',
+               'Record submitted. Thank you, everything is in order: enjoy your stay! Returning to the club website…',
+               "Enregistrement envoyé. Merci, tout est en règle : bon séjour au refuge ! Retour au site du club…"), 'ok');
         if (window.turnstile) { try { window.turnstile.reset(); } catch (err) {} }
+        // En acabar es torna a la pàgina del club. S'espera un poc perquè si
+        // no, ningú arribaria a llegir que el registre s'ha enviat bé. El botó
+        // es queda bloquejat mentrestant per a no enviar-ho dos vegades.
+        setTimeout(function () {
+          window.location.href = /^\/es\//.test(window.location.pathname) ? '/es/' : '/';
+        }, 3500);
+        return;
       } else {
         show(t("No s'ha pogut enviar el registre. Torna-ho a provar en uns minuts.",
                'No se ha podido enviar el registro. Inténtalo de nuevo en unos minutos.',
