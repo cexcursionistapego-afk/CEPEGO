@@ -982,3 +982,7 @@ html[data-lang="en"] .va,html[data-lang="en"] .es{display:none}
   cursor:pointer;transition:color .2s,background .2s,border-color .2s}
 .lang3__b:hover{color:var(--navy);border-color:var(--navy)}
 .lang3__b[aria-current="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
+/* Capçalera del registre de viatgers: nomes l'escut, sense menu. El .wrap
+   general reparteix marca i menu als extrems; ací, amb un sol element, es
+   centra per a que no quede escorat. */
+.site-header--marca .wrap{justify-content:center}
