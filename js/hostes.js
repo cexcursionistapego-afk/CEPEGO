@@ -274,11 +274,16 @@
     }
 
     var foto = form.querySelector('[name="doc_foto"]').files[0];
-    if (foto && foto.size > MAX_FILE) {
+    if (!foto) {
+      show(t('Falta la foto del document.', 'Falta la foto del documento.',
+             'The photo of the document is missing.'), 'err');
+      return;
+    }
+    if (foto.size > MAX_FILE) {
       show(t('La foto ha de pesar menys de 4MB.', 'La foto debe pesar menos de 4MB.', 'The photo must be smaller than 4MB.'), 'err');
       return;
     }
-    if (foto && !/^image\//.test(foto.type || '')) {
+    if (!/^image\//.test(foto.type || '')) {
       show(t('El document ha de ser una imatge (foto o captura).',
              'El documento debe ser una imagen (foto o captura).',
              'The document must be an image (photo or screenshot).'), 'err');
@@ -288,12 +293,10 @@
     btn.disabled = true;
     show(t('Enviant…', 'Enviando…', 'Sending…'), '');
 
-    (foto ? fileToBase64(foto) : Promise.resolve(null)).then(function (b64) {
-      if (b64) {
-        body.doc_foto_b64 = b64;
-        body.doc_foto_type = foto.type || 'image/jpeg';
-        body.doc_foto_name = foto.name || 'document.jpg';
-      }
+    fileToBase64(foto).then(function (b64) {
+      body.doc_foto_b64 = b64;
+      body.doc_foto_type = foto.type || 'image/jpeg';
+      body.doc_foto_name = foto.name || 'document.jpg';
       return fetch('/api/registre-viatgers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -145,9 +145,11 @@ exports.handler = async function (event) {
   if (!b.acepto)
     return res(400, { ok: false, error: 'acceptacio', message: 'Cal acceptar les condicions.' });
 
-  if (b.doc_foto_b64 && base64SizeExceeds(b.doc_foto_b64))
+  if (!b.doc_foto_b64)
+    return res(400, { ok: false, error: 'foto', message: 'Falta la foto del document.' });
+  if (base64SizeExceeds(b.doc_foto_b64))
     return res(400, { ok: false, error: 'foto_gran', message: 'La foto ha de pesar menys de 4MB.' });
-  if (b.doc_foto_b64 && !/^image\/(jpeg|png|webp|heic|heif|gif)$/i.test(s(b.doc_foto_type)))
+  if (!/^image\/(jpeg|png|webp|heic|heif|gif)$/i.test(s(b.doc_foto_type)))
     return res(400, { ok: false, error: 'foto_tipus', message: 'El document ha de ser una imatge.' });
 
   const fields = {
@@ -182,7 +184,7 @@ exports.handler = async function (event) {
     // L'adjunt va després de crear el registre, al camp del document triat. Si
     // falla, el registre ja està desat: val més això que perdre'l tot per una
     // foto, i la foto sempre es pot afegir a mà.
-    if (recordId && b.doc_foto_b64) {
+    if (recordId) {
       try {
         await fetch(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent(DOCS[tipo].foto)}/uploadAttachment`, {
           method: 'POST',
