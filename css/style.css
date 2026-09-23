@@ -948,3 +948,21 @@ html[data-lang="es"] .va{display:none}
   font-size:1.12rem;font-weight:580;line-height:1.2}
 @media(max-width:860px){.junta__item{flex-basis:calc(50% - 7px)}}
 @media(max-width:520px){.junta__item{flex-basis:100%;min-width:0}}
+
+/* Registre de viatgers (/huespedes). El bloc de la llei va destacat perque es
+   el motiu de la pagina: qui entra ha d'entendre en dos segons per que se li
+   demanen estes dades. */
+.llei{background:var(--white);border:1px solid var(--hair);border-left:4px solid var(--navy);
+  border-radius:var(--r);box-shadow:var(--shadow-sm);padding:clamp(20px,2.6vw,30px)}
+.llei__marca{display:inline-block;font-family:var(--font-mono);font-size:.74rem;
+  letter-spacing:.06em;color:var(--white);background:var(--navy);
+  padding:4px 10px;border-radius:999px;margin-bottom:12px}
+.llei__t{font-size:clamp(1.4rem,2.4vw,1.9rem);margin-bottom:.5em}
+.llei p:last-child{margin-bottom:0}
+.qui{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);
+  box-shadow:var(--shadow-sm);padding:clamp(18px,2.2vw,26px)}
+.qui__t{font-size:1.15rem;margin-bottom:.6em}
+.qui__l{margin:0;padding-left:1.1em}
+.qui__l li{margin-bottom:.55em;font-size:.94rem;line-height:1.6}
+.qui__l li:last-child{margin-bottom:0}
+@media(max-width:760px){.llei{border-left-width:3px}}

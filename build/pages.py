@@ -422,6 +422,103 @@ def build(g):
     write("reservar.html", doc("Reservar La Figuereta | CEPEGO",
         "Disponibilitat, normes i sol·licitud de reserva del refugi La Figuereta.", reservar, path="reservar.html", extra_js="js/reserves.js", turnstile=True))
 
+    # ============================================= REGISTRE DE VIATGERS (R.D. 933/2021)
+    # Pàgina fora del menú: només s'hi arriba per l'enllaç que el club passa a
+    # qui ve a dormir, o pel QR del refugi. No va al sitemap i porta noindex,
+    # però NO és secreta: és un formulari públic i es protegeix com els altres
+    # (honeypot, comprovació d'Origin i Turnstile). Ací no es llista cap
+    # registre: cadascú envia les seues dades i prou. La llista es consulta a
+    # Airtable, que és on el club ja treballa. El camí bonic /huespedes el fa
+    # un rewrite de netlify.toml.
+    huespedes=header("refugi")+subhero(IMG+"refugi-nit.jpg",'<span class="va">Refugi La Figuereta</span><span class="es">Refugio La Figuereta</span>',
+        "Registre de viatgers","Registro de viajeros",
+        "Obligatori per a totes les persones que passen la nit al refugi.",
+        "Obligatorio para todas las personas que pasan la noche en el refugio.", pos='85%')+f'''
+<section class="section" style="padding-top:clamp(28px,3.5vw,48px);padding-bottom:clamp(24px,3vw,40px)">
+  <div class="wrap narrow">
+
+    <div class="llei reveal">
+      <div class="llei__marca">R.D. 933/2021</div>
+      <h2 class="llei__t"><span class="va">Per qu&#232; cal omplir aix&#242;</span><span class="es">Por qu&#233; hay que rellenar esto</span></h2>
+      <p><span class="va">El <strong>Reial decret 933/2021, de 26 d&#39;octubre</strong>, obliga tots els allotjaments &#8212;hotels, cases rurals i tamb&#233; els refugis de muntanya&#8212; a registrar les dades de les persones que hi pernocten i a comunicar-les al Ministeri de l&#39;Interior.</span><span class="es">El <strong>Real Decreto 933/2021, de 26 de octubre</strong>, obliga a todos los alojamientos &#8212;hoteles, casas rurales y tambi&#233;n los refugios de monta&#241;a&#8212; a registrar los datos de las personas que pernoctan en ellos y a comunicarlos al Ministerio del Interior.</span></p>
+      <p><span class="va">No &#233;s una decisi&#243; del club: &#233;s una obligaci&#243; legal del refugi. Sense aquest registre no podem allotjar ning&#250;.</span><span class="es">No es una decisi&#243;n del club: es una obligaci&#243;n legal del refugio. Sin este registro no podemos alojar a nadie.</span></p>
+    </div>
+
+    <div class="grid cols-2 reveal" style="margin-top:clamp(20px,2.6vw,30px)">
+      <div class="qui">
+        <h3 class="qui__t"><span class="va">Qui l&#39;ha d&#39;omplir</span><span class="es">Qui&#233;n debe rellenarlo</span></h3>
+        <ul class="qui__l">
+          <li><span class="va"><strong>Cada persona</strong> que dorma al refugi, una vegada per estada. No n&#39;hi ha prou amb les dades de qui fa la reserva.</span><span class="es"><strong>Cada persona</strong> que duerma en el refugio, una vez por estancia. No basta con los datos de quien hace la reserva.</span></li>
+          <li><span class="va">Si hi ha <strong>menors</strong>, les seues dades les ompli l&#39;adult responsable.</span><span class="es">Si hay <strong>menores</strong>, sus datos los rellena el adulto responsable.</span></li>
+          <li><span class="va">Millor <strong>abans d&#39;arribar</strong>; si no, en arribar al refugi.</span><span class="es">Mejor <strong>antes de llegar</strong>; si no, al llegar al refugio.</span></li>
+        </ul>
+      </div>
+      <div class="qui">
+        <h3 class="qui__t"><span class="va">Qu&#232; fem amb les dades</span><span class="es">Qu&#233; hacemos con los datos</span></h3>
+        <ul class="qui__l">
+          <li><span class="va">Es tracten conforme al <strong>RGPD</strong> i a la normativa de protecci&#243; de dades, i s&#39;utilitzen <strong>nom&#233;s</strong> per a complir aquesta obligaci&#243;.</span><span class="es">Se tratan conforme al <strong>RGPD</strong> y a la normativa de protecci&#243;n de datos, y se utilizan <strong>solo</strong> para cumplir esta obligaci&#243;n.</span></li>
+          <li><span class="va">Una vegada enviades a la <strong>plataforma de la Gu&#224;rdia Civil</strong>, s&#39;esborren del nostre sistema.</span><span class="es">Una vez enviados a la <strong>plataforma de la Guardia Civil</strong>, se borran de nuestro sistema.</span></li>
+          <li><span class="va">Ni es fan servir per a res m&#233;s ni es cedeixen a ning&#250;.</span><span class="es">Ni se usan para nada m&#225;s ni se ceden a nadie.</span></li>
+          <li><span class="va">Ho pots consultar tot a l&#39;<a href="privacitat.html">av&#237;s de privacitat</a>.</span><span class="es">Puedes consultarlo todo en el <a href="privacitat.html">aviso de privacidad</a>.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:clamp(22px,3vw,34px)">
+      <form id="viatger-form" novalidate>
+
+        <div class="form-section-label"><span class="va">L&#39;estada</span><span class="es">La estancia</span></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Dia d&#39;entrada</span><span class="es">D&#237;a de entrada</span> *</label><input type="date" name="entrada" required></div>
+          <div class="field"><label><span class="va">Dia d&#39;eixida</span><span class="es">D&#237;a de salida</span> *</label><input type="date" name="salida" required></div>
+        </div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Dades de la persona</span><span class="es">Datos de la persona</span></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Nom</span><span class="es">Nombre</span> *</label><input name="nombre" required autocomplete="given-name"></div>
+          <div class="field"><label><span class="va">Cognoms</span><span class="es">Apellidos</span> *</label><input name="apellidos" required autocomplete="family-name"></div>
+        </div>
+        <div class="field"><label for="v-sexo"><span class="va">Sexe</span><span class="es">Sexo</span> *</label><select name="sexo" id="v-sexo" required></select></div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Document d&#39;identitat</span><span class="es">Documento de identidad</span></div>
+        <div class="field"><label for="v-tipus"><span class="va">Tipus de document</span><span class="es">Tipo de documento</span> *</label><select name="tipo_doc" id="v-tipus" required></select></div>
+        <div class="field" id="v-camp-dni"><label><span class="va">N&#250;mero de DNI o NIE</span><span class="es">N&#250;mero de DNI o NIE</span> *</label><input name="dni" placeholder="12345678A" autocomplete="off"></div>
+        <div class="field" id="v-camp-pasaporte" hidden><label><span class="va">N&#250;mero de passaport</span><span class="es">N&#250;mero de pasaporte</span> *</label><input name="pasaporte" autocomplete="off"></div>
+        <div class="field" id="v-camp-tie" hidden><label><span class="va">N&#250;mero de TIE</span><span class="es">N&#250;mero de TIE</span> *</label><input name="tie" autocomplete="off"></div>
+        <div class="field"><label><span class="va">Foto del document (opcional)</span><span class="es">Foto del documento (opcional)</span></label><input type="file" name="doc_foto" accept="image/*"></div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Domicili i contacte</span><span class="es">Domicilio y contacto</span></div>
+        <div class="field"><label><span class="va">Carrer i n&#250;mero</span><span class="es">Calle y n&#250;mero</span> *</label><input name="calle" required autocomplete="street-address"></div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Municipi</span><span class="es">Municipio</span> *</label><input name="municipio" required autocomplete="address-level2"></div>
+          <div class="field"><label><span class="va">Prov&#237;ncia</span><span class="es">Provincia</span> *</label><input name="provincia" required autocomplete="address-level1"></div>
+        </div>
+        <div class="select-row">
+          <div class="field"><label><span class="va">Pa&#237;s</span><span class="es">Pa&#237;s</span> *</label><input name="pais" required autocomplete="country-name"></div>
+          <div class="field"><label><span class="va">Tel&#232;fon</span><span class="es">Tel&#233;fono</span> *</label><input type="tel" name="telefono" required autocomplete="tel"></div>
+        </div>
+
+        <div class="form-section-label" style="margin-top:20px"><span class="va">Acceptaci&#243;</span><span class="es">Aceptaci&#243;n</span></div>
+        <div class="field">
+          <label class="chk"><input type="checkbox" name="acepto" value="1"> <span class="va">En realitzar aquest formulari, l&#39;usuari o club assumeix plenament la responsabilitat per qualsevol accident o incident durant l&#39;&#250;s de l&#39;espai cedit, eximint la part cedent de qualsevol responsabilitat.</span><span class="es">Al realizar este formulario, el usuario o club asume plenamente la responsabilidad por cualquier accidente o incidente durante el uso del espacio cedido, eximiendo a la parte cedente de cualquier responsabilidad.</span></label>
+        </div>
+
+        <div class="hp"><label>No omplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        {turnstile('ts-viatger')}
+        <button type="submit" id="viatger-submit" class="btn btn-primary" style="width:100%;margin-top:8px"><span class="va">Enviar el registre</span><span class="es">Enviar el registro</span></button>
+        <p class="note" style="margin:12px 0 0;font-size:.82rem;opacity:.75"><span class="va">* Camps obligatoris. Les dades es tracten d&#39;acord amb el RGPD i el R.D. 933/2021, i s&#39;utilitzen exclusivament per al registre de viatgers del refugi.</span><span class="es">* Campos obligatorios. Los datos se tratan conforme al RGPD y al R.D. 933/2021, y se utilizan exclusivamente para el registro de viajeros del refugio.</span></p>
+        <div id="viatger-msg" class="r-msg"></div>
+        {turnstile_note()}
+      </form>
+    </div>
+
+  </div>
+</section>
+'''+footer()
+    write("huespedes.html", doc("Registre de viatgers | Refugi La Figuereta",
+        "Registre obligatori de viatgers del refugi La Figuereta (R.D. 933/2021).",
+        huespedes, path="huespedes.html", extra_js="js/huespedes.js", turnstile=True, noindex=True))
+
     # ============================================= METEO
     alert_levels=[
         ("green","Verda","Verde","Sense risc","Sin riesgo",

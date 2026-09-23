@@ -217,7 +217,9 @@ def footer():
   </div>
 </footer>'''
 
-def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, turnstile=False):
+def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, turnstile=False, noindex=False):
+    # Pàgines que no han d'eixir a Google encara que algú les enllace.
+    noidx='<meta name="robots" content="noindex,nofollow">\n' if noindex else ''
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
     ts='<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>\n' if turnstile else ''
     idredirect=('<script src="/js/identity-redirect.js"></script>\n' if identity else '')
@@ -231,7 +233,7 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, t
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
-<title>{title}</title>
+{noidx}<title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canon}">
 <link rel="icon" type="image/png" href="{IMG}favicon.png">
