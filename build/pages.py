@@ -468,7 +468,6 @@ def build(g):
         <ul class="qui__l">
           <li><span class="va"><strong>Cada persona</strong> que dorma al refugi, una vegada per estada. No n&#39;hi ha prou amb les dades de qui fa la reserva.</span><span class="es"><strong>Cada persona</strong> que duerma en el refugio, una vez por estancia. No basta con los datos de quien hace la reserva.</span><span class="en"><strong>Every person</strong> sleeping at the hut, once per stay. The booking holder&#39;s details alone are not enough.</span></li>
           <li><span class="va">Si hi ha <strong>menors</strong>, les seues dades les ompli l&#39;adult responsable.</span><span class="es">Si hay <strong>menores</strong>, sus datos los rellena el adulto responsable.</span><span class="en">For <strong>minors</strong>, the responsible adult fills in their details.</span></li>
-          <li><span class="va">Millor <strong>abans d&#39;arribar</strong>; si no, en arribar al refugi.</span><span class="es">Mejor <strong>antes de llegar</strong>; si no, al llegar al refugio.</span><span class="en">Best <strong>before you arrive</strong>; otherwise, on arrival at the hut.</span></li>
         </ul>
       </div>
       <div class="qui">
