@@ -437,23 +437,12 @@ def build(g):
     # el selector de dalt (js/hostes.js toca data-lang i el CSS fa la resta).
     # El subhero es munta ací a mà i no amb subhero(): eixa funció només sap de
     # dos idiomes i en anglés el títol es quedaria en blanc.
-    # Sense menú: esta pàgina és d'un sol ús i qui hi entra ve a omplir el
-    # registre, no a passejar-se pel lloc. Es queda només l'escut, per a que es
-    # veja de seguida de quin refugi és, i el selector d'idioma va dins de la
-    # pàgina (el botó del menú no hi és i, a més, ací hi ha tres idiomes).
-    huespedes=f'''<header class="site-header site-header--marca" id="hdr">
-  <div class="wrap">
-    <a class="brand" href="index.html">
-      <img src="{IMG}favicon.png" alt="Escut CEPEGO">
-      <span class="brand__text">
-        <span class="brand__name">Centre Excursionista de Pego</span>
-        <span class="brand__sub">Des de 1973</span>
-      </span>
-    </a>
-  </div>
-</header>'''+f'''<section class="subhero">
-  <div class="subhero__bg" style="background-image:url('{IMG}refugi-nit.jpg');background-position:center 85%"></div>
-  <div class="subhero__scrim"></div>
+    # Sense res damunt de la foto: ni menú, ni escut, ni la franja d'avisos
+    # del club. És una pàgina d'un sol ús i qui hi entra ve a omplir el
+    # registre. El canvi d'idioma va dins de la pàgina, davall del títol.
+    huespedes=f'''<section class="subhero">
+  <div class="subhero__bg" style="background-image:url('{IMG}refugi-senyal.jpg');background-position:center center"></div>
+  <div class="subhero__scrim subhero__scrim--fort"></div>
   <div class="wrap subhero__inner">
     <div class="kicker on-photo"><span class="va">Refugi La Figuereta</span><span class="es">Refugio La Figuereta</span><span class="en">La Figuereta Mountain Hut</span></div>
     <h1><span class="va">Registre de viatgers</span><span class="es">Registro de viajeros</span><span class="en">Traveller register</span></h1>
@@ -548,7 +537,7 @@ def build(g):
 '''+footer()
     write("hostes.html", doc("Registre de viatgers | Refugi La Figuereta",
         "Registre obligatori de viatgers del refugi La Figuereta (R.D. 933/2021).",
-        huespedes, path="hostes.html", extra_js="js/hostes.js", turnstile=True, noindex=True))
+        huespedes, path="hostes.html", extra_js="js/hostes.js", turnstile=True, noindex=True, avis=False))
 
     # ============================================= METEO
     alert_levels=[

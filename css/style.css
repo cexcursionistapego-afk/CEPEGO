@@ -986,3 +986,7 @@ html[data-lang="en"] .va,html[data-lang="en"] .es{display:none}
    general reparteix marca i menu als extrems; ací, amb un sol element, es
    centra per a que no quede escorat. */
 .site-header--marca .wrap{justify-content:center}
+/* La foto del registre de viatgers es de mig dia i te la part de baix molt
+   clara (herba i pedra al sol), on justament va el text. El vel general es
+   queda curt ahi: este es el mateix pero mes tancat cap avall. */
+.subhero__scrim--fort{background:linear-gradient(180deg,rgba(15,18,26,.22),rgba(15,18,26,.52) 45%,rgba(15,18,26,.8))}

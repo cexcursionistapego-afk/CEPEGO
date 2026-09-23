@@ -217,7 +217,9 @@ def footer():
   </div>
 </footer>'''
 
-def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, turnstile=False, noindex=False):
+def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, turnstile=False, noindex=False, avis=True):
+    # La franja d'avisos del club no pinta res a les pàgines d'un sol ús.
+    avis_div='<div id="avis"></div>\n' if avis else ''
     # Pàgines que no han d'eixir a Google encara que algú les enllace.
     noidx='<meta name="robots" content="noindex,nofollow">\n' if noindex else ''
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
@@ -257,8 +259,7 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, t
 <link rel="stylesheet" href="/css/style.css">
 {idw}{ts}</head>
 <body>
-<div id="avis"></div>
-{body}
+{avis_div}{body}
 <script src="/js/main.js"></script>
 {extra_js_tags}{idredirect}</body>
 </html>
