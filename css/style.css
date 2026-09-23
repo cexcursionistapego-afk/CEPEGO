@@ -77,13 +77,14 @@ em{font-style:italic}
 .kicker.center-k{display:flex;justify-content:center}
 
 /* language visibility */
-html[data-lang="va"] .es{display:none}
-html[data-lang="es"] .va{display:none}
-/* L'anglés només s'usa al registre de viatgers (/hostes), on ve gent de fora.
-   La resta del lloc no en porta, per aixo .en va amagat sempre que l'idioma no
-   siga eixe: aixi no ix res a mitges en cap pagina. */
-html[data-lang="va"] .en,html[data-lang="es"] .en{display:none}
-html[data-lang="en"] .va,html[data-lang="en"] .es{display:none}
+/* El lloc va en valencia i castella. L'angles i el frances nomes s'usen al
+   registre de viatgers (/hostes), on ve gent de fora; per aixo .en i .fr van
+   amagats sempre que l'idioma no siga eixe, i aixi no ix res a mitges en cap
+   altra pagina. */
+html[data-lang="va"] .es,html[data-lang="va"] .en,html[data-lang="va"] .fr{display:none}
+html[data-lang="es"] .va,html[data-lang="es"] .en,html[data-lang="es"] .fr{display:none}
+html[data-lang="en"] .va,html[data-lang="en"] .es,html[data-lang="en"] .fr{display:none}
+html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{display:none}
 
 /* ================= HEADER ================= */
 .site-header{position:sticky;top:0;z-index:100;background:rgba(245,241,233,.82);
@@ -980,8 +981,10 @@ html[data-lang="en"] .va,html[data-lang="en"] .es{display:none}
   letter-spacing:.02em;color:var(--muted);background:var(--white);
   border:1px solid var(--hair);border-radius:999px;padding:7px 16px;
   cursor:pointer;transition:color .2s,background .2s,border-color .2s}
-.lang3__b:hover{color:var(--navy);border-color:var(--navy)}
-.lang3__b[aria-current="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
+/* En roig i no en blau: aixi el selector d'idioma no es confon amb la resta
+   de botons del formulari, que van en el blau de la marca. */
+.lang3__b:hover{color:var(--ember);border-color:var(--ember)}
+.lang3__b[aria-current="true"]{background:var(--ember);border-color:var(--ember);color:var(--white)}
 /* Capçalera del registre de viatgers: nomes l'escut, sense menu. El .wrap
    general reparteix marca i menu als extrems; ací, amb un sol element, es
    centra per a que no quede escorat. */
@@ -990,3 +993,37 @@ html[data-lang="en"] .va,html[data-lang="en"] .es{display:none}
    clara (herba i pedra al sol), on justament va el text. El vel general es
    queda curt ahi: este es el mateix pero mes tancat cap avall. */
 .subhero__scrim--fort{background:linear-gradient(180deg,rgba(15,18,26,.22),rgba(15,18,26,.52) 45%,rgba(15,18,26,.8))}
+
+/* Calendari propi del registre de viatgers. No es fa servir <input type="date">
+   perque eixe calendari el pinta el navegador i ix en l'idioma del navegador,
+   no en el que s'ha triat a la pagina. */
+.dp{position:relative}
+.dp__camp{width:100%;text-align:left;font-family:var(--font-body);font-size:1rem;
+  color:var(--ink);background:var(--white);border:1px solid var(--hair);
+  border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color .2s}
+.dp__camp:hover,.dp__camp[aria-expanded="true"]{border-color:var(--navy)}
+.dp__txt--buit{color:var(--muted)}
+.dp__pop{position:absolute;z-index:60;top:calc(100% + 6px);left:0;min-width:290px;
+  background:var(--white);border:1px solid var(--hair);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:14px}
+.dp__cap{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.dp__mes{font-family:var(--font-display);font-weight:600;color:var(--navy);
+  font-size:1.05rem;text-transform:capitalize}
+.dp__nav{width:34px;height:34px;border:1px solid var(--hair);background:var(--white);
+  border-radius:9px;color:var(--navy);font-size:1.2rem;line-height:1;cursor:pointer}
+.dp__nav:hover{border-color:var(--navy);background:var(--paper)}
+.dp__graella{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.dp__dia-cap{text-align:center;font-size:.68rem;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--muted);padding:4px 0}
+.dp__buit{height:38px}
+.dp__dia{height:38px;border:0;background:none;border-radius:9px;cursor:pointer;
+  font-family:var(--font-body);font-size:.92rem;color:var(--ink)}
+.dp__dia:hover{background:var(--paper-2)}
+.dp__dia--hui{font-weight:700;color:var(--ember)}
+.dp__dia--triat,.dp__dia--triat:hover{background:var(--navy);color:var(--white);font-weight:600}
+/* En pantalla xicoteta el calendari ix centrat i ample: el dia s'ha de poder
+   tocar amb el dit sense apuntar. */
+@media(max-width:560px){
+  .dp__pop{left:50%;transform:translateX(-50%);width:min(320px,calc(100vw - 32px))}
+  .dp__dia,.dp__buit{height:42px}
+}
