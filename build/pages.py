@@ -206,7 +206,7 @@ def build(g):
 </section>
 '''+footer()
     write("index.html", doc("Centre Excursionista de Pego | Refugi La Figuereta",
-        "Club de muntanya sense ànim de lucre des de 1973 a Pego. Senderisme, escalada, barranquisme, espeleologia i el refugi La Figuereta.",
+        "Club de muntanya a Pego des de 1973. Senderisme, escalada, barranquisme, espeleologia i el refugi La Figuereta.",
         home, path="index.html", identity=True))
 
     # ============================================= REFUGI

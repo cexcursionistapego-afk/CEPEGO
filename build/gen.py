@@ -162,7 +162,7 @@ def footer():
     <div class="footer__head">
       <img class="logo" src="{IMG}favicon-footer.png" alt="Escut CEPEGO">
       <div class="footer__name">Centre Excursionista<span>de Pego</span><small>Des de 1973 · Pego, Alacant</small></div>
-      <p class="footer__tagline"><span class="va">Club de muntanya sense ànim de lucre. Senderisme, escalada, barranquisme, espeleologia i alta muntanya des de Pego, Alacant.</span><span class="es">Club de montaña sin ánimo de lucro. Senderismo, escalada, barranquismo, espeleología y alta montaña desde Pego, Alicante.</span></p>
+      <p class="footer__tagline"><span class="va">Club de muntanya a Pego, Alacant. Senderisme, escalada, barranquisme, espeleologia i alta muntanya.</span><span class="es">Club de montaña en Pego, Alicante. Senderismo, escalada, barranquismo, espeleología y alta montaña.</span></p>
       <div class="social">
         <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{IG_SVG}</a>
         <a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook">{FB_SVG}</a>
