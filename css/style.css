@@ -672,8 +672,8 @@ html[data-lang="es"] .va{display:none}
 .partner-card img{height:80px;width:auto;object-fit:contain;display:block}
 
 /* ---- Bar ---- */
-.footer__bar{border-top:1px solid rgba(255,255,255,.05);padding:clamp(14px,2vw,22px) 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:#373b45}
-.footer__bar a{color:#4e535f}
+.footer__bar{border-top:1px solid rgba(255,255,255,.05);padding:clamp(14px,2vw,22px) 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:#fff}
+.footer__bar a{color:#fff}
 .footer__bar a:hover{color:#fff}
 
 /* ---- Soci form extras ---- */
