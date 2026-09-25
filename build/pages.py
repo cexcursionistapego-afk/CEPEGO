@@ -672,7 +672,7 @@ def build(g):
       "Pego · Calvari · Escola d'Escalada · Barranc de les Coves · Font del Lliberet · Bodoix · La Figuereta · Senda del Xical · Barranc de la Canal · Calvari.",
       IMG+"bb9bb0_7f7f8275a09b48738568bbb829a360c7~mv2.png", "https://loc.wiki/t/133790078?h=jpy94v53z8&wa=sd", "Pego"),
      ("Circular Pous de Neu","13,49 km","+362 m","813 m","facil","Fàcil","Fácil",
-      "Vall d'Alcalà · Pous de neu · Mas de Capa · Mona · Vall d'Alcalà.",
+      "Vall d'Alcalà · Pous de neu · Mas de Capa i Mona · Vall d'Alcalà.",
       IMG+"ruta-pous-de-neu-qr.png", "https://es.wikiloc.com/rutas-senderismo/ruta-neveres-i-mas-de-capa-i-mona-de-la-vall-dalcala-69664783", "Vall d'Alcalà"),
      ("Barranc de l'Infern – La Catedral del Senderisme","16,73 km","+1.294 m","589 m","dificil","Difícil","Difícil",
       "Vall d'Ebo · Cova Santa · Barranc de l'Infern (els 6.000 escalons) · Vall d'Ebo.",
