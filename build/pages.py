@@ -662,7 +662,7 @@ def build(g):
      ("Circular del Pla Roig","9,54 km","+303 m","603 m","moderada","Moderada","Moderada",
       "Vall d'Ebo · Corral de la Solana · Pla Roig · Pantà · Vall d'Ebo.",
       IMG+"ruta-pla-roig-qr.png", "https://es.wikiloc.com/rutas-senderismo/vall-debo-corral-de-la-solana-pla-roig-pantano-vall-debo-60417294", "Vall d'Ebo"),
-     ("Pego – Tormos","10,29 km","+590 m","504 m","facil","Fàcil","Fácil",
+     ("Pego – Tormos","10,29 km","+590 m","504 m","moderada","Moderada","Moderada",
       "Només anada: de Pego a Tormos. Cal tornar pel mateix camí o deixar un cotxe a l'arribada.",
       IMG+"ruta-pego-tormos-qr.png", "https://es.wikiloc.com/rutas-senderismo/pego-tormos-159060707", "Pego"),
      ("Circular Serra de Mostalla","10,93 km","+334 m","298 m","moderada","Moderada","Moderada",
