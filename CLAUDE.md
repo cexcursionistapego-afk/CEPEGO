@@ -226,17 +226,25 @@ campos, **ordenada por distancia**. El desplegable de territorio sale solo
 de las propias rutas, así que un pueblo nuevo aparece en el filtro sin
 tocar nada más.
 
-El QR **tiene que salir igual que los demás**, que es fácil de estropear:
+El QR lo hace un script, para no tener que acordarse de la receta:
 
-- 684 × 684 px, **negro sobre blanco** (nada de azul ni de escudo).
-- Logo de **Wikiloc** centrado, ocupando el **32,5 %**. Se puede recortar
-  de un QR que ya esté bien en lugar de buscarlo fuera.
-- Corrección de errores `H`, y subiendo la versión hasta que un lector de
-  verdad (`cv2.QRCodeDetector`) lo descodifique: con el logo encima, las
-  versiones bajas no dejan bastante redundancia.
+```bash
+pip install segno pillow opencv-python-headless numpy   # solo la primera vez
+python3 build/qr.py "https://es.wikiloc.com/rutas-senderismo/..." pla-roig
+# -> img/ruta-pla-roig-qr.png
+```
 
-**Verifica siempre el QR con un lector antes de subirlo.** Si no, se sube
-un código que no se puede escanear y nadie se entera.
+El script **comprueba el código con un lector antes de guardarlo**: si no
+se puede escanear, no escribe nada y falla. Tampoco pisa un fichero que ya
+exista. El logo de Wikiloc está en `build/wikiloc-logo.png` (solo se usa
+para generar; no se publica).
+
+Si algún día hay que hacerlo a mano, la receta es: 684 × 684 px, **negro
+sobre blanco** (nada de azul ni de escudo), logo de Wikiloc centrado al
+**32,5 %**, corrección de errores `H` y subiendo la versión hasta que un
+lector de verdad lo descodifique — con el logo encima, las versiones bajas
+no dejan bastante redundancia. Se estropeó una vez justamente por hacerlo
+de memoria.
 
 ## Probar los cambios
 
