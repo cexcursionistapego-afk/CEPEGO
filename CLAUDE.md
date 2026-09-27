@@ -3,6 +3,10 @@
 Web del Centre Excursionista de Pego. Sitio estático generado con Python,
 alojado en Netlify, con funciones serverless que hablan con Airtable.
 
+> **Este fichero va en el repositorio a propósito.** Ya se perdió una vez
+> por vivir solo en la máquina de trabajo: es lo único que explica cómo
+> funciona todo esto, así que tiene que sobrevivir a quien lo gestione.
+
 ## Servicios de los que depende la web
 
 El club es de voluntarios y la gente rota, así que conviene tener claro
@@ -13,7 +17,7 @@ credencial se guarda aquí: esto es solo el mapa.
 |---|---|---|
 | **GitHub** (`cexcursionistapego-afk/CEPEGO`) | El código y el contenido. Todo el historial. | Se conserva la web publicada, pero no se puede cambiar nada. Es la copia de seguridad real del proyecto. |
 | **Netlify** | Publica la web y ejecuta las funciones. Guarda las claves secretas como variables de entorno. | La web deja de poder actualizarse. Las claves de Airtable y Turnstile viven solo ahí. |
-| **Airtable** | **Todos los datos de socios**: nombre, DNI/NIE, teléfono, IBAN y fotos del DNI. También reservas y consultas. | Es lo más sensible que hay. Una brecha aquí es notificable a la AEPD. |
+| **Airtable** | **Todos los datos de socios**: nombre, DNI/NIE, teléfono, IBAN y fotos del DNI. También reservas, consultas y el registro de viajeros. | Es lo más sensible que hay. Una brecha aquí es notificable a la AEPD. |
 | **Cloudflare** | Solo la configuración del captcha (Turnstile). | Se podría desactivar el captcha. Impacto bajo. |
 | **Wix** | Donde está registrado el dominio `cepego.com` (la web anterior del club estaba allí). | Quien controle esto puede apuntar el dominio a otro sitio y suplantar la web entera. |
 | **Gmail** (`cexcursionistapego@gmail.com`) | Correo del club y vía de recuperación de todas las demás cuentas. | Da acceso indirecto a casi todo lo anterior. |
@@ -79,10 +83,19 @@ repositorio. Después de tocar `build/gen.py` o `build/pages.py` hay que
 ejecutar `python3 build/gen.py` y **commitear el HTML generado**, o los
 cambios no salen.
 
+**Antes de empezar, comprueba que la copia local es la buena.** El panel
+escribe directo en la rama de producción, así que el remoto avanza solo.
+Un `git fetch` y un `git log --oneline -3 origin/<rama>` al principio
+evitan trabajar encima de una copia vieja. Si al ir a subir salen
+conflictos en *todos* los ficheros a la vez, no es un conflicto normal:
+son dos historias distintas, y la buena es la del remoto.
+
 ## Estructura
 
 - `build/gen.py` — plantilla común (`doc()`, `header()`, `footer()`,
   `subhero()`, `write()`), constantes y la Content-Security-Policy.
+  `doc()` acepta `noindex=True` y `avis=False` para las páginas de un solo
+  uso.
 - `build/pages.py` — el contenido de cada página. `write()` genera la
   versión valenciana en la raíz y la castellana en `/es/`.
 - `js/` — JavaScript del cliente. `main.js` va en todas las páginas.
@@ -93,6 +106,10 @@ cambios no salen.
   Antes estaba en `/admin`; se movió para que los escáneres automáticos no
   lo encuentren. No lo pongas en `robots.txt`: eso publicaría la ruta.
 
+La lista de páginas del `sitemap.xml` es la constante `PAGES` de
+`gen.py`, escrita a mano. Una página nueva no entra sola: si debe
+indexarse, hay que añadirla ahí.
+
 ## Panel de administración
 
 En `cepego.com/juansa`, protegido con Netlify Identity. Escribe
@@ -101,10 +118,14 @@ directamente en la rama de producción (`backend.branch` en
 solas**. Gestiona: calendario, datos del club, aviso de portada, notícies
 y reunions.
 
+Las imágenes que se suben por el panel van a `img/calendari/` con un
+nombre automático. Si una se va a usar en la web (una cabecera, por
+ejemplo), muévela a `img/` con un nombre que se entienda.
+
 ## Seguridad de los formularios
 
-Los cuatro formularios (alta, baja, contacto, reserva) llevan, en este
-orden:
+Los cinco formularios (alta, baja, contacto, reserva y registro de
+viajeros) llevan, en este orden:
 
 1. Honeypot (campo oculto `website`).
 2. Comprobación de `Origin`/`Referer` contra el propio dominio (CSRF).
@@ -130,19 +151,52 @@ recurso externo nuevo, actualiza `CSP` en `build/gen.py`.
 ## Cómo llegan los datos a Airtable
 
 Todo lo que la gente envía por los formularios acaba en la base
-`appkuKVxHSMyDElfh`, en tres tablas:
+`appkuKVxHSMyDElfh`, en cuatro tablas:
 
 - **CONTACTE** (`tblAD8ZeIKmNwNRm9`) — reservas y consultas. El campo
   `TIPO DE CONSULTA` distingue unas de otras.
 - **SOCIS** (`tblNm2FZG9KCdiCDq`) — altas de socio, con las fotos del DNI
   adjuntas al registro.
 - **BAIXES** (`tblGeQzo49FyjBQJs`) — bajas.
+- **REGISTRE RESERVES R.D. 933/2021** (`tblPIgkyzam4AKvTo`) — el registro
+  de viajeros del refugio.
 
 Las reservas entran con `ESTADO = "PENDENT GESTIONAR"`. **El calendario de
 la web solo bloquea los días de los registros que el club pasa a
 `ESTADO = "RESERVAT"`** a mano en Airtable. O sea: una solicitud no ocupa
 fechas hasta que alguien la confirma. Ese es el circuito, y es
 intencionado.
+
+El IBAN se guarda siempre junto y en mayúsculas (`normIBAN` en
+`netlify/functions/_validators.js`), aunque la gente lo escriba de cuatro
+en cuatro.
+
+## Registro de viajeros (R.D. 933/2021)
+
+En `cepego.com/hostes` (y `/huespedes`, que redirige a la versión
+castellana). Es la página que se pasa a quien viene a dormir al refugio:
+la ley obliga a registrar a todo el que pernocta.
+
+- **Fuera del menú, con `noindex` y fuera del sitemap**, pero *no es
+  secreta*: es un formulario público y se protege como los demás.
+- **No lista ningún registro, y es a propósito.** Al ser pública,
+  cualquiera con el enlace entra; un endpoint de lectura sería una lista
+  abierta de DNIs y domicilios. Los registros se consultan en Airtable.
+- `netlify/functions/registre-viatgers.js` solo escribe. El tipo de
+  documento (DNI / PASSAPORTE / TIE) decide en qué campo va el número y en
+  qué campo de adjunto va la foto.
+- **Cuatro idiomas** — el resto del sitio tiene dos. Al refugio viene
+  gente de fuera. No hay `/en/` ni `/fr/`: el selector de la propia página
+  cambia `data-lang` al vuelo y el CSS enseña los `<span>` que tocan. Por
+  eso `.en` y `.fr` van ocultos en cualquier otro idioma, para que no
+  aparezca texto a medias en otra página.
+- **El calendario está hecho a mano** (`js/hostes.js`). No se usa
+  `<input type="date">` porque ese calendario lo pinta el navegador y sale
+  en el idioma *del navegador*, no en el de la página. Se comprobó: poner
+  `lang` en el campo o en el documento no cambia nada.
+- No tiene cabecera, ni franja de avisos, ni pie. El único enlace al aviso
+  de privacidad es el del bloque "Qué hacemos con los datos": si tocas ese
+  texto, no lo pierdas.
 
 ## Reglas del refugio codificadas
 
@@ -165,19 +219,24 @@ Si cambia alguna, hay que tocar los dos sitios.
   `reserves_cua_desde`, las solicitudes para esa fecha en adelante se
   aceptan pero avisando de que entran en cola.
 
-## Cosas que ya han dado problemas
+## Añadir una ruta a "Rutes i entorn"
 
-- **Turnstile deja pasar todo si falta la clave.** Un envío correcto no
-  distingue "verificado" de "saltado". Solo lo dice el panel de Cloudflare.
-- **Las variables de entorno de Netlify no llegan a las funciones hasta
-  que hay un despliegue nuevo.** Cambiar una y no redesplegar parece que
-  funciona, pero no aplica.
-- **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
-  cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a
-  devolver `parse_failed`. No es un fallo del código: hay que reajustar
-  las expresiones regulares al HTML nuevo.
-- **CSS Grid con `1fr` no da columnas iguales** si el contenido de una es
-  más ancho. Por eso `.cols-2/3/4` usan `minmax(0,1fr)`.
+Las rutas son la lista `routes` de `build/pages.py`, una tupla de 11
+campos, **ordenada por distancia**. El desplegable de territorio sale solo
+de las propias rutas, así que un pueblo nuevo aparece en el filtro sin
+tocar nada más.
+
+El QR **tiene que salir igual que los demás**, que es fácil de estropear:
+
+- 684 × 684 px, **negro sobre blanco** (nada de azul ni de escudo).
+- Logo de **Wikiloc** centrado, ocupando el **32,5 %**. Se puede recortar
+  de un QR que ya esté bien en lugar de buscarlo fuera.
+- Corrección de errores `H`, y subiendo la versión hasta que un lector de
+  verdad (`cv2.QRCodeDetector`) lo descodifique: con el logo encima, las
+  versiones bajas no dejan bastante redundancia.
+
+**Verifica siempre el QR con un lector antes de subirlo.** Si no, se sube
+un código que no se puede escanear y nadie se entera.
 
 ## Probar los cambios
 
@@ -192,3 +251,28 @@ python3 -m http.server 8910
 
 Las funciones serverless se pueden probar importándolas en Node y
 sustituyendo `global.fetch` por un doble, sin necesidad de red.
+
+## Cosas que ya han dado problemas
+
+- **Turnstile deja pasar todo si falta la clave.** Un envío correcto no
+  distingue "verificado" de "saltado". Solo lo dice el panel de Cloudflare.
+- **Las variables de entorno de Netlify no llegan a las funciones hasta
+  que hay un despliegue nuevo.** Cambiar una y no redesplegar parece que
+  funciona, pero no aplica.
+- **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
+  cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a
+  devolver `parse_failed`. No es un fallo del código: hay que reajustar
+  las expresiones regulares al HTML nuevo.
+- **AVAMET devolvió 403 (27-09-2026)** porque mandábamos un User-Agent que
+  se declaraba robot. Se cambió por uno de navegador normal. Para saber
+  cuál de las dos cosas pasa, abre `cepego.com/api/meteo?station=figuereta`
+  y mira el `error`: `fetch_failed` es que ellos nos rechazan o están
+  caídos; `parse_failed` es que han cambiado el HTML. La página enseña
+  "sense connexió" en los dos casos, así que desde fuera no se distinguen.
+- **El calendario nativo de `<input type="date">` no se puede traducir**
+  desde la web: sale en el idioma del navegador y ya está.
+- **CSS Grid con `1fr` no da columnas iguales** si el contenido de una es
+  más ancho. Por eso `.cols-2/3/4` usan `minmax(0,1fr)`.
+- **Las imágenes pegadas en el chat no llegan a la máquina de trabajo.**
+  Para meter una foto nueva hay que subirla por el panel `/juansa` y luego
+  moverla a `img/`.
