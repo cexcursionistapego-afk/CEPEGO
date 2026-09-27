@@ -30,6 +30,19 @@ const STATIONS = {
   },
 };
 
+// AVAMET va començar a tornar 403 (27-09-2026). Abans s'enviava una capçalera
+// que es declarava robot ("CEPEGO-meteo/1.0; +https://cepego.com") i és el
+// típic que talla un tallafocs. Ací es demana la pàgina com la demanaria una
+// persona amb el navegador: és la mateixa pàgina pública de sempre, la de les
+// estacions del club, i no es toca res més.
+// Si algun dia torna el 403, deixa de ser cosa de capçaleres: voldrà dir que
+// AVAMET no vol que es llija des d'un servidor, i llavors toca parlar amb ells.
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36',
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'Accept-Language': 'ca,es;q=0.9,en;q=0.8',
+};
+
 function res(code, obj) {
   return {
     statusCode: code,
@@ -93,9 +106,7 @@ exports.handler = async function (event) {
 
   let html;
   try {
-    const r = await fetch(station.url, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; CEPEGO-meteo/1.0; +https://cepego.com)' },
-    });
+    const r = await fetch(station.url, { headers: HEADERS });
     if (!r.ok) return res(200, { ok: false, error: 'fetch_failed', status: r.status });
     html = await r.text();
   } catch (e) {
