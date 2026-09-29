@@ -596,7 +596,7 @@ def build(g):
          l'altra coixa. -->
     <figure class="webcam reveal" id="webcam" hidden>
       <div class="webcam__marc">
-        <img class="webcam__img" id="webcam-img" alt="" decoding="async">
+        <img class="webcam__img" id="webcam-img" alt="Webcam La Figuereta" decoding="async">
         <!-- Només una línia i menuda: la mateixa foto ja porta la data i
              l'hora estampades per la càmera, així que repetir-ho ací era
              text de sobra, sobretot en el mòbil. js/webcam.js només canvia
@@ -604,7 +604,7 @@ def build(g):
         <div class="webcam__barra">
           <span class="webcam__lloc" id="webcam-lloc">
             <span class="webcam__punt" id="webcam-punt"></span>
-            <span class="va">La Figuereta &#183; en directe</span><span class="es">La Figuereta &#183; en directo</span>
+            <span class="va">Webcam La Figuereta &#183; en directe</span><span class="es">Webcam La Figuereta &#183; en directo</span>
           </span>
         </div>
       </div>

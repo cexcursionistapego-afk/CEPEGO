@@ -65,7 +65,7 @@
   }
 
   function pintaEstat(iso) {
-    var base = t('La Figuereta', 'La Figuereta');
+    var base = 'Webcam La Figuereta';
     if (esDeNit()) {
       diu(base + ' · ' + t('torna a les ', 'vuelve a las ') + horaNit(nit.fins));
       punt.className = 'webcam__punt webcam__punt--nit';
