@@ -15,6 +15,14 @@
   var el = document.getElementById('aemet-forecast');
   if (!el) return;
 
+  // Banderola de vent: es llig d'una ullada i no es confon amb cap altra
+  // icona de la fila.
+  var VENT_SVG = '<svg class="fc-vent__i" viewBox="0 0 16 16" aria-hidden="true">' +
+    '<path d="M2 5h7.5a2 2 0 1 0-2-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>' +
+    '<path d="M2 8.5h9.5a2 2 0 1 1-2 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>' +
+    '<path d="M2 12h5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>' +
+    '</svg>';
+
   function bi(va, es) { return '<span class="va">' + va + '</span><span class="es">' + es + '</span>'; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
@@ -376,6 +384,22 @@
       }).join('') + '</div>';
     }
 
+    /* Vent del dia: el més fort dels trams, que és el que importa per a
+       saber si farà aire. Només ix si AEMET l'ha donat; si el parser no
+       l'ha trobat, la fila queda com sempre i no es nota res.
+       Per davall de 15 km/h no es pinta: és el vent de qualsevol dia i
+       només afegiria soroll a una fila que ja va plena. */
+    var vent = '';
+    var v = d.vent_max;
+    if (v && v.kmh != null && v.kmh >= 15) {
+      var fort = v.kmh >= 40;
+      vent = '<span class="fc-vent' + (fort ? ' fc-vent--fort' : '') + '" title="' +
+        esc(bi('Vent', 'Viento') + (v.dir ? ' ' + v.dir : '')) + '">' +
+        VENT_SVG +
+        '<span class="fc-vent__n">' + Math.round(v.kmh) + '</span>' +
+        '</span>';
+    }
+
     return '<li class="fc-row' + (isToday ? ' fc-row--today' : '') + (color ? ' fc-row--alert fc-row--' + color : '') + '">' +
       '<div class="fc-day">' +
         (isToday
@@ -389,6 +413,7 @@
         bar +
         '<span class="fc-t fc-t--max">' + (d.temp_max != null ? Math.round(d.temp_max) + '°' : '') + '</span>' +
       '</div>' +
+      vent +
       alertRow +
       '</li>';
   }

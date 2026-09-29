@@ -302,6 +302,15 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
 - **Las variables de entorno de Netlify no llegan a las funciones hasta
   que hay un despliegue nuevo.** Cambiar una y no redesplegar parece que
   funciona, pero no aplica.
+- **El viento de AEMET está sin calibrar.** El resto del parser se hizo
+  contra el HTML real; la fila del viento no, porque desde el entorno de
+  trabajo no se llega a aemet.es. Está escrito para tolerar varias formas y,
+  si no encuentra nada, devuelve `vent_max: null` y la predicción sale igual
+  que siempre — no puede tumbar lo que ya funciona, pero **puede no salir**.
+  Si en la web no aparece el viento ningún día, hay que mirar el HTML real de
+  la fila "Viento (km/h)" y ajustar el regex en `netlify/functions/aemet.js`.
+  Solo se pinta a partir de 15 km/h, así que en días flojos es normal que no
+  salga.
 - **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
   cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a
   devolver `parse_failed`. No es un fallo del código: hay que reajustar

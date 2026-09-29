@@ -157,6 +157,40 @@ function parseAemet(rawHtml) {
     }
   }
 
+  // --- Vent: un valor per període, com la precipitació ---
+  //
+  // AEMET pinta cada cel·la amb una fletxa (<img title="Norte">, la direcció)
+  // i la velocitat en km/h al costat; quan no bufa posa "Calma". Ací no s'ha
+  // pogut calibrar contra el HTML de veritat, així que es proven diverses
+  // formes de trobar la fila i de llegir la cel·la, i sobretot: si no es
+  // troba res, es torna una llista buida i la resta de la predicció segueix
+  // igual que sempre. El vent és un afegit, no pot tombar el que ja funciona.
+  const windVals = [];
+  {
+    let secStart = table.indexOf('Viento');
+    if (secStart === -1) secStart = table.indexOf('Vent');
+    const rowStart = secStart === -1 ? -1 : table.indexOf('<tr>', secStart);
+    const rowEnd = rowStart === -1 ? -1 : table.indexOf('</tr>', rowStart);
+    if (rowStart !== -1) {
+      const row = table.slice(rowStart, rowEnd);
+      const cellRe = /<td[^>]*>([\s\S]*?)<\/td>/g;
+      let cell;
+      while ((cell = cellRe.exec(row)) !== null) {
+        const dins = cell[1];
+        const dirM = /(?:title|alt)="([^"]*)"/.exec(dins);
+        const text = decodeEntities(dins.replace(/<[^>]*>/g, ' ')).trim();
+        const kmhM = /(\d+)/.exec(text);
+        const calma = /calma/i.test(text) || /calma/i.test(dirM ? dirM[1] : '');
+        if (calma) { windVals.push({ dir: null, kmh: 0 }); continue; }
+        if (!dirM && !kmhM) { windVals.push(null); continue; }
+        windVals.push({
+          dir: dirM ? decodeEntities(dirM[1]).replace(/^Viento\s+(del\s+)?/i, '').trim() : null,
+          kmh: kmhM ? toNumber(kmhM[1]) : null,
+        });
+      }
+    }
+  }
+
   // --- Avisos: una cel·la per dia, amb un <a title="..."> per cada avís ---
   //
   // Un mateix dia pot portar més d'un avís (el cas típic ací: pluges i
@@ -229,6 +263,13 @@ function parseAemet(rawHtml) {
     }
     const precipDefined = precipGroup.filter((v) => v != null);
     const precipOf = (p) => (p ? precipVals[p.idx] : null);
+    const ventOf = (p) => (p && windVals[p.idx] ? windVals[p.idx] : null);
+    // El màxim del dia és el que interessa per a saber si farà aire: si de
+    // vesprada bufa a 40 km/h, tant se val que de matí estiguera en calma.
+    const ventsDia = windVals.slice(idx - d.colspan, idx).filter((v) => v && v.kmh != null);
+    const ventFort = ventsDia.length
+      ? ventsDia.reduce((a, b) => (b.kmh > a.kmh ? b : a))
+      : null;
     return {
       label: d.label,
       date_title: d.title,
@@ -243,6 +284,10 @@ function parseAemet(rawHtml) {
       precip_max: precipDefined.length ? Math.max(...precipDefined) : null,
       temp_min: tempPairs[i] ? tempPairs[i].min : null,
       temp_max: tempPairs[i] ? tempPairs[i].max : null,
+      vent_mati: ventOf(mati),
+      vent_vesprada: ventOf(vesprada),
+      vent_nit: ventOf(nit),
+      vent_max: ventFort,
       alerts: alerts[i] || [],
     };
   });
