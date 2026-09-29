@@ -604,7 +604,7 @@ def build(g):
         <div class="webcam__barra">
           <span class="webcam__lloc" id="webcam-lloc">
             <span class="webcam__punt" id="webcam-punt"></span>
-            <span class="va">Webcam La Figuereta &#183; en directe</span><span class="es">Webcam La Figuereta &#183; en directo</span>
+            Webcam La Figuereta
           </span>
         </div>
       </div>
