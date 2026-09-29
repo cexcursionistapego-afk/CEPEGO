@@ -221,14 +221,17 @@ ordenador del club que sube una foto cada 5 minutos.
   se ve pequeña, el problema está en el origen — que la cámara guarde a
   1280×720 o más.
 
-**Por la noche la cámara no sube nada**, porque no se vería y gastaría de
-balde. Las horas están en el panel (`webcam_nit_desde` / `webcam_nit_fins`
-en `data/site.json`) y durante esa franja la página dice que la cámara
-descansa y a qué hora vuelve, en vez de avisar de que la imagen es vieja.
+**Ahora mismo la cámara sube las 24 horas**, también de noche.
 
-> **Esas horas están en dos sitios**: en el panel y en la tarea programada
-> del ordenador de la cámara. Si se cambian en uno, hay que cambiarlas en
-> el otro, o la página dirá una cosa y la cámara hará otra.
+Existe la opción de pararla por la noche: si se rellenan `webcam_nit_desde`
+y `webcam_nit_fins` en el panel, durante esa franja la página dice que la
+cámara descansa y a qué hora vuelve, en vez de avisar de que la imagen es
+vieja. **Están vacías a propósito**; dejarlas así es lo que hace que la
+webcam funcione toda la noche.
+
+> Si algún día se rellenan, **esas horas quedan en dos sitios**: el panel y
+> la tarea programada del ordenador de la cámara. Habría que cambiarlas en
+> los dos, o la página dirá una cosa y la cámara hará otra.
 
 ## Reglas del refugio codificadas
 
