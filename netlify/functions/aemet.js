@@ -157,36 +157,37 @@ function parseAemet(rawHtml) {
     }
   }
 
-  // --- Vent: un valor per període, com la precipitació ---
+  // --- Vent: un valor per període (calibrat contra el HTML real, 29-09-2026) ---
   //
-  // AEMET pinta cada cel·la amb una fletxa (<img title="Norte">, la direcció)
-  // i la velocitat en km/h al costat; quan no bufa posa "Calma". Ací no s'ha
-  // pogut calibrar contra el HTML de veritat, així que es proven diverses
-  // formes de trobar la fila i de llegir la cel·la, i sobretot: si no es
-  // troba res, es torna una llista buida i la resta de la predicció segueix
-  // igual que sempre. El vent és un afegit, no pot tombar el que ja funciona.
+  // La secció ve marcada per <th colspan="N" title="Dirección y velocidad
+  // del viento" ...>, en minúscules ("viento", no "Viento" — per això es
+  // busca en minúscules i no com les altres files). Cada cel·la de dades
+  // porta:
+  //   <div class="icono_viento" title="Del suroeste (SO)">
+  //     <div class="texto_viento">SO</div>               ← abreviatura del rumb
+  //     <div class="imagen_viento">...
+  //       <div class="texto_km_viento">
+  //         <div class="font-size-12px">5</div>           ← velocitat en km/h
+  // Quan no bufa: title="En calma", texto_viento="C", velocitat "0".
+  // Hi ha una cel·la per període, en el mateix ordre que la resta de files
+  // (precipitació, etc.): 11 cel·les per a 11 trams a la setmana calibrada.
   const windVals = [];
   {
-    let secStart = table.indexOf('Viento');
-    if (secStart === -1) secStart = table.indexOf('Vent');
+    const secStart = table.toLowerCase().indexOf('viento');
     const rowStart = secStart === -1 ? -1 : table.indexOf('<tr>', secStart);
     const rowEnd = rowStart === -1 ? -1 : table.indexOf('</tr>', rowStart);
     if (rowStart !== -1) {
       const row = table.slice(rowStart, rowEnd);
-      const cellRe = /<td[^>]*>([\s\S]*?)<\/td>/g;
+      const cellRe = /<td class="alinear_texto_centro nocomunes">([\s\S]*?)<\/td>/g;
       let cell;
       while ((cell = cellRe.exec(row)) !== null) {
         const dins = cell[1];
-        const dirM = /(?:title|alt)="([^"]*)"/.exec(dins);
-        const text = decodeEntities(dins.replace(/<[^>]*>/g, ' ')).trim();
-        const kmhM = /(\d+)/.exec(text);
-        const calma = /calma/i.test(text) || /calma/i.test(dirM ? dirM[1] : '');
-        if (calma) { windVals.push({ dir: null, kmh: 0 }); continue; }
-        if (!dirM && !kmhM) { windVals.push(null); continue; }
-        windVals.push({
-          dir: dirM ? decodeEntities(dirM[1]).replace(/^Viento\s+(del\s+)?/i, '').trim() : null,
-          kmh: kmhM ? toNumber(kmhM[1]) : null,
-        });
+        const dirM = /<div class="texto_viento">([^<]*)<\/div>/.exec(dins);
+        const kmhM = /<div class="font-size-12px">([^<]*)<\/div>/.exec(dins);
+        const dir = dirM ? decodeEntities(dirM[1]).trim() : null;
+        const kmh = kmhM ? toNumber(kmhM[1]) : null;
+        if (dir === 'C' || kmh === 0) { windVals.push({ dir: null, kmh: 0 }); continue; }
+        windVals.push(kmh != null ? { dir: dir, kmh: kmh } : null);
       }
     }
   }
