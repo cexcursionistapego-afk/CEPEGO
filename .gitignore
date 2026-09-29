@@ -3,6 +3,10 @@ __pycache__/
 *.pyc
 *.pyo
 
+# Dependències de les funcions: les instal·la Netlify des del package.json,
+# no han d'anar al repositori.
+node_modules/
+
 # OS
 .DS_Store
 Thumbs.db
