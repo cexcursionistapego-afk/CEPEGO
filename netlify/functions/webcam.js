@@ -85,7 +85,11 @@ exports.handler = async function (event) {
 
   if (!foto) {
     const url = process.env.WEBCAM_URL;
-    if (!url) return json(200, { ok: false, error: 'no-config' });
+    if (!url) return json(200, {
+      ok: false,
+      error: 'sense-imatge',
+      message: 'La funció va bé; encara no s\'ha pujat cap foto.',
+    });
     const r = await desDeLaXarxa(url);
     if (r.error) return json(200, Object.assign({ ok: false }, r));
     foto = r;

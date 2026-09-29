@@ -47,7 +47,11 @@ exports.handler = async function (event) {
   // amb el captcha: allò era per a no deixar el club sense formularis, però
   // un endpoint d'escriptura obert és una invitació a que t'ompliguen el lloc
   // del que vulguen.
-  if (!clau) return res(503, { ok: false, error: 'no-config' });
+  if (!clau) return res(503, {
+    ok: false,
+    error: 'falta-clau-al-servidor',
+    message: "WEBCAM_UPLOAD_KEY no li arriba a la funció. Posa-la a Netlify i fes un desplegament nou: sense redesplegar, la variable no s'aplica.",
+  });
 
   const h = event.headers || {};
   const rebuda = String(h.authorization || h.Authorization || '').replace(/^Bearer\s+/i, '');
