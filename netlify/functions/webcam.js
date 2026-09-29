@@ -1,24 +1,28 @@
 // GET /api/webcam        -> la imatge de la webcam del refugi
-// GET /api/webcam?meta=1 -> JSON amb quan es va actualitzar de veritat
+// GET /api/webcam?meta=1 -> JSON amb quan es va pujar de veritat
 //
-// La càmera deixa una foto nova cada 5 minuts en un ordinador del club, que la
-// puja per FTP al servidor sempre amb el mateix nom. Ací es fa de pont en lloc
-// d'enllaçar-la directament al <img> per dos motius:
+// La foto pot vindre de dos llocs, i es mira en este ordre:
 //
-//   1. La Content-Security-Policy de les pàgines és 'img-src self data:'. Si
-//      la imatge vinguera d'un altre domini, el navegador la bloquejaria i
-//      caldria obrir la CSP a eixe domini. Passant per ací, per al navegador
-//      és una imatge del propi lloc i no cal tocar res.
-//   2. L'adreça del servidor de la càmera no queda escrita al repositori.
+//   1. Netlify Blobs, on la deixa /api/webcam-upload. És el camí normal:
+//      l'ordinador del club puja la foto cada 5 minuts directament ací.
+//   2. La variable d'entorn WEBCAM_URL, si algun dia la càmera té adreça
+//      pròpia a internet i es vol llegir d'allà sense passar per l'ordinador.
 //
-// L'adreça va a la variable d'entorn WEBCAM_URL de Netlify. Si no està
-// configurada, açò respon que no ho està i la pàgina simplement no ensenya la
-// webcam: val més que no hi siga que no un buit trencat.
+// Per què la imatge passa per una funció en compte d'anar al <img> directa:
+// la Content-Security-Policy de les pàgines és img-src 'self' data:, així que
+// una imatge d'un altre domini quedaria bloquejada pel navegador. Passant per
+// ací, per al navegador és una imatge del propi lloc i no cal tocar la CSP.
 //
-// Ull: canviar la variable a Netlify no té efecte fins que hi ha un
-// desplegament nou.
+// Si no hi ha ni l'una ni l'altra, es respon que no està configurada i la
+// pàgina simplement no ensenya la webcam.
 
-const CACHE = 'public, max-age=60, stale-while-revalidate=240';
+const { getStore } = require('@netlify/blobs');
+
+// La foto canvia cada 5 minuts, així que no té sentit anar a buscar-la més
+// sovint: es deixa que la caché de Netlify la servisca 4 minuts. Això és el
+// que evita que cada visitant gaste una crida de funció — amb la caché, mil
+// visites en 4 minuts són una sola crida.
+const CACHE = 'public, max-age=240, stale-while-revalidate=120';
 
 function json(code, obj, cache) {
   return {
@@ -28,40 +32,65 @@ function json(code, obj, cache) {
   };
 }
 
-exports.handler = async function (event) {
-  const url = process.env.WEBCAM_URL;
-  const meta = ((event.queryStringParameters || {}).meta || '') === '1';
+function imatge(buf, tipus) {
+  return {
+    statusCode: 200,
+    headers: { 'Content-Type': tipus || 'image/jpeg', 'Cache-Control': CACHE },
+    body: buf.toString('base64'),
+    isBase64Encoded: true,
+  };
+}
 
-  if (!url) return json(200, { ok: false, error: 'no-config' });
+function edat(updated) {
+  if (!updated) return null;
+  const q = new Date(updated);
+  return isNaN(q) ? null : Math.round((Date.now() - q.getTime()) / 60000);
+}
 
+// 1) La que puja l'ordinador del club.
+async function desDelMagatzem() {
+  try {
+    const store = getStore('webcam');
+    const r = await store.getWithMetadata('figuereta', { type: 'arrayBuffer' });
+    if (!r || !r.data) return null;
+    const m = r.metadata || {};
+    return { buf: Buffer.from(r.data), tipus: m.type, updated: m.updated || null };
+  } catch (e) {
+    return null;
+  }
+}
+
+// 2) La càmera amb adreça pròpia, si mai es fa servir.
+async function desDeLaXarxa(url) {
   let r;
   try {
     r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
   } catch (e) {
-    return json(200, { ok: false, error: 'exception', detail: String(e).slice(0, 200) });
+    return { error: 'exception', detail: String(e).slice(0, 200) };
   }
-  if (!r.ok) return json(200, { ok: false, error: 'fetch_failed', status: r.status });
-
-  // Quan es va pujar la foto de veritat. És el que permet distingir "la càmera
-  // va bé" de "la càmera s'ha quedat penjada i estem ensenyant una foto de fa
-  // hores": sense això, una imatge vella pareix igual de fresca que una nova.
+  if (!r.ok) return { error: 'fetch_failed', status: r.status };
   const lastMod = r.headers.get('last-modified');
-  const quan = lastMod ? new Date(lastMod) : null;
-  const updated = quan && !isNaN(quan) ? quan.toISOString() : null;
+  const q = lastMod ? new Date(lastMod) : null;
+  return {
+    buf: Buffer.from(await r.arrayBuffer()),
+    tipus: r.headers.get('content-type') || 'image/jpeg',
+    updated: q && !isNaN(q) ? q.toISOString() : null,
+  };
+}
 
-  if (meta) {
-    const minuts = updated ? Math.round((Date.now() - new Date(updated).getTime()) / 60000) : null;
-    return json(200, { ok: true, updated: updated, age_min: minuts }, CACHE);
+exports.handler = async function (event) {
+  const meta = ((event.queryStringParameters || {}).meta || '') === '1';
+
+  let foto = await desDelMagatzem();
+
+  if (!foto) {
+    const url = process.env.WEBCAM_URL;
+    if (!url) return json(200, { ok: false, error: 'no-config' });
+    const r = await desDeLaXarxa(url);
+    if (r.error) return json(200, Object.assign({ ok: false }, r));
+    foto = r;
   }
 
-  const buf = Buffer.from(await r.arrayBuffer());
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': r.headers.get('content-type') || 'image/jpeg',
-      'Cache-Control': CACHE,
-    },
-    body: buf.toString('base64'),
-    isBase64Encoded: true,
-  };
+  if (meta) return json(200, { ok: true, updated: foto.updated, age_min: edat(foto.updated) }, CACHE);
+  return imatge(foto.buf, foto.tipus);
 };

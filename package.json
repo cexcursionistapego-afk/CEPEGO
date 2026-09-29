@@ -1,0 +1,8 @@
+{
+  "name": "cepego",
+  "private": true,
+  "description": "Primera i única dependència npm del projecte. Fins ara les funcions no en tenien cap i això és part del que fa el projecte fàcil de mantindre; es trenca la norma perquè la webcam necessita guardar la foto en algun lloc que els desplegaments del git no s'enduguen, i Netlify Blobs és l'única manera de fer-ho sense contractar res a banda.",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}
