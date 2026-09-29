@@ -1027,3 +1027,34 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   .dp__pop{left:50%;transform:translateX(-50%);width:min(320px,calc(100vw - 32px))}
   .dp__dia,.dp__buit{height:42px}
 }
+
+/* Webcam del refugi (pagina de meteo). Va a tota l'amplaria damunt de les dos
+   estacions: dins d'una de les targetes deixaria l'altra coixa, i la foto es
+   el que la gent vol vore gran. */
+.webcam{margin:0 0 clamp(16px,2.5vw,28px)}
+.webcam__marc{position:relative;border-radius:var(--r);overflow:hidden;
+  background:var(--paper-2);box-shadow:var(--shadow-sm);border:1px solid var(--hair)}
+/* L'alcaria es fixa per proporcio i no pel contingut: aixi la pagina no pega
+   un bot quan arriba la imatge. */
+.webcam__img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.webcam__barra{position:absolute;left:0;right:0;bottom:0;display:flex;
+  align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:10px 14px;color:#fff;font-size:.82rem;
+  background:linear-gradient(180deg,rgba(15,18,26,0),rgba(15,18,26,.78))}
+.webcam__lloc{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+.webcam__quan{font-family:var(--font-mono);font-size:.74rem;opacity:.9}
+.webcam__punt{width:8px;height:8px;border-radius:50%;background:#5fd08a;
+  box-shadow:0 0 0 0 rgba(95,208,138,.7);animation:webcam-batec 2.4s infinite}
+/* Si la camera s'ha quedat penjada, el punt deixa de bategar i es posa en
+   ambre: la foto es veu igual de be, aixi que si no es diu ningu ho sap. */
+.webcam__punt--vella{background:#e0a33a;animation:none;box-shadow:none}
+@keyframes webcam-batec{
+  0%{box-shadow:0 0 0 0 rgba(95,208,138,.7)}
+  70%{box-shadow:0 0 0 7px rgba(95,208,138,0)}
+  100%{box-shadow:0 0 0 0 rgba(95,208,138,0)}
+}
+@media(max-width:560px){
+  .webcam__img{aspect-ratio:4/3}
+  .webcam__barra{font-size:.76rem;padding:9px 12px}
+}
+@media(prefers-reduced-motion:reduce){.webcam__punt{animation:none}}

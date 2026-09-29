@@ -41,6 +41,10 @@
   from = "/api/registre-viatgers"
   to = "/.netlify/functions/registre-viatgers"
   status = 200
+[[redirects]]
+  from = "/api/webcam"
+  to = "/.netlify/functions/webcam"
+  status = 200
 
 # Camí curt per al registre de viatgers del refugi. És l'enllaç que es passa a
 # qui ve a dormir (i el que anirà al QR del refugi), així que ha de ser fàcil
