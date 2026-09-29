@@ -35,12 +35,25 @@
     return d === 1 ? t('fa 1 dia', 'hace 1 día') : t('fa ' + d + ' dies', 'hace ' + d + ' días');
   }
 
-  function pintaEdat(min) {
-    if (min == null) { quan.textContent = ''; punt.className = 'webcam__punt'; return; }
+  // L'hora es pinta en l'horari del qui mira, no en el del servidor: el
+  // navegador ja sap en quin fus està i toLocaleTimeString ho resol sol.
+  function hora(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    return d.toLocaleTimeString(es ? 'es-ES' : 'ca-ES', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function pintaEdat(iso) {
+    if (!iso) { quan.textContent = ''; punt.className = 'webcam__punt'; return; }
+    // El compte es fa ací i no al servidor: la resposta pot vindre de la
+    // caché, i si el número vinguera fet, es quedaria congelat fins a 4
+    // minuts i l'hora no quadraria.
+    var min = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
     var vella = min >= VELLA;
-    quan.textContent = vella
-      ? t('última imatge ' + textEdat(min), 'última imagen ' + textEdat(min))
-      : t('actualitzada ' + textEdat(min), 'actualizada ' + textEdat(min));
+    var h = hora(iso);
+    quan.textContent = (vella ? t('última imatge', 'última imagen') : t('actualitzada', 'actualizada'))
+      + (h ? ' ' + t('a les ', 'a las ') + h : '')
+      + ' · ' + textEdat(min);
     punt.className = 'webcam__punt' + (vella ? ' webcam__punt--vella' : '');
     panell.classList.toggle('webcam--vella', vella);
   }
@@ -54,13 +67,17 @@
   function refrescaEdat() {
     fetch('/api/webcam?meta=1&t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { return r.json(); })
-      .then(function (d) { pintaEdat(d && d.ok ? d.age_min : null); })
+      .then(function (d) { pintaEdat(d && d.ok ? d.updated : null); })
       .catch(function () { pintaEdat(null); });
   }
 
   img.addEventListener('load', function () {
     panell.hidden = false;
     panell.classList.add('in');
+    // No estirar la foto més enllà del que fa de veritat: si la càmera envia
+    // 640 px i ací l'amplem a 1.100, es veu borrosa. Millor xicoteta i
+    // nítida, centrada, que gran i desenfocada.
+    if (img.naturalWidth) img.style.maxWidth = img.naturalWidth + 'px';
   });
   // Si la càmera no respon, el panell es queda amagat i la pàgina segueix
   // igual que abans, amb les dos estacions i res més.

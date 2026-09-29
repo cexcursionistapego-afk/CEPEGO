@@ -94,6 +94,10 @@ exports.handler = async function (event) {
     foto = r;
   }
 
+  // El "fa X minuts" el calcula el navegador a partir de l'hora absoluta i no
+  // el servidor: si el calculàrem ací, la caché el congelaria i la pàgina
+  // diria "fa 1 minut" quan en fa 5. Amb l'hora absoluta, encara que la
+  // resposta vinga de la caché, el compte ix bé.
   if (meta) return json(200, { ok: true, updated: foto.updated, age_min: edat(foto.updated) }, CACHE);
   return imatge(foto.buf, foto.tipus);
 };
