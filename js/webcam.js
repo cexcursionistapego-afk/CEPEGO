@@ -14,7 +14,7 @@
   if (!panell) return;
 
   var img = document.getElementById('webcam-img');
-  var quan = document.getElementById('webcam-quan');
+  var lloc = document.getElementById('webcam-lloc');
   var punt = document.getElementById('webcam-punt');
 
   var CADA = 5 * 60 * 1000;   // la càmera puja una foto cada 5 minuts
@@ -54,48 +54,35 @@
   var es = document.documentElement.getAttribute('data-lang') === 'es';
   function t(va, txtEs) { return es ? txtEs : va; }
 
-  function textEdat(min) {
-    if (min == null) return '';
-    if (min < 1) return t('ara mateix', 'ahora mismo');
-    if (min === 1) return t('fa 1 minut', 'hace 1 minuto');
-    if (min < 60) return t('fa ' + min + ' minuts', 'hace ' + min + ' minutos');
-    var h = Math.floor(min / 60);
-    if (h === 1) return t('fa 1 hora', 'hace 1 hora');
-    if (h < 24) return t('fa ' + h + ' hores', 'hace ' + h + ' horas');
-    var d = Math.floor(h / 24);
-    return d === 1 ? t('fa 1 dia', 'hace 1 día') : t('fa ' + d + ' dies', 'hace ' + d + ' días');
+  // La frase de dia ja ve escrita en l'HTML, en els dos idiomes. Es guarda
+  // per a poder tornar-hi quan la càmera es recupera.
+  var frasePerDefecte = lloc.innerHTML;
+
+  function diu(text) {
+    lloc.innerHTML = '<span class="webcam__punt" id="webcam-punt"></span>';
+    lloc.appendChild(document.createTextNode(text));
+    punt = document.getElementById('webcam-punt');
   }
 
-  // L'hora es pinta en l'horari del qui mira, no en el del servidor: el
-  // navegador ja sap en quin fus està i toLocaleTimeString ho resol sol.
-  function hora(iso) {
-    var d = new Date(iso);
-    if (isNaN(d)) return '';
-    return d.toLocaleTimeString(es ? 'es-ES' : 'ca-ES', { hour: '2-digit', minute: '2-digit' });
-  }
-
-  function pintaEdat(iso) {
-    if (!iso) { quan.textContent = ''; punt.className = 'webcam__punt'; return; }
+  function pintaEstat(iso) {
+    var base = t('La Figuereta', 'La Figuereta');
     if (esDeNit()) {
-      // Es diu a quina hora torna: si no, qui entra de nit es queda sense
-      // saber si la càmera està espatllada o simplement dormint.
-      quan.textContent = t('de nit la càmera descansa', 'de noche la cámara descansa')
-        + ' · ' + t('torna a les ', 'vuelve a las ') + horaNit(nit.fins);
+      diu(base + ' · ' + t('torna a les ', 'vuelve a las ') + horaNit(nit.fins));
       punt.className = 'webcam__punt webcam__punt--nit';
       panell.classList.remove('webcam--vella');
       return;
     }
-    // El compte es fa ací i no al servidor: la resposta pot vindre de la
-    // caché, i si el número vinguera fet, es quedaria congelat fins a 4
-    // minuts i l'hora no quadraria.
-    var min = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
-    var vella = min >= VELLA;
-    var h = hora(iso);
-    quan.textContent = (vella ? t('última imatge', 'última imagen') : t('actualitzada', 'actualizada'))
-      + (h ? ' ' + t('a les ', 'a las ') + h : '')
-      + ' · ' + textEdat(min);
-    punt.className = 'webcam__punt' + (vella ? ' webcam__punt--vella' : '');
-    panell.classList.toggle('webcam--vella', vella);
+    var min = iso ? Math.round((Date.now() - new Date(iso).getTime()) / 60000) : null;
+    if (min != null && min >= VELLA) {
+      diu(base + ' · ' + t('sense senyal', 'sin señal'));
+      punt.className = 'webcam__punt webcam__punt--vella';
+      panell.classList.add('webcam--vella');
+      return;
+    }
+    // Tot normal: la frase de sempre, tal com ve de l'HTML.
+    lloc.innerHTML = frasePerDefecte;
+    punt = document.getElementById('webcam-punt');
+    panell.classList.remove('webcam--vella');
   }
 
   // El navegador es guarda la imatge en memòria; sense canviar l'adreça
@@ -107,8 +94,8 @@
   function refrescaEdat() {
     fetch('/api/webcam?meta=1&t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { return r.json(); })
-      .then(function (d) { pintaEdat(d && d.ok ? d.updated : null); })
-      .catch(function () { pintaEdat(null); });
+      .then(function (d) { pintaEstat(d && d.ok ? d.updated : null); })
+      .catch(function () { pintaEstat(null); });
   }
 
   img.addEventListener('load', function () {

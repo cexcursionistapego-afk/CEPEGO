@@ -1045,12 +1045,13 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
    un bot mentre carrega, i js/webcam.js li posa un max-width igual a
    l'amplaria real de la imatge per a no ampliar-la mai mes del que fa. */
 .webcam__img{width:100%;height:auto;display:block;margin:0 auto;max-height:78vh}
+/* Una sola linia i menuda: la foto ja porta la data i l'hora estampades per
+   la camera, aixi que repetir-ho ací sobrava, sobretot en el mobil. */
 .webcam__barra{position:absolute;left:0;right:0;bottom:0;display:flex;
-  align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-  padding:10px 14px;color:#fff;font-size:.82rem;
-  background:linear-gradient(180deg,rgba(15,18,26,0),rgba(15,18,26,.78))}
-.webcam__lloc{display:inline-flex;align-items:center;gap:8px;font-weight:600}
-.webcam__quan{font-family:var(--font-mono);font-size:.74rem;opacity:.9}
+  align-items:center;padding:8px 12px;color:#fff;font-size:.74rem;
+  background:linear-gradient(180deg,rgba(15,18,26,0),rgba(15,18,26,.72))}
+.webcam__lloc{display:inline-flex;align-items:center;gap:7px;font-weight:600;
+  letter-spacing:.01em}
 .webcam__punt{width:8px;height:8px;border-radius:50%;background:#5fd08a;
   box-shadow:0 0 0 0 rgba(95,208,138,.7);animation:webcam-batec 2.4s infinite}
 /* Si la camera s'ha quedat penjada, el punt deixa de bategar i es posa en
@@ -1063,7 +1064,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 }
 @media(max-width:560px){
   .webcam__marc{min-height:170px}
-  .webcam__barra{font-size:.76rem;padding:9px 12px}
+  .webcam__barra{font-size:.7rem;padding:7px 10px}
 }
 @media(prefers-reduced-motion:reduce){.webcam__punt{animation:none}}
 /* De nit la camera no puja res a proposit: el punt es queda quiet i apagat,
