@@ -20,6 +20,37 @@
   var CADA = 5 * 60 * 1000;   // la càmera puja una foto cada 5 minuts
   var VELLA = 20;             // minuts a partir dels quals es considera penjada
 
+  /* De nit la càmera no puja res, perquè no es veuria i gastaria de bades.
+     Sense saber-ho, la pàgina es passaria la nit avisant que la imatge és
+     vella, com si estiguera espatllada. Les hores es posen al panell
+     (data/site.json) i han de ser LES MATEIXES que tinga programades
+     l'ordinador de la càmera: si es canvien ahí, cal canviar-les allà. */
+  var nit = null;   // { desde: minuts, fins: minuts }
+
+  function aMinuts(txt) {
+    var m = /^(\d{1,2}):(\d{2})$/.exec(String(txt || '').trim());
+    if (!m) return null;
+    var h = +m[1], mi = +m[2];
+    if (h > 23 || mi > 59) return null;
+    return h * 60 + mi;
+  }
+
+  // Els minuts del panell tornats a "08:00" per a poder ensenyar-los.
+  function horaNit(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  }
+
+  function esDeNit() {
+    if (!nit) return false;
+    var ara = new Date();
+    var m = ara.getHours() * 60 + ara.getMinutes();
+    // La franja creua la mitjanit (21:30 → 08:00), així que no val amb un
+    // simple "està entre les dos".
+    return nit.desde > nit.fins ? (m >= nit.desde || m < nit.fins)
+                                : (m >= nit.desde && m < nit.fins);
+  }
+
   var es = document.documentElement.getAttribute('data-lang') === 'es';
   function t(va, txtEs) { return es ? txtEs : va; }
 
@@ -45,6 +76,15 @@
 
   function pintaEdat(iso) {
     if (!iso) { quan.textContent = ''; punt.className = 'webcam__punt'; return; }
+    if (esDeNit()) {
+      // Es diu a quina hora torna: si no, qui entra de nit es queda sense
+      // saber si la càmera està espatllada o simplement dormint.
+      quan.textContent = t('de nit la càmera descansa', 'de noche la cámara descansa')
+        + ' · ' + t('torna a les ', 'vuelve a las ') + horaNit(nit.fins);
+      punt.className = 'webcam__punt webcam__punt--nit';
+      panell.classList.remove('webcam--vella');
+      return;
+    }
     // El compte es fa ací i no al servidor: la resposta pot vindre de la
     // caché, i si el número vinguera fet, es quedaria congelat fins a 4
     // minuts i l'hora no quadraria.
@@ -83,8 +123,14 @@
   // igual que abans, amb les dos estacions i res més.
   img.addEventListener('error', function () { panell.hidden = true; });
 
-  refrescaImatge();
-  refrescaEdat();
+  fetch('/data/site.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (s) {
+      var d = aMinuts(s && s.webcam_nit_desde), f = aMinuts(s && s.webcam_nit_fins);
+      if (d != null && f != null && d !== f) nit = { desde: d, fins: f };
+    })
+    .catch(function () {})
+    .then(function () { refrescaImatge(); refrescaEdat(); });
 
   var timer = setInterval(function () { refrescaImatge(); refrescaEdat(); }, CADA);
 

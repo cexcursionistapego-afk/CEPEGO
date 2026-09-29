@@ -67,6 +67,8 @@ collections:
           - { label: "Quota sala d'entrenament", name: "quota_sala", widget: "string" }
           - { label: "Avís blau a Reservar (valencià)", name: "avis_reserva_va", widget: "text" }
           - { label: "Avís blau a Reservar (castellà)", name: "avis_reserva_es", widget: "text" }
+          - { label: "Webcam: de nit, des de", name: "webcam_nit_desde", widget: "string", required: false, hint: "Hora a la qual la càmera deixa de pujar fotos (per exemple 21:30). De nit no es veuria res i gastaria de bades. Entre esta hora i la de baix, la pàgina diu que la càmera descansa en compte d'avisar que la imatge és vella. IMPORTANT: han de ser les mateixes hores que tinga programades l'ordinador de la càmera. Deixa-ho buit si la càmera puja tot el dia." }
+          - { label: "Webcam: de nit, fins a", name: "webcam_nit_fins", widget: "string", required: false, hint: "Hora a la qual la càmera torna a pujar fotos (per exemple 08:00)." }
           - { label: "Reserves en cua a partir de (deixa-ho buit per a desactivar)", name: "reserves_cua_desde", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false, hint: "Si poses una data, qui intente reservar per a eixe dia o posteriors podrà enviar la sol·licitud igualment, però se li avisarà que encara no s'han obert les reserves i que entra en una cua per ordre d'arribada. Deixa-ho buit per a tornar al funcionament normal." }
 
   # ---------- AVÍS / NOVETAT ----------

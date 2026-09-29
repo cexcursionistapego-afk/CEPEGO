@@ -198,6 +198,38 @@ la ley obliga a registrar a todo el que pernocta.
   de privacidad es el del bloque "Qué hacemos con los datos": si tocas ese
   texto, no lo pierdas.
 
+## Webcam del refugio
+
+Sale en `/meteo`, encima de las dos estaciones. La cámara está en un
+ordenador del club que sube una foto cada 5 minutos.
+
+- **No hay FTP**: en Netlify no se puede montar un servidor FTP. El
+  ordenador sube la foto por HTTPS a `/api/webcam-upload` con una clave
+  (`WEBCAM_UPLOAD_KEY`). Esa clave **solo sirve para subir la foto**: es a
+  propósito, para que un ordenador que se pierda no se lleve nada más.
+- La foto se guarda en **Netlify Blobs**, no en el repositorio. Si fuera al
+  repositorio, cada publicación del panel `/juansa` la borraría, porque el
+  sitio se vuelve a desplegar tal cual está en git.
+- `/api/webcam` la devuelve. Pasa por una función en vez de ir directa al
+  `<img>` porque la CSP es `img-src 'self' data:`.
+- **La edad la calcula el navegador**, no el servidor: la respuesta se
+  cachea 4 minutos y un "hace X minutos" hecho en el servidor se quedaría
+  congelado y mostraría una hora que no cuadra.
+- **La foto no se amplía nunca más de lo que mide** (`js/webcam.js` le pone
+  un `max-width` igual a su anchura real). Antes se estiraba a 16:9 con
+  `object-fit:cover`, que además recortaba los lados: se veía borrosa. Si
+  se ve pequeña, el problema está en el origen — que la cámara guarde a
+  1280×720 o más.
+
+**Por la noche la cámara no sube nada**, porque no se vería y gastaría de
+balde. Las horas están en el panel (`webcam_nit_desde` / `webcam_nit_fins`
+en `data/site.json`) y durante esa franja la página dice que la cámara
+descansa y a qué hora vuelve, en vez de avisar de que la imagen es vieja.
+
+> **Esas horas están en dos sitios**: en el panel y en la tarea programada
+> del ordenador de la cámara. Si se cambian en uno, hay que cambiarlas en
+> el otro, o la página dirá una cosa y la cámara hará otra.
+
 ## Reglas del refugio codificadas
 
 Estas son decisiones del club, no detalles técnicos. Están duplicadas en

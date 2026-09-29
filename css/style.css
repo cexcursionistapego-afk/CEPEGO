@@ -1066,3 +1066,6 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   .webcam__barra{font-size:.76rem;padding:9px 12px}
 }
 @media(prefers-reduced-motion:reduce){.webcam__punt{animation:none}}
+/* De nit la camera no puja res a proposit: el punt es queda quiet i apagat,
+   sense l'ambre d'avis, que voldria dir que alguna cosa va malament. */
+.webcam__punt--nit{background:var(--muted);animation:none;box-shadow:none}
