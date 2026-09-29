@@ -16,7 +16,7 @@
 // Si no hi ha ni l'una ni l'altra, es respon que no està configurada i la
 // pàgina simplement no ensenya la webcam.
 
-const { getStore } = require('@netlify/blobs');
+const { magatzem } = require('./_blobs');
 
 // La foto canvia cada 5 minuts, així que no té sentit anar a buscar-la més
 // sovint: es deixa que la caché de Netlify la servisca 4 minuts. Això és el
@@ -50,8 +50,7 @@ function edat(updated) {
 // 1) La que puja l'ordinador del club.
 async function desDelMagatzem() {
   try {
-    const store = getStore('webcam');
-    const r = await store.getWithMetadata('figuereta', { type: 'arrayBuffer' });
+    const r = await magatzem().getWithMetadata('figuereta', { type: 'arrayBuffer' });
     if (!r || !r.data) return null;
     const m = r.metadata || {};
     return { buf: Buffer.from(r.data), tipus: m.type, updated: m.updated || null };

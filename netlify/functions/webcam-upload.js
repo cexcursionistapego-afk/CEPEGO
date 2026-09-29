@@ -20,7 +20,7 @@
 // Ull: canviar la variable a Netlify no té efecte fins que hi ha un
 // desplegament nou.
 
-const { getStore } = require('@netlify/blobs');
+const { magatzem, explicaError } = require('./_blobs');
 const crypto = require('crypto');
 
 const MAX_BYTES = 4 * 1024 * 1024;
@@ -66,12 +66,11 @@ exports.handler = async function (event) {
   if (dades.length > MAX_BYTES) return res(413, { ok: false, error: 'massa-gran', message: 'La foto ha de pesar menys de 4MB.' });
 
   try {
-    const store = getStore('webcam');
-    await store.set('figuereta', dades, {
+    await magatzem().set('figuereta', dades, {
       metadata: { updated: new Date().toISOString(), type: tipus, bytes: dades.length },
     });
   } catch (e) {
-    return res(500, { ok: false, error: 'store', detail: String(e).slice(0, 200) });
+    return res(500, Object.assign({ ok: false }, explicaError(e)));
   }
 
   return res(200, { ok: true, bytes: dades.length });

@@ -277,6 +277,13 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
   y mira el `error`: `fetch_failed` es que ellos nos rechazan o están
   caídos; `parse_failed` es que han cambiado el HTML. La página enseña
   "sense connexió" en los dos casos, así que desde fuera no se distinguen.
+- **Netlify Blobs no siempre se autoconfigura.** La webcam guarda la foto ahí
+  (`netlify/functions/_blobs.js`). Si la subida falla con
+  `MissingBlobsEnvironmentError` / `blobs-sense-configurar`, es que Netlify no
+  le está inyectando el contexto a la función: hay que poner `BLOBS_SITE_ID` y
+  `BLOBS_TOKEN` en las variables del sitio y **redesplegar**. El código usa
+  esas variables si están y, si no, deja que Netlify haga lo suyo, así que el
+  día que vuelva a funcionar solo basta con quitarlas.
 - **El calendario nativo de `<input type="date">` no se puede traducir**
   desde la web: sale en el idioma del navegador y ya está.
 - **CSS Grid con `1fr` no da columnas iguales** si el contenido de una es
