@@ -314,15 +314,25 @@
   // Una cel·la de tram. `desc` buit vol dir que AEMET no dona eixe tram
   // (típic del dia en curs, que ja ha perdut el matí): es deixa un guionet
   // perquè les columnes seguisquen quadrant.
-  function periodCell(desc, precip, night, span, labelVa, labelEs) {
+  function periodCell(desc, precip, night, span, labelVa, labelEs, vent) {
     var cls = 'fc-p' + (span ? ' fc-p--all' : '');
     if (!desc) return '<div class="fc-p fc-p--empty" aria-hidden="true">–</div>';
     var pr = (precip != null && precip > 0)
       ? '<span class="fc-p__pr">' + Math.round(precip) + '%</span>' : '';
+    // El vent va dins del tram, davall de la icona, al costat de la pluja:
+    // en una línia a banda quedava lleig i ocupava de més. Per davall de 15
+    // km/h no es pinta, que és el vent de qualsevol dia.
+    var vt = '';
+    if (vent && vent.kmh != null && vent.kmh >= 15) {
+      vt = '<span class="fc-p__vt' + (vent.kmh >= 40 ? ' fc-p__vt--fort' : '') + '" title="' +
+        esc(bi('Vent', 'Viento') + (vent.dir ? ' ' + vent.dir : '') + ' · ' + Math.round(vent.kmh) + ' km/h') + '">' +
+        VENT_SVG + Math.round(vent.kmh) + '</span>';
+    }
+    var peu = (pr || vt) ? '<span class="fc-p__peu">' + pr + vt + '</span>' : '';
     return '<div class="' + cls + '" title="' + esc(desc) + '">' +
       icon(desc, night) +
       (labelVa ? '<span class="fc-p__lb">' + bi(labelVa, labelEs) + '</span>' : '') +
-      pr + '</div>';
+      peu + '</div>';
   }
 
   // Quan el dia porta un sol tram, l'etiqueta ix del rang horari d'eixe
@@ -349,10 +359,12 @@
     var hasSplit = !!(d.desc_mati || d.desc_vesprada || d.desc_nit);
     var gen = generalLabel(d.hora_general);
     var periods = hasSplit
-      ? periodCell(d.desc_mati, d.precip_mati, false) +
-        periodCell(d.desc_vesprada, d.precip_vesprada, false) +
-        periodCell(d.desc_nit, d.precip_nit, true)
-      : periodCell(d.desc_general, d.precip_max, gen.night, true, gen.va, gen.es);
+      ? periodCell(d.desc_mati, d.precip_mati, false, false, null, null, d.vent_mati) +
+        periodCell(d.desc_vesprada, d.precip_vesprada, false, false, null, null, d.vent_vesprada) +
+        periodCell(d.desc_nit, d.precip_nit, true, false, null, null, d.vent_nit)
+      // Dia sense trams: es fa servir el vent més fort del dia, que és
+      // l'únic que té sentit quan la previsió és d'un sol bloc.
+      : periodCell(d.desc_general, d.precip_max, gen.night, true, gen.va, gen.es, d.vent_max);
 
     // Barra de rang: on cau la mínima i la màxima del dia dins del rang de
     // tota la setmana. Deixa vore d'un colp d'ull quins dies refresquen.
@@ -384,22 +396,6 @@
       }).join('') + '</div>';
     }
 
-    /* Vent del dia: el més fort dels trams, que és el que importa per a
-       saber si farà aire. Només ix si AEMET l'ha donat; si el parser no
-       l'ha trobat, la fila queda com sempre i no es nota res.
-       Per davall de 15 km/h no es pinta: és el vent de qualsevol dia i
-       només afegiria soroll a una fila que ja va plena. */
-    var vent = '';
-    var v = d.vent_max;
-    if (v && v.kmh != null && v.kmh >= 15) {
-      var fort = v.kmh >= 40;
-      vent = '<span class="fc-vent' + (fort ? ' fc-vent--fort' : '') + '" title="' +
-        esc(bi('Vent', 'Viento') + (v.dir ? ' ' + v.dir : '')) + '">' +
-        VENT_SVG +
-        '<span class="fc-vent__n">' + Math.round(v.kmh) + '</span>' +
-        '</span>';
-    }
-
     return '<li class="fc-row' + (isToday ? ' fc-row--today' : '') + (color ? ' fc-row--alert fc-row--' + color : '') + '">' +
       '<div class="fc-day">' +
         (isToday
@@ -413,7 +409,6 @@
         bar +
         '<span class="fc-t fc-t--max">' + (d.temp_max != null ? Math.round(d.temp_max) + '°' : '') + '</span>' +
       '</div>' +
-      vent +
       alertRow +
       '</li>';
   }

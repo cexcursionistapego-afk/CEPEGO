@@ -310,7 +310,8 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
   Si en la web no aparece el viento ningún día, hay que mirar el HTML real de
   la fila "Viento (km/h)" y ajustar el regex en `netlify/functions/aemet.js`.
   Solo se pinta a partir de 15 km/h, así que en días flojos es normal que no
-  salga.
+  salga. Va dentro de cada tramo (mañana/tarde/noche), junto al % de lluvia;
+  en los días de un solo bloque se usa el más fuerte del día.
 - **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
   cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a
   devolver `parse_failed`. No es un fallo del código: hay que reajustar
