@@ -1072,8 +1072,8 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .webcam__punt--nit{background:var(--muted);animation:none;box-shadow:none}
 
 /* Vent dins de cada tram, al costat de la probabilitat de pluja: en una
-   linia a banda quedava lleig i ocupava de mes. Nomes ix a partir de 15 km/h,
-   que per davall es el vent de qualsevol dia. */
+   linia a banda quedava lleig i ocupava de mes. Es pinta sempre; per davall
+   de 15 km/h va mes apagat. */
 .fc-p__peu{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;
   justify-content:center;margin-top:1px}
 .fc-p__vt{display:inline-flex;align-items:center;gap:2px;
@@ -1081,4 +1081,5 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   color:var(--muted);white-space:nowrap}
 .fc-p__vt__i,.fc-p__vt svg{width:11px;height:11px;flex-shrink:0}
 /* A partir de 40 km/h ja no es un detall: es el que pot fer que no isques. */
+.fc-p__vt--fluix{font-weight:500;opacity:.8}
 .fc-p__vt--fort{color:#9a5a12}

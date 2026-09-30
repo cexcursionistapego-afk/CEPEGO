@@ -308,7 +308,7 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
   filas ("Probabilidad de precipitación", con mayúscula), así que la búsqueda
   se hace en minúsculas. Cada celda trae `<div class="texto_viento">SO</div>`
   (rumbo) y `<div class="font-size-12px">5</div>` (km/h); en calma, rumbo "C"
-  y velocidad "0". Solo se pinta a partir de 15 km/h. Va dentro de cada tramo
+  y velocidad "0". Se pinta siempre (en calma, "0"); en gris apagado por debajo de 15 km/h y en ámbar desde 40. Va dentro de cada tramo
   (mañana/tarde/noche), junto al % de lluvia; en los días de un solo bloque se
   usa el más fuerte del día.
 - **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si

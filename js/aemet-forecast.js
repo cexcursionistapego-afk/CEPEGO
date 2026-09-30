@@ -319,14 +319,17 @@
     if (!desc) return '<div class="fc-p fc-p--empty" aria-hidden="true">–</div>';
     var pr = (precip != null && precip > 0)
       ? '<span class="fc-p__pr">' + Math.round(precip) + '%</span>' : '';
-    // El vent va dins del tram, davall de la icona, al costat de la pluja:
-    // en una línia a banda quedava lleig i ocupava de més. Per davall de 15
-    // km/h no es pinta, que és el vent de qualsevol dia.
+    // El vent va dins del tram, davall de la icona, al costat de la pluja.
+    // Es pinta sempre (amb calma = 0): si només isquera amb vent fort, la
+    // majoria de dies no es vora res i pareixeria que no funciona. Ambre a
+    // partir de 40 km/h.
     var vt = '';
-    if (vent && vent.kmh != null && vent.kmh >= 15) {
-      vt = '<span class="fc-p__vt' + (vent.kmh >= 40 ? ' fc-p__vt--fort' : '') + '" title="' +
-        esc(bi('Vent', 'Viento') + (vent.dir ? ' ' + vent.dir : '') + ' · ' + Math.round(vent.kmh) + ' km/h') + '">' +
-        VENT_SVG + Math.round(vent.kmh) + '</span>';
+    if (vent && vent.kmh != null) {
+      var kmh = Math.round(vent.kmh);
+      var cls2 = 'fc-p__vt' + (kmh >= 40 ? ' fc-p__vt--fort' : '') + (kmh < 15 ? ' fc-p__vt--fluix' : '');
+      vt = '<span class="' + cls2 + '" title="' +
+        esc(bi('Vent', 'Viento') + (vent.dir ? ' ' + vent.dir : '') + ' · ' + kmh + ' km/h') + '">' +
+        VENT_SVG + kmh + '</span>';
     }
     var peu = (pr || vt) ? '<span class="fc-p__peu">' + pr + vt + '</span>' : '';
     return '<div class="' + cls + '" title="' + esc(desc) + '">' +

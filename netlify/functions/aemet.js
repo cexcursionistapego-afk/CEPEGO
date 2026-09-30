@@ -118,7 +118,7 @@ function parseAemet(rawHtml) {
     while ((m = thRe.exec(niv2)) !== null) {
       const block = m[1];
       const hourM = /<div class="fuente09em">([^<]*)<\/div>/.exec(block);
-      const iconM = /title="([^"]*)"\s+alt="[^"]*"\s*\/>/.exec(block);
+      const iconM = /<img\b[^>]*?\btitle\s*=\s*"([^"]*)"/i.exec(block);
       periods.push({
         hour: hourM ? decodeEntities(hourM[1]).replace(/\s+/g, '') : null,
         desc: iconM ? decodeEntities(iconM[1]) : null,
