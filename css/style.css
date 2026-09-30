@@ -387,7 +387,11 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 /* Espais exteriors: text centrat damunt i collage de 4 fotos davall.
    La paella ocupa dues files (el club la vol vertical) i la figuera va en
    horitzontal; en mòbil les oliveres, l'única apaïsada, van a tota l'amplada. */
-.equip-block--full{grid-template-columns:1fr}
+.equip-block--full{grid-template-columns:1fr;border-bottom:1px solid var(--hair)}
+/* L'encapçalament "Equipament" va entre els espais exteriors i la cuina:
+   la ratlla la posa el bloc de damunt (a tota l'amplada) i la cuina ja no. */
+.equip-head{padding-top:clamp(36px,5vw,64px)}
+.equip-head + .equip-block{border-top:none}
 .exteriors__txt{max-width:680px;margin:0 auto;text-align:center}
 .collage{display:grid;grid-template-columns:1.05fr 1fr 1fr;
   grid-template-rows:repeat(2,clamp(190px,21vw,290px));gap:12px}

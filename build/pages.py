@@ -239,25 +239,21 @@ def build(g):
     <!-- Intro + heading BEFORE mosaic -->
     <div class="narrow center reveal" style="margin-bottom:clamp(32px,4.5vw,60px)">
       <p class="lead"><span class="va">La Figuereta és el refugi del Centre Excursionista de Pego, a la Vall d'Ebo, habilitat per passar uns dies en la natura fent senderisme, escalada, descens de barrancs, espeleologia o turisme rural pels pobles propers.</span><span class="es">La Figuereta es el refugio del Centro Excursionista de Pego, en la Vall d'Ebo, habilitado para pasar unos días en la naturaleza haciendo senderismo, escalada, barrancos, espeleología o turismo rural por los pueblos cercanos.</span></p>
-      <div class="kicker center-k" style="margin-top:clamp(28px,4vw,52px)"><span class="va">Equipament</span><span class="es">Equipamiento</span></div>
-      <h2 style="margin-top:.4em"><span class="va">Tot a punt per a 21 persones</span><span class="es">Todo listo para 21 personas</span></h2>
-      <p><span class="va">Dos habitacles comunicats amb lliteres, cuina completa i tots els serveis per gaudir de la natura.</span><span class="es">Dos habitáculos comunicados con literas, cocina completa y todos los servicios para disfrutar de la naturaleza.</span></p>
     </div>
 
     <!-- BLOC ESPAIS EXTERIORS — text centrat i collage a tota l'amplada -->
     <div class="equip-block equip-block--full reveal">
       <div class="exteriors__txt">
         <span class="equip-tag"><span class="va">Espais exteriors</span><span class="es">Espacios exteriores</span></span>
-        <h3 style="margin-top:.5em"><span class="va">A l'ombra de la figuera</span><span class="es">A la sombra de la higuera</span></h3>
-        <p style="margin-top:12px;color:var(--muted)"><span class="va">A la Figuereta, la vida es fa sobretot a fora. Al voltant del refugi hi ha diversos racons amb taules per a dinar, allargar la sobretaula o simplement estar: a l'ombra de la nostra famosa figuera de 500 anys, entre oliveres amb la vall als peus, o dins del bosc de pins mediterranis que envolta la casa.</span><span class="es">En la Figuereta, la vida se hace sobre todo fuera. Alrededor del refugio hay varios rincones con mesas para comer, alargar la sobremesa o simplemente estar: a la sombra de nuestra famosa higuera de 500 años, entre olivos con el valle a los pies, o dentro del bosque de pinos mediterráneos que rodea la casa.</span></p>
+        <p style="margin-top:12px;color:var(--muted)"><span class="va">A la Figuereta, la vida es fa sobretot a fora. Al voltant del refugi hi ha diversos racons amb taules per a dinar, allargar la sobretaula o simplement estar: a l'ombra de la nostra famosa figuera de més de 200 anys, entre oliveres amb la vall als peus, o dins del bosc de pins mediterranis que envolta la casa.</span><span class="es">En la Figuereta, la vida se hace sobre todo fuera. Alrededor del refugio hay varios rincones con mesas para comer, alargar la sobremesa o simplemente estar: a la sombra de nuestra famosa higuera de más de 200 años, entre olivos con el valle a los pies, o dentro del bosque de pinos mediterráneos que rodea la casa.</span></p>
         <p style="margin-top:10px;color:var(--muted)"><span class="va">Tria el racó que més t'agrade: una paella entre amics, un esmorzar amb vistes a la serra o una vesprada llarga sense pressa. Ací, la natura fa de menjador.</span><span class="es">Elige el rincón que más te guste: una paella entre amigos, un almuerzo con vistas a la sierra o una tarde larga sin prisa. Aquí, la naturaleza hace de comedor.</span></p>
         <p style="margin-top:10px;color:var(--muted)"><span class="va">I si vos ve de gust caminar, les rutes comencen a la mateixa porta: la circular Figuereta – Tossal, curta i fàcil, que passa per la Cova Blanca i el Tossal Gran; la Figuereta – Ebo, que baixa fins al riu Girona i al poble i torna pel Camí Vell d'Atzúbia; o, a pocs minuts, els Tolls d'Ebo i el Pla Roig.</span><span class="es">Y si os apetece caminar, las rutas empiezan en la misma puerta: la circular Figuereta – Tossal, corta y fácil, que pasa por la Cova Blanca y el Tossal Gran; la Figuereta – Ebo, que baja hasta el río Girona y el pueblo y vuelve por el Camí Vell d'Atzúbia; o, a pocos minutos, els Tolls d'Ebo y el Pla Roig.</span></p>
         <a class="btn btn-outline" style="margin-top:18px" href="rutes.html"><span class="va">Rutes i entorn →</span><span class="es">Rutas y entorno →</span></a>
       </div>
       <div class="collage">
         <figure class="collage__i collage__i--figuera">
-          <img loading="lazy" src="{IMG}exterior-figuera.jpg" alt="Taula de fusta a l'ombra de la figuera de 500 anys, al costat del refugi">
-          <figcaption><span class="va">La figuera · 500 anys</span><span class="es">La higuera · 500 años</span></figcaption>
+          <img loading="lazy" src="{IMG}exterior-figuera.jpg" alt="Taula de fusta a l'ombra de la figuera de més de 200 anys, al costat del refugi">
+          <figcaption><span class="va">La figuera · +200 anys</span><span class="es">La higuera · +200 años</span></figcaption>
         </figure>
         <figure class="collage__i collage__i--oliveres">
           <img loading="lazy" src="{IMG}exterior-oliveres.jpg" alt="Taula entre oliveres davant del refugi, amb les muntanyes al fons">
@@ -272,6 +268,13 @@ def build(g):
           <figcaption><span class="va">Amb vistes a la vall</span><span class="es">Con vistas al valle</span></figcaption>
         </figure>
       </div>
+    </div>
+
+    <!-- Encapçalament de l'equipament, davall dels espais exteriors -->
+    <div class="narrow center reveal equip-head">
+      <div class="kicker center-k"><span class="va">Equipament</span><span class="es">Equipamiento</span></div>
+      <h2 style="margin-top:.4em"><span class="va">Tot a punt per a 21 persones</span><span class="es">Todo listo para 21 personas</span></h2>
+      <p><span class="va">Dos habitacles comunicats amb lliteres, cuina completa i tots els serveis per gaudir de la natura.</span><span class="es">Dos habitáculos comunicados con literas, cocina completa y todos los servicios para disfrutar de la naturaleza.</span></p>
     </div>
 
     <!-- BLOC 1: CUINA — foto esquerra en escriptori, baix en mòbil -->
