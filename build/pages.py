@@ -257,6 +257,34 @@ def build(g):
       </div>
     </div>
 
+    <!-- BLOC ESPAIS EXTERIORS — text centrat i collage a tota l'amplada -->
+    <div class="equip-block equip-block--full reveal">
+      <div class="exteriors__txt">
+        <span class="equip-tag"><span class="va">Espais exteriors</span><span class="es">Espacios exteriores</span></span>
+        <h3 style="margin-top:.5em"><span class="va">A l'ombra de la figuera</span><span class="es">A la sombra de la higuera</span></h3>
+        <p style="margin-top:12px;color:var(--muted)"><span class="va">A la Figuereta, la vida es fa sobretot a fora. Al voltant del refugi hi ha diversos racons amb taules per a dinar, allargar la sobretaula o simplement estar: a l'ombra de la nostra famosa figuera de 500 anys, entre oliveres amb la vall als peus, o dins del bosc de pins mediterranis que envolta la casa.</span><span class="es">En la Figuereta, la vida se hace sobre todo fuera. Alrededor del refugio hay varios rincones con mesas para comer, alargar la sobremesa o simplemente estar: a la sombra de nuestra famosa higuera de 500 años, entre olivos con el valle a los pies, o dentro del bosque de pinos mediterráneos que rodea la casa.</span></p>
+        <p style="margin-top:10px;color:var(--muted)"><span class="va">Tria el racó que més t'agrade: una paella entre amics, un esmorzar amb vistes a la serra o una vesprada llarga sense pressa. Ací, la natura fa de menjador.</span><span class="es">Elige el rincón que más te guste: una paella entre amigos, un almuerzo con vistas a la sierra o una tarde larga sin prisa. Aquí, la naturaleza hace de comedor.</span></p>
+      </div>
+      <div class="collage">
+        <figure class="collage__i collage__i--figuera">
+          <img loading="lazy" src="{IMG}exterior-figuera.jpg" alt="Taula de fusta a l'ombra de la figuera de 500 anys, al costat del refugi">
+          <figcaption><span class="va">La figuera · 500 anys</span><span class="es">La higuera · 500 años</span></figcaption>
+        </figure>
+        <figure class="collage__i collage__i--oliveres">
+          <img loading="lazy" src="{IMG}exterior-oliveres.jpg" alt="Taula entre oliveres davant del refugi, amb les muntanyes al fons">
+          <figcaption><span class="va">Entre oliveres</span><span class="es">Entre olivos</span></figcaption>
+        </figure>
+        <figure class="collage__i collage__i--paella">
+          <img loading="lazy" src="{IMG}exterior-paella-pins.jpg" alt="Paella damunt d'una taula al pinar que envolta el refugi">
+          <figcaption><span class="va">Dinar al pinar</span><span class="es">Comer en el pinar</span></figcaption>
+        </figure>
+        <figure class="collage__i collage__i--vistes">
+          <img loading="lazy" src="{IMG}exterior-vistes.jpg" alt="Taula enmig de margallons amb vistes a la vall">
+          <figcaption><span class="va">Amb vistes a la vall</span><span class="es">Con vistas al valle</span></figcaption>
+        </figure>
+      </div>
+    </div>
+
     <!-- BLOC SALA D'ESTAR — foto dreta -->
     <div class="equip-block equip-block--rev reveal">
       <div>

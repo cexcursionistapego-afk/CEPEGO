@@ -384,6 +384,37 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .equip-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
   color:var(--white);background:var(--sage);border-radius:100px;padding:3px 10px;margin-bottom:8px}
 
+/* Espais exteriors: text centrat damunt i collage de 4 fotos davall.
+   La figuera (la protagonista) ocupa dues files; en mòbil es queda a
+   l'esquerra i les oliveres, que són l'única apaïsada, van a tota l'amplada. */
+.equip-block--full{grid-template-columns:1fr}
+.exteriors__txt{max-width:680px;margin:0 auto;text-align:center}
+.collage{display:grid;grid-template-columns:1.05fr 1fr 1fr;
+  grid-template-rows:repeat(2,clamp(190px,21vw,290px));gap:12px}
+.collage__i{position:relative;margin:0;overflow:hidden;border-radius:var(--r-lg);box-shadow:var(--shadow-sm);background:var(--hair)}
+.collage__i img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.collage__i:hover img{transform:scale(1.04)}
+.collage__i figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 11px;
+  font-size:.74rem;font-weight:600;letter-spacing:.06em;color:#fff;
+  background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0))}
+.collage__i--figuera{grid-column:1;grid-row:1 / 3}
+.collage__i--figuera img{object-position:50% 35%}
+.collage__i--oliveres{grid-column:2 / 4;grid-row:1}
+.collage__i--oliveres img{object-position:50% 60%}
+.collage__i--paella{grid-column:2;grid-row:2}
+.collage__i--paella img{object-position:50% 78%}
+.collage__i--vistes{grid-column:3;grid-row:2}
+.collage__i--vistes img{object-position:50% 62%}
+@media(max-width:600px){
+  .collage{grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,165px) 200px;gap:8px}
+  .collage__i--figuera{grid-column:1;grid-row:1 / 3}
+  .collage__i--paella{grid-column:2;grid-row:1}
+  .collage__i--vistes{grid-column:2;grid-row:2}
+  .collage__i--oliveres{grid-column:1 / 3;grid-row:3}
+  .collage__i figcaption{font-size:.68rem;padding:22px 10px 8px}
+}
+@media(prefers-reduced-motion:reduce){.collage__i img{transition:none}.collage__i:hover img{transform:none}}
+
 /* Photo strip (3 images horizontal) */
 .photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:clamp(28px,4vw,52px) 0}
 .photo-strip img{width:100%;height:clamp(180px,22vw,280px);object-fit:cover;border-radius:var(--r);display:block;box-shadow:var(--shadow-sm)}
