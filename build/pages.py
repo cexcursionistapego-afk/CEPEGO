@@ -244,19 +244,6 @@ def build(g):
       <p><span class="va">Dos habitacles comunicats amb lliteres, cuina completa i tots els serveis per gaudir de la natura.</span><span class="es">Dos habitáculos comunicados con literas, cocina completa y todos los servicios para disfrutar de la naturaleza.</span></p>
     </div>
 
-    <!-- BLOC 1: CUINA — foto esquerra en escriptori, baix en mòbil -->
-    <div class="equip-block equip-block--photo-below-mobile reveal">
-      <div class="equip-block__media">
-        <img loading="lazy" src="{REFUGI[1]}" alt="Cuina del refugi">
-      </div>
-      <div>
-        <span class="equip-tag"><span class="va">Cuina i àpats</span><span class="es">Cocina y comidas</span></span>
-        <h3 style="margin-top:.5em"><span class="va">Cuina equipada per a tothom</span><span class="es">Cocina equipada para todos</span></h3>
-        <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([1,2,3,8])}        </ul>
-      </div>
-    </div>
-
     <!-- BLOC ESPAIS EXTERIORS — text centrat i collage a tota l'amplada -->
     <div class="equip-block equip-block--full reveal">
       <div class="exteriors__txt">
@@ -282,6 +269,19 @@ def build(g):
           <img loading="lazy" src="{IMG}exterior-vistes.jpg" alt="Taula enmig de margallons amb vistes a la vall">
           <figcaption><span class="va">Amb vistes a la vall</span><span class="es">Con vistas al valle</span></figcaption>
         </figure>
+      </div>
+    </div>
+
+    <!-- BLOC 1: CUINA — foto esquerra en escriptori, baix en mòbil -->
+    <div class="equip-block equip-block--photo-below-mobile reveal">
+      <div class="equip-block__media">
+        <img loading="lazy" src="{REFUGI[1]}" alt="Cuina del refugi">
+      </div>
+      <div>
+        <span class="equip-tag"><span class="va">Cuina i àpats</span><span class="es">Cocina y comidas</span></span>
+        <h3 style="margin-top:.5em"><span class="va">Cuina equipada per a tothom</span><span class="es">Cocina equipada para todos</span></h3>
+        <ul class="equip equip-1col" style="margin-top:18px">
+{eq_li([1,2,3,8])}        </ul>
       </div>
     </div>
 
