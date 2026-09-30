@@ -950,6 +950,12 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .footer__bar{border-top:1px solid rgba(255,255,255,.05);padding:clamp(14px,2vw,22px) 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:#fff}
 .footer__bar a{color:#fff}
 .footer__bar a:hover{color:#fff}
+.footer__bar .nw{white-space:nowrap}
+/* En mòbil, el copyright i els enllaços legals van un davall de l'altre i
+   centrats: repartits a banda i banda quedaven amuntegats. */
+@media(max-width:700px){
+  .footer__bar{flex-direction:column;align-items:center;text-align:center;gap:8px;font-size:.7rem}
+}
 
 /* ---- Soci form extras ---- */
 .form-section-label{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:4px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--ember)}
