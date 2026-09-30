@@ -385,8 +385,8 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   color:var(--white);background:var(--sage);border-radius:100px;padding:3px 10px;margin-bottom:8px}
 
 /* Espais exteriors: text centrat damunt i collage de 4 fotos davall.
-   La figuera (la protagonista) ocupa dues files; en mòbil es queda a
-   l'esquerra i les oliveres, que són l'única apaïsada, van a tota l'amplada. */
+   La paella ocupa dues files (el club la vol vertical) i la figuera va en
+   horitzontal; en mòbil les oliveres, l'única apaïsada, van a tota l'amplada. */
 .equip-block--full{grid-template-columns:1fr}
 .exteriors__txt{max-width:680px;margin:0 auto;text-align:center}
 .collage{display:grid;grid-template-columns:1.05fr 1fr 1fr;
@@ -397,18 +397,19 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .collage__i figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 11px;
   font-size:.74rem;font-weight:600;letter-spacing:.06em;color:#fff;
   background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0))}
-.collage__i--figuera{grid-column:1;grid-row:1 / 3}
-.collage__i--figuera img{object-position:50% 35%}
+.collage__i--paella{grid-column:1;grid-row:1 / 3}
+.collage__i--paella img{object-position:50% 60%}
 .collage__i--oliveres{grid-column:2 / 4;grid-row:1}
 .collage__i--oliveres img{object-position:50% 60%}
-.collage__i--paella{grid-column:2;grid-row:2}
-.collage__i--paella img{object-position:50% 78%}
+.collage__i--figuera{grid-column:2;grid-row:2}
+.collage__i--figuera img{object-position:50% 58%}
 .collage__i--vistes{grid-column:3;grid-row:2}
 .collage__i--vistes img{object-position:50% 62%}
 @media(max-width:600px){
   .collage{grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,165px) 200px;gap:8px}
-  .collage__i--figuera{grid-column:1;grid-row:1 / 3}
-  .collage__i--paella{grid-column:2;grid-row:1}
+  .collage__i--paella{grid-column:1;grid-row:1 / 3}
+  .collage__i--figuera{grid-column:2;grid-row:1}
+  .collage__i--figuera img{object-position:50% 42%}
   .collage__i--vistes{grid-column:2;grid-row:2}
   .collage__i--oliveres{grid-column:1 / 3;grid-row:3}
   .collage__i figcaption{font-size:.68rem;padding:22px 10px 8px}
