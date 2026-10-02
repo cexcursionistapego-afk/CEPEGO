@@ -1,6 +1,6 @@
-// Genera el sitio estático en dist/: páginas en valenciano (/), castellano
-// (/es/) e inglés (/en/), recursos, panel de gestión, sitemap, robots,
-// cabeceras y manifest.
+// Genera el sitio estático en dist/: páginas en valenciano (/val/, idioma por
+// defecto), castellano (/es/) e inglés (/en/), recursos, panel de gestión,
+// sitemap, robots, cabeceras y manifest.
 //
 //   node scripts/build.mjs
 //
@@ -128,7 +128,7 @@ ${urls}
     `Contact: mailto:${site.email}\nExpires: ${expires}\nPreferred-Languages: ca, es, en\nCanonical: ${base}/.well-known/security.txt\n`);
 
   await writeFile(path.join(DIST, 'site.webmanifest'), JSON.stringify({
-    name: site.name, short_name: site.name, lang: LANG_META[DEFAULT].htmlLang, start_url: '/', display: 'standalone',
+    name: site.name, short_name: site.name, lang: LANG_META[DEFAULT].htmlLang, start_url: ROUTES.home[DEFAULT], display: 'standalone',
     background_color: '#f2eee6', theme_color: '#f2eee6',
     icons: [
       { src: '/assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },

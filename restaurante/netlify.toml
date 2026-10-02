@@ -15,6 +15,13 @@
 [functions]
   node_bundler = "esbuild"
 
+# El valenciano es el idioma por defecto: la raíz lleva a /val/
+[[redirects]]
+  from = "/"
+  to = "/val/"
+  status = 301
+  force = true
+
 # Página 404 en el idioma de cada sección (la de la raíz es la valenciana)
 [[redirects]]
   from = "/es/*"
