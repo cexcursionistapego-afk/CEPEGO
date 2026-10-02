@@ -15,10 +15,10 @@
 [functions]
   node_bundler = "esbuild"
 
-# El valenciano es el idioma por defecto: la raíz lleva a /val/
+# El valenciano es el idioma por defecto: la raíz lleva a /va/
 [[redirects]]
   from = "/"
-  to = "/val/"
+  to = "/va/"
   status = 301
   force = true
 

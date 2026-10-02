@@ -1,13 +1,13 @@
 # Web y reservas — restaurante de autor
 
-Web trilingüe (**valenciano por defecto en `/val/`**, castellano en `/es/`, inglés en `/en/`; la raíz `/` lleva al valenciano), con sistema de reservas propio y panel de gestión. Funciona en el plan gratuito de Netlify, sin base de datos externa: los datos se guardan en Netlify Blobs.
+Web trilingüe (**valenciano por defecto en `/va/`**, castellano en `/es/`, inglés en `/en/`; la raíz `/` lleva al valenciano), con sistema de reservas propio y panel de gestión. Funciona en el plan gratuito de Netlify, sin base de datos externa: los datos se guardan en Netlify Blobs.
 
 > **Nombre provisional:** «Umbral» y todos los datos marcados como PROVISIONAL (dirección, teléfono, equipo, productores, datos fiscales) son de relleno. Se cambian en `site.config.mjs` y `content/*.mjs`.
 
 ## Qué incluye
 
-**Web pública** (`/val/`, `/es/`, `/en/`)
-- Portada, Menús, Filosofía, Eventos privados, Tarjeta regalo, Contacto, Reservas, Gestionar reserva, Aviso legal, Privacidad, Cookies y 404, en los tres idiomas y con URL traducidas (`/val/reserves/`, `/es/reservas/`, `/en/reservations/`).
+**Web pública** (`/va/`, `/es/`, `/en/`)
+- Portada, Menús, Filosofía, Eventos privados, Tarjeta regalo, Contacto, Reservas, Gestionar reserva, Aviso legal, Privacidad, Cookies y 404, en los tres idiomas y con URL traducidas (`/va/reserves/`, `/es/reservas/`, `/en/reservations/`).
 - Diseño propio: tipografía editorial, «platos generativos» dibujados a partir de los ingredientes de cada plato (hacen de imagen hasta que haya fotografía) y una web que sigue la luz de la sala: clara de día y oscura al anochecer, según la hora local del restaurante.
 - Disponibilidad en directo en la portada («Queden taules», «Pròxima taula lliure: dissabte…»).
 - Asistente de reserva paso a paso: comensales, día (calendario con disponibilidad real), hora, menú y maridaje, y datos con dietas, alergias y ocasión. Termina con localizador, enlace de gestión y botones para añadir la reserva al calendario.

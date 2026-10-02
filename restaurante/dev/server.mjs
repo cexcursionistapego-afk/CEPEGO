@@ -82,7 +82,7 @@ async function serveStatic(req, res, pathname) {
 http.createServer(async (req, res) => {
   const { pathname } = new URL(req.url, 'http://x');
   // Igual que netlify.toml: la raíz lleva al idioma por defecto (valenciano).
-  if (pathname === '/') { res.writeHead(301, { location: '/val/' }); return res.end(); }
+  if (pathname === '/') { res.writeHead(301, { location: '/va/' }); return res.end(); }
   const fn = functions.find((f) => f.paths.some((p) => matches(p, pathname)));
   try {
     if (fn) {

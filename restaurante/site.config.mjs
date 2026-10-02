@@ -47,7 +47,7 @@ export default {
   timezone: 'Europe/Madrid',
   currency: 'EUR',
   priceRange: '€€€€',
-  // Idiomas de la web: valenciano en /val/ (predeterminado: la raíz / lleva
+  // Idiomas de la web: valenciano en /va/ (predeterminado: la raíz / lleva
   // allí), castellano en /es/ e inglés en /en/. Para quitar el inglés, bórralo
   // de esta lista.
   languages: ['va', 'es', 'en'],

@@ -1,4 +1,4 @@
-// Genera el sitio estático en dist/: páginas en valenciano (/val/, idioma por
+// Genera el sitio estático en dist/: páginas en valenciano (/va/, idioma por
 // defecto), castellano (/es/) e inglés (/en/), recursos, panel de gestión,
 // sitemap, robots, cabeceras y manifest.
 //

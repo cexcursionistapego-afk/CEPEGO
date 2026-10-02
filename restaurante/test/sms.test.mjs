@@ -71,9 +71,9 @@ test('envío con Twilio y registro en la reserva', async () => {
   const link = await shortLink(b);
   const res = await short(new Request(link), { ip: '1.2.3.4' });
   assert.equal(res.status, 302);
-  assert.match(res.headers.get('location'), new RegExp(`^/val/reserves/gestionar/\\?c=${b.code}&t=`));
+  assert.match(res.headers.get('location'), new RegExp(`^/va/reserves/gestionar/\\?c=${b.code}&t=`));
   const bad = await short(new Request(link.slice(0, -1) + 'x'), { ip: '1.2.3.4' });
-  assert.equal(bad.headers.get('location'), '/val/reserves/gestionar/');
+  assert.equal(bad.headers.get('location'), '/va/reserves/gestionar/');
   // En castellano, el enlace lleva a /es/
   const es = await createBooking({ date: '2030-10-17', service: 'cena', time: '21:15', party: 2, name: 'Luis', phone: '611222333', lang: 'es', consentPrivacy: true }, { actor: { id: 'admin', name: 'Sala' }, now });
   const resEs = await short(new Request(await shortLink(es)), { ip: '1.2.3.4' });
