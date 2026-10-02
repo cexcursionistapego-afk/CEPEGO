@@ -86,7 +86,7 @@ export function menuCardsHTML(menus, lang, links) {
     <article class="menu-card" data-reveal>
       <div class="menu-card-plate">${plateSVG(m.courses[Math.min(4, m.courses.length - 1)]?.es || m.id)}</div>
       <div class="menu-card-body">
-        <p class="eyebrow num">${String(i + 1).padStart(2, '0')} — ${esc(l.courses(m.courses.length))}</p>
+        <p class="eyebrow">${esc(l.courses(m.courses.length))}</p>
         <h3 class="menu-card-title">${esc(m.name[lang] || m.name.es)}</h3>
         <p class="menu-card-summary">${esc(m.summary[lang] || m.summary.es)}</p>
         <p class="menu-card-price"><span class="num">${price(m.price, lang)}</span> <span class="muted">${l.perPerson}</span></p>
@@ -101,7 +101,7 @@ export function menuDetailHTML(menus, lang, links) {
   return menus.filter((m) => m.active !== false).map((m, mi) => `
     <section class="menu-detail" id="${esc(m.id)}" aria-labelledby="menu-${esc(m.id)}">
       <header class="menu-detail-head" data-reveal>
-        <p class="eyebrow num">${String(mi + 1).padStart(2, '0')} — ${esc(l.courses(m.courses.length))}</p>
+        <p class="eyebrow">${esc(l.courses(m.courses.length))}</p>
         <h2 class="menu-detail-title" id="menu-${esc(m.id)}">${esc(m.name[lang] || m.name.es)}</h2>
         <p class="lead">${esc(m.summary[lang] || m.summary.es)}</p>
         <div class="menu-detail-prices">
@@ -114,13 +114,12 @@ export function menuDetailHTML(menus, lang, links) {
         <ol class="score-list">
           ${m.courses.map((c, i) => `
           <li class="course" data-reveal tabindex="0" data-course="${i}">
-            <span class="course-n num">${String(i + 1).padStart(2, '0')}</span>
             <span class="course-name">${esc(c[lang] || c.es)}</span>
             <span class="course-plate">${plateSVG(c.es, { rim: false })}</span>
           </li>`).join('')}
         </ol>
         <div class="score-stage" aria-hidden="true">
-          ${m.courses.map((c, i) => `<div class="stage-plate${i === 0 ? ' is-active' : ''}" data-stage="${i}">${plateSVG(c.es)}<p class="stage-caption"><span class="num">${String(i + 1).padStart(2, '0')}</span> ${esc(c[lang] || c.es)}</p></div>`).join('')}
+          ${m.courses.map((c, i) => `<div class="stage-plate${i === 0 ? ' is-active' : ''}" data-stage="${i}">${plateSVG(c.es)}<p class="stage-caption">${esc(c[lang] || c.es)}</p></div>`).join('')}
         </div>
       </div>
     </section>`).join('');

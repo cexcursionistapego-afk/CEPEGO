@@ -5,7 +5,7 @@ export function booking(ctx) {
   const { t, url, cfg, site } = ctx;
   const b = t.booking, f = t.forms;
   const steps = ['party', 'date', 'time', 'menu', 'details'];
-  const stepHead = (id, i) => `<header class="step-head"><p class="eyebrow num">${esc(b.stepWord)} ${String(i + 1).padStart(2, '0')} / ${String(steps.length).padStart(2, '0')}</p><h2 class="step-title" tabindex="-1">${esc(b.steps[id])}</h2></header>`;
+  const stepHead = (id) => `<header class="step-head"><h2 class="step-title" tabindex="-1">${esc(b.steps[id])}</h2></header>`;
   const consent = check({ name: 'consentPrivacy', required: true, html: f.consent.replace('{privacy}', url('privacy')) });
 
   const body = `

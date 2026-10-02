@@ -14,9 +14,8 @@ export default function philosophy(ctx) {
 
 <section class="section" aria-label="${esc(p.title)}">
   <div class="wrap pillars">
-    ${p.pillars.map(([title, text], i) => `
+    ${p.pillars.map(([title, text]) => `
     <article class="pillar" data-reveal>
-      <p class="eyebrow num">${String(i + 1).padStart(2, '0')}</p>
       <h2 class="pillar-title">${esc(title)}</h2>
       <p>${esc(text)}</p>
     </article>`).join('')}

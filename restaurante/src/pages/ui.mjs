@@ -45,19 +45,17 @@ export function formStatus() {
 
 export function sectionHead(eyebrow, title, extra = '') {
   return `<header class="section-head" data-reveal>
-    <p class="eyebrow num">${esc(eyebrow)}</p>
+    <p class="eyebrow">${esc(eyebrow)}</p>
     <div>${title ? `<h2 class="section-title">${title}</h2>` : ''}${extra}</div>
   </header>`;
 }
 
 export function producersList(producers, opts = {}) {
-  const max = 50;
   return `<ul class="producers${opts.compact ? ' producers-compact' : ''}">${producers.map(([kind, name, dist]) => {
-    const km = Number.parseFloat(dist) || 0;
     return `<li data-reveal>
       <span class="producer-kind">${esc(kind)}</span>
       <span class="producer-name">${esc(name)}</span>
-      <span class="producer-dist" aria-label="${esc(dist)}"><span class="producer-bar"><span style="--d:${Math.min(1, km / max).toFixed(3)}"></span></span><span class="num">${esc(dist)}</span></span>
+      <span class="producer-dist num">${esc(dist)}</span>
     </li>`;
   }).join('')}</ul>`;
 }

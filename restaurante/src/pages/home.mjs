@@ -12,7 +12,7 @@ export default function home(ctx) {
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-plate" aria-hidden="true">${plateSVG('hero · tomate, azafrán, hinojo', { className: 'spin', type: 2 })}</div>
   <div class="wrap hero-inner">
-    <p class="hero-meta eyebrow">${h.meta.map((m) => `<span>${esc(m)}</span>`).join('')}<span class="hero-clock" data-clock hidden></span></p>
+    <p class="hero-meta eyebrow">${h.meta.map((m) => `<span>${esc(m)}</span>`).join('')}</p>
     <h1 class="hero-title" id="hero-title"><span class="sr-only">${esc(site.name)} — ${esc(h.title)}</span><span class="hero-word" aria-hidden="true">${letters}</span></h1>
     <div class="hero-foot">
       <p class="hero-lede">${nobr(h.lede)}</p>
@@ -32,11 +32,6 @@ export default function home(ctx) {
       <a class="link-arrow" href="${url('philosophy')}" data-reveal>${esc(h.manifestoLink)}</a>
     </div>
   </div>
-  <div class="wrap">
-    <dl class="figures">
-      ${h.figures.map(([n, label]) => `<div data-reveal><dt class="figure-n num">${esc(n)}</dt><dd>${esc(label)}</dd></div>`).join('')}
-    </dl>
-  </div>
 </section>
 
 <section class="section" aria-labelledby="menus-title">
@@ -50,10 +45,14 @@ export default function home(ctx) {
 <section class="section chef" aria-label="${esc(h.chefEyebrow)}">
   <div class="wrap">
     ${sectionHead(h.chefEyebrow, '')}
-    <figure class="chef-quote" data-reveal>
-      <blockquote><p>${esc(h.quote)}</p></blockquote>
-      <figcaption><span class="chef-name">${esc(site.chef)}</span><span class="muted">${esc(h.chefRole)}</span></figcaption>
-    </figure>
+    <div class="chef-intro" data-reveal>
+      <h2 class="chef-intro-name">${esc(site.chef)}</h2>
+      <div>
+        <p class="eyebrow">${esc(h.chefRole)}</p>
+        <p class="chef-intro-text">${nobr(t.philosophy.chefBio)}</p>
+        <a class="link-arrow" href="${url('philosophy')}">${esc(h.manifestoLink)}</a>
+      </div>
+    </div>
   </div>
 </section>
 

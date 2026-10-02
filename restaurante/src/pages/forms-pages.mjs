@@ -29,9 +29,9 @@ export function events(ctx) {
 </header>
 <section class="section">
   <div class="wrap options">
-    ${e.options.map(([title, cap, text], i) => `
+    ${e.options.map(([title, cap, text]) => `
     <article class="option" data-reveal>
-      <p class="eyebrow num">${String(i + 1).padStart(2, '0')} — ${esc(cap)}</p>
+      <p class="eyebrow">${esc(cap)}</p>
       <h2 class="option-title">${esc(title)}</h2>
       <p>${esc(text)}</p>
     </article>`).join('')}
@@ -81,9 +81,8 @@ export function gift(ctx) {
 </header>
 <section class="section">
   <div class="wrap options">
-    ${g.steps.map(([title, text], i) => `
+    ${g.steps.map(([title, text]) => `
     <article class="option" data-reveal>
-      <p class="eyebrow num">${String(i + 1).padStart(2, '0')}</p>
       <h2 class="option-title">${esc(title)}</h2>
       <p>${esc(text)}</p>
     </article>`).join('')}

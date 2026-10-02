@@ -64,18 +64,6 @@ setInterval(() => {
   if ((root.dataset.themePref || 'auto') === 'auto' && window.__theme) root.dataset.theme = window.__theme('auto');
 }, 60000);
 
-// ── Hora local de la sala ────────────────────────────────────────────────
-const clock = document.querySelector('[data-clock]');
-if (clock) {
-  const tick = () => {
-    const time = new Intl.DateTimeFormat('es-ES', { timeZone: i18n.timezone, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date());
-    clock.textContent = `${i18n.live.localTime} ${time}`;
-    clock.hidden = false;
-  };
-  tick();
-  setInterval(tick, 30000);
-}
-
 // ── Disponibilidad de hoy en directo (portada) ───────────────────────────
 const live = document.querySelector('[data-live]');
 if (live) {

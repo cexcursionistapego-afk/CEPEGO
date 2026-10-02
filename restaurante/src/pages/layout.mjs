@@ -105,8 +105,8 @@ export function layout(ctx, page) {
   const canonical = abs(url(page.id));
   const robots = ctx.indexable && !page.noindex ? 'index, follow, max-image-preview:large' : 'noindex, nofollow';
   const navLinks = NAV.map((id) => `<li><a href="${url(id)}"${id === page.id ? ' aria-current="page"' : ''}>${esc(t.nav[id])}</a></li>`).join('');
-  const mobileLinks = ['home', ...NAV, 'booking'].map((id, i) =>
-    `<li><a href="${url(id)}"${id === page.id ? ' aria-current="page"' : ''}><span class="num">${String(i).padStart(2, '0')}</span>${esc(id === 'home' ? site.name : t.nav[id])}</a></li>`).join('');
+  const mobileLinks = ['home', ...NAV, 'booking'].map((id) =>
+    `<li><a href="${url(id)}"${id === page.id ? ' aria-current="page"' : ''}>${esc(id === 'home' ? site.name : t.nav[id])}</a></li>`).join('');
   const a = site.address;
   const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.name} ${a.street} ${a.postalCode} ${a.city}`)}`;
   const alternates = page.noAlternate ? '' : [

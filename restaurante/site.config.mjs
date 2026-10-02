@@ -18,7 +18,7 @@ export default {
     en: 'A chef-driven restaurant. Two seasonal tasting menus, local produce and a dining room of just twenty-four guests.',
   },
 
-  chef: 'Nombre del Chef', // PROVISIONAL
+  chef: 'Joan Sastre',
   founded: 2026,
 
   // PROVISIONAL — datos de contacto y localización.
