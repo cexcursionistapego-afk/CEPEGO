@@ -845,6 +845,7 @@ main > .section:last-of-type { padding-bottom: clamp(72px, 11vw, 168px); }
   .menu-card-plate { max-width: 220px; }
   .party-grid { grid-template-columns: repeat(3, 1fr); }
   .menu-choice { grid-template-columns: 52px minmax(0, 1fr); padding: 14px; gap: 14px; }
+  .menu-choice-undecided { grid-template-columns: minmax(0, 1fr); }
   .menu-choice .plate { width: 52px; }
   .menu-choice-price { grid-column: 2; font-size: 22px; }
   .menu-choice-name { font-size: 26px; }
