@@ -3,3 +3,4 @@ dist/
 .data/
 .netlify/
 *.log
+.preview/

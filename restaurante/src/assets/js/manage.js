@@ -61,15 +61,31 @@ if (c && t) {
   lookup.hidden = false;
 }
 
-root.querySelector('[data-cancel]').addEventListener('click', async (e) => {
-  if (!confirm(M.cancelConfirm)) return;
+// Cancelar pide una segunda confirmación dentro de la página (sin ventanas del
+// navegador, que algunas apps y vistas embebidas bloquean).
+const actions = root.querySelector('[data-manage-actions]');
+const confirmBox = root.querySelector('[data-confirm]');
+root.querySelector('[data-cancel]').addEventListener('click', () => {
+  actions.hidden = true;
+  confirmBox.hidden = false;
+  confirmBox.querySelector('[data-confirm-no]').focus();
+});
+confirmBox.querySelector('[data-confirm-no]').addEventListener('click', () => {
+  confirmBox.hidden = true;
+  actions.hidden = false;
+  root.querySelector('[data-cancel]').focus();
+});
+confirmBox.querySelector('[data-confirm-yes]').addEventListener('click', async (e) => {
   const button = e.currentTarget;
   button.disabled = true;
   try {
     const data = await api('/api/booking/cancel', { method: 'POST', body: { c, t } });
+    confirmBox.hidden = true;
     await render({ booking: data.booking, canCancel: false });
     setStatus(view, M.cancelled, 'ok');
   } catch (err) {
+    confirmBox.hidden = true;
+    actions.hidden = false;
     setStatus(view, err.message, 'error');
   } finally {
     button.disabled = false;

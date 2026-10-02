@@ -149,6 +149,13 @@ export function manage(ctx) {
     <div class="done-actions" data-manage-actions>
       <button type="button" class="btn" data-cancel>${esc(m.cancel)}</button>
     </div>
+    <div class="manage-confirm" data-confirm hidden>
+      <p>${esc(m.cancelConfirm)}</p>
+      <div class="done-actions">
+        <button type="button" class="btn btn-danger" data-confirm-yes>${esc(m.cancel)}</button>
+        <button type="button" class="btn btn-ghost" data-confirm-no>${esc(t.booking.back)}</button>
+      </div>
+    </div>
     ${formStatus()}
   </div>
   <form class="form manage-lookup" data-lookup novalidate hidden>
