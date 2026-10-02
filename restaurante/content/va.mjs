@@ -26,7 +26,7 @@ export default {
 
   home: {
     title: 'Cuina d’autor',
-    meta: ['Cuina d’autor', 'Pego · Alacant'],
+    meta: ['Cuina d’autor', 'Dénia · Alacant'],
     lede: 'Dos menús degustació, vint-i-quatre comensals i allò que la terra decidix cada setmana.',
     cta: 'Reservar taula',
     scroll: 'Descobrir',
@@ -48,8 +48,8 @@ export default {
 
   // PROVISIONAL — productors d’exemple
   producers: [
-    ['Peix de llotja', 'Llotja de Dénia', '22 km'],
-    ['Arròs', 'Marjal de Pego-Oliva', '3 km'],
+    ['Peix de llotja', 'Llotja de Dénia', '4 km'],
+    ['Arròs', 'Marjal de Pego-Oliva', '22 km'],
     ['Verdura i fruita', 'Horta de la Vall', '4 km'],
     ['Oli d’oliva', 'Almàssera de la Serra', '15 km'],
     ['Formatges', 'Formatgeria de muntanya', '31 km'],
@@ -73,7 +73,7 @@ export default {
 
   philosophy: {
     title: 'Filosofia',
-    lead: 'Un restaurant xicotet, en un poble xicotet, que cuina el paisatge que té al voltant.',
+    lead: 'Un restaurant xicotet a les Marines de Dénia, entre la mar i el Montgó, que cuina el paisatge que té al voltant.',
     pillars: [
       ['Producte', 'Treballem amb pescadors, hortolans i pastors que coneixem pel seu nom. Si alguna cosa no arriba, el plat no ix: el menú s’adapta a la natura, i no al revés.'],
       ['Temps', 'Fermentem, curem i madurem a casa. Algunes elaboracions comencen setmanes abans que t’assegues; altres s’acaben davant teu.'],

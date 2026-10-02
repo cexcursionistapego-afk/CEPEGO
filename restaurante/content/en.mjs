@@ -25,7 +25,7 @@ export default {
 
   home: {
     title: "Chef's tasting menus",
-    meta: ['Chef-driven cuisine', 'Pego · Alicante'],
+    meta: ['Chef-driven cuisine', 'Dénia · Alicante'],
     lede: 'Two tasting menus, twenty-four guests and whatever the land decides each week.',
     cta: 'Book a table',
     scroll: 'Discover',
@@ -47,8 +47,8 @@ export default {
 
   // PROVISIONAL
   producers: [
-    ['Day-boat fish', 'Dénia fish market', '22 km'],
-    ['Rice', 'Pego-Oliva wetlands', '3 km'],
+    ['Day-boat fish', 'Dénia fish market', '4 km'],
+    ['Rice', 'Pego-Oliva wetlands', '22 km'],
     ['Vegetables & fruit', 'Huerta de la Vall', '4 km'],
     ['Olive oil', 'Almazara de la Sierra', '15 km'],
     ['Cheese', 'Mountain dairy', '31 km'],
@@ -72,7 +72,7 @@ export default {
 
   philosophy: {
     title: 'Philosophy',
-    lead: 'A small restaurant, in a small town, cooking the landscape around it.',
+    lead: 'A small restaurant on Les Marines in Dénia, between the sea and the Montgó, cooking the landscape around it.',
     pillars: [
       ['Produce', 'We work with fishermen, growers and shepherds we know by name. If something does not arrive, the dish does not go out: the menu follows nature, not the other way round.'],
       ['Time', 'We ferment, cure and age in-house. Some preparations start weeks before you sit down; others are finished in front of you.'],

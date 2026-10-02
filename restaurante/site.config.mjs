@@ -21,16 +21,17 @@ export default {
   chef: 'Joan Sastre',
   founded: 2026,
 
-  // PROVISIONAL — datos de contacto y localización.
+  // Localización. Teléfono y email: PROVISIONALES.
   address: {
-    street: 'Calle del Mercado, 12',
-    postalCode: '03780',
-    city: 'Pego',
+    street: 'Carretera de les Marines, s/n',
+    postalCode: '03700',
+    city: 'Dénia',
     region: 'Alicante',
     country: 'ES',
     countryName: { va: 'Espanya', es: 'España', en: 'Spain' },
   },
-  geo: { lat: 38.8433, lng: -0.1176 },
+  // Coordenadas aproximadas (Les Marines, Dénia): ajustarlas con las exactas del local.
+  geo: { lat: 38.8556, lng: 0.0838 },
   phone: '+34 600 000 000',
   email: 'reservas@ejemplo.com',
   social: {

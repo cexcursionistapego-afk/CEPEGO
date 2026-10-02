@@ -26,7 +26,7 @@ export default {
 
   home: {
     title: 'Cocina de autor',
-    meta: ['Cocina de autor', 'Pego · Alicante'],
+    meta: ['Cocina de autor', 'Dénia · Alicante'],
     lede: 'Dos menús degustación, veinticuatro comensales y lo que la tierra decide cada semana.',
     cta: 'Reservar mesa',
     scroll: 'Descubrir',
@@ -48,8 +48,8 @@ export default {
 
   // PROVISIONAL — productores de ejemplo
   producers: [
-    ['Pescado de lonja', 'Lonja de Dénia', '22 km'],
-    ['Arroz', 'Marjal de Pego-Oliva', '3 km'],
+    ['Pescado de lonja', 'Lonja de Dénia', '4 km'],
+    ['Arroz', 'Marjal de Pego-Oliva', '22 km'],
     ['Verdura y fruta', 'Huerta de la Vall', '4 km'],
     ['Aceite de oliva', 'Almazara de la Sierra', '15 km'],
     ['Quesos', 'Quesería de montaña', '31 km'],
@@ -73,7 +73,7 @@ export default {
 
   philosophy: {
     title: 'Filosofía',
-    lead: 'Un restaurante pequeño, en un pueblo pequeño, que cocina el paisaje que tiene alrededor.',
+    lead: 'Un restaurante pequeño en Les Marines de Dénia, entre el mar y el Montgó, que cocina el paisaje que lo rodea.',
     pillars: [
       ['Producto', 'Trabajamos con pescadores, hortelanos y pastores a los que conocemos por su nombre. Si algo no llega, el plato no sale: el menú se ajusta a la naturaleza, no al revés.'],
       ['Tiempo', 'Fermentamos, curamos y maduramos en casa. Algunas elaboraciones empiezan semanas antes de que te sientes; otras se terminan delante de ti.'],
