@@ -1,19 +1,18 @@
 /* Panel de gestión — misma identidad que la web, densidad de herramienta. */
 
-@font-face { font-family: 'Instrument Serif'; src: url('/assets/fonts/instrument-serif-latin-400-normal.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Inter Tight'; src: url('/assets/fonts/inter-tight-latin-wght-normal.woff2') format('woff2-variations'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'Schibsted Grotesk'; src: url('/assets/fonts/schibsted-grotesk-latin-wght-normal.woff2') format('woff2-variations'); font-weight: 400 900; font-display: swap; }
 
 :root {
-  --bg: #f4f1eb; --surface: #fbf9f6; --surface-2: #efebe3; --ink: #1a1916; --ink-2: #45413a; --muted: #7a756c;
+  --bg: #f4f5f2; --surface: #fbfcfa; --surface-2: #e9ece6; --ink: #1a1916; --ink-2: #45413a; --muted: #7a756c;
   --line: rgba(26, 25, 22, .12); --line-strong: rgba(26, 25, 22, .28);
-  --accent: #9e4b2c; --accent-soft: rgba(158, 75, 44, .1);
+  --accent: #1e5a43; --accent-soft: rgba(30, 90, 67, .1);
   --ok: #3f6b3a; --ok-soft: rgba(63, 107, 58, .12);
   --warn: #a5701a; --warn-soft: rgba(165, 112, 26, .13);
   --danger: #a23b2a; --danger-soft: rgba(162, 59, 42, .1);
   --info: #3e5a73; --info-soft: rgba(62, 90, 115, .12);
   --shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 8px 24px -12px rgba(40, 30, 20, .18);
-  --serif: 'Instrument Serif', Georgia, serif;
-  --sans: 'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --sans: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --radius: 12px;
   --sidebar: 232px;
   color-scheme: light;
@@ -21,7 +20,7 @@
 [data-theme='dark'] {
   --bg: #121110; --surface: #1b1a18; --surface-2: #24221f; --ink: #ece7de; --ink-2: #c9c2b6; --muted: #948e84;
   --line: rgba(236, 231, 222, .1); --line-strong: rgba(236, 231, 222, .26);
-  --accent: #d48a63; --accent-soft: rgba(212, 138, 99, .14);
+  --accent: #7fc4a1; --accent-soft: rgba(127, 196, 161, .14);
   --ok: #8fbf7c; --ok-soft: rgba(143, 191, 124, .13);
   --warn: #e2b05a; --warn-soft: rgba(226, 176, 90, .14);
   --danger: #ec8a74; --danger-soft: rgba(236, 138, 116, .13);
@@ -345,3 +344,6 @@ table.list tr:last-child td { border-bottom: 0; }
   .bk { break-inside: avoid; }
   .bk-table { border: 1px solid #999; }
 }
+
+/* Titulares del panel: misma grotesca que la web, en negrita compacta. */
+.serif, .page-title, .login-brand, .sb-brand, .service-head h2, .kpi-n, .bk-party, .drawer-head h2, .settings .card-pad > h2 { font-weight: 700; letter-spacing: -.035em; }

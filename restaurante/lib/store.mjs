@@ -114,14 +114,14 @@ export async function writeJSON(key, data) {
  */
 export async function update(key, fn, init) {
   const store = await getStore();
-  for (let attempt = 0; attempt < 10; attempt++) {
+  for (let attempt = 0; attempt < 25; attempt++) {
     const current = await store.getJSON(key);
     const base = current ? current.data : structuredClone(init);
     const result = await fn(base);
     if (result === undefined) return base;
     const ok = await store.setJSON(key, result, current ? { etag: current.etag } : { onlyIfNew: true });
     if (ok) return result;
-    await new Promise((r) => setTimeout(r, 20 + Math.random() * 60 * (attempt + 1)));
+    await new Promise((r) => setTimeout(r, 15 + Math.random() * 40 * Math.min(attempt + 1, 6)));
   }
   const err = new Error('Conflicto de escritura, inténtalo de nuevo.');
   err.status = 409;

@@ -137,14 +137,13 @@ ${alternates}
 <meta property="og:locale" content="${t.locale}">
 ${ogAlt}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#f2eee6">
+<meta name="theme-color" content="#f4f5f2">
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${asset('/assets/css/site.css')}">
 <script src="${asset('/assets/js/theme.js')}"></script>
 ${jsonLd(ctx, page)}

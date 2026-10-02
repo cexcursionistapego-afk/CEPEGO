@@ -80,18 +80,18 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 function layout({ title, intro, rows = [], button, foot }) {
   const a = site.address;
   const rowsHtml = rows.map(([k, v]) => `
-      <tr><td style="padding:10px 0;border-top:1px solid #e2ddd3;color:#77726a;font-size:12px;letter-spacing:.12em;text-transform:uppercase;width:42%">${esc(k)}</td>
-      <td style="padding:10px 0;border-top:1px solid #e2ddd3;color:#1a1916;font-size:15px">${esc(v)}</td></tr>`).join('');
-  return `<!doctype html><html><body style="margin:0;background:#f3efe8;font-family:Helvetica,Arial,sans-serif;color:#1a1916">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3efe8"><tr><td align="center" style="padding:48px 20px">
+      <tr><td style="padding:10px 0;border-top:1px solid #dfe2dc;color:#676d66;font-size:12px;letter-spacing:.12em;text-transform:uppercase;width:42%">${esc(k)}</td>
+      <td style="padding:10px 0;border-top:1px solid #dfe2dc;color:#121412;font-size:15px">${esc(v)}</td></tr>`).join('');
+  return `<!doctype html><html><body style="margin:0;background:#f4f5f2;font-family:Helvetica,Arial,sans-serif;color:#121412">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f5f2"><tr><td align="center" style="padding:48px 20px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px">
-    <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:30px;letter-spacing:-.01em;padding-bottom:40px">${esc(site.name)}</td></tr>
-    <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:26px;line-height:1.2;padding-bottom:16px">${esc(title)}</td></tr>
-    ${intro ? `<tr><td style="font-size:15px;line-height:1.6;color:#4a463f;padding-bottom:28px">${esc(intro)}</td></tr>` : ''}
+    <tr><td style="font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:28px;letter-spacing:-.03em;padding-bottom:40px">${esc(site.name)}</td></tr>
+    <tr><td style="font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.02em;padding-bottom:16px">${esc(title)}</td></tr>
+    ${intro ? `<tr><td style="font-size:15px;line-height:1.6;color:#363b36;padding-bottom:28px">${esc(intro)}</td></tr>` : ''}
     ${rows.length ? `<tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rowsHtml}</table></td></tr>` : ''}
-    ${button ? `<tr><td style="padding-top:32px"><a href="${esc(button.href)}" style="display:inline-block;background:#1a1916;color:#f3efe8;text-decoration:none;padding:14px 26px;border-radius:999px;font-size:14px">${esc(button.label)}</a></td></tr>` : ''}
-    ${foot ? `<tr><td style="font-size:13px;line-height:1.6;color:#77726a;padding-top:32px">${esc(foot)}</td></tr>` : ''}
-    <tr><td style="font-size:12px;line-height:1.7;color:#77726a;padding-top:48px;border-top:1px solid #e2ddd3;margin-top:40px">
+    ${button ? `<tr><td style="padding-top:32px"><a href="${esc(button.href)}" style="display:inline-block;background:#121412;color:#f4f5f2;text-decoration:none;padding:14px 26px;border-radius:6px;font-size:14px">${esc(button.label)}</a></td></tr>` : ''}
+    ${foot ? `<tr><td style="font-size:13px;line-height:1.6;color:#676d66;padding-top:32px">${esc(foot)}</td></tr>` : ''}
+    <tr><td style="font-size:12px;line-height:1.7;color:#676d66;padding-top:48px;border-top:1px solid #dfe2dc;margin-top:40px">
       ${esc(site.name)} · ${esc(a.street)} · ${esc(a.postalCode)} ${esc(a.city)}<br>${esc(site.phone)} · ${esc(site.email)}
     </td></tr>
   </table></td></tr></table></body></html>`;

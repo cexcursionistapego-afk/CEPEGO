@@ -10,7 +10,7 @@ export default function home(ctx) {
 
   const body = `
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-plate" aria-hidden="true">${plateSVG('hero · tomate, azafrán, hinojo', { className: 'spin', type: 2 })}</div>
+  <div class="hero-plate" aria-hidden="true">${plateSVG('hero · tomate, azafrán, hinojo', { type: 2 })}</div>
   <div class="wrap hero-inner">
     <p class="hero-meta eyebrow">${h.meta.map((m) => `<span>${esc(m)}</span>`).join('')}</p>
     <h1 class="hero-title" id="hero-title"><span class="sr-only">${esc(site.name)} — ${esc(h.title)}</span><span class="hero-word" aria-hidden="true">${letters}</span></h1>

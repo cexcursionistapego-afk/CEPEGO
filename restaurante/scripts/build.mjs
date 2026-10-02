@@ -129,7 +129,7 @@ ${urls}
 
   await writeFile(path.join(DIST, 'site.webmanifest'), JSON.stringify({
     name: site.name, short_name: site.name, lang: LANG_META[DEFAULT].htmlLang, start_url: ROUTES.home[DEFAULT], display: 'standalone',
-    background_color: '#f2eee6', theme_color: '#f2eee6',
+    background_color: '#f4f5f2', theme_color: '#f4f5f2',
     icons: [
       { src: '/assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },
       { src: '/assets/img/icon-512.png', sizes: '512x512', type: 'image/png' },

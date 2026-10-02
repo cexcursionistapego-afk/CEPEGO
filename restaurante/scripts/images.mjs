@@ -24,21 +24,20 @@ async function loadPlaywright() {
 }
 
 const css = `
-@font-face { font-family: S; src: url(${font('instrument-serif-latin-400-normal.woff2')}); }
-@font-face { font-family: S; font-style: italic; src: url(${font('instrument-serif-latin-400-italic.woff2')}); }
-@font-face { font-family: T; src: url(${font('inter-tight-latin-wght-normal.woff2')}); font-weight: 100 900; }
+@font-face { font-family: S; src: url(${font('schibsted-grotesk-latin-wght-normal.woff2')}); font-weight: 400 900; }
+@font-face { font-family: T; src: url(${font('schibsted-grotesk-latin-wght-normal.woff2')}); font-weight: 400 900; }
 * { margin: 0; box-sizing: border-box; }
-body { --plate: #fbf9f5; --plate-line: rgba(25,24,21,.2); background: #f2eee6; color: #191815; overflow: hidden; }
+body { --plate: #ffffff; --plate-line: rgba(18,20,18,.16); background: #f4f5f2; color: #121412; overflow: hidden; }
 `;
 
 const og = `<!doctype html><html><head><style>${css}
 .og { width: 1200px; height: 630px; position: relative; padding: 64px 72px; display: flex; flex-direction: column; justify-content: space-between; }
-.plate-wrap { position: absolute; width: 700px; height: 700px; right: -190px; top: -35px; filter: drop-shadow(0 30px 50px rgba(70,48,28,.18)); }
-.meta { font: 600 15px T; letter-spacing: .18em; text-transform: uppercase; color: #736e66; display: flex; gap: 32px; position: relative; }
-.name { font: 400 250px/0.8 S; letter-spacing: -.045em; margin-left: -10px; position: relative; }
-.foot { display: flex; justify-content: space-between; align-items: end; border-top: 1px solid rgba(25,24,21,.16); padding-top: 22px; position: relative; }
-.lede { font: italic 400 36px/1.1 S; max-width: 620px; }
-.url { font: 500 17px T; color: #736e66; }
+.plate-wrap { position: absolute; width: 400px; height: 400px; right: 64px; top: 115px; filter: drop-shadow(0 24px 40px rgba(20,32,26,.14)); }
+.meta { font: 500 19px T; color: #676d66; display: flex; gap: 32px; position: relative; }
+.name { font: 740 176px/0.86 S; letter-spacing: -.06em; margin-left: -8px; position: relative; }
+.foot { display: flex; justify-content: space-between; align-items: end; position: relative; }
+.lede { font: 450 34px/1.15 S; letter-spacing: -.015em; max-width: 620px; }
+.url { font: 500 19px T; color: #676d66; }
 </style></head><body><div class="og">
   <div class="plate-wrap">${plateSVG('hero · tomate, azafrán, hinojo', { type: 2 })}</div>
   <div class="meta"><span>${site.tagline.va}</span><span>${site.address.city} · ${site.address.region}</span></div>
@@ -47,7 +46,7 @@ const og = `<!doctype html><html><head><style>${css}
 </div></body></html>`;
 
 const icon = (size, padding) => `<!doctype html><html><head><style>${css}
-.i { width: ${size}px; height: ${size}px; display: grid; place-items: center; background: #191815; }
+.i { width: ${size}px; height: ${size}px; display: grid; place-items: center; background: #1e5a43; }
 .p { width: ${size - padding * 2}px; height: ${size - padding * 2}px; }
 </style></head><body><div class="i"><div class="p">${plateSVG('icono · gamba roja, azafrán', { type: 1 })}</div></div></body></html>`;
 
