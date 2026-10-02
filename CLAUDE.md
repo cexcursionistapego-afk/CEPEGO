@@ -328,6 +328,18 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
   `BLOBS_TOKEN` en las variables del sitio y **redesplegar**. El código usa
   esas variables si están y, si no, deja que Netlify haga lo suyo, así que el
   día que vuelva a funcionar solo basta con quitarlas.
+- **"Comprova la connexió" en muchos móviles (02-10-2026).** Las fotos del
+  móvil (3–9 MB) se enviaban tal cual en base64: o pasaban del límite de 6 MB
+  de Netlify o la función tardaba más de 10 s subiéndolas a Airtable, y en
+  los dos casos Netlify contesta en HTML. El navegador no podía leer eso como
+  JSON y decía "error de conexión", que no era verdad. Ahora:
+  `window.cepegoFoto` (`js/main.js`) reduce cada foto a 1600 px en JPEG antes
+  de enviarla (unos 300–500 KB); `window.cepegoResposta` lee respuestas que
+  no son JSON sin romperse, y los mensajes de error terminan con el código,
+  p. ej. "(error 502)" o "(error 400 captcha)". "Comprova la connexió" solo
+  sale si de verdad no hubo respuesta. En el servidor, `fetchAmbTemps`
+  (`_security.js`) pone límite de tiempo a siteverify (4 s) y a la subida de
+  adjuntos (5 s), para que la función conteste siempre antes de los 10 s.
 - **El calendario nativo de `<input type="date">` no se puede traducir**
   desde la web: sale en el idioma del navegador y ya está.
 - **CSS Grid con `1fr` no da columnas iguales** si el contenido de una es

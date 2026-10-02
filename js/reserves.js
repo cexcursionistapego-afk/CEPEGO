@@ -321,7 +321,7 @@
       submitBtn.disabled=true; show(l==='es'?'Enviando…':'Enviant…','');
       Promise.all([
         fetch('/api/reserva',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
-          .then(function(r){ return r.json().catch(function(){return{ok:false};}); }),
+          .then(function(r){ return window.cepegoResposta ? window.cepegoResposta(r) : r.json().catch(function(){return{ok:false};}); }),
         queueFromPromise
       ])
         .then(function(results){
@@ -340,7 +340,8 @@
             }
           } else {
             submitBtn.disabled=false; resetCaptcha();
-            show(l==='es'?'No se ha podido enviar. Inténtalo de nuevo o escríbenos por email.':'No s\'ha pogut enviar. Torna-ho a provar o escriu-nos per correu.','err');
+            var codi = window.cepegoCodi ? window.cepegoCodi(res) : '';
+            show((l==='es'?'No se ha podido enviar. Inténtalo de nuevo o escríbenos por email.':'No s\'ha pogut enviar. Torna-ho a provar o escriu-nos per correu.') + codi,'err');
           }
         })
         .catch(function(){ submitBtn.disabled=false; resetCaptcha(); show(l==='es'?'Error de conexión.':'Error de connexió.','err'); });

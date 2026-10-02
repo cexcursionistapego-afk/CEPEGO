@@ -35,22 +35,45 @@ function base64SizeExceeds(b64, maxBytes) {
 // formularis; l'honeypot i la comprovació d'Origin continuen actives.
 const SITEVERIFY = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
+// fetch amb temps màxim. Netlify talla la funció als 10 s i, si passa, el
+// navegador rep un error en HTML en compte de la nostra resposta: cada pas
+// que depén d'un servei de fora ha de tindre un límit més curt.
+async function fetchAmbTemps(url, opts, ms) {
+  const ctrl = new AbortController();
+  const tm = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, Object.assign({}, opts, { signal: ctrl.signal }));
+  } finally {
+    clearTimeout(tm);
+  }
+}
+
 async function verifyTurnstile(token, remoteIp) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) return { ok: true, skipped: true };
-  if (!token) return { ok: false, error: 'captcha' };
+  // Un testimoni de Turnstile no passa de 2048 caràcters.
+  if (!token || String(token).length > 2048) return { ok: false, error: 'captcha' };
+  const form = new URLSearchParams({ secret: secret, response: String(token) });
+  if (remoteIp) form.append('remoteip', remoteIp);
+  let r;
   try {
-    const form = new URLSearchParams({ secret: secret, response: String(token) });
-    if (remoteIp) form.append('remoteip', remoteIp);
-    const r = await fetch(SITEVERIFY, {
+    r = await fetchAmbTemps(SITEVERIFY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: form.toString(),
-    });
+    }, 4000);
+  } catch (e) {
+    // Cloudflare no respon o tarda més de 4 s: es deixa passar (vegeu dalt).
+    return { ok: true, skipped: true };
+  }
+  // Només una caiguda seua (5xx) obri la porta. Qualsevol altra resposta que
+  // no siga un "success" clar compta com a captcha fallat.
+  if (r.status >= 500) return { ok: true, skipped: true };
+  try {
     const data = await r.json();
     return data && data.success ? { ok: true } : { ok: false, error: 'captcha' };
   } catch (e) {
-    return { ok: true, skipped: true };
+    return { ok: false, error: 'captcha' };
   }
 }
 
@@ -59,4 +82,4 @@ function clientIp(event) {
   return h['x-nf-client-connection-ip'] || (h['x-forwarded-for'] || '').split(',')[0].trim() || undefined;
 }
 
-module.exports = { isAllowedOrigin, base64SizeExceeds, MAX_FILE_BYTES, verifyTurnstile, clientIp };
+module.exports = { isAllowedOrigin, base64SizeExceeds, MAX_FILE_BYTES, verifyTurnstile, clientIp, fetchAmbTemps };

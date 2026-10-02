@@ -18,7 +18,11 @@
   var btn = document.getElementById('viatger-submit');
   var selSexe = document.getElementById('v-sexo');
   var selTipus = document.getElementById('v-tipus');
-  var MAX_FILE = 4 * 1024 * 1024;
+  // La foto es reduïx abans d'enviar-la (window.cepegoFoto, a main.js), així
+  // que ací s'accepten les d'un mòbil tal qual. El que arriba al servidor ha
+  // de quedar per davall de 4 MB.
+  var MAX_FILE = 20 * 1024 * 1024;
+  var MAX_ENVIAT = 4 * 1024 * 1024;
   var root = document.documentElement;
 
   var IDIOMES = ['va', 'es', 'en', 'fr'];
@@ -421,8 +425,8 @@
       return;
     }
     if (foto.size > MAX_FILE) {
-      show(t('La foto ha de pesar menys de 4MB.', 'La foto debe pesar menos de 4MB.',
-             'The photo must be smaller than 4MB.', 'La photo doit peser moins de 4 Mo.'), 'err');
+      show(t('La foto ha de pesar menys de 20MB.', 'La foto debe pesar menos de 20MB.',
+             'The photo must be smaller than 20MB.', 'La photo doit peser moins de 20 Mo.'), 'err');
       return;
     }
     if (!/^image\//.test(foto.type || '')) {
@@ -436,17 +440,26 @@
     btn.disabled = true;
     show(t('Enviant…', 'Enviando…', 'Sending…', 'Envoi en cours…'), '');
 
-    fileToBase64(foto).then(function (b64) {
-      body.doc_foto_b64 = b64;
-      body.doc_foto_type = foto.type || 'image/jpeg';
-      body.doc_foto_name = foto.name || 'document.jpg';
+    var reduida = window.cepegoFoto ? window.cepegoFoto(foto)
+      : fileToBase64(foto).then(function (b64) {
+          return { b64: b64, type: foto.type || 'image/jpeg', name: foto.name || 'document.jpg', size: foto.size };
+        });
+    reduida.then(function (f) {
+      if (f.size > MAX_ENVIAT) { var e = new Error('gran'); e.gran = true; throw e; }
+      body.doc_foto_b64 = f.b64;
+      body.doc_foto_type = f.type;
+      body.doc_foto_name = f.name;
       return fetch('/api/registre-viatgers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
+      }).then(function (r) {
+        // La resposta pot no ser JSON (un 413 o un 502 de Netlify). Això no
+        // és un problema de connexió i no s'ha de dir que ho és.
+        return window.cepegoResposta ? window.cepegoResposta(r) : r.json();
+      }, function () {
+        var e = new Error('xarxa'); e.xarxa = true; throw e;
       });
-    }).then(function (r) {
-      return r.json();
     }).then(function (d) {
       if (d && d.ok) {
         form.reset();
@@ -467,17 +480,34 @@
         }, 3500);
         return;
       } else {
+        var codi = window.cepegoCodi ? window.cepegoCodi(d) : '';
         show(t("No s'ha pogut enviar el registre. Torna-ho a provar en uns minuts.",
                'No se ha podido enviar el registro. Inténtalo de nuevo en unos minutos.',
                'The record could not be sent. Please try again in a few minutes.',
-               "L'enregistrement n'a pas pu être envoyé. Réessayez dans quelques minutes."), 'err');
+               "L'enregistrement n'a pas pu être envoyé. Réessayez dans quelques minutes.") + codi, 'err');
       }
+      // El servidor gasta el captcha encara que done error: sense reiniciar-lo,
+      // el segon intent tornava a fallar.
+      if (window.turnstile) { try { window.turnstile.reset(); } catch (err) {} }
       btn.disabled = false;
-    }).catch(function () {
-      show(t("No s'ha pogut enviar el registre. Comprova la connexió.",
-             'No se ha podido enviar el registro. Comprueba la conexión.',
-             'The record could not be sent. Please check your connection.',
-             "L'enregistrement n'a pas pu être envoyé. Vérifiez votre connexion."), 'err');
+    }).catch(function (e) {
+      if (e && e.gran) {
+        show(t('La foto és massa gran. Prova amb una captura de pantalla del document.',
+               'La foto es demasiado grande. Prueba con una captura de pantalla del documento.',
+               'The photo is too large. Try a screenshot of the document instead.',
+               "La photo est trop lourde. Essayez avec une capture d'écran du document."), 'err');
+      } else if (e && e.xarxa) {
+        show(t("No s'ha pogut enviar el registre. Comprova la connexió.",
+               'No se ha podido enviar el registro. Comprueba la conexión.',
+               'The record could not be sent. Please check your connection.',
+               "L'enregistrement n'a pas pu être envoyé. Vérifiez votre connexion."), 'err');
+      } else {
+        show(t("No s'ha pogut llegir la foto. Prova amb una altra.",
+               'No se ha podido leer la foto. Prueba con otra.',
+               'The photo could not be read. Please try another one.',
+               "La photo n'a pas pu être lue. Essayez avec une autre."), 'err');
+      }
+      if (window.turnstile) { try { window.turnstile.reset(); } catch (err) {} }
       btn.disabled = false;
     });
   });

@@ -3,6 +3,74 @@
   var root = document.documentElement;
   function escHtml(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
+  /* ---------- FOTOS I RESPOSTES DELS FORMULARIS ---------- */
+  // Les fotos que fa un mòbil pesen 3–8 MB. Enviades tal qual, el registre
+  // de viatgers, l'alta i la baixa fallaven en molts mòbils: la petició
+  // passava del límit de Netlify o tardava tant que la funció es tallava, i
+  // el navegador només veia "error de connexió". Ara es reduïxen ací abans
+  // d'enviar-les (1600 px pel costat llarg, JPEG): el DNI es llig igual de bé
+  // i pesa uns 300–500 KB. Si el navegador no pot obrir la imatge (un HEIC en
+  // Android, per exemple) s'envia l'original, com abans.
+  // La imatge es carrega com a data: i no com a blob: perquè la CSP només
+  // admet img-src 'self' data:.
+  var FOTO_MAX_PX = 1600, FOTO_QUALITAT = 0.85, FOTO_JA_XICOTETA = 700 * 1024;
+  window.cepegoFoto = function (file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onerror = function () { reject(reader.error || new Error('lectura')); };
+      reader.onload = function () {
+        var dataUrl = String(reader.result || '');
+        var original = { b64: dataUrl.split(',')[1] || '', type: file.type || 'image/jpeg',
+                         name: file.name || 'foto.jpg', size: file.size };
+        var img = new Image();
+        img.onerror = function () { resolve(original); };
+        img.onload = function () {
+          var w = img.naturalWidth, h = img.naturalHeight;
+          var escala = Math.min(1, FOTO_MAX_PX / Math.max(w, h, 1));
+          if (escala === 1 && file.size <= FOTO_JA_XICOTETA) { resolve(original); return; }
+          try {
+            var c = document.createElement('canvas');
+            c.width = Math.max(1, Math.round(w * escala));
+            c.height = Math.max(1, Math.round(h * escala));
+            var ctx = c.getContext('2d');
+            // Fons blanc: una captura PNG amb transparència no ix negra en JPEG.
+            ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+            ctx.drawImage(img, 0, 0, c.width, c.height);
+            var b64 = (c.toDataURL('image/jpeg', FOTO_QUALITAT).split(',')[1]) || '';
+            if (!b64 || b64.length >= original.b64.length) { resolve(original); return; }
+            resolve({ b64: b64, type: 'image/jpeg',
+                      name: (file.name || 'foto').replace(/\.[^.]*$/, '') + '.jpg',
+                      size: Math.floor(b64.length * 3 / 4) });
+          } catch (e) { resolve(original); }
+        };
+        img.src = dataUrl;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+  // Llig la resposta d'una funció sense petar si no és JSON (un 413 o un 502
+  // de Netlify ve en HTML). Abans això acabava en "comprova la connexió",
+  // que no era veritat i no deixava saber què havia passat; ara es torna
+  // l'estat HTTP perquè el missatge el puga dir.
+  window.cepegoResposta = function (r) {
+    return r.text().then(function (t) {
+      try {
+        var d = JSON.parse(t);
+        if (d && typeof d === 'object') { d.status = r.status; return d; }
+      } catch (e) {}
+      return { ok: false, error: 'servidor', status: r.status };
+    });
+  };
+  // Afig el codi d'error al final del missatge: "(error 502)" o "(error 400
+  // captcha)". Així, quan algú envia una captura, se sap què ha passat.
+  window.cepegoCodi = function (res) {
+    if (!res) return '';
+    var parts = [];
+    if (res.status && res.status !== 200) parts.push(res.status);
+    if (res.error && res.error !== 'servidor') parts.push(res.error);
+    return parts.length ? ' (error ' + parts.join(' ') + ')' : '';
+  };
+
   /* ---------- IDIOMA: per URL — / = valencià, /es/ = espanyol ---------- */
   var curLang = root.getAttribute('data-lang')==='es' ? 'es' : 'va';
   document.querySelectorAll('[data-lang-btn]').forEach(function(b){
@@ -203,7 +271,7 @@
       telefon:  { va: 'El telèfon no és vàlid.', es: 'El teléfono no es válido.' },
       dni:      { va: 'El DNI/NIE no és vàlid.', es: 'El DNI/NIE no es válido.' },
       iban:     { va: 'L\'IBAN no és vàlid.', es: 'El IBAN no es válido.' },
-      file:     { va: 'L\'arxiu ha de pesar menys de 4MB.', es: 'El archivo debe pesar menos de 4MB.' }
+      file:     { va: 'L\'arxiu ha de pesar menys de 20MB.', es: 'El archivo debe pesar menos de 20MB.' }
     };
     function fLang() { return root.getAttribute('data-lang') === 'es' ? 'es' : 'va'; }
     function fieldError(field) {
@@ -252,7 +320,8 @@
       input.addEventListener('input', function () { if (isTouched(input)) checkTextInput(input); });
     });
 
-    var MAX_FILE = 4 * 1024 * 1024;
+    // 20 MB abans de reduir-la: el que s'envia després és molt menys.
+    var MAX_FILE = 20 * 1024 * 1024;
     document.querySelectorAll('.field input[type="file"]').forEach(function (input) {
       input.addEventListener('change', function () {
         var field = input.closest('.field');

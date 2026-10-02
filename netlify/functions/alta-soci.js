@@ -4,7 +4,7 @@
 // les fotos del DNI, pujades com a adjunts després de crear el registre).
 
 const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN, normIBAN } = require('./_validators');
-const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp } = require('./_security');
+const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp, fetchAmbTemps } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblNm2FZG9KCdiCDq'; // SOCIS CENTRE EXCURSIONISTA PEGO
@@ -86,15 +86,18 @@ exports.handler = async function (event) {
         { field: 'DNI ANVERS', b64: b.dni_anvers_b64, type: b.dni_anvers_type || 'image/jpeg', name: b.dni_anvers_name || 'dni-anvers.jpg' },
         { field: 'DNI REVERS', b64: b.dni_revers_b64, type: b.dni_revers_type || 'image/jpeg', name: b.dni_revers_name || 'dni-revers.jpg' },
       ];
-      for (const u of uploads) {
+      // Les dues fotos alhora i amb límit de temps: una darrere de l'altra
+      // podien passar dels 10 s de Netlify i el navegador rebia un error
+      // encara que l'alta s'haguera guardat.
+      await Promise.all(uploads.map(async (u) => {
         try {
-          await fetch(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent(u.field)}/uploadAttachment`, {
+          await fetchAmbTemps(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent(u.field)}/uploadAttachment`, {
             method: 'POST',
             headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({ contentType: u.type, file: u.b64, filename: u.name }),
-          });
+          }, 5000);
         } catch (e) { /* la sol·licitud ja s'ha creat; l'adjunt es pot pujar manualment si falla */ }
-      }
+      }));
     }
 
     return res(200, { ok: true });

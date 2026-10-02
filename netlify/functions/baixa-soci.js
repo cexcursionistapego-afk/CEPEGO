@@ -2,7 +2,7 @@
 // Envia una sol·licitud de baixa a la taula BAIXES CENTRE EXCURSIONISTA PEGO.
 
 const { isValidEmail, isValidPhone, isValidDNI, isValidIBAN, normIBAN } = require('./_validators');
-const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp } = require('./_security');
+const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp, fetchAmbTemps } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblGeQzo49FyjBQJs'; // BAIXES CENTRE EXCURSIONISTA PEGO
@@ -70,7 +70,7 @@ exports.handler = async function (event) {
 
     if (recordId && b.dni_foto_b64) {
       try {
-        await fetch(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent('DNI CARA FOTO')}/uploadAttachment`, {
+        await fetchAmbTemps(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent('DNI CARA FOTO')}/uploadAttachment`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -78,7 +78,7 @@ exports.handler = async function (event) {
             file: b.dni_foto_b64,
             filename: b.dni_foto_name || 'dni.jpg',
           }),
-        });
+        }, 5000);
       } catch (e) { /* la sol·licitud ja s'ha creat; l'adjunt es pot pujar manualment si falla */ }
     }
 

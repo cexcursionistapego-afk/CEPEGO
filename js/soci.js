@@ -40,7 +40,19 @@
   var altaForm = document.getElementById('alta-form');
   var altaMsg  = document.getElementById('alta-msg');
   var altaBtn  = document.getElementById('alta-submit');
-  var MAX_FILE = 4 * 1024 * 1024; // 4MB
+  // Les fotos es reduïxen abans d'enviar-les (window.cepegoFoto, a main.js):
+  // s'accepten les del mòbil tal qual i el que s'envia queda molt per davall
+  // dels 4 MB que admet el servidor.
+  var MAX_FILE = 20 * 1024 * 1024;
+  var MAX_ENVIAT = 4 * 1024 * 1024;
+  function foto(file) {
+    if (window.cepegoFoto) return window.cepegoFoto(file);
+    return fileToBase64(file).then(function (b64) {
+      return { b64: b64, type: file.type || 'image/jpeg', name: file.name || 'foto.jpg', size: file.size };
+    });
+  }
+  function llig(r) { return window.cepegoResposta ? window.cepegoResposta(r) : r.json().catch(function () { return { ok: false }; }); }
+  function codi(res) { return window.cepegoCodi ? window.cepegoCodi(res) : ''; }
   function fileToBase64(file) {
     return new Promise(function (resolve, reject) {
       var reader = new FileReader();
@@ -81,21 +93,22 @@
         return;
       }
       if (fAnvers.size > MAX_FILE || fRevers.size > MAX_FILE) {
-        show(altaMsg, l === 'es' ? 'Cada foto debe pesar menos de 4MB.' : 'Cada foto ha de pesar menys de 4MB.', 'err');
+        show(altaMsg, l === 'es' ? 'Cada foto debe pesar menos de 20MB.' : 'Cada foto ha de pesar menys de 20MB.', 'err');
         return;
       }
 
       altaBtn.disabled = true;
       show(altaMsg, l === 'es' ? 'Enviando…' : 'Enviant…', '');
 
-      Promise.all([fileToBase64(fAnvers), fileToBase64(fRevers)])
-        .then(function (b64) {
-          body.dni_anvers_b64 = b64[0];
-          body.dni_anvers_type = fAnvers.type || 'image/jpeg';
-          body.dni_anvers_name = fAnvers.name || 'dni-anvers.jpg';
-          body.dni_revers_b64 = b64[1];
-          body.dni_revers_type = fRevers.type || 'image/jpeg';
-          body.dni_revers_name = fRevers.name || 'dni-revers.jpg';
+      Promise.all([foto(fAnvers), foto(fRevers)])
+        .then(function (f) {
+          if (f[0].size > MAX_ENVIAT || f[1].size > MAX_ENVIAT) throw new Error('gran');
+          body.dni_anvers_b64 = f[0].b64;
+          body.dni_anvers_type = f[0].type;
+          body.dni_anvers_name = f[0].name;
+          body.dni_revers_b64 = f[1].b64;
+          body.dni_revers_type = f[1].type;
+          body.dni_revers_name = f[1].name;
 
           return fetch('/api/alta-soci', {
             method: 'POST',
@@ -103,7 +116,7 @@
             body: JSON.stringify(body)
           });
         })
-        .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+        .then(llig)
         .then(function (res) {
           if (res && res.ok) {
             altaForm.reset(); resetCaptcha('#ts-alta');
@@ -114,12 +127,16 @@
           } else {
             altaBtn.disabled = false; resetCaptcha('#ts-alta');
             show(altaMsg, l === 'es'
-              ? 'No se ha podido enviar. Inténtalo de nuevo o escríbenos a cexcursionistapego@gmail.com'
-              : 'No s\'ha pogut enviar. Torna-ho a provar o escriu-nos a cexcursionistapego@gmail.com', 'err');
+              ? 'No se ha podido enviar. Inténtalo de nuevo o escríbenos a cexcursionistapego@gmail.com' + codi(res)
+              : 'No s\'ha pogut enviar. Torna-ho a provar o escriu-nos a cexcursionistapego@gmail.com' + codi(res), 'err');
           }
         })
-        .catch(function () {
+        .catch(function (e) {
           altaBtn.disabled = false; resetCaptcha('#ts-alta');
+          if (e && e.message === 'gran') {
+            show(altaMsg, l === 'es' ? 'La foto es demasiado grande. Prueba con otra.' : 'La foto és massa gran. Prova amb una altra.', 'err');
+            return;
+          }
           show(altaMsg, l === 'es' ? 'Error de conexión.' : 'Error de connexió.', 'err');
         });
     });
@@ -153,18 +170,19 @@
 
       var fDni = baixaForm.querySelector('[name="dni_foto"]').files[0];
       if (fDni && fDni.size > MAX_FILE) {
-        show(baixaMsg, l === 'es' ? 'La foto debe pesar menos de 4MB.' : 'La foto ha de pesar menys de 4MB.', 'err');
+        show(baixaMsg, l === 'es' ? 'La foto debe pesar menos de 20MB.' : 'La foto ha de pesar menys de 20MB.', 'err');
         return;
       }
 
       baixaBtn.disabled = true;
       show(baixaMsg, l === 'es' ? 'Enviando…' : 'Enviant…', '');
 
-      (fDni ? fileToBase64(fDni) : Promise.resolve(null)).then(function (b64) {
-        if (b64) {
-          body.dni_foto_b64 = b64;
-          body.dni_foto_type = fDni.type || 'image/jpeg';
-          body.dni_foto_name = fDni.name || 'dni.jpg';
+      (fDni ? foto(fDni) : Promise.resolve(null)).then(function (f) {
+        if (f) {
+          if (f.size > MAX_ENVIAT) throw new Error('gran');
+          body.dni_foto_b64 = f.b64;
+          body.dni_foto_type = f.type;
+          body.dni_foto_name = f.name;
         }
         return fetch('/api/baixa-soci', {
           method: 'POST',
@@ -172,7 +190,7 @@
           body: JSON.stringify(body)
         });
       })
-        .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+        .then(llig)
         .then(function (res) {
           if (res && res.ok) {
             baixaForm.reset(); resetCaptcha('#ts-baixa');
@@ -183,12 +201,16 @@
           } else {
             baixaBtn.disabled = false; resetCaptcha('#ts-baixa');
             show(baixaMsg, l === 'es'
-              ? 'No se ha podido enviar. Escríbenos a cexcursionistapego@gmail.com'
-              : 'No s\'ha pogut enviar. Escriu-nos a cexcursionistapego@gmail.com', 'err');
+              ? 'No se ha podido enviar. Escríbenos a cexcursionistapego@gmail.com' + codi(res)
+              : 'No s\'ha pogut enviar. Escriu-nos a cexcursionistapego@gmail.com' + codi(res), 'err');
           }
         })
-        .catch(function () {
+        .catch(function (e) {
           baixaBtn.disabled = false; resetCaptcha('#ts-baixa');
+          if (e && e.message === 'gran') {
+            show(baixaMsg, l === 'es' ? 'La foto es demasiado grande. Prueba con otra.' : 'La foto és massa gran. Prova amb una altra.', 'err');
+            return;
+          }
           show(baixaMsg, l === 'es' ? 'Error de conexión.' : 'Error de connexió.', 'err');
         });
     });

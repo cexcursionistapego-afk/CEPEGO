@@ -7,7 +7,7 @@
 // un endpoint de lectura seria una llista oberta de DNIs i domicilis. Les
 // dades es consulten a Airtable.
 
-const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp } = require('./_security');
+const { isAllowedOrigin, base64SizeExceeds, verifyTurnstile, clientIp, fetchAmbTemps } = require('./_security');
 
 const BASE  = process.env.AIRTABLE_BASE || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblPIgkyzam4AKvTo'; // REGISTRE RESERVES R.D. 933/2021
@@ -186,7 +186,7 @@ exports.handler = async function (event) {
     // foto, i la foto sempre es pot afegir a mà.
     if (recordId) {
       try {
-        await fetch(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent(DOCS[tipo].foto)}/uploadAttachment`, {
+        await fetchAmbTemps(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent(DOCS[tipo].foto)}/uploadAttachment`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -194,7 +194,7 @@ exports.handler = async function (event) {
             file: b.doc_foto_b64,
             filename: b.doc_foto_name || 'document.jpg',
           }),
-        });
+        }, 5000);
       } catch (e) { /* el registre ja s'ha creat */ }
     }
 

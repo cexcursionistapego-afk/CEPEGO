@@ -34,7 +34,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     })
-      .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (r) { return window.cepegoResposta ? window.cepegoResposta(r) : r.json().catch(function () { return { ok: false }; }); })
       .then(function (res) {
         if (res && res.ok) {
           form.reset(); resetCaptcha();
@@ -44,8 +44,8 @@
         } else {
           btn.disabled = false; resetCaptcha();
           show(l === 'es'
-            ? 'No se ha podido enviar. Escríbenos a cexcursionistapego@gmail.com'
-            : 'No s\'ha pogut enviar. Escriu-nos a cexcursionistapego@gmail.com', 'err');
+            ? 'No se ha podido enviar. Escríbenos a cexcursionistapego@gmail.com' + (window.cepegoCodi ? window.cepegoCodi(res) : '')
+            : 'No s\'ha pogut enviar. Escriu-nos a cexcursionistapego@gmail.com' + (window.cepegoCodi ? window.cepegoCodi(res) : ''), 'err');
         }
       })
       .catch(function () {
