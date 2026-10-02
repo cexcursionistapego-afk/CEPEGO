@@ -69,7 +69,7 @@ export default {
     notesTitle: 'Abans de vindre',
     notes: [
       'Adaptem els menús a al·lèrgies, intoleràncies i dietes vegetarianes si ens ho dius en reservar.',
-      'Duració aproximada: Origen, dues hores i mitja; Umbral, tres hores i mitja.',
+      'Duració aproximada: Origen, dues hores i mitja; Bagatge, tres hores i mitja.',
       'Preus per persona amb IVA inclòs. Aigua filtrada i pa de la casa inclosos.',
       'La informació d’al·lèrgens de cada plat està disponible a la sala (Reglament UE 1169/2011).',
       'El menú se servix a tota la taula. Els plats poden variar segons el mercat del dia.',

@@ -69,7 +69,7 @@ export default {
     notesTitle: 'Antes de venir',
     notes: [
       'Adaptamos los menús a alergias, intolerancias y dietas vegetarianas si nos avisas al reservar.',
-      'Duración aproximada: Origen, dos horas y media; Umbral, tres horas y media.',
+      'Duración aproximada: Origen, dos horas y media; Bagatge, tres horas y media.',
       'Precios por persona con IVA incluido. Agua filtrada y pan de la casa incluidos.',
       'La información de alérgenos de cada plato está disponible en sala (Reglamento UE 1169/2011).',
       'El menú se sirve a toda la mesa. Los platos pueden variar según el mercado del día.',

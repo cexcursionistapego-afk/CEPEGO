@@ -77,9 +77,9 @@ export const DEFAULT_CONFIG = {
       ],
     },
     {
-      id: 'umbral',
+      id: 'bagatge',
       active: true,
-      name: { va: 'Umbral', es: 'Umbral', en: 'Umbral' },
+      name: { va: 'Bagatge', es: 'Bagatge', en: 'Bagatge' },
       summary: {
         va: 'Catorze passos. El menú complet de la casa, pensat per a una vesprada o una nit sense presses.',
         es: 'Catorce tiempos. El menú completo de la casa, pensado para una tarde o una noche sin prisa.',

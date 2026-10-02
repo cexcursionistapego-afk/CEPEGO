@@ -8,6 +8,7 @@ import { execSync } from 'node:child_process';
 import { mkdir, readFile, writeFile, readdir, rm, copyFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import site from '../site.config.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
@@ -80,7 +81,7 @@ entry = entry.replace(title, '')
   .replace(/<head>\s*/, '').replace(/<\/head>\s*/, '')
   .replace(/<body[^>]*>\s*/, '').replace(/<\/body>\s*/, '')
   .replace(/<meta charset="utf-8">\s*/, '').replace(/<meta name="viewport"[^>]*>\s*/, '');
-entry = `<title>${'Umbral'}</title>\n<script>document.documentElement.lang = 'ca-valencia';</script>\n${entry}`;
+entry = `<title>${site.name}</title>\n<script>document.documentElement.lang = 'ca-valencia';</script>\n${entry}`;
 await writeFile(path.join(OUT, 'entry.html'), entry);
 
 await writeFile(path.join(OUT, 'files.json'), JSON.stringify(files.filter((f) => f !== 'index.html'), null, 1));

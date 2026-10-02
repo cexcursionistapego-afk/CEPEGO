@@ -25,17 +25,17 @@ const people = [
 ];
 const plan = [
   [0, 'cena', '20:30', 2, { allergies: 'Frutos secos (anafilaxia)' }],
-  [0, 'cena', '20:30', 4, { occasion: 'aniversario', menu: 'umbral', pairing: 'vino' }],
+  [0, 'cena', '20:30', 4, { occasion: 'aniversario', menu: 'bagatge', pairing: 'vino' }],
   [0, 'cena', '20:45', 2, { menu: 'origen', dietary: ['sin-gluten'] }],
   [0, 'cena', '21:00', 3, { status: 'pending', notes: 'Si puede ser, mesa junto a la ventana' }],
-  [0, 'cena', '21:15', 2, { menu: 'umbral', pairing: 'sin' }],
+  [0, 'cena', '21:15', 2, { menu: 'bagatge', pairing: 'sin' }],
   [0, 'cena', '21:30', 2, { occasion: 'cumpleanos' }],
   [1, 'comida', '13:30', 2, { menu: 'origen' }],
   [1, 'comida', '14:00', 5, { dietary: ['vegetariano'] }],
-  [1, 'cena', '20:30', 2, { menu: 'umbral', pairing: 'vino', occasion: 'negocios' }],
+  [1, 'cena', '20:30', 2, { menu: 'bagatge', pairing: 'vino', occasion: 'negocios' }],
   [1, 'cena', '21:00', 6, { allergies: 'Marisco' }],
   [2, 'comida', '14:15', 4, {}],
-  [6, 'cena', '21:00', 2, { menu: 'umbral' }],
+  [6, 'cena', '21:00', 2, { menu: 'bagatge' }],
 ];
 let i = 0;
 for (const [d, service, time, party, extra] of plan) {
@@ -51,5 +51,5 @@ await updateBooking(past.date, past.id, { status: 'completed' }, { actor: staff,
 await updateGuest('laura@example.com', { tags: ['VIP', 'Habitual'], notes: 'Prefiere la barra. Le encanta el maridaje sin alcohol.' });
 await addToWaitlist({ date: today, service: 'cena', party: 2, name: 'Andrea Soler', email: 'andrea@example.com', phone: '688999000', consentPrivacy: true, lang: 'va' }).catch(() => {});
 await createRequest({ type: 'evento', name: 'Empresa Demo', email: 'eventos@example.com', phone: '699000111', guests: 18, date: addDays(today, 30), eventType: 'Empresa', budget: '150–250 € por persona', message: 'Cena de equipo con presentación de producto.', consentPrivacy: true, lang: 'es' });
-await createRequest({ type: 'regalo', name: 'Sara Puig', email: 'sara@example.com', phone: '600222333', recipient: 'Mis padres', menu: 'umbral', pairing: 'vino', guests: 2, amount: 460, delivery: 'print', dedication: 'Per molts anys!', consentPrivacy: true, lang: 'va' });
+await createRequest({ type: 'regalo', name: 'Sara Puig', email: 'sara@example.com', phone: '600222333', recipient: 'Mis padres', menu: 'bagatge', pairing: 'vino', guests: 2, amount: 460, delivery: 'print', dedication: 'Per molts anys!', consentPrivacy: true, lang: 'va' });
 console.log(`✓ datos de demostración creados para ${today} y siguientes días`);

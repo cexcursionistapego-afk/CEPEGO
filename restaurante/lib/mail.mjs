@@ -3,7 +3,7 @@
 // sistema funciona igual y simplemente no envía correos.
 //
 //   RESEND_API_KEY  clave de la API
-//   MAIL_FROM       remitente verificado, p. ej. «Umbral <reservas@dominio.com>»
+//   MAIL_FROM       remitente verificado, p. ej. «Bagatge <reservas@dominio.com>»
 //   STAFF_EMAIL     a quién avisar de reservas y solicitudes nuevas
 
 import site from '../site.config.mjs';

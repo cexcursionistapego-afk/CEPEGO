@@ -5,10 +5,10 @@
 // Los valores marcados como PROVISIONAL son de relleno.
 
 export default {
-  // PROVISIONAL — nombre de trabajo hasta tener el definitivo.
-  name: 'Umbral',
-  // Dominio definitivo (sin barra final). Mientras no lo haya, Netlify da uno
-  // gratuito (*.netlify.app) y el build lo toma de la variable URL.
+  name: 'Bagatge',
+  // Dominio definitivo (sin barra final), p. ej. https://bagatgerestaurant.com.
+  // Se define con la variable SITE_URL en Netlify; mientras no exista se usa el
+  // gratuito *.netlify.app (variable URL) y la web no se indexa.
   url: process.env.SITE_URL || process.env.URL || 'http://localhost:8888',
 
   tagline: { va: 'Cuina d’autor', es: 'Cocina de autor', en: "Chef's table & tasting menus" },

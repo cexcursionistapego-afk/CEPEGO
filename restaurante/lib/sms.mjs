@@ -4,7 +4,7 @@
 //   TWILIO_ACCOUNT_SID          AC…
 //   TWILIO_AUTH_TOKEN           token de la cuenta
 //   TWILIO_FROM                 número de Twilio (+34…/+1…) o remitente
-//                               alfanumérico de hasta 11 caracteres («Umbral»)
+//                               alfanumérico de hasta 11 caracteres («Bagatge»)
 //   TWILIO_MESSAGING_SERVICE_SID  (opcional) MG…, en lugar de TWILIO_FROM
 //   SMS_DEFAULT_COUNTRY         prefijo para números sin «+» (por defecto 34)
 

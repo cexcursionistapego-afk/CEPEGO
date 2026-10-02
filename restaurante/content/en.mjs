@@ -68,7 +68,7 @@ export default {
     notesTitle: 'Before you come',
     notes: [
       'We adapt our menus to allergies, intolerances and vegetarian diets if you let us know when booking.',
-      'Approximate length: Origen, two and a half hours; Umbral, three and a half hours.',
+      'Approximate length: Origen, two and a half hours; Bagatge, three and a half hours.',
       'Prices per guest, VAT included. Filtered water and house bread included.',
       'Allergen information for every dish is available in the dining room (EU Regulation 1169/2011).',
       'The menu is served to the whole table. Dishes may vary with the day’s market.',

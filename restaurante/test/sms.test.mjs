@@ -6,10 +6,10 @@ import path from 'node:path';
 
 process.env.USE_FILE_STORE = '1';
 process.env.DATA_DIR = await mkdtemp(path.join(tmpdir(), 'sms-'));
-process.env.SITE_URL = 'https://umbral-demo.netlify.app';
+process.env.SITE_URL = 'https://bagatge-demo.netlify.app';
 process.env.TWILIO_ACCOUNT_SID = 'AC_test';
 process.env.TWILIO_AUTH_TOKEN = 'secret';
-process.env.TWILIO_FROM = 'Umbral';
+process.env.TWILIO_FROM = 'Bagatge';
 
 const { toE164, toGsm, bookingSmsText, sendSms } = await import('../lib/sms.mjs');
 const { createBooking, findByCode } = await import('../lib/bookings.mjs');
@@ -36,8 +36,8 @@ test('números: móviles españoles en E.164, fijos descartados', () => {
 test('texto: alfabeto GSM-7 y un solo SMS', () => {
   assert.equal(toGsm('Mediodía, jamón, café, niño — «sí»'), 'Mediodia, jamon, café, niño - "si"');
   const b = { code: 'K7M2QX', date: '2030-10-17', time: '21:00', party: 2, lang: 'es' };
-  const text = bookingSmsText('confirmed', b, 'https://umbral-demo.netlify.app/r/K7M2QX-abcdefghij');
-  assert.match(text, /^Umbral: mesa confirmada, 2 pers\., jue 17 oct, 21:00\. Loc\. K7M2QX\. Gestionar: https:/);
+  const text = bookingSmsText('confirmed', b, 'https://bagatge-demo.netlify.app/r/K7M2QX-abcdefghij');
+  assert.match(text, /^Bagatge: mesa confirmada, 2 pers\., jue 17 oct, 21:00\. Loc\. K7M2QX\. Gestionar: https:/);
   assert.ok(text.length <= 160, `largo ${text.length}`);
   const en = bookingSmsText('reminder', { ...b, lang: 'en' }, 'https://x.app/r/K');
   assert.match(en, /see you tomorrow, Thu 17 Oct, 21:00 \(2 guests\)/);
@@ -58,7 +58,7 @@ test('envío con Twilio y registro en la reserva', async () => {
   const req = sent.at(-1);
   assert.match(req.url, /Accounts\/AC_test\/Messages\.json$/);
   assert.equal(req.body.get('To'), '+34600123123');
-  assert.equal(req.body.get('From'), 'Umbral');
+  assert.equal(req.body.get('From'), 'Bagatge');
   assert.match(req.body.get('Body'), /Loc\. [A-Z2-9]{6}/);
   assert.equal(req.auth, 'Basic ' + Buffer.from('AC_test:secret').toString('base64'));
   const stored = await findByCode(b.code);

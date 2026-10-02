@@ -2,7 +2,7 @@
 
 Web trilingüe (**valenciano por defecto en `/va/`**, castellano en `/es/`, inglés en `/en/`; la raíz `/` lleva al valenciano), con sistema de reservas propio y panel de gestión. Funciona en el plan gratuito de Netlify, sin base de datos externa: los datos se guardan en Netlify Blobs.
 
-> **Nombre provisional:** «Umbral» y todos los datos marcados como PROVISIONAL (dirección, teléfono, equipo, productores, datos fiscales) son de relleno. Se cambian en `site.config.mjs` y `content/*.mjs`.
+> **Bagatge.** Los datos marcados como PROVISIONAL (dirección, teléfono, equipo, productores, datos fiscales) son de relleno y se cambian en `site.config.mjs` y `content/*.mjs`. Dominio previsto: `bagatgerestaurant` (definirlo en `SITE_URL`).
 
 ## Qué incluye
 
