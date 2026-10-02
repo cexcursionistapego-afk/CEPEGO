@@ -1,0 +1,54 @@
+// Identidad del restaurante. Es el ÚNICO sitio que hay que tocar cuando haya
+// nombre y dominio definitivos: el build regenera todas las páginas, los
+// correos y los datos estructurados a partir de aquí.
+//
+// Los valores marcados como PROVISIONAL son de relleno.
+
+export default {
+  // PROVISIONAL — nombre de trabajo hasta tener el definitivo.
+  name: 'Umbral',
+  // Dominio definitivo (sin barra final). Mientras no lo haya, Netlify da uno
+  // gratuito (*.netlify.app) y el build lo toma de la variable URL.
+  url: process.env.SITE_URL || process.env.URL || 'http://localhost:8888',
+
+  tagline: { va: 'Cuina d’autor', es: 'Cocina de autor', en: "Chef's table & tasting menus" },
+  description: {
+    va: 'Restaurant de cuina d’autor. Dos menús degustació que canvien amb la temporada, producte de proximitat i una sala de només vint-i-quatre comensals.',
+    es: 'Restaurante de cocina de autor. Dos menús degustación que cambian con la temporada, producto de cercanía y una sala de solo veinticuatro comensales.',
+    en: 'A chef-driven restaurant. Two seasonal tasting menus, local produce and a dining room of just twenty-four guests.',
+  },
+
+  chef: 'Nombre del Chef', // PROVISIONAL
+  founded: 2026,
+
+  // PROVISIONAL — datos de contacto y localización.
+  address: {
+    street: 'Calle del Mercado, 12',
+    postalCode: '03780',
+    city: 'Pego',
+    region: 'Alicante',
+    country: 'ES',
+    countryName: { va: 'Espanya', es: 'España', en: 'Spain' },
+  },
+  geo: { lat: 38.8433, lng: -0.1176 },
+  phone: '+34 600 000 000',
+  email: 'reservas@ejemplo.com',
+  social: {
+    instagram: 'https://www.instagram.com/',
+  },
+
+  // Datos fiscales para el aviso legal (PROVISIONAL).
+  legal: {
+    company: 'Nombre Fiscal, S.L.',
+    taxId: 'B00000000',
+    registry: 'Registro Mercantil de Alicante, tomo 0000, folio 00, hoja A-000000',
+  },
+
+  timezone: 'Europe/Madrid',
+  currency: 'EUR',
+  priceRange: '€€€€',
+  // Idiomas de la web. El primero es el predeterminado y va en la raíz (/);
+  // el resto, en /es/ y /en/. Para quitar el inglés, bórralo de esta lista.
+  languages: ['va', 'es', 'en'],
+  defaultLanguage: 'va',
+};
