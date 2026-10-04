@@ -215,7 +215,7 @@ def build(g):
      ("Nevera amb congelador, microones i torrador de pa.","Nevera con congelador, microondas y tostador de pan."),
      ("Cafetera Nespresso: 1 € la càpsula.","Cafetera Nespresso: 1 € la cápsula."),
      ("Endolls a 220 v. a les dues plantes.","Enchufes a 220 v. en las dos plantas."),
-     ("Lavabos i dutxa amb aigua calenta (moneda d'1 €, dóna per a dues persones).","Lavabos y ducha con agua caliente (moneda de 1 €, da para dos personas)."),
+     ("Lavabos i dutxa amb aigua calenta (funciona amb 2 monedes d'1 €, dóna per a dues persones).","Lavabos y ducha con agua caliente (funciona con 2 monedas de 1 €, da para dos personas)."),
      ("Aigüera exterior amb punts d'aigua (NO potable).","Fregadero exterior con puntos de agua (NO potable)."),
      ("Internet de banda ampla (cal reservar-lo).","Internet de banda ancha (hay que reservarlo)."),
      ("No hi ha utensilis de cuina: porta el que necessites.","No hay utensilios de cocina: trae lo que necesites."),
