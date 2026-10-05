@@ -1,5 +1,5 @@
 /* CEPEGO — Reserves del refugi: calendari de disponibilitat + formulari.
-   Llig els dies OCUPATS de /api/disponibilitat (registres RESERVAT a Airtable)
+   Llig els dies OCUPATS de /api/disponibilitat (registres RESERVAT o EMAIL PAGO FINAL a Airtable)
    i envia la sol·licitud a /api/reserva (entra com PENDENT GESTIONAR). */
 (function () {
   var cal = document.getElementById('reserva-cal');

@@ -163,9 +163,13 @@ Todo lo que la gente envía por los formularios acaba en la base
 
 Las reservas entran con `ESTADO = "PENDENT GESTIONAR"`. **El calendario de
 la web solo bloquea los días de los registros que el club pasa a
-`ESTADO = "RESERVAT"`** a mano en Airtable. O sea: una solicitud no ocupa
-fechas hasta que alguien la confirma. Ese es el circuito, y es
-intencionado.
+`ESTADO = "RESERVAT"`** a mano en Airtable, **o a `"EMAIL PAGO FINAL"`**, que
+es el paso siguiente de la misma reserva (los días siguen ocupados). En
+cualquier otro estado (GESTIONAT, CAMBIA DE DATA…) los días quedan libres.
+O sea: una solicitud no ocupa fechas hasta que alguien la confirma. Ese es
+el circuito, y es intencionado. La lista de estados está en
+`netlify/functions/disponibilitat.js`; si se define la variable
+`AIRTABLE_RESERVED_VALUE` en Netlify, la sustituye (separados por comas).
 
 El IBAN se guarda siempre junto y en mayúsculas (`normIBAN` en
 `netlify/functions/_validators.js`), aunque la gente lo escriba de cuatro

@@ -1,11 +1,18 @@
 // GET /api/disponibilitat
 // Retorna els rangs de dates OCUPATS del refugi: registres de la taula CONTACTE
-// amb ESTADO = "RESERVAT". Les sol·licituds en "PENDENT GESTIONAR" NO es retornen.
+// amb ESTADO = "RESERVAT" o "EMAIL PAGO FINAL". El segon és el pas següent de
+// la mateixa reserva (s'ha enviat el correu del pagament final): la reserva
+// continua en peu i els dies han de seguir ocupats. Només quan el registre
+// passa a qualsevol altre estat (GESTIONAT, CAMBIA DE DATA…) els dies queden
+// lliures. Les sol·licituds en "PENDENT GESTIONAR" NO es retornen.
 // No exposa cap dada personal, només dates.
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = process.env.AIRTABLE_TABLE || 'tblAD8ZeIKmNwNRm9';
-const RESERVED = process.env.AIRTABLE_RESERVED_VALUE || 'RESERVAT';
+// Llista d'estats que ocupen dies. Es pot canviar sense tocar el codi amb la
+// variable AIRTABLE_RESERVED_VALUE (separats per comes).
+const RESERVED = (process.env.AIRTABLE_RESERVED_VALUE || 'RESERVAT,EMAIL PAGO FINAL')
+  .split(',').map((v) => v.trim()).filter(Boolean);
 const F_IN  = 'DIA DE ENTRADA';
 const F_OUT = 'DIA DE SALIDA';
 const F_STATE = 'ESTADO';
@@ -15,7 +22,8 @@ exports.handler = async function () {
   const token = process.env.AIRTABLE_TOKEN;
   if (!token) return { statusCode: 200, headers, body: JSON.stringify({ ok: false, reserves: [], reason: 'no-token' }) };
 
-  const formula = `AND({${F_STATE}}='${RESERVED}', {${F_IN}}!='', {${F_OUT}}!='')`;
+  const estats = RESERVED.map((v) => `{${F_STATE}}='${v.replace(/'/g, "\\'")}'`).join(', ');
+  const formula = `AND(OR(${estats}), {${F_IN}}!='', {${F_OUT}}!='')`;
   const params = new URLSearchParams({ filterByFormula: formula, pageSize: '100' });
   params.append('fields[]', F_IN);
   params.append('fields[]', F_OUT);
