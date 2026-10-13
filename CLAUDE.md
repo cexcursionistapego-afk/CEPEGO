@@ -177,6 +177,11 @@ ENVIAT"` salen en el calendario en **naranja ("Pendent de confirmar")**, pero
 hay alguien delante. `/api/disponibilitat` los devuelve aparte, en
 `pendents` (variable `AIRTABLE_PENDING_VALUE` para cambiar el estado).
 
+**El día de salida siempre se ve marcado** (medio rojo si es una reserva,
+medio naranja si es pendiente), pero **se puede elegir como entrada** de otra
+reserva: el grupo anterior sale por la mañana. La excepción sigue siendo el
+domingo, que se bloquea entero (salida a las 17:00).
+
 El IBAN se guarda siempre junto y en mayúsculas (`normIBAN` en
 `netlify/functions/_validators.js`), aunque la gente lo escriba de cuatro
 en cuatro.

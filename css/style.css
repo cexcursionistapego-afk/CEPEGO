@@ -561,6 +561,9 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 /* Sol·licitud pendent de confirmar (EMAIL RECEPCIÓ ENVIAT): es pot triar igual. */
 .rcal-d button.pend{background:#f6dfb0;color:#7a4a05}
 .rcal-legend i.lg.pend{background:#f6dfb0}
+/* Dia d'eixida d'una reserva: mig marcat (s'ix al matí) i es pot triar per a entrar. */
+.rcal-d button.pend-eixida{background:linear-gradient(135deg,#f6dfb0 0 50%,#d6ecd8 50% 100%);color:#1a4a1e}
+.rcal-d button.eixida{background:linear-gradient(135deg,#efcccd 0 50%,#d6ecd8 50% 100%);color:#1a4a1e}
 .rcal-d button.past{background:transparent;color:#c9c3b4;cursor:not-allowed}
 .rcal-d button.busy{background:repeating-linear-gradient(45deg,#f2d9da,#f2d9da 5px,#efcccd 5px,#efcccd 10px);color:#a13;text-decoration:line-through;opacity:.9}
 .rcal-d button.busy:disabled{cursor:not-allowed}

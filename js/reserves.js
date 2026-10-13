@@ -22,6 +22,8 @@
   var todayStr = iso(today);
   var view = new Date(today.getFullYear(), today.getMonth(), 1);
   var pend = {};                // 'YYYY-MM-DD' -> true (sol·licitud pendent de confirmar)
+  var pendNits = {};            // nits pendents (sense el dia d'eixida), per a l'avís
+  var eixida = {};              // dia d'eixida d'una reserva: es marca però es pot triar per a entrar
   var busy = {};                // 'YYYY-MM-DD' -> true (dies RESERVAT o tancament estiu)
   var reservesList = [];        // llistat cru de {start,end} per a detectar canvis de torn
   var selStart = null, selEnd = null;
@@ -82,25 +84,26 @@
     // (eixida a les 17:00), no hi ha marge per a que entre un altre grup eixe
     // mateix dia, així que el diumenge també queda bloquejat.
     reservesList = reserves || [];
-    busy = {};
+    busy = {}; eixida = {};
     reservesList.forEach(function(r){
       if(!r.start||!r.end) return;
       var d=r.start, guard=0;
       while(d<r.end && guard<400){ busy[d]=true; d=addDays(d,1); guard++; }
-      if(parse(r.end).getDay()===0) busy[r.end]=true;
+      if(parse(r.end).getDay()===0) busy[r.end]=true; else eixida[r.end]=true;
     });
   }
   // Nits amb una sol·licitud en "EMAIL RECEPCIÓ ENVIAT": no bloquegen, només
   // s'avisa que hi ha algú davant.
   function expandPend(pendents){
-    pend = {};
+    pend = {}; pendNits = {};
     (pendents||[]).forEach(function(r){
       if(!r.start||!r.end) return;
       var d=r.start, guard=0;
-      while(d<r.end && guard<400){ pend[d]=true; d=addDays(d,1); guard++; }
+      // També el dia d'eixida (<=): es veu marcat però es pot triar igual.
+      while(d<=r.end && guard<400){ pend[d]=true; if(d<r.end) pendNits[d]=true; d=addDays(d,1); guard++; }
     });
   }
-  function rangeHasPend(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(pend[d]) return true; d=addDays(d,1); guard++; } return false; }
+  function rangeHasPend(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(pendNits[d]) return true; d=addDays(d,1); guard++; } return false; }
   function rangeHasBusy(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(busy[d]||isSummer(d)) return true; d=addDays(d,1); guard++; } return false; }
   // Torn el mateix dia: algú altre ix eixe matí (entrem a partir de les 12) o
   // algú altre entra eixa vesprada (hem d'eixir abans de les 12).
@@ -246,7 +249,7 @@
       var isBlocked = busy[ds] || isSummer(ds) || blockedAsExit;
       if(ds<todayStr) cls.push('past');
       else if(isBlocked) cls.push('busy');
-      else { cls.push('free'); if(pend[ds]) cls.push('pend'); }
+      else { cls.push('free'); if(pendNits[ds]) cls.push('pend'); else if(eixida[ds]) cls.push('eixida'); else if(pend[ds]) cls.push('pend-eixida'); }
       if(ds===selStart||ds===selEnd) cls.push('sel');
       else if(selStart&&selEnd&&ds>selStart&&ds<selEnd) cls.push('inrange');
       var disabled = ds<todayStr || isSummer(ds) || (busy[ds] && !pickableAsExit) || blockedAsExit;
