@@ -225,7 +225,8 @@ def build(g):
      ("Extintors homologats (UNE-EN 3) distribuïts pel refugi.","Extintores homologados (UNE-EN 3) distribuidos por el refugio."),
      ("Eixides d'emergència senyalitzades (norma UNE 23034).","Salidas de emergencia señalizadas (norma UNE 23034)."),
      ("Cal pujar sense calçat a la zona de dormir.","Hay que subir sin calzado a la zona de dormir."),
-     ("No proporcionem tovalloles: porta la teua.","No proporcionamos toallas: trae la tuya.")]
+     ("No proporcionem tovalloles: porta la teua.","No proporcionamos toallas: trae la tuya."),
+     ("Dispensador de gel de bany a la dutxa, apte també com a xampú.","Dispensador de gel de baño en la ducha, apto también como champú.")]
     def eq_li(idxs):
         return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
     refugi=header("refugi")+subhero(IMG+"refugi-nit.jpg",'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
@@ -339,7 +340,7 @@ def build(g):
         <span class="equip-tag"><span class="va">Punts d'aigua i higiene</span><span class="es">Puntos de agua e higiene</span></span>
         <h3 style="margin-top:.5em"><span class="va">Tot el que necessites</span><span class="es">Todo lo que necesitas</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([5,6,15])}        </ul>
+{eq_li([5,16,6,15])}        </ul>
         <p class="note" style="margin-top:18px"><span class="va">⚠️ L'aigua és d'una cava natural, un bé escàs: <strong>no és potable</strong> i cal utilitzar-la de manera responsable. Porta la teua per a consumir.</span><span class="es">⚠️ El agua es de una cava natural, un bien escaso: <strong>no es potable</strong> y hay que utilizarla de forma responsable. Trae la tuya para consumir.</span></p>
       </div>
     </div>
