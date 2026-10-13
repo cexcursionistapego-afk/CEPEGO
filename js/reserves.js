@@ -21,6 +21,7 @@
   var today = new Date(); today.setHours(0,0,0,0);
   var todayStr = iso(today);
   var view = new Date(today.getFullYear(), today.getMonth(), 1);
+  var pend = {};                // 'YYYY-MM-DD' -> true (sol·licitud pendent de confirmar)
   var busy = {};                // 'YYYY-MM-DD' -> true (dies RESERVAT o tancament estiu)
   var reservesList = [];        // llistat cru de {start,end} per a detectar canvis de torn
   var selStart = null, selEnd = null;
@@ -70,6 +71,7 @@
   var submitBtn= document.getElementById('r-submit');
   var queueNotice = document.getElementById('r-queue-notice');
   var turnoverNotice = document.getElementById('r-turnover-notice');
+  var pendNotice = document.getElementById('r-pend-notice');
   var sociSelect = document.getElementById('r-soci');
   var sociNotice = document.getElementById('r-soci-notice');
 
@@ -88,6 +90,17 @@
       if(parse(r.end).getDay()===0) busy[r.end]=true;
     });
   }
+  // Nits amb una sol·licitud en "EMAIL RECEPCIÓ ENVIAT": no bloquegen, només
+  // s'avisa que hi ha algú davant.
+  function expandPend(pendents){
+    pend = {};
+    (pendents||[]).forEach(function(r){
+      if(!r.start||!r.end) return;
+      var d=r.start, guard=0;
+      while(d<r.end && guard<400){ pend[d]=true; d=addDays(d,1); guard++; }
+    });
+  }
+  function rangeHasPend(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(pend[d]) return true; d=addDays(d,1); guard++; } return false; }
   function rangeHasBusy(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(busy[d]||isSummer(d)) return true; d=addDays(d,1); guard++; } return false; }
   // Torn el mateix dia: algú altre ix eixe matí (entrem a partir de les 12) o
   // algú altre entra eixa vesprada (hem d'eixir abans de les 12).
@@ -178,6 +191,13 @@
           turnoverNotice.style.display = 'none';
         }
       }
+      if(pendNotice) {
+        var hiHaPend = rangeHasPend(selStart, selEnd);
+        pendNotice.style.display = hiHaPend ? '' : 'none';
+        if(hiHaPend) pendNotice.innerHTML =
+          '<span class="va">🕓 Algun d\'aquests dies ja té una sol·licitud pendent de confirmar. Pots enviar la teua igualment: si l\'anterior no es confirma, la teua passarà davant i t\'ho comunicarem per correu.</span>'+
+          '<span class="es">🕓 Alguno de estos días ya tiene una solicitud pendiente de confirmar. Puedes enviar la tuya igualmente: si la anterior no se confirma, pasarás delante y te lo comunicaremos por correo.</span>';
+      }
       if(queueNotice) {
         var queued = inQueuePeriod(queueFrom, selStart, selEnd);
         queueNotice.style.display = queued ? '' : 'none';
@@ -191,6 +211,7 @@
         : (l==='es'?'Elige el día de entrada en el calendario':'Tria el dia d\'entrada al calendari');
       if(submitBtn) submitBtn.disabled=true;
       if(queueNotice) queueNotice.style.display = 'none';
+      if(pendNotice) pendNotice.style.display = 'none';
       if(turnoverNotice) {
         // Amb només l'entrada triada ja sabem si toca "pots entrar a partir
         // de les 12:00" (l'eixida encara no s'ha triat, no cal esperar-la).
@@ -225,7 +246,7 @@
       var isBlocked = busy[ds] || isSummer(ds) || blockedAsExit;
       if(ds<todayStr) cls.push('past');
       else if(isBlocked) cls.push('busy');
-      else cls.push('free');
+      else { cls.push('free'); if(pend[ds]) cls.push('pend'); }
       if(ds===selStart||ds===selEnd) cls.push('sel');
       else if(selStart&&selEnd&&ds>selStart&&ds<selEnd) cls.push('inrange');
       var disabled = ds<todayStr || isSummer(ds) || (busy[ds] && !pickableAsExit) || blockedAsExit;
@@ -253,6 +274,7 @@
       navHTML('rcal-prev-b','rcal-next-b');
     legend.innerHTML =
       '<span><i class="lg free"></i>'+(l==='es'?'Libre':'Lliure')+'</span>'+
+      '<span><i class="lg pend"></i>'+(l==='es'?'Pendiente de confirmar':'Pendent de confirmar')+'</span>'+
       '<span><i class="lg busy"></i>'+(l==='es'?'Reservado':'Reservat')+'</span>'+
       '<span><i class="lg sel"></i>'+(l==='es'?'Tu selección':'La teua selecció')+'</span>'+
       (loaded?'':' <span class="rcal-load">'+(l==='es'?'cargando…':'carregant…')+'</span>');
@@ -268,7 +290,7 @@
   render(); sync();
   fetch('/api/disponibilitat',{cache:'no-store'})
     .then(function(r){ return r.ok?r.json():null; })
-    .then(function(d){ loaded=true; if(d&&d.reserves) expand(d.reserves); render(); })
+    .then(function(d){ loaded=true; if(d&&d.reserves) expand(d.reserves); if(d) expandPend(d.pendents); render(); sync(); })
     .catch(function(){ loaded=true; render(); });
 
   /* -------- formulari -------- */

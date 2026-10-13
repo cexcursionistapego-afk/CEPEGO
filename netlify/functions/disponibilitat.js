@@ -5,6 +5,9 @@
 // continua en peu i els dies han de seguir ocupats. Només quan el registre
 // passa a qualsevol altre estat (GESTIONAT, CAMBIA DE DATA…) els dies queden
 // lliures. Les sol·licituds en "PENDENT GESTIONAR" NO es retornen.
+// A banda, retorna com a "pendents" les sol·licituds en "EMAIL RECEPCIÓ
+// ENVIAT": encara no estan confirmades, però ja hi ha algú interessat en eixos
+// dies. El calendari les pinta d'un altre color i es poden seguir triant.
 // No exposa cap dada personal, només dates.
 
 const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
@@ -12,6 +15,8 @@ const TABLE = process.env.AIRTABLE_TABLE || 'tblAD8ZeIKmNwNRm9';
 // Llista d'estats que ocupen dies. Es pot canviar sense tocar el codi amb la
 // variable AIRTABLE_RESERVED_VALUE (separats per comes).
 const RESERVED = (process.env.AIRTABLE_RESERVED_VALUE || 'RESERVAT,EMAIL PAGO FINAL')
+  .split(',').map((v) => v.trim()).filter(Boolean);
+const PENDING = (process.env.AIRTABLE_PENDING_VALUE || 'EMAIL RECEPCIÓ ENVIAT')
   .split(',').map((v) => v.trim()).filter(Boolean);
 const F_IN  = 'DIA DE ENTRADA';
 const F_OUT = 'DIA DE SALIDA';
@@ -22,15 +27,16 @@ exports.handler = async function () {
   const token = process.env.AIRTABLE_TOKEN;
   if (!token) return { statusCode: 200, headers, body: JSON.stringify({ ok: false, reserves: [], reason: 'no-token' }) };
 
-  const estats = RESERVED.map((v) => `{${F_STATE}}='${v.replace(/'/g, "\\'")}'`).join(', ');
+  const estats = RESERVED.concat(PENDING).map((v) => `{${F_STATE}}='${v.replace(/'/g, "\\'")}'`).join(', ');
   const formula = `AND(OR(${estats}), {${F_IN}}!='', {${F_OUT}}!='')`;
   const params = new URLSearchParams({ filterByFormula: formula, pageSize: '100' });
   params.append('fields[]', F_IN);
   params.append('fields[]', F_OUT);
+  params.append('fields[]', F_STATE);
   const url = `https://api.airtable.com/v0/${BASE}/${TABLE}?${params.toString()}`;
 
   try {
-    const reserves = [];
+    const reserves = [], pendents = [];
     let offset;
     do {
       const u = offset ? `${url}&offset=${offset}` : url;
@@ -42,12 +48,16 @@ exports.handler = async function () {
       const data = await r.json();
       (data.records || []).forEach(function (rec) {
         const start = rec.fields[F_IN], end = rec.fields[F_OUT];
-        if (start && end) reserves.push({ start: String(start).slice(0, 10), end: String(end).slice(0, 10) });
+        if (!start || !end) return;
+        const rang = { start: String(start).slice(0, 10), end: String(end).slice(0, 10) };
+        const estat = rec.fields[F_STATE];
+        const nom = estat && typeof estat === 'object' ? estat.name : estat;
+        (RESERVED.indexOf(nom) !== -1 ? reserves : pendents).push(rang);
       });
       offset = data.offset;
     } while (offset);
 
-    return { statusCode: 200, headers, body: JSON.stringify({ ok: true, reserves: reserves }) };
+    return { statusCode: 200, headers, body: JSON.stringify({ ok: true, reserves: reserves, pendents: pendents }) };
   } catch (e) {
     return { statusCode: 200, headers, body: JSON.stringify({ ok: false, reserves: [], reason: 'exception', detail: String(e).slice(0, 200) }) };
   }

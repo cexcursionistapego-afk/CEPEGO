@@ -171,6 +171,12 @@ el circuito, y es intencionado. La lista de estados está en
 `netlify/functions/disponibilitat.js`; si se define la variable
 `AIRTABLE_RESERVED_VALUE` en Netlify, la sustituye (separados por comas).
 
+**Solicitudes pendientes de confirmar:** los registros en `"EMAIL RECEPCIÓ
+ENVIAT"` salen en el calendario en **naranja ("Pendent de confirmar")**, pero
+**no bloquean**: se pueden seguir eligiendo, y el formulario avisa de que ya
+hay alguien delante. `/api/disponibilitat` los devuelve aparte, en
+`pendents` (variable `AIRTABLE_PENDING_VALUE` para cambiar el estado).
+
 El IBAN se guarda siempre junto y en mayúsculas (`normIBAN` en
 `netlify/functions/_validators.js`), aunque la gente lo escriba de cuatro
 en cuatro.
