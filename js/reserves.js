@@ -205,6 +205,13 @@
         var queued = inQueuePeriod(queueFrom, selStart, selEnd);
         queueNotice.style.display = queued ? '' : 'none';
         if (queued) queueNotice.innerHTML = queueNoticeHTML(queueFrom);
+        // Si toquen els dos avisos (cua i sol·licitud pendent), un sol globus.
+        if (queued && pendNotice && rangeHasPend(selStart, selEnd)) {
+          pendNotice.style.display = 'none';
+          queueNotice.innerHTML =
+            '<span class="va">⚠️ Les reserves per a eixes dates encara no estan obertes i algun d\'aquests dies ja té una sol·licitud pendent de confirmar. Pots enviar la teua igualment: entrarà en una cua per ordre d\'arribada, la gestionarem a partir del ' + fmt(queueFrom) + ' i, si l\'anterior no es confirma, passarà davant. T\'ho comunicarem per correu.</span>' +
+            '<span class="es">⚠️ Las reservas para esas fechas aún no están abiertas y alguno de estos días ya tiene una solicitud pendiente de confirmar. Puedes enviar la tuya igualmente: entrará en una cola por orden de llegada, la gestionaremos a partir del ' + fmt(queueFrom) + ' y, si la anterior no se confirma, pasará delante. Te lo comunicaremos por correo.</span>';
+        }
       }
     } else {
       if(fEntrada) fEntrada.value=selStart||'';
