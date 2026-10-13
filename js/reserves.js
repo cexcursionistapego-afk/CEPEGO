@@ -94,7 +94,9 @@
   }
   // Nits amb una sol·licitud en "EMAIL RECEPCIÓ ENVIAT": no bloquegen, només
   // s'avisa que hi ha algú davant.
+  var pendList = [];
   function expandPend(pendents){
+    pendList = pendents || [];
     pend = {}; pendNits = {};
     (pendents||[]).forEach(function(r){
       if(!r.start||!r.end) return;
@@ -107,8 +109,11 @@
   function rangeHasBusy(a,b){ var d=a,guard=0; while(d<b&&guard<400){ if(busy[d]||isSummer(d)) return true; d=addDays(d,1); guard++; } return false; }
   // Torn el mateix dia: algú altre ix eixe matí (entrem a partir de les 12) o
   // algú altre entra eixa vesprada (hem d'eixir abans de les 12).
-  function existingEndsOn(ds){ return reservesList.some(function(r){ return r.end===ds; }); }
-  function existingStartsOn(ds){ return reservesList.some(function(r){ return r.start===ds; }); }
+  // També compten les sol·licituds pendents: si es confirmen, el canvi de
+  // torn serà el mateix i val més avisar-ho ja.
+  function totes(){ return reservesList.concat(pendList); }
+  function existingEndsOn(ds){ return totes().some(function(r){ return r.end===ds; }); }
+  function existingStartsOn(ds){ return totes().some(function(r){ return r.start===ds; }); }
   // 'definite': el dia anterior ja està reservat (eixida eixe matí, dissabte).
   // 'possible': entrada en dissabte encara lliure el divendres — algú el
   // podria reservar més avant i llavors sí caldria entrar a partir de les 12.
