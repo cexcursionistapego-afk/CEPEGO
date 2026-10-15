@@ -4,14 +4,14 @@
   "facebook": "https://www.facebook.com/centre.excursionistapego/",
   "iban": "ES88 0081 1028 86 0001004510",
   "quota_soci": "35 €",
+  "webcam_nit_desde": "",
   "quota_sala": "50 €",
   "avis_reserva_va": "⚠️ El refugi no admet reserves del 31 de maig al 1 d'octubre (tancament d'estiu anual). Tampoc es lloga la nit del 31 de desembre. ",
+  "webcam_nit_fins": "",
   "adreca": "Carrer del Llavador, 83 · 03780 Pego",
   "avis_reserva_es": "⚠️ El refugio no admite reservas del 31 de mayo al 1 de octubre (cierre de verano anual). Tampoco se alquila la noche del 31 de diciembre. ",
   "telefon": "NO",
-  "reserves_cua_desde": "2027-01-10",
+  "reserves_cua_desde": "2027-01-06",
   "email": "cexcursionistapego@gmail.com",
-  "preu1": "190 €",
-  "webcam_nit_desde": "",
-  "webcam_nit_fins": ""
+  "preu1": "190 €"
 }
