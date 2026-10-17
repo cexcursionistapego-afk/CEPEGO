@@ -335,7 +335,14 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
   06–12, tarde 12–18, noche 18–24) se queda con la **mediana**: un modelo
   descolgado no arrastra el resultado. El viento es el más fuerte y el cielo
   el código más repetido.
-  - **Las alertas siguen siendo de AEMET**, que es quien las emite.
+  - **La web la presenta como previsión propia del club** ("La nostra
+    previsió"), porque la hacemos nosotros a partir de esos modelos; debajo
+    van siempre citados. **Lo que nunca es nuestro son los niveles de alerta**:
+    esos los emite AEMET y así está escrito al pie, encima y debajo del
+    logotipo. No inventamos niveles de alerta.
+  - **Si Open-Meteo falla y se cae a la previsión de AEMET, se dice** con una
+    línea bajo la tabla: anunciar previsión propia y enseñar la de AEMET sin
+    avisar sería engañar.
   - **Si Open-Meteo no responde, la web cae a la previsión de AEMET**, como
     antes. Nada queda en blanco.
   - Cuando los modelos no coinciden sale "3 de 5 models" en la fila. Solo se

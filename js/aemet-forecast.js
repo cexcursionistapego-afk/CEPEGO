@@ -545,7 +545,12 @@
       if (!json || json.ok === false || !json.days || !json.days.length) throw new Error('bad response');
       if (bo && aemet && aemet.days) copiaAlertes(json.days, aemet.days);
       if (av && av.ok) aplicaAvisos(json.days, av.avisos);
-      el.innerHTML = tableHTML(json.days);
+      // Si hem hagut de caure a la previsió d'AEMET s'ha de dir: la pàgina
+      // anuncia una previsió feta per nosaltres i eixa no ho és.
+      el.innerHTML = tableHTML(json.days) + (bo ? '' :
+        '<p class="fc-font">' + bi(
+          'Ara mateix no podem calcular la nostra previsió; esta és la d\'AEMET per a Pego.',
+          'Ahora mismo no podemos calcular nuestra previsión; esta es la de AEMET para Pego.') + '</p>');
     })
     .catch(function () {
       el.innerHTML = msgHTML(
