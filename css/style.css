@@ -313,6 +313,16 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 /* El de NOAA son dos escuts redons, sense text xicotet: cap mes alt. */
 .avamet-credit--narrow .avamet-credit__logo--swpc{height:78px;border-radius:0}
 .avamet-credit__logo--avamet{height:80px}
+/* Fonts de la previsio de consens: els organismes que fan de veritat els
+   models. Van en text perque no tenim els seus logos com a fitxer. */
+.fonts{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:7px;
+  max-width:760px;margin:10px auto 0}
+.fonts__t{width:100%;text-align:center;font-size:.64rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.fonts a{display:inline-block;padding:4px 11px;border-radius:20px;background:var(--paper-2);
+  border:1px solid var(--hair);font-size:.7rem;font-weight:600;color:var(--navy);
+  text-decoration:none;transition:background .2s var(--ease)}
+.fonts a:hover{background:#fff}
 
 /* price row */
 .prices{display:flex;gap:16px;flex-wrap:wrap}
@@ -648,7 +658,15 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 
 /* Un avis per nivell, cada un del seu color. Quan n'hi ha mes d'un es
    separen i, si no caben, baixen a la linia de baix en lloc d'estretir-se. */
-.fc-alerts{grid-area:alert;display:flex;flex-wrap:wrap;gap:7px;margin:9px 0 2px;min-width:0}
+.fc-peu{grid-area:alert;display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:9px 0 2px;min-width:0}
+.fc-peu .fc-alerts{margin:0}
+/* Avis de desacord entre models: nomes ix quan no coincideixen, aixi que no
+   crida mes que les alertes d'AEMET, que son oficials. */
+.fc-dubte{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:20px;
+  background:var(--paper-2);border:1px solid var(--hair);
+  font-size:.64rem;font-weight:600;color:var(--muted);line-height:1.35;white-space:nowrap}
+.fc-dubte__i{width:11px;height:11px;flex:0 0 auto;opacity:.75}
+.fc-alerts{display:flex;flex-wrap:wrap;gap:7px;min-width:0}
 .fc-alert{display:inline-flex;align-items:center;gap:6px;max-width:100%;
   padding:5px 10px;border-radius:20px;font-size:.68rem;font-weight:600;line-height:1.35;
   text-decoration:none;transition:filter .2s var(--ease)}

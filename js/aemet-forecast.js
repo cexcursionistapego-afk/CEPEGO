@@ -393,6 +393,20 @@
     // Només es pinta l'avís quan n'hi ha un de real. AEMET marca "Sin
     // peligro" la major part dels dies i repetir-ho set vegades només fa
     // soroll: si no ix res, és que no hi ha avís.
+    // Quan els models no es posen d'acord val més dir-ho que fer veure que
+    // la previsió és segura. Només es canta el desacord: que coincidisquen
+    // és el normal i ompliria la taula de soroll.
+    var dubte = '';
+    if (d.models && d.acord != null && d.acord < d.models) {
+      dubte = '<span class="fc-dubte" title="' +
+        esc(bi('Els models no es posen d\'acord', 'Los modelos no se ponen de acuerdo')) + '">' +
+        '<svg class="fc-dubte__i" viewBox="0 0 16 16" aria-hidden="true">' +
+        '<circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
+        '<path fill="currentColor" d="M7.2 4.6h1.6v4.2H7.2zm0 5.3h1.6v1.5H7.2z"/></svg>' +
+        bi(d.acord + ' de ' + d.models + ' models', d.acord + ' de ' + d.models + ' modelos') +
+        '</span>';
+    }
+
     var grups = alertGroups(d.alerts);
     var color = grups.length ? grups[0].color : null;
     var alertRow = '';
@@ -420,7 +434,7 @@
         bar +
         '<span class="fc-t fc-t--max">' + (d.temp_max != null ? Math.round(d.temp_max) + '°' : '') + '</span>' +
       '</div>' +
-      alertRow +
+      (dubte || alertRow ? '<div class="fc-peu">' + dubte + alertRow + '</div>' : '') +
       '</li>';
   }
 
@@ -499,16 +513,37 @@
     });
   }
 
+  // Els avisos d'AEMET van per número de dia, igual que els oficials: la
+  // previsió de consens i la taula d'AEMET porten els mateixos dies, només
+  // canvia qui fa la previsió del cel i la pluja.
+  function copiaAlertes(days, aemetDays) {
+    if (!aemetDays || !aemetDays.length) return;
+    var perDia = {};
+    aemetDays.forEach(function (d) {
+      var n = parseInt(splitDayLabel(d.label).num, 10);
+      if (!isNaN(n) && d.alerts && d.alerts.length) perDia[n] = d.alerts;
+    });
+    days.forEach(function (d) {
+      var n = parseInt(splitDayLabel(d.label).num, 10);
+      if (perDia[n] && (!d.alerts || !d.alerts.length)) d.alerts = perDia[n];
+    });
+  }
+
   var src = el.getAttribute('data-aemet-src') || '/api/aemet';
-  Promise.all([
-    fetch(src, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }),
-    fetch('/api/avisos', { cache: 'no-store' })
+  function opcional(u) {
+    return fetch(u, { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .catch(function () { return null; })
-  ])
+      .catch(function () { return null; });
+  }
+  Promise.all([opcional('/api/pronostic'), opcional(src), opcional('/api/avisos')])
     .then(function (out) {
-      var json = out[0], av = out[1];
+      var cons = out[0], aemet = out[1], av = out[2];
+      // El consens de models mana; si no respon, es cau a la previsió
+      // d'AEMET, que és com anava la web abans.
+      var bo = (cons && cons.ok && cons.days && cons.days.length) ? cons : null;
+      var json = bo || aemet;
       if (!json || json.ok === false || !json.days || !json.days.length) throw new Error('bad response');
+      if (bo && aemet && aemet.days) copiaAlertes(json.days, aemet.days);
       if (av && av.ok) aplicaAvisos(json.days, av.avisos);
       el.innerHTML = tableHTML(json.days);
     })

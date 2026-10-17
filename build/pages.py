@@ -662,8 +662,18 @@ def build(g):
     <div class="kicker center-k"><span class="va">Previsió pròxims dies</span><span class="es">Previsión próximos días</span></div>
     <div id="aemet-forecast" class="reveal"></div>
     <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
+      <span class="fonts__t" style="margin-bottom:6px"><span class="va">Alertes oficials d'</span><span class="es">Alertas oficiales de </span></span>
       <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/pego-id03102" target="_blank" rel="noopener"><img src="{IMG}aemet-logo.png" alt="AEMET" class="avamet-credit__logo"></a>
     </p>
+    <div class="fonts">
+      <span class="fonts__t"><span class="va">Previsió del refugi: consens dels models de</span><span class="es">Previsión del refugio: consenso de los modelos de</span></span>
+      <a href="https://www.ecmwf.int/" target="_blank" rel="noopener">ECMWF</a>
+      <a href="https://www.noaa.gov/" target="_blank" rel="noopener">NOAA · GFS</a>
+      <a href="https://www.dwd.de/" target="_blank" rel="noopener">DWD · ICON</a>
+      <a href="https://meteofrance.com/" target="_blank" rel="noopener">Météo-France</a>
+      <a href="https://www.metoffice.gov.uk/" target="_blank" rel="noopener">Met Office</a>
+      <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+    </div>
   </div>
 </section>
 

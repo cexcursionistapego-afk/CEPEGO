@@ -38,6 +38,10 @@
   to = "/.netlify/functions/avisos"
   status = 200
 [[redirects]]
+  from = "/api/pronostic"
+  to = "/.netlify/functions/pronostic"
+  status = 200
+[[redirects]]
   from = "/api/solar"
   to = "/.netlify/functions/solar"
   status = 200

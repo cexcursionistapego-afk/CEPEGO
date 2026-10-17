@@ -326,6 +326,26 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
   y velocidad "0". Se pinta siempre (en calma, "0"); en gris apagado por debajo de 15 km/h y en ámbar desde 40. Va dentro de cada tramo
   (mañana/tarde/noche), junto al % de lluvia; en los días de un solo bloque se
   usa el más fuerte del día.
+- **La previsión de los próximos días es un CONSENSO de modelos (17-10-2026),
+  no la de AEMET.** La tabla municipal de AEMET es la previsión de Pego pueblo
+  (70 m) y el refugio está en la Vall d'Ebo a 540 m: no hace el mismo tiempo.
+  `netlify/functions/pronostic.js` pide a **Open-Meteo** (gratis, sin clave)
+  los cinco modelos oficiales — ECMWF, NOAA/GFS, DWD/ICON, Météo-France y UK
+  Met Office — en las coordenadas del refugio, y para cada tramo (mañana
+  06–12, tarde 12–18, noche 18–24) se queda con la **mediana**: un modelo
+  descolgado no arrastra el resultado. El viento es el más fuerte y el cielo
+  el código más repetido.
+  - **Las alertas siguen siendo de AEMET**, que es quien las emite.
+  - **Si Open-Meteo no responde, la web cae a la previsión de AEMET**, como
+    antes. Nada queda en blanco.
+  - Cuando los modelos no coinciden sale "3 de 5 models" en la fila. Solo se
+    canta el desacuerdo: coincidir es lo normal.
+  - Coordenadas en `REFUGI_LAT` / `REFUGI_LON` / `REFUGI_ALT` (variables de
+    Netlify). **Las de por defecto son aproximadas de la Vall d'Ebo**: hay que
+    poner las del refugio de verdad.
+  - **No se ponen logos de Windguru ni Meteored**: esas webs no hacen
+    previsiones, solo muestran estos mismos modelos. Decir que los datos son
+    suyos sería falso, y son marcas ajenas.
 - **Avisos oficiales (Meteoalerta), 17-10-2026.** La fila "Avisos" de la
   tabla municipal de AEMET es un resumen y a veces dice "Bajo" cuando la zona
   está en naranja o rojo — que es lo que enseña la app de AEMET. Por eso
