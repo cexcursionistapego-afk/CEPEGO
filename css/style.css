@@ -829,6 +829,8 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 
 /* ================= METEO DASHBOARD ================= */
 .meteo-dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px);align-items:start}
+/* Amb una sola estacio (nomes la Figuereta) no te sentit mitja amplaria. */
+.meteo-dash-grid--una{grid-template-columns:minmax(0,560px);justify-content:center}
 @media(max-width:860px){.meteo-dash-grid{grid-template-columns:1fr}}
 
 .meteo-dash{position:relative;background:var(--white);border:1px solid var(--hair);border-radius:var(--r-lg);

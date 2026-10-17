@@ -194,6 +194,9 @@
 
   function init() {
     mount('meteo-dash-figuereta', 'figuereta');
+    // La targeta de Pego es va llevar de la pàgina: ací el que interessa és
+    // el refugi. mount() no fa res si no troba el div, així que tornar-la a
+    // posar només seria afegir el <div id="meteo-dash-pego"> i esta línia.
     mount('meteo-dash-pego', 'pego');
   }
 

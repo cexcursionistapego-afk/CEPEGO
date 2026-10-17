@@ -647,9 +647,8 @@ def build(g):
       </div>
     </figure>
 
-    <div class="meteo-dash-grid reveal" style="margin-top:clamp(16px,2.5vw,28px)">
+    <div class="meteo-dash-grid meteo-dash-grid--una reveal" style="margin-top:clamp(16px,2.5vw,28px)">
       <div id="meteo-dash-figuereta"></div>
-      <div id="meteo-dash-pego"></div>
     </div>
     <p class="note center avamet-credit" style="margin-top:14px">
       <a href="https://www.avamet.org/" target="_blank" rel="noopener"><img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo avamet-credit__logo--avamet"></a>
@@ -664,11 +663,6 @@ def build(g):
       <p class="note" style="margin-top:8px"><span class="va">Esta previsió la fem nosaltres per al refugi: no és la de cap servei en concret. Creuem cinc models meteorològics als 540&nbsp;m de la Figuereta i ens quedem amb allò en què coincideixen.</span><span class="es">Esta previsión la hacemos nosotros para el refugio: no es la de ningún servicio en concreto. Cruzamos cinco modelos meteorológicos a los 540&nbsp;m de La Figuereta y nos quedamos con aquello en que coinciden.</span></p>
     </div>
     <div id="aemet-forecast" class="reveal"></div>
-    <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
-      <span class="fonts__t" style="margin-bottom:6px"><span class="va">⚠️ Els nivells d'alerta són sempre oficials d'</span><span class="es">⚠️ Los niveles de alerta son siempre oficiales de </span></span>
-      <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/pego-id03102" target="_blank" rel="noopener"><img src="{IMG}aemet-logo.png" alt="AEMET" class="avamet-credit__logo"></a>
-      <span class="fonts__t" style="margin-top:6px;margin-bottom:0"><span class="va">Nosaltres no emetem alertes: estes són les d'AEMET per a la zona</span><span class="es">Nosotros no emitimos alertas: estas son las de AEMET para la zona</span></span>
-    </p>
     <div class="fonts">
       <span class="fonts__t"><span class="va">Models amb què la calculem</span><span class="es">Modelos con los que la calculamos</span></span>
       <a href="https://www.ecmwf.int/" target="_blank" rel="noopener">ECMWF</a>
@@ -678,19 +672,10 @@ def build(g):
       <a href="https://www.metoffice.gov.uk/" target="_blank" rel="noopener">Met Office</a>
       <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
     </div>
-  </div>
-</section>
-
-<section class="section" style="padding:0 0 clamp(28px,3.5vw,48px)">
-  <div class="wrap">
-    <div class="narrow center reveal" style="margin-bottom:clamp(20px,2.6vw,32px)">
-      <div class="kicker center-k"><span class="va">Activitat solar</span><span class="es">Actividad solar</span></div>
-      <h2><span class="va">Tempestes solars</span><span class="es">Tormentas solares</span></h2>
-      <p class="lead"><span class="va">El Sol també té el seu temps. Quan hi ha una tempesta geomagnètica (escala G), el GPS i la ràdio poden fallar a la muntanya.</span><span class="es">El Sol también tiene su tiempo. Cuando hay una tormenta geomagnética (escala G), el GPS y la radio pueden fallar en la montaña.</span></p>
-    </div>
-    <div id="solar-now" class="reveal"></div>
     <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
-      <a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener"><img src="{IMG}swpc-logo.png" alt="NOAA Space Weather Prediction Center" class="avamet-credit__logo avamet-credit__logo--swpc"></a>
+      <span class="fonts__t" style="margin-bottom:6px"><span class="va">⚠️ Els nivells d'alerta són sempre oficials d'</span><span class="es">⚠️ Los niveles de alerta son siempre oficiales de </span></span>
+      <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/pego-id03102" target="_blank" rel="noopener"><img src="{IMG}aemet-logo.png" alt="AEMET" class="avamet-credit__logo"></a>
+      <span class="fonts__t" style="margin-top:6px;margin-bottom:0"><span class="va">Nosaltres no emetem alertes: estes són les d'AEMET per a la zona</span><span class="es">Nosotros no emitimos alertas: estas son las de AEMET para la zona</span></span>
     </p>
   </div>
 </section>
@@ -706,10 +691,24 @@ def build(g):
 {alert_legend_li}    </ul>
   </div>
 </section>
+<section class="section" style="padding:0 0 clamp(28px,3.5vw,48px)">
+  <div class="wrap">
+    <div class="narrow center reveal" style="margin-bottom:clamp(20px,2.6vw,32px)">
+      <div class="kicker center-k"><span class="va">Activitat solar</span><span class="es">Actividad solar</span></div>
+      <h2><span class="va">Tempestes solars</span><span class="es">Tormentas solares</span></h2>
+      <p class="lead"><span class="va">El Sol també té el seu temps. Quan hi ha una tempesta geomagnètica (escala G), el GPS i la ràdio poden fallar a la muntanya.</span><span class="es">El Sol también tiene su tiempo. Cuando hay una tormenta geomagnética (escala G), el GPS y la radio pueden fallar en la montaña.</span></p>
+    </div>
+    <div id="solar-now" class="reveal"></div>
+    <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">
+      <a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener"><img src="{IMG}swpc-logo.png" alt="NOAA Space Weather Prediction Center" class="avamet-credit__logo avamet-credit__logo--swpc"></a>
+    </p>
+  </div>
+</section>
+
 '''
     meteo=header("meteo")+subhero(IMG+"meteo-instal.jpg",'METEO',
         "El temps","El tiempo",
-        "Estacions meteorològiques a La Figuereta i a Pego connectades a la xarxa AVAMET, la previsió del temps i els avisos d'alertes meteorològiques d'AEMET, i les tempestes solars de NOAA.","Estaciones meteorológicas en La Figuereta y en Pego conectadas a la red AVAMET, la previsión del tiempo y los avisos de alertas meteorológicas de AEMET, y las tormentas solares de NOAA.",
+        "L'estació meteorològica de La Figuereta en directe, la nostra previsió per al refugi, els avisos d'AEMET i les tempestes solars de NOAA.","La estación meteorológica de La Figuereta en directo, nuestra previsión para el refugio, los avisos de AEMET y las tormentas solares de NOAA.",
         pos='18%')+meteo_dash+footer()
     write("meteo.html", doc("El temps a Pego i la Figuereta | CEPEGO",
         "Estacions meteorològiques del refugi La Figuereta i de Pego connectades a la xarxa AVAMET, previsió d'AEMET i activitat solar de NOAA.", meteo, path="meteo.html", extra_js=["js/meteo-dashboard.js","js/webcam.js","js/aemet-forecast.js","js/solar.js"]))
