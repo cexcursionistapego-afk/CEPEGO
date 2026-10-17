@@ -667,6 +667,9 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .fc-alert:hover{filter:brightness(.94)}
 .fc-alert__i{width:11px;height:11px;flex:0 0 auto}
 .fc-alert__go{font-size:1rem;line-height:1;opacity:.55;margin-left:1px}
+/* Franja horaria de l'avis, dins de la mateixa pindola. */
+.fc-alert__h{font-weight:700;margin-left:6px;padding-left:6px;
+  border-left:1px solid currentColor;opacity:.75;white-space:nowrap}
 .fc-alert--yellow,.fc-alert--yellow:hover{background:#fbf0d2;color:#8a6d0c}
 .fc-alert--orange,.fc-alert--orange:hover{background:#fbe4d2;color:#9a4a10}
 .fc-alert--red,.fc-alert--red:hover{background:#fbdcdc;color:#8f1d1d}

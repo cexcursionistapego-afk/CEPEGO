@@ -230,7 +230,8 @@
   // tempestes ix un llamp: es reconeix abans de llegir res.
   var ICO_WARN = '<path fill="currentColor" d="M8 1.2 15.2 14H.8zM7.1 6v4h1.8V6zm0 5.2v1.6h1.8v-1.6z"/>';
   var ICO_BOLT = '<path fill="currentColor" d="M9.6 1 3.6 9.2h3.3L6.2 15 12.4 6.6H8.9z"/>';
-  function alertIcon(list) {
+  function alertIcon(list0) {
+    var list = (list0 || []).map(textAvis);
     var tempesta = (list || []).some(function (t) { return /tormenta/i.test(String(t)); });
     return '<svg class="fc-alert__i" viewBox="0 0 16 16" aria-hidden="true">' +
       (tempesta ? ICO_BOLT : ICO_WARN) + '</svg>';
@@ -243,17 +244,33 @@
   // pintar-los tots igual donava a entendre que eren igual de greus.
   // Els grups van del més greu al menys, i el més greu marca la fila.
   var RANK = { green: 0, yellow: 1, orange: 2, red: 3 };
+  // Els avisos poden vindre com a text (la taula d'AEMET) o com a objecte
+  // amb la franja horària (els oficials de la zona).
+  function textAvis(a) { return a && typeof a === 'object' ? a.t : a; }
+
   function alertGroups(list) {
     var grups = [];
-    (list || []).forEach(function (t) {
+    (list || []).forEach(function (a) {
+      var t = textAvis(a);
       var c = alertColor(t);
       // "Sin peligro" (verd) no es pinta: seria soroll a quasi tots els dies.
       if (c === 'green') return;
       var clau = String(t).split(' - ')[0].trim().toLowerCase();
       var g = null;
       grups.forEach(function (x) { if (x.clau === clau) g = x; });
-      if (!g) { g = { clau: clau, color: c, items: [] }; grups.push(g); }
+      if (!g) { g = { clau: clau, color: c, items: [], des: null, fins: null, hores: '' }; grups.push(g); }
       g.items.push(t);
+      // La franja del grup abraça la de tots els seus avisos: si el roig és
+      // de 12 a 16 i de 18 a 20, el que cal saber és que va de 12 a 20.
+      if (a && typeof a === 'object' && a.h) {
+        g.des = g.des == null ? a.des : Math.min(g.des, a.des);
+        g.fins = g.fins == null ? a.fins : Math.max(g.fins, a.fins);
+      }
+    });
+    grups.forEach(function (g) {
+      if (g.des == null || (g.des === 0 && g.fins >= 24)) return;
+      var dd = function (n) { return (n < 10 ? '0' : '') + n; };
+      g.hores = dd(g.des) + '–' + dd(Math.min(g.fins, 24)) + ' h';
     });
     grups.sort(function (a, b) { return RANK[b.color] - RANK[a.color]; });
     return grups;
@@ -402,7 +419,8 @@
         return '<a class="fc-alert fc-alert--' + g.color + '" href="' + esc(avisosUrl(idx)) + '" ' +
           'target="_blank" rel="noopener" title="' + esc(AVISOS_TITLE) + '">' +
           alertIcon(g.items) +
-          '<span>' + bi(esc(tr.va), esc(tr.es)) + '</span>' +
+          '<span>' + bi(esc(tr.va), esc(tr.es)) +
+          (g.hores ? '<b class="fc-alert__h">' + esc(g.hores) + '</b>' : '') + '</span>' +
           '<span class="fc-alert__go" aria-hidden="true">&rsaquo;</span></a>';
       }).join('') + '</div>';
     }
@@ -480,16 +498,40 @@
       var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(txt || ''));
       return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
     }
+    // L'hora, del mateix text. Si els minuts no són zero s'arrodonix cap
+    // amunt: un avís que acaba a les 19:59 cobrix tota l'hora de les 19.
+    function horaDe(txt, final) {
+      var m = /T(\d{2}):(\d{2})/.exec(String(txt || ''));
+      if (!m) return null;
+      var h = +m[1];
+      if (final && +m[2] > 0) h += 1;
+      return h;
+    }
+    function dosDigits(n) { return (n < 10 ? '0' : '') + n; }
     avisos.forEach(function (a) {
       var d = diaDe(a.inici);
       var ultim = diaDe(a.fi) || d;
       if (!d) return;
       if (ultim < d) ultim = d;
-      // Un avís pot abastar més d'un dia: es marquen tots els que toca.
+      var hIni = horaDe(a.inici, false), hFi = horaDe(a.fi, true);
+      // Un avís pot abastar més d'un dia: es marquen tots els que toca. A
+      // cada dia se li posa només el tros que li correspon — si comença el
+      // dissabte a migdia i acaba el diumenge a les huit, el dissabte és de
+      // 12 h en avant i el diumenge fins a les 8.
       for (var i = 0; i < 10 && d <= ultim; i++) {
         var n = d.getDate();
+        var primerDia = i === 0;
+        var ultimDia = d.getTime() === ultim.getTime();
+        var des = primerDia && hIni != null ? hIni : 0;
+        var fins = ultimDia && hFi != null ? hFi : 24;
         if (!perDia[n]) perDia[n] = [];
-        if (perDia[n].indexOf(a.titol) === -1) perDia[n].push(a.titol);
+        var repe = false;
+        perDia[n].forEach(function (x) { if (x.t === a.titol && x.des === des && x.fins === fins) repe = true; });
+        // Tot el dia (0–24) no porta hores: dir-ho seria soroll.
+        if (!repe) perDia[n].push({
+          t: a.titol, des: des, fins: fins,
+          h: (des === 0 && fins >= 24) ? '' : dosDigits(des) + '–' + dosDigits(Math.min(fins, 24)) + ' h'
+        });
         d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
       }
     });

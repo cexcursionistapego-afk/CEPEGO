@@ -368,6 +368,12 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     aviso; se lee a mano, sin dependencias npm.
   - El día del aviso se saca del **texto** de la fecha, no de `new Date()`:
     un aviso que empieza a las 00:00 de aquí es el día anterior en UTC.
+  - **Cada aviso lleva su franja horaria** ("12–20 h") dentro de la misma
+    píldora. Un mismo día puede tener dos niveles en horas distintas (naranja
+    por la mañana, rojo por la tarde) y entonces salen dos píldoras, cada una
+    con sus horas. Si cubre el día entero (00–24) no se ponen horas. Un aviso
+    que cruza la medianoche se recorta en cada día: el primero "18–24 h" y el
+    siguiente "00–09 h".
   - Para cambiar de zona o de área: `AEMET_ZONA` y `AEMET_AREA`.
 - **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
   cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a
