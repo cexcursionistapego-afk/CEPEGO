@@ -398,12 +398,15 @@
     // és el normal i ompliria la taula de soroll.
     var dubte = '';
     if (d.models && d.acord != null && d.acord < d.models) {
+      // El detall (quants models coincideixen) va al títol emergent: a la
+      // fila només cal saber que eixe dia la previsió no és de fiar.
       dubte = '<span class="fc-dubte" title="' +
-        esc(bi('Els models no es posen d\'acord', 'Los modelos no se ponen de acuerdo')) + '">' +
+        esc(bi('Només ' + d.acord + ' de ' + d.models + ' models coincideixen per a este dia',
+               'Solo ' + d.acord + ' de ' + d.models + ' modelos coinciden para este día')) + '">' +
         '<svg class="fc-dubte__i" viewBox="0 0 16 16" aria-hidden="true">' +
         '<circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
         '<path fill="currentColor" d="M7.2 4.6h1.6v4.2H7.2zm0 5.3h1.6v1.5H7.2z"/></svg>' +
-        bi(d.acord + ' de ' + d.models + ' models', d.acord + ' de ' + d.models + ' modelos') +
+        bi('Previsió dubtosa', 'Previsión dudosa') +
         '</span>';
     }
 
