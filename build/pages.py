@@ -661,7 +661,7 @@ def build(g):
   <div class="wrap">
     <div class="narrow center reveal" style="margin-bottom:clamp(14px,2vw,22px)">
       <div class="kicker center-k"><span class="va">La nostra previsió</span><span class="es">Nuestra previsión</span></div>
-      <p class="note" style="margin-top:8px"><span class="va">Esta previsió la fem nosaltres per al refugi: no és la de cap servei en concret. Creuem cinc models meteorològics als 540&nbsp;m de la Figuereta i ens quedem amb allò en què coincideixen. Quan no es posen d'acord, el dia ho diu.</span><span class="es">Esta previsión la hacemos nosotros para el refugio: no es la de ningún servicio en concreto. Cruzamos cinco modelos meteorológicos a los 540&nbsp;m de La Figuereta y nos quedamos con aquello en que coinciden. Cuando no se ponen de acuerdo, el día lo dice.</span></p>
+      <p class="note" style="margin-top:8px"><span class="va">Esta previsió la fem nosaltres per al refugi: no és la de cap servei en concret. Creuem cinc models meteorològics als 540&nbsp;m de la Figuereta i ens quedem amb allò en què coincideixen.</span><span class="es">Esta previsión la hacemos nosotros para el refugio: no es la de ningún servicio en concreto. Cruzamos cinco modelos meteorológicos a los 540&nbsp;m de La Figuereta y nos quedamos con aquello en que coinciden.</span></p>
     </div>
     <div id="aemet-forecast" class="reveal"></div>
     <p class="note center avamet-credit avamet-credit--narrow" style="margin-top:14px">

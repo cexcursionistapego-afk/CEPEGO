@@ -340,13 +340,14 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     van siempre citados. **Lo que nunca es nuestro son los niveles de alerta**:
     esos los emite AEMET y así está escrito al pie, encima y debajo del
     logotipo. No inventamos niveles de alerta.
+  - `/api/pronostic` devuelve también `acord` (cuántos modelos coinciden) y
+    `models` por día, pero la web **no los enseña**: se probó y quedaba raro.
+    Están ahí por si algún día se quieren.
   - **Si Open-Meteo falla y se cae a la previsión de AEMET, se dice** con una
     línea bajo la tabla: anunciar previsión propia y enseñar la de AEMET sin
     avisar sería engañar.
   - **Si Open-Meteo no responde, la web cae a la previsión de AEMET**, como
     antes. Nada queda en blanco.
-  - Cuando los modelos no coinciden sale "3 de 5 models" en la fila. Solo se
-    canta el desacuerdo: coincidir es lo normal.
   - Coordenadas del refugio: **38.82086, -0.14519** (38°49'15.1"N
     0°08'42.7"W, de Google Maps), 540 m. Se pueden cambiar sin tocar el
     código con `REFUGI_LAT` / `REFUGI_LON` / `REFUGI_ALT` en Netlify.
