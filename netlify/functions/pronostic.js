@@ -25,8 +25,9 @@
 // Torna els dies amb els mateixos camps que /api/aemet, perquè la pàgina els
 // pinta igual, més 'acord' i 'models' de cada tram.
 
-const LAT = process.env.REFUGI_LAT || '38.8142';
-const LON = process.env.REFUGI_LON || '-0.1174';
+// El refugi La Figuereta: 38°49'15.1"N 0°08'42.7"W, tret de Google Maps.
+const LAT = process.env.REFUGI_LAT || '38.82086';
+const LON = process.env.REFUGI_LON || '-0.14519';
 const ALT = process.env.REFUGI_ALT || '540';
 const DIES = 7;
 

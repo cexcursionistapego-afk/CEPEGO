@@ -340,9 +340,9 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     antes. Nada queda en blanco.
   - Cuando los modelos no coinciden sale "3 de 5 models" en la fila. Solo se
     canta el desacuerdo: coincidir es lo normal.
-  - Coordenadas en `REFUGI_LAT` / `REFUGI_LON` / `REFUGI_ALT` (variables de
-    Netlify). **Las de por defecto son aproximadas de la Vall d'Ebo**: hay que
-    poner las del refugio de verdad.
+  - Coordenadas del refugio: **38.82086, -0.14519** (38°49'15.1"N
+    0°08'42.7"W, de Google Maps), 540 m. Se pueden cambiar sin tocar el
+    código con `REFUGI_LAT` / `REFUGI_LON` / `REFUGI_ALT` en Netlify.
   - **No se ponen logos de Windguru ni Meteored**: esas webs no hacen
     previsiones, solo muestran estos mismos modelos. Decir que los datos son
     suyos sería falso, y son marcas ajenas.
