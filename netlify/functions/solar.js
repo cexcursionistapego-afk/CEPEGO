@@ -33,7 +33,7 @@ const UA = 'Mozilla/5.0 (compatible; CEPEGO-meteo/1.0; +https://cepego.com)';
 function res(code, obj) {
   return {
     statusCode: code,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=900' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=900' },
     body: JSON.stringify(obj),
   };
 }

@@ -28,7 +28,7 @@ const API = 'https://opendata.aemet.es/opendata/api/avisos_cap/ultimoelaborado/a
 function res(status, body, cache) {
   return {
     statusCode: status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': cache || 'public, max-age=600' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': cache || 'public, max-age=600' },
     body: JSON.stringify(body),
   };
 }

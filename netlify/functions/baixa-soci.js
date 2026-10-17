@@ -8,7 +8,7 @@ const BASE  = process.env.AIRTABLE_BASE  || 'appkuKVxHSMyDElfh';
 const TABLE = 'tblGeQzo49FyjBQJs'; // BAIXES CENTRE EXCURSIONISTA PEGO
 
 function res(code, obj) {
-  return { statusCode: code, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) };
+  return { statusCode: code, headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(obj) };
 }
 function s(v) { return (v || '').trim(); }
 
@@ -58,7 +58,7 @@ exports.handler = async function (event) {
   try {
     const r = await fetch(`https://api.airtable.com/v0/${BASE}/${TABLE}`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({ records: [{ fields }], typecast: true }),
     });
     if (!r.ok) {
@@ -72,7 +72,7 @@ exports.handler = async function (event) {
       try {
         await fetchAmbTemps(`https://content.airtable.com/v0/${BASE}/${recordId}/${encodeURIComponent('DNI CARA FOTO')}/uploadAttachment`, {
           method: 'POST',
-          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json; charset=utf-8' },
           body: JSON.stringify({
             contentType: b.dni_foto_type || 'image/jpeg',
             file: b.dni_foto_b64,

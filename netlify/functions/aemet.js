@@ -37,7 +37,7 @@ const URL = 'https://www.aemet.es/es/eltiempo/prediccion/municipios/pego-id03102
 function res(code, obj) {
   return {
     statusCode: code,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=1800' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=1800' },
     body: JSON.stringify(obj),
   };
 }

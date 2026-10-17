@@ -11,7 +11,7 @@ const TABLE = process.env.AIRTABLE_TABLE || 'tblAD8ZeIKmNwNRm9';
 const NEW_STATE = process.env.AIRTABLE_NEW_STATE || 'PENDENT GESTIONAR';
 
 function res(code, obj) {
-  return { statusCode: code, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) };
+  return { statusCode: code, headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(obj) };
 }
 function isDate(s) { return /^\d{4}-\d{2}-\d{2}$/.test(s || ''); }
 
@@ -85,7 +85,7 @@ exports.handler = async function (event) {
   try {
     const r = await fetch(`https://api.airtable.com/v0/${BASE}/${TABLE}`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({ records: [{ fields }], typecast: true }),
     });
     if (!r.ok) {

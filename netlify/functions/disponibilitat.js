@@ -23,7 +23,7 @@ const F_OUT = 'DIA DE SALIDA';
 const F_STATE = 'ESTADO';
 
 exports.handler = async function () {
-  const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=120' };
+  const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=120' };
   const token = process.env.AIRTABLE_TOKEN;
   if (!token) return { statusCode: 200, headers, body: JSON.stringify({ ok: false, reserves: [], reason: 'no-token' }) };
 

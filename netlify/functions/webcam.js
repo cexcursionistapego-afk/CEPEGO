@@ -27,7 +27,7 @@ const CACHE = 'public, max-age=240, stale-while-revalidate=120';
 function json(code, obj, cache) {
   return {
     statusCode: code,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': cache || 'no-store' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': cache || 'no-store' },
     body: JSON.stringify(obj),
   };
 }

@@ -46,7 +46,7 @@ const HEADERS = {
 function res(code, obj) {
   return {
     statusCode: code,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=300' },
     body: JSON.stringify(obj),
   };
 }

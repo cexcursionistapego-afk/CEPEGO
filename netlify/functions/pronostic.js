@@ -45,7 +45,7 @@ const CAMPS = ['temperature_2m', 'precipitation_probability', 'precipitation', '
 function res(status, body, cache) {
   return {
     statusCode: status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': cache || 'public, max-age=1800' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': cache || 'public, max-age=1800' },
     body: JSON.stringify(body),
   };
 }

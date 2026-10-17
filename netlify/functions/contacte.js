@@ -10,7 +10,7 @@ const NEW_STATE = process.env.AIRTABLE_NEW_STATE || 'PENDENT GESTIONAR';
 const TIPO_CONSULTA = 'DUBTES I SUGGERÈNCIES';
 
 function res(code, obj) {
-  return { statusCode: code, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) };
+  return { statusCode: code, headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(obj) };
 }
 function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim()); }
 
@@ -46,7 +46,7 @@ exports.handler = async function (event) {
   try {
     const r = await fetch(`https://api.airtable.com/v0/${BASE}/${TABLE}`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({ records: [{ fields }], typecast: true }),
     });
     if (!r.ok) {

@@ -27,7 +27,7 @@ const MAX_BYTES = 4 * 1024 * 1024;
 const TIPUS_OK = /^image\/(jpeg|png|webp)$/i;
 
 function res(code, obj) {
-  return { statusCode: code, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) };
+  return { statusCode: code, headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(obj) };
 }
 
 // Comparació de temps constant: amb un === es podria endevinar la clau lletra
