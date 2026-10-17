@@ -34,6 +34,10 @@
   to = "/.netlify/functions/aemet"
   status = 200
 [[redirects]]
+  from = "/api/avisos"
+  to = "/.netlify/functions/avisos"
+  status = 200
+[[redirects]]
   from = "/api/solar"
   to = "/.netlify/functions/solar"
   status = 200

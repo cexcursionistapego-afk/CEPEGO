@@ -211,6 +211,14 @@
       .replace(/Tormentas?/i, 'Tempestes')
       .replace(/Lluvias?/i, 'Pluges')
       .replace(/Precipitaciones/i, 'Precipitacions')
+      .replace(/Precipitaci[oó]n/i, 'Precipitació')
+      .replace(/Costeras?/i, 'Costaner')
+      .replace(/Nevadas?/i, 'Nevades')
+      .replace(/Aludes/i, 'Allaus')
+      .replace(/Deshielo/i, 'Desglaç')
+      .replace(/Polvo en suspensi[oó]n/i, 'Pols en suspensió')
+      .replace(/Altas temperaturas/i, 'Temperatures altes')
+      .replace(/Bajas temperaturas/i, 'Temperatures baixes')
       .replace(/Viento/i, 'Vent')
       .replace(/Nieve/i, 'Neu')
       .replace(/Niebla/i, 'Boira')
@@ -456,11 +464,52 @@
   el.className = (el.className ? el.className + ' ' : '') + 'aemet-fc';
   el.innerHTML = msgHTML('Carregant la previsió…', 'Cargando la previsión…');
 
+  // Avisos oficials de la zona (Meteoalerta). La fila "Avisos" de la taula
+  // municipal d'AEMET és un resum i de vegades es queda en "Bajo" quan la
+  // zona està en taronja o roig, que és el que ix a l'app d'AEMET. Quan un
+  // dia té avís oficial, eixe mana; si l'API no contesta o no hi ha clau,
+  // es queden els de la taula municipal i la web funciona igual.
+  function aplicaAvisos(days, avisos) {
+    if (!avisos || !avisos.length) return;
+    var perDia = {};
+    // La data es trau del text de l'hora ("2026-10-19T00:00:00+02:00"), no
+    // de new Date(): un avís que comença a les 00:00 d'ací és el dia abans
+    // en UTC, i el navegador d'algú a fora el col·locaria en el dia que no
+    // toca. El dia que val és el d'Espanya, que és el que ve a la cadena.
+    function diaDe(txt) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(txt || ''));
+      return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+    }
+    avisos.forEach(function (a) {
+      var d = diaDe(a.inici);
+      var ultim = diaDe(a.fi) || d;
+      if (!d) return;
+      if (ultim < d) ultim = d;
+      // Un avís pot abastar més d'un dia: es marquen tots els que toca.
+      for (var i = 0; i < 10 && d <= ultim; i++) {
+        var n = d.getDate();
+        if (!perDia[n]) perDia[n] = [];
+        if (perDia[n].indexOf(a.titol) === -1) perDia[n].push(a.titol);
+        d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+      }
+    });
+    days.forEach(function (dia) {
+      var num = parseInt(splitDayLabel(dia.label).num, 10);
+      if (perDia[num]) dia.alerts = perDia[num];
+    });
+  }
+
   var src = el.getAttribute('data-aemet-src') || '/api/aemet';
-  fetch(src, { cache: 'no-store' })
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (json) {
+  Promise.all([
+    fetch(src, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }),
+    fetch('/api/avisos', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; })
+  ])
+    .then(function (out) {
+      var json = out[0], av = out[1];
       if (!json || json.ok === false || !json.days || !json.days.length) throw new Error('bad response');
+      if (av && av.ok) aplicaAvisos(json.days, av.avisos);
       el.innerHTML = tableHTML(json.days);
     })
     .catch(function () {

@@ -326,6 +326,21 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
   y velocidad "0". Se pinta siempre (en calma, "0"); en gris apagado por debajo de 15 km/h y en ámbar desde 40. Va dentro de cada tramo
   (mañana/tarde/noche), junto al % de lluvia; en los días de un solo bloque se
   usa el más fuerte del día.
+- **Avisos oficiales (Meteoalerta), 17-10-2026.** La fila "Avisos" de la
+  tabla municipal de AEMET es un resumen y a veces dice "Bajo" cuando la zona
+  está en naranja o rojo — que es lo que enseña la app de AEMET. Por eso
+  `netlify/functions/avisos.js` pide los avisos oficiales de la zona a la API
+  OpenData de AEMET (`/avisos_cap/ultimoelaborado/area/77`, Comunitat
+  Valenciana) y se queda con los de "Litoral norte de Alicante". Cuando un día
+  tiene aviso oficial, ese manda sobre el de la tabla municipal.
+  - Necesita `AEMET_API_KEY` en Netlify (clave gratuita de opendata.aemet.es,
+    pedida con el correo del club). **Sin clave la web funciona igual**, con
+    los avisos de la tabla municipal: `/api/avisos` devuelve `no-key`.
+  - La respuesta de AEMET es un `.tar` (a veces en gzip) con un XML CAP por
+    aviso; se lee a mano, sin dependencias npm.
+  - El día del aviso se saca del **texto** de la fecha, no de `new Date()`:
+    un aviso que empieza a las 00:00 de aquí es el día anterior en UTC.
+  - Para cambiar de zona o de área: `AEMET_ZONA` y `AEMET_AREA`.
 - **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
   cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a
   devolver `parse_failed`. No es un fallo del código: hay que reajustar
