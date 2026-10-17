@@ -374,6 +374,12 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     con sus horas. Si cubre el día entero (00–24) no se ponen horas. Un aviso
     que cruza la medianoche se recorta en cada día: el primero "18–24 h" y el
     siguiente "00–09 h".
+  - **Van ordenados por hora de inicio**, no por gravedad: primero lo que pasa
+    antes. A igualdad de hora, delante el más grave.
+  - **Se quitan los duplicados.** AEMET saca el mismo fenómeno dos veces el
+    mismo día (umbral de 1 h y de 12 h), lo que daba "Pluges i pluges"; y si
+    el mismo fenómeno sale en rojo y en naranja a las mismas horas, se deja
+    solo el rojo, que es el que manda.
   - Para cambiar de zona o de área: `AEMET_ZONA` y `AEMET_AREA`.
 - **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
   cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a

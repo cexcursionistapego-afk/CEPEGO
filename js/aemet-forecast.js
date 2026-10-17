@@ -248,6 +248,12 @@
   // amb la franja horària (els oficials de la zona).
   function textAvis(a) { return a && typeof a === 'object' ? a.t : a; }
 
+  // El fenomen d'un avís, sense el nivell: "Rojo - Lluvias" -> "lluvias".
+  function fenomenDe(t) {
+    var i = String(t).indexOf(' - ');
+    return (i === -1 ? String(t) : String(t).slice(i + 3)).trim().toLowerCase();
+  }
+
   function alertGroups(list) {
     var grups = [];
     (list || []).forEach(function (a) {
@@ -259,7 +265,12 @@
       var g = null;
       grups.forEach(function (x) { if (x.clau === clau) g = x; });
       if (!g) { g = { clau: clau, color: c, items: [], des: null, fins: null, hores: '' }; grups.push(g); }
-      g.items.push(t);
+      // AEMET pot traure el mateix fenomen dos vegades el mateix dia (el
+      // llindar d'una hora i el de dotze, per exemple). Al lector li diria
+      // "Pluges i pluges", així que només es guarda una volta.
+      var repe = false;
+      g.items.forEach(function (x) { if (fenomenDe(x) === fenomenDe(t)) repe = true; });
+      if (!repe) g.items.push(t);
       // La franja del grup abraça la de tots els seus avisos: si el roig és
       // de 12 a 16 i de 18 a 20, el que cal saber és que va de 12 a 20.
       if (a && typeof a === 'object' && a.h) {
@@ -267,12 +278,35 @@
         g.fins = g.fins == null ? a.fins : Math.max(g.fins, a.fins);
       }
     });
+
+    // Si el mateix fenomen ix en roig i en taronja a les mateixes hores, el
+    // taronja sobra: el roig ja mana. Només es lleva quan el de més nivell
+    // cobrix tota la franja del de menys.
+    grups = grups.filter(function (g) {
+      return !grups.some(function (alt) {
+        if (alt === g || RANK[alt.color] <= RANK[g.color]) return false;
+        var cobrix = (alt.des == null && g.des == null) ||
+          (alt.des != null && g.des != null && alt.des <= g.des && alt.fins >= g.fins);
+        if (!cobrix) return false;
+        // Tots els fenòmens del de menys nivell han d'estar en el de més.
+        return g.items.every(function (x) {
+          return alt.items.some(function (y) { return fenomenDe(y) === fenomenDe(x); });
+        });
+      });
+    });
+
     grups.forEach(function (g) {
       if (g.des == null || (g.des === 0 && g.fins >= 24)) return;
       var dd = function (n) { return (n < 10 ? '0' : '') + n; };
       g.hores = dd(g.des) + '–' + dd(Math.min(g.fins, 24)) + ' h';
     });
-    grups.sort(function (a, b) { return RANK[b.color] - RANK[a.color]; });
+    // Per ordre d'hora: el que passa abans, primer. Quan comencen alhora,
+    // davant el més greu. Els de tot el dia (sense hora) van al final.
+    grups.sort(function (a, b) {
+      var ha = a.des == null ? 99 : a.des, hb = b.des == null ? 99 : b.des;
+      if (ha !== hb) return ha - hb;
+      return RANK[b.color] - RANK[a.color];
+    });
     return grups;
   }
 
@@ -297,8 +331,10 @@
       return i === -1 ? txt : txt.slice(i + 3).trim();
     }
     function ajunta(arr, conj) {
-      var f = arr.map(fenomen).map(function (x, i) {
-        return i === 0 ? x : x.charAt(0).toLowerCase() + x.slice(1);
+      var f = [];
+      arr.map(fenomen).forEach(function (x) {
+        var ja = f.some(function (y) { return y.toLowerCase() === x.toLowerCase(); });
+        if (!ja) f.push(f.length ? x.charAt(0).toLowerCase() + x.slice(1) : x);
       });
       return f.length > 1 ? f.slice(0, -1).join(', ') + ' ' + conj + ' ' + f[f.length - 1] : f[0];
     }
