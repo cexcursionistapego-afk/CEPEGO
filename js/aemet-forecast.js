@@ -593,6 +593,24 @@
     });
   }
 
+  // Quan es va calcular. No és l'hora de la visita: la resposta es guarda
+  // mitja hora, així que dir "ara mateix" seria mentida. L'hora es dona
+  // sempre la d'Espanya, encara que qui mire la pàgina estiga a fora.
+  function horaHTML(iso) {
+    if (!iso) return '';
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    var h;
+    try {
+      h = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' });
+    } catch (e) {
+      h = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    }
+    return '<p class="fc-font">' + bi(
+      'Calculada a les ' + h + ' · es refà cada mitja hora',
+      'Calculada a las ' + h + ' · se rehace cada media hora') + '</p>';
+  }
+
   var src = el.getAttribute('data-aemet-src') || '/api/aemet';
   function opcional(u) {
     return fetch(u, { cache: 'no-store' })
@@ -611,7 +629,7 @@
       if (av && av.ok) aplicaAvisos(json.days, av.avisos);
       // Si hem hagut de caure a la previsió d'AEMET s'ha de dir: la pàgina
       // anuncia una previsió feta per nosaltres i eixa no ho és.
-      el.innerHTML = tableHTML(json.days) + (bo ? '' :
+      el.innerHTML = tableHTML(json.days) + (bo ? horaHTML(json.calculat) :
         '<p class="fc-font">' + bi(
           'Ara mateix no podem calcular la nostra previsió; esta és la d\'AEMET per a Pego.',
           'Ahora mismo no podemos calcular nuestra previsión; esta es la de AEMET para Pego.') + '</p>');

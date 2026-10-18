@@ -267,7 +267,13 @@ exports.handler = async function () {
   });
 
   if (!days.length) return res(200, { ok: false, error: 'sense_dies' }, 'public, max-age=300');
-  return res(200, { ok: true, font: 'consens', models: presents, lat: LAT, lon: LON, days: days });
+  // 'calculat' és quan s'ha fet de veritat este càlcul. La resposta es
+  // guarda 30 minuts (max-age), així que molta gent veurà esta mateixa hora:
+  // és el que es vol dir, quan es va calcular i no quan s'ha mirat.
+  return res(200, {
+    ok: true, font: 'consens', models: presents, lat: LAT, lon: LON,
+    calculat: new Date().toISOString(), days: days,
+  });
 };
 
 exports._intern = { mediana, descDeCodi, rumb, tram, consens, etiqueta, perTrams, resumTram };

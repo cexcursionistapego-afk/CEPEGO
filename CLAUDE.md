@@ -340,6 +340,13 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     van siempre citados. **Lo que nunca es nuestro son los niveles de alerta**:
     esos los emite AEMET y así está escrito al pie, encima y debajo del
     logotipo. No inventamos niveles de alerta.
+  - **No se recalcula en cada visita.** La respuesta se cachea 30 minutos
+    (`max-age=1800`): con cinco modelos por visita acabaríamos tumbando la
+    cuota de un servicio gratuito, y los modelos tampoco cambian tan a
+    menudo (ECMWF 2 veces al día, GFS 4). Debajo de la tabla sale **la hora
+    en que se calculó de verdad** (campo `calculat`), en hora de España
+    aunque quien mire la página esté fuera. No se pone "ahora mismo" porque
+    sería mentira.
   - `/api/pronostic` devuelve también `acord` (cuántos modelos coinciden) y
     `models` por día, pero la web **no los enseña**: se probó y quedaba raro.
     Están ahí por si algún día se quieren.
