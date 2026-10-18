@@ -421,10 +421,13 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     el mismo fenómeno sale en rojo y en naranja a las mismas horas, se deja
     solo el rojo, que es el que manda.
   - Para cambiar de zona o de área: `AEMET_ZONA` y `AEMET_AREA`.
-- **La celda de lluvia del día late a partir de 80 l/m²** (`PLUJA_FORTA` en
-  `js/meteo-dashboard.js`). 80 mm en un día es una tronada de las gordas y
-  conviene que se vea de un golpe de vista.
-  - **Solo se aplica al día, no al mes ni al año.** Aquí llueven unos
+- **Dos celdas de la estación laten cuando el dato es serio**
+  (`js/meteo-dashboard.js`): la lluvia del día a partir de **80 l/m²**
+  (`PLUJA_FORTA`) y el viento a partir de una **racha máxima de 50 km/h**
+  (`RATXA_FORTA`). 80 mm en un día es una tronada de las gordas, y 50 km/h de
+  racha ya tumba a alguien en una cresta. El viento mira la **racha máxima**,
+  no la media: lo que hace daño es el golpe.
+  - De la lluvia, **solo se aplica al día, no al mes ni al año.** Aquí llueven unos
     700 l/m² al año: con ese umbral la celda de "Enguany" estaría encendida
     casi siempre y dejaría de querer decir nada. Si algún día se quieren
     umbrales para mes o año, se le pasa uno a `cella()` y ya está.

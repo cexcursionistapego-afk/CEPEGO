@@ -152,7 +152,9 @@
             '<div class="v">' + num(d.humidity, 0, '%') + '</div>' +
             '<div class="l">' + bi('Humitat', 'Humedad') + '</div>' +
           '</div>' +
-          '<div class="meteo-dash__stat meteo-dash__stat--wind">' +
+          '<div class="meteo-dash__stat meteo-dash__stat--wind' +
+            (d.wind_gust_max != null && !isNaN(d.wind_gust_max) && d.wind_gust_max >= RATXA_FORTA
+              ? ' meteo-dash__stat--forta' : '') + '">' +
             '<div class="meteo-dash__windrose">' +
               '<span class="meteo-dash__windrose-n">N</span>' +
               '<span class="meteo-dash__wind-arrow"' + (deg !== null ? ' style="transform:rotate(' + deg + 'deg)"' : ' style="opacity:.3"') + '>' + ICON.wind + '</span>' +
@@ -186,6 +188,12 @@
   // orde: ací plouen uns 700 l/m² a l'any, així que estaria parpellejant
   // quasi sempre i deixaria de voler dir res.
   var PLUJA_FORTA = 80;
+
+  // Ratxa de vent a partir de la qual la cel·la del vent batega. 50 km/h a
+  // la muntanya ja tomba una persona en una cresta i fa perillós el
+  // barranquisme. Es mira la RATXA MÀXIMA, no el vent mitjà: el que fa mal
+  // és la bufada, no la mitjana.
+  var RATXA_FORTA = 50;
 
   function cella(valor, etiqueta, llindar) {
     var alta = llindar != null && valor != null && !isNaN(valor) && valor >= llindar;

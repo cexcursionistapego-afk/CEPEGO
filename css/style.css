@@ -908,9 +908,14 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .meteo-dash__precip--forta{animation:pluja-forta 1.6s ease-in-out infinite}
 .meteo-dash__precip--forta .v{color:#8f1d1d}
 .meteo-dash__precip--forta .meteo-dash__precip-ic{color:#8f1d1d}
+/* Ratxa de vent molt forta: la cel·la del vent batega igual que la pluja. */
+.meteo-dash__stat--forta{animation:pluja-forta 1.6s ease-in-out infinite}
+.meteo-dash__stat--forta .v,
+.meteo-dash__stat--forta .sub{color:#8f1d1d}
+.meteo-dash__stat--forta .meteo-dash__wind-arrow{color:#8f1d1d}
 /* A qui ha demanat al sistema que no li moguen la pantalla, color fix. */
 @media(prefers-reduced-motion:reduce){
-  .meteo-dash__precip--forta{animation:none;background:#fbdcdc}
+  .meteo-dash__precip--forta,.meteo-dash__stat--forta{animation:none;background:#fbdcdc}
 }
 
 /* skeleton (loading) */
