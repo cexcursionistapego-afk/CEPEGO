@@ -626,7 +626,7 @@ def build(g):
     #   (id del grup, etiqueta, [(id de l'estació, etiqueta curta), ...])
     meteo_llocs=[
       ("figuereta","La Figuereta",[("figuereta","La Figuereta")]),
-      ("pego","Pego",[("pego","Verdales")]),
+      ("pego","Pego",[("pego","Verdales"),("pego-plana","La Plana")]),
     ]
     lloc_sel='    <div class="lloc-sel reveal" role="group" aria-label="Lloc">\n'
     for gi,(grup,etiq,estacions) in enumerate(meteo_llocs):

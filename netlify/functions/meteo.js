@@ -28,6 +28,10 @@ const STATIONS = {
     url: 'https://www.avamet.org/mxo-i.php?id=c30m102e14',
     name: 'Pego',
   },
+  'pego-plana': {
+    url: 'https://www.avamet.org/mxo-i.php?id=c30m102e13',
+    name: 'Pego · la Plana',
+  },
 };
 
 // AVAMET va començar a tornar 403 (27-09-2026). Abans s'enviava una capçalera

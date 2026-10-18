@@ -18,6 +18,11 @@
       va: 'Pego', es: 'Pego',
       sub_va: 'Les Verdales · 89 m alt.', sub_es: 'Les Verdales · 89 m alt.',
       avamet: 'https://www.avamet.org/mxo-i.php?id=c30m102e14'
+    },
+    'pego-plana': {
+      va: 'Pego · la Plana', es: 'Pego · la Plana',
+      sub_va: 'La marjal', sub_es: 'El marjal',
+      avamet: 'https://www.avamet.org/mxo-i.php?id=c30m102e13'
     }
   };
 

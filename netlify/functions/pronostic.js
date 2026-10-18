@@ -39,6 +39,13 @@ const LLOCS = {
     lon: process.env.PEGO_LON || '-0.11748',
     alt: process.env.PEGO_ALT || '89',
   },
+  // La marjal. Sense altura: no la sabem i val més que Open-Meteo pose la
+  // del seu mapa del terreny que no ficar-ne una a ull.
+  'pego-plana': {
+    lat: process.env.PEGO_PLANA_LAT || '38.85361',
+    lon: process.env.PEGO_PLANA_LON || '-0.08639',
+    alt: process.env.PEGO_PLANA_ALT || '',
+  },
 };
 const DIES = 7;
 
@@ -202,7 +209,7 @@ exports.handler = async function (event) {
   const url = 'https://api.open-meteo.com/v1/forecast'
     + '?latitude=' + encodeURIComponent(lloc.lat)
     + '&longitude=' + encodeURIComponent(lloc.lon)
-    + '&elevation=' + encodeURIComponent(lloc.alt)
+    + (lloc.alt ? '&elevation=' + encodeURIComponent(lloc.alt) : '')
     + '&hourly=' + CAMPS.join(',')
     + '&models=' + MODELS.map((m) => m.id).join(',')
     + '&timezone=' + encodeURIComponent('Europe/Madrid')

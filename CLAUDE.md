@@ -366,7 +366,8 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     4. `netlify/functions/pronostic.js`, `LLOCS`: latitud, longitud y altura
        para la previsión.
     `js/main.js` no hay que tocarlo: lee los grupos de la propia página.
-  - **La página del tiempo tiene un selector arriba: La Figuereta o Pego.**
+  - **La página del tiempo tiene un selector arriba: La Figuereta o Pego**, y
+    dentro de Pego una segunda fila (les Verdales / la Plana).
     Por defecto el refugio, y la elección se recuerda en el navegador
     (`localStorage`, clave `cepego-lloc`). Al cambiar se rehacen **las dos
     cosas**: la tarjeta de la estación de AVAMET y la previsión
@@ -374,12 +375,17 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     los dos, porque la zona es la misma. El selector vive en `js/main.js`
     (`window.cepegoLloc`, con `get` / `set` / `escolta`) y lo escuchan
     `js/meteo-dashboard.js` y `js/aemet-forecast.js`.
-  - Coordenadas: refugio **38.82086, -0.14519** (38°49'15.1"N 0°08'42.7"W,
-    de Google Maps), 540 m. Pego **38.84339, -0.11748**, 89 m
-    (también de Google Maps; la altura es la de la estación de les
-    Verdales). Se cambian sin tocar el código con
-    `REFUGI_LAT`/`REFUGI_LON`/`REFUGI_ALT` y `PEGO_LAT`/`PEGO_LON`/`PEGO_ALT`
-    en Netlify.
+  - Coordenadas y estaciones AVAMET de cada sitio:
+    | id | AVAMET | coordenadas | altura |
+    |---|---|---|---|
+    | `figuereta` | `c30m135e02` | 38.82086, -0.14519 | 540 m |
+    | `pego` (les Verdales) | `c30m102e14` | 38.84339, -0.11748 | 89 m |
+    | `pego-plana` (la marjal) | `c30m102e13` | 38.85361, -0.08639 | — |
+    La altura de la marjal **se deja vacía a propósito**: no la sabemos y es
+    mejor que Open-Meteo use la de su mapa del terreno que poner una a ojo.
+    Si `alt` está vacío, no se manda el parámetro `elevation`. Todo se puede
+    cambiar sin tocar el código con `REFUGI_LAT`/`LON`/`ALT`,
+    `PEGO_LAT`/`LON`/`ALT` y `PEGO_PLANA_LAT`/`LON`/`ALT` en Netlify.
   - **No se ponen logos de Windguru ni Meteored**: esas webs no hacen
     previsiones, solo muestran estos mismos modelos. Decir que los datos son
     suyos sería falso, y son marcas ajenas.
