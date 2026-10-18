@@ -44,7 +44,7 @@ CSP = "; ".join([
 # que no cal cartell de consentiment. El testimoni és PÚBLIC (ix al codi de
 # la pàgina), no és cap clau secreta. Mentre estiga buit no es carrega res.
 # Es trau de Cloudflare → Analytics & Logs → Web Analytics → Add a site.
-CF_ANALYTICS = ""
+CF_ANALYTICS = "3721e1c86ecc4e069e463e029b6ca7a3"
 
 FEMECV="https://www.femecv.com/va"; AJPEGO="https://www.pego.org/"; PIV="https://www.pegoilesvalls.es/"
 
@@ -231,7 +231,7 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, t
     ts='<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>\n' if turnstile else ''
     idredirect=('<script src="/js/identity-redirect.js"></script>\n' if identity else '')
     # Va l'últim i amb defer: comptar visites no ha de retardar la pàgina.
-    cfa = (f'<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
+    cfa = (f'<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" '
            f'data-cf-beacon=\'{{"token": "{CF_ANALYTICS}"}}\'></script>\n') if CF_ANALYTICS else ''
     extra_js_list = [extra_js] if isinstance(extra_js, str) else (extra_js or [])
     extra_js_tags = "".join(f'<script src="/{s.lstrip(chr(47))}"></script>\n' for s in extra_js_list)

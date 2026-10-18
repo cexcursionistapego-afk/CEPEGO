@@ -421,6 +421,22 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     el mismo fenómeno sale en rojo y en naranja a las mismas horas, se deja
     solo el rojo, que es el que manda.
   - Para cambiar de zona o de área: `AEMET_ZONA` y `AEMET_AREA`.
+- **Cuántas visitas tiene la web (18-10-2026).** Con **Cloudflare Web
+  Analytics**, gratis e ilimitado. Se mira en dash.cloudflare.com, con la
+  cuenta del club: la búsqueda rápida de arriba y escribir "web analytics"
+  (el menú cambió y ya no hay "Analytics & Logs"). Da visitas por día,
+  páginas más vistas, de dónde viene la gente y con qué dispositivo.
+  - El *token* está en `CF_ANALYTICS`, en `build/gen.py`. **Es público**: va
+    en el código de todas las páginas, no es una clave secreta. Si queda
+    vacío, no se carga nada.
+  - **No usa cookies ni identifica a nadie**, así que no hace falta cartel de
+    consentimiento. Por eso se eligió en vez de Google Analytics, que sí lo
+    exigiría. Aun así está listado en la página de cookies, junto a los demás
+    servicios: la transparencia no cuesta nada.
+  - El script necesita `static.cloudflareinsights.com` en `script-src` y
+    `cloudflareinsights.com` en `connect-src` de la CSP (`build/gen.py`).
+  - No se pone ningún contador a la vista en el pie: hoy queda anticuado y
+    un número bajo juega en contra. Quien quiera el dato, al panel.
 - **Las capturas de AEMET y AVAMET se parsean del HTML de sus webs.** Si
   cambian el diseño, `netlify/functions/aemet.js` o `meteo.js` empezarán a
   devolver `parse_failed`. No es un fallo del código: hay que reajustar
