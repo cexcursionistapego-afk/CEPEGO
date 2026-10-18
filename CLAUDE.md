@@ -367,7 +367,7 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
        para la previsión.
     `js/main.js` no hay que tocarlo: lee los grupos de la propia página.
   - **La página del tiempo tiene un selector arriba: La Figuereta o Pego**, y
-    dentro de Pego una segunda fila (les Verdales / la Plana).
+    dentro de Pego una segunda fila (les Verdales / la Plana / Ambra).
     Por defecto el refugio, y la elección se recuerda en el navegador
     (`localStorage`, clave `cepego-lloc`). Al cambiar se rehacen **las dos
     cosas**: la tarjeta de la estación de AVAMET y la previsión
@@ -381,11 +381,13 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     | `figuereta` | `c30m135e02` | 38.82086, -0.14519 | 540 m |
     | `pego` (les Verdales) | `c30m102e14` | 38.84339, -0.11748 | 89 m |
     | `pego-plana` (la marjal) | `c30m102e13` | 38.85361, -0.08639 | — |
+    | `pego-ambra` | `c30m102e03` | 38.83090, -0.10340 | 81 m |
     La altura de la marjal **se deja vacía a propósito**: no la sabemos y es
     mejor que Open-Meteo use la de su mapa del terreno que poner una a ojo.
     Si `alt` está vacío, no se manda el parámetro `elevation`. Todo se puede
     cambiar sin tocar el código con `REFUGI_LAT`/`LON`/`ALT`,
-    `PEGO_LAT`/`LON`/`ALT` y `PEGO_PLANA_LAT`/`LON`/`ALT` en Netlify.
+    `PEGO_LAT`/`LON`/`ALT`, `PEGO_PLANA_LAT`/`LON`/`ALT` y
+    `PEGO_AMBRA_LAT`/`LON`/`ALT` en Netlify.
   - **No se ponen logos de Windguru ni Meteored**: esas webs no hacen
     previsiones, solo muestran estos mismos modelos. Decir que los datos son
     suyos sería falso, y son marcas ajenas.

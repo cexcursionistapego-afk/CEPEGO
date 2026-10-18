@@ -46,6 +46,11 @@ const LLOCS = {
     lon: process.env.PEGO_PLANA_LON || '-0.08639',
     alt: process.env.PEGO_PLANA_ALT || '',
   },
+  'pego-ambra': {
+    lat: process.env.PEGO_AMBRA_LAT || '38.83090',
+    lon: process.env.PEGO_AMBRA_LON || '-0.10340',
+    alt: process.env.PEGO_AMBRA_ALT || '81',
+  },
 };
 const DIES = 7;
 

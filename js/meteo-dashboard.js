@@ -23,6 +23,11 @@
       va: 'Pego · la Plana', es: 'Pego · la Plana',
       sub_va: 'La marjal', sub_es: 'El marjal',
       avamet: 'https://www.avamet.org/mxo-i.php?id=c30m102e13'
+    },
+    'pego-ambra': {
+      va: 'Pego · Ambra', es: 'Pego · Ambra',
+      sub_va: '81 m alt.', sub_es: '81 m alt.',
+      avamet: 'https://www.avamet.org/mxo-i.php?id=c30m102e03'
     }
   };
 
