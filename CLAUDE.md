@@ -364,9 +364,9 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     (`window.cepegoLloc`, con `get` / `set` / `escolta`) y lo escuchan
     `js/meteo-dashboard.js` y `js/aemet-forecast.js`.
   - Coordenadas: refugio **38.82086, -0.14519** (38°49'15.1"N 0°08'42.7"W,
-    de Google Maps), 540 m. Pego **38.8425, -0.1175**, 89 m —
-    **aproximadas del pueblo**, a la altura de la estación de les Verdales;
-    si alguien pasa las exactas, mejor. Se cambian sin tocar el código con
+    de Google Maps), 540 m. Pego **38.84339, -0.11748**, 89 m
+    (también de Google Maps; la altura es la de la estación de les
+    Verdales). Se cambian sin tocar el código con
     `REFUGI_LAT`/`REFUGI_LON`/`REFUGI_ALT` y `PEGO_LAT`/`PEGO_LON`/`PEGO_ALT`
     en Netlify.
   - **No se ponen logos de Windguru ni Meteored**: esas webs no hacen

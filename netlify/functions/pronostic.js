@@ -25,9 +25,9 @@
 // Torna els dies amb els mateixos camps que /api/aemet, perquè la pàgina els
 // pinta igual, més 'acord' i 'models' de cada tram.
 
-// Els dos llocs que es poden triar a la pàgina del temps. El refugi són les
-// coordenades de Google Maps (38°49'15.1"N 0°08'42.7"W); les de Pego són
-// aproximades del poble, a l'altura de l'estació d'AVAMET de les Verdales.
+// Els dos llocs que es poden triar a la pàgina del temps. Les dos parelles
+// de coordenades ixen de Google Maps; l'altura de Pego és la de l'estació
+// d'AVAMET de les Verdales.
 const LLOCS = {
   figuereta: {
     lat: process.env.REFUGI_LAT || '38.82086',
@@ -35,8 +35,8 @@ const LLOCS = {
     alt: process.env.REFUGI_ALT || '540',
   },
   pego: {
-    lat: process.env.PEGO_LAT || '38.84250',
-    lon: process.env.PEGO_LON || '-0.11750',
+    lat: process.env.PEGO_LAT || '38.84339',
+    lon: process.env.PEGO_LON || '-0.11748',
     alt: process.env.PEGO_ALT || '89',
   },
 };
