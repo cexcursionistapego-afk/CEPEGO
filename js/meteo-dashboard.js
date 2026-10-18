@@ -193,11 +193,12 @@
   }
 
   function init() {
-    mount('meteo-dash-figuereta', 'figuereta');
-    // La targeta de Pego es va llevar de la pàgina: ací el que interessa és
-    // el refugi. mount() no fa res si no troba el div, així que tornar-la a
-    // posar només seria afegir el <div id="meteo-dash-pego"> i esta línia.
-    mount('meteo-dash-pego', 'pego');
+    // Una sola targeta: la del lloc triat a dalt (el refugi o Pego). Es
+    // torna a muntar sencera en canviar, que és el més senzill i no deixa
+    // cap dada de l'altre lloc a mitges.
+    var lloc = (window.cepegoLloc && window.cepegoLloc.get()) || 'figuereta';
+    mount('meteo-dash', lloc);
+    if (window.cepegoLloc) window.cepegoLloc.escolta(function (nou) { mount('meteo-dash', nou); });
   }
 
   if (document.readyState === 'loading') {

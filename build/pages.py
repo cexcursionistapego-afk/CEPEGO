@@ -647,8 +647,12 @@ def build(g):
       </div>
     </figure>
 
-    <div class="meteo-dash-grid meteo-dash-grid--una reveal" style="margin-top:clamp(16px,2.5vw,28px)">
-      <div id="meteo-dash-figuereta"></div>
+    <div class="lloc-sel reveal" role="group" aria-label="Lloc">
+      <button type="button" class="lloc-sel__b" data-lloc="figuereta" aria-current="true">La Figuereta</button>
+      <button type="button" class="lloc-sel__b" data-lloc="pego">Pego</button>
+    </div>
+    <div class="meteo-dash-grid meteo-dash-grid--una reveal" style="margin-top:clamp(14px,2vw,22px)">
+      <div id="meteo-dash"></div>
     </div>
     <p class="note center avamet-credit" style="margin-top:14px">
       <a href="https://www.avamet.org/" target="_blank" rel="noopener"><img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo avamet-credit__logo--avamet"></a>
@@ -660,7 +664,7 @@ def build(g):
   <div class="wrap">
     <div class="narrow center reveal" style="margin-bottom:clamp(14px,2vw,22px)">
       <div class="kicker center-k"><span class="va">La nostra previsió</span><span class="es">Nuestra previsión</span></div>
-      <p class="note" style="margin-top:8px"><span class="va">Esta previsió la fem nosaltres per al refugi: no és la de cap servei en concret. Creuem cinc models meteorològics als 540&nbsp;m de la Figuereta i ens quedem amb allò en què coincideixen.</span><span class="es">Esta previsión la hacemos nosotros para el refugio: no es la de ningún servicio en concreto. Cruzamos cinco modelos meteorológicos a los 540&nbsp;m de La Figuereta y nos quedamos con aquello en que coinciden.</span></p>
+      <p class="note" style="margin-top:8px"><span class="va">Esta previsió la fem nosaltres: no és la de cap servei en concret. Creuem cinc models meteorològics al lloc triat a dalt i ens quedem amb allò en què coincideixen.</span><span class="es">Esta previsión la hacemos nosotros: no es la de ningún servicio en concreto. Cruzamos cinco modelos meteorológicos en el lugar elegido arriba y nos quedamos con aquello en que coinciden.</span></p>
     </div>
     <div id="aemet-forecast" class="reveal"></div>
     <div class="fonts">

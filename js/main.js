@@ -3,6 +3,49 @@
   var root = document.documentElement;
   function escHtml(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
+  /* ---------- LLOC TRIAT A LA PÀGINA DEL TEMPS ---------- */
+  // La pàgina del temps ensenya La Figuereta o Pego. Ací es guarda quin,
+  // perquè la targeta de l'estació i la previsió canvien alhora i cada una
+  // la pinta un fitxer distint. Per defecte, el refugi.
+  (function () {
+    var LLOCS = { figuereta: 1, pego: 1 };
+    var actual = 'figuereta';
+    try {
+      var desat = localStorage.getItem('cepego-lloc');
+      if (desat && LLOCS[desat]) actual = desat;
+    } catch (e) {}
+    var oients = [];
+    window.cepegoLloc = {
+      get: function () { return actual; },
+      // Avisa qui escolte i li passa el lloc nou.
+      set: function (v) {
+        if (!LLOCS[v] || v === actual) return;
+        actual = v;
+        try { localStorage.setItem('cepego-lloc', v); } catch (e) {}
+        oients.forEach(function (f) { try { f(v); } catch (e) {} });
+      },
+      escolta: function (f) { oients.push(f); }
+    };
+
+    // Els botons de dalt de la pàgina del temps.
+    function pintaBotons(v) {
+      document.querySelectorAll('.lloc-sel__b').forEach(function (b) {
+        b.setAttribute('aria-current', b.getAttribute('data-lloc') === v ? 'true' : 'false');
+      });
+    }
+    function lligaBotons() {
+      var bs = document.querySelectorAll('.lloc-sel__b');
+      if (!bs.length) return;
+      bs.forEach(function (b) {
+        b.addEventListener('click', function () { window.cepegoLloc.set(b.getAttribute('data-lloc')); });
+      });
+      pintaBotons(actual);
+      window.cepegoLloc.escolta(pintaBotons);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lligaBotons);
+    else lligaBotons();
+  })();
+
   /* ---------- FOTOS I RESPOSTES DELS FORMULARIS ---------- */
   // Les fotos que fa un mòbil pesen 3–8 MB. Enviades tal qual, el registre
   // de viatgers, l'alta i la baixa fallaven en molts mòbils: la petició

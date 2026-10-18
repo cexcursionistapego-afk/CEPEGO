@@ -617,27 +617,39 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .catch(function () { return null; });
   }
-  Promise.all([opcional('/api/pronostic'), opcional(src), opcional('/api/avisos')])
-    .then(function (out) {
-      var cons = out[0], aemet = out[1], av = out[2];
-      // El consens de models mana; si no respon, es cau a la previsió
-      // d'AEMET, que és com anava la web abans.
-      var bo = (cons && cons.ok && cons.days && cons.days.length) ? cons : null;
-      var json = bo || aemet;
-      if (!json || json.ok === false || !json.days || !json.days.length) throw new Error('bad response');
-      if (bo && aemet && aemet.days) copiaAlertes(json.days, aemet.days);
-      if (av && av.ok) aplicaAvisos(json.days, av.avisos);
-      // Si hem hagut de caure a la previsió d'AEMET s'ha de dir: la pàgina
-      // anuncia una previsió feta per nosaltres i eixa no ho és.
-      el.innerHTML = tableHTML(json.days) + (bo ? horaHTML(json.calculat) :
-        '<p class="fc-font">' + bi(
-          'Ara mateix no podem calcular la nostra previsió; esta és la d\'AEMET per a Pego.',
-          'Ahora mismo no podemos calcular nuestra previsión; esta es la de AEMET para Pego.') + '</p>');
-    })
-    .catch(function () {
-      el.innerHTML = msgHTML(
-        'No s’ha pogut carregar la previsió d’AEMET ara mateix.',
-        'No se ha podido cargar la previsión de AEMET ahora mismo.'
-      );
-    });
+  // La previsió es torna a demanar en canviar de lloc a dalt (refugi/Pego).
+  // Les alertes d'AEMET són les mateixes per als dos: la zona és la mateixa.
+  function carrega(lloc) {
+    el.innerHTML = msgHTML('Carregant la previsió…', 'Cargando la previsión…');
+    Promise.all([
+      opcional('/api/pronostic?lloc=' + encodeURIComponent(lloc)),
+      opcional(src),
+      opcional('/api/avisos')
+    ])
+      .then(function (out) {
+        var cons = out[0], aemet = out[1], av = out[2];
+        // El consens de models mana; si no respon, es cau a la previsió
+        // d'AEMET, que és com anava la web abans.
+        var bo = (cons && cons.ok && cons.days && cons.days.length) ? cons : null;
+        var json = bo || aemet;
+        if (!json || json.ok === false || !json.days || !json.days.length) throw new Error('bad response');
+        if (bo && aemet && aemet.days) copiaAlertes(json.days, aemet.days);
+        if (av && av.ok) aplicaAvisos(json.days, av.avisos);
+        // Si hem hagut de caure a la previsió d'AEMET s'ha de dir: la pàgina
+        // anuncia una previsió feta per nosaltres i eixa no ho és.
+        el.innerHTML = tableHTML(json.days) + (bo ? horaHTML(json.calculat) :
+          '<p class="fc-font">' + bi(
+            'Ara mateix no podem calcular la nostra previsió; esta és la d\'AEMET per a Pego.',
+            'Ahora mismo no podemos calcular nuestra previsión; esta es la de AEMET para Pego.') + '</p>');
+      })
+      .catch(function () {
+        el.innerHTML = msgHTML(
+          'No s’ha pogut carregar la previsió ara mateix.',
+          'No se ha podido cargar la previsión ahora mismo.'
+        );
+      });
+  }
+
+  carrega((window.cepegoLloc && window.cepegoLloc.get()) || 'figuereta');
+  if (window.cepegoLloc) window.cepegoLloc.escolta(carrega);
 })();

@@ -355,9 +355,20 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     avisar sería engañar.
   - **Si Open-Meteo no responde, la web cae a la previsión de AEMET**, como
     antes. Nada queda en blanco.
-  - Coordenadas del refugio: **38.82086, -0.14519** (38°49'15.1"N
-    0°08'42.7"W, de Google Maps), 540 m. Se pueden cambiar sin tocar el
-    código con `REFUGI_LAT` / `REFUGI_LON` / `REFUGI_ALT` en Netlify.
+  - **La página del tiempo tiene un selector arriba: La Figuereta o Pego.**
+    Por defecto el refugio, y la elección se recuerda en el navegador
+    (`localStorage`, clave `cepego-lloc`). Al cambiar se rehacen **las dos
+    cosas**: la tarjeta de la estación de AVAMET y la previsión
+    (`/api/pronostic?lloc=pego`). Las alertas de AEMET son las mismas para
+    los dos, porque la zona es la misma. El selector vive en `js/main.js`
+    (`window.cepegoLloc`, con `get` / `set` / `escolta`) y lo escuchan
+    `js/meteo-dashboard.js` y `js/aemet-forecast.js`.
+  - Coordenadas: refugio **38.82086, -0.14519** (38°49'15.1"N 0°08'42.7"W,
+    de Google Maps), 540 m. Pego **38.8425, -0.1175**, 89 m —
+    **aproximadas del pueblo**, a la altura de la estación de les Verdales;
+    si alguien pasa las exactas, mejor. Se cambian sin tocar el código con
+    `REFUGI_LAT`/`REFUGI_LON`/`REFUGI_ALT` y `PEGO_LAT`/`PEGO_LON`/`PEGO_ALT`
+    en Netlify.
   - **No se ponen logos de Windguru ni Meteored**: esas webs no hacen
     previsiones, solo muestran estos mismos modelos. Decir que los datos son
     suyos sería falso, y son marcas ajenas.

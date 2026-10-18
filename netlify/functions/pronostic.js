@@ -25,10 +25,21 @@
 // Torna els dies amb els mateixos camps que /api/aemet, perquè la pàgina els
 // pinta igual, més 'acord' i 'models' de cada tram.
 
-// El refugi La Figuereta: 38°49'15.1"N 0°08'42.7"W, tret de Google Maps.
-const LAT = process.env.REFUGI_LAT || '38.82086';
-const LON = process.env.REFUGI_LON || '-0.14519';
-const ALT = process.env.REFUGI_ALT || '540';
+// Els dos llocs que es poden triar a la pàgina del temps. El refugi són les
+// coordenades de Google Maps (38°49'15.1"N 0°08'42.7"W); les de Pego són
+// aproximades del poble, a l'altura de l'estació d'AVAMET de les Verdales.
+const LLOCS = {
+  figuereta: {
+    lat: process.env.REFUGI_LAT || '38.82086',
+    lon: process.env.REFUGI_LON || '-0.14519',
+    alt: process.env.REFUGI_ALT || '540',
+  },
+  pego: {
+    lat: process.env.PEGO_LAT || '38.84250',
+    lon: process.env.PEGO_LON || '-0.11750',
+    alt: process.env.PEGO_ALT || '89',
+  },
+};
 const DIES = 7;
 
 // Els noms dels models tal com els demana Open-Meteo.
@@ -184,11 +195,14 @@ function etiqueta(dia) {
   return DOW[d.getUTCDay()] + '. ' + String(p[2]);
 }
 
-exports.handler = async function () {
+exports.handler = async function (event) {
+  const q = (event && event.queryStringParameters) || {};
+  const clau = LLOCS[String(q.lloc || '').toLowerCase()] ? String(q.lloc).toLowerCase() : 'figuereta';
+  const lloc = LLOCS[clau];
   const url = 'https://api.open-meteo.com/v1/forecast'
-    + '?latitude=' + encodeURIComponent(LAT)
-    + '&longitude=' + encodeURIComponent(LON)
-    + '&elevation=' + encodeURIComponent(ALT)
+    + '?latitude=' + encodeURIComponent(lloc.lat)
+    + '&longitude=' + encodeURIComponent(lloc.lon)
+    + '&elevation=' + encodeURIComponent(lloc.alt)
     + '&hourly=' + CAMPS.join(',')
     + '&models=' + MODELS.map((m) => m.id).join(',')
     + '&timezone=' + encodeURIComponent('Europe/Madrid')
@@ -271,7 +285,7 @@ exports.handler = async function () {
   // guarda 30 minuts (max-age), així que molta gent veurà esta mateixa hora:
   // és el que es vol dir, quan es va calcular i no quan s'ha mirat.
   return res(200, {
-    ok: true, font: 'consens', models: presents, lat: LAT, lon: LON,
+    ok: true, font: 'consens', models: presents, lloc: clau, lat: lloc.lat, lon: lloc.lon,
     calculat: new Date().toISOString(), days: days,
   });
 };

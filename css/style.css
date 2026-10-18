@@ -831,6 +831,13 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .meteo-dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px);align-items:start}
 /* Amb una sola estacio (nomes la Figuereta) no te sentit mitja amplaria. */
 .meteo-dash-grid--una{grid-template-columns:minmax(0,560px);justify-content:center}
+/* Selector de lloc (La Figuereta / Pego) de la pagina del temps. */
+.lloc-sel{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:clamp(14px,2vw,20px)}
+.lloc-sel__b{font-family:var(--font-body);font-size:.84rem;font-weight:600;cursor:pointer;
+  padding:7px 18px;border-radius:100px;border:1px solid var(--hair);background:var(--paper-2);
+  color:var(--navy);transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
+.lloc-sel__b:hover{border-color:var(--navy)}
+.lloc-sel__b[aria-current="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
 @media(max-width:860px){.meteo-dash-grid{grid-template-columns:1fr}}
 
 .meteo-dash{position:relative;background:var(--white);border:1px solid var(--hair);border-radius:var(--r-lg);
