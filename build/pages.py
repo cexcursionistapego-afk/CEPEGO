@@ -621,6 +621,31 @@ def build(g):
         <p class="alert-legend__rec"><span class="va">{rva}</span><span class="es">{res}</span></p>
       </li>
 ''' for cls,nva,nes,lva,les,iva,ies,rva,res in alert_levels)
+    # Els llocs del selector del temps. Cada grup pot tindre més d'una
+    # estació: si en té una sola, la segona fila de botons no ix.
+    #   (id del grup, etiqueta, [(id de l'estació, etiqueta curta), ...])
+    meteo_llocs=[
+      ("figuereta","La Figuereta",[("figuereta","La Figuereta")]),
+      ("pego","Pego",[("pego","Verdales")]),
+    ]
+    lloc_sel='    <div class="lloc-sel reveal" role="group" aria-label="Lloc">\n'
+    for gi,(grup,etiq,estacions) in enumerate(meteo_llocs):
+        ara=' aria-current="true"' if gi==0 else ''
+        lloc_sel+=f'      <button type="button" class="lloc-sel__b" data-grup="{grup}"{ara}>{etiq}</button>\n'
+    lloc_sel+='    </div>\n'
+    for grup,etiq,estacions in meteo_llocs:
+        if len(estacions)<2: continue
+        lloc_sel+=f'    <div class="lloc-sub" data-grup="{grup}" hidden>\n'
+        for ei,(eid,eetiq) in enumerate(estacions):
+            ara=' aria-current="true"' if ei==0 else ''
+            lloc_sel+=f'      <button type="button" class="lloc-sub__b" data-lloc="{eid}"{ara}>{eetiq}</button>\n'
+        lloc_sel+='    </div>\n'
+    # Quin grup és cada estació, per al JS.
+    lloc_sel+='    <script type="application/json" id="lloc-grups">'
+    import json as _json
+    lloc_sel+=_json.dumps({eid:grup for grup,_e,est in meteo_llocs for eid,_x in est},ensure_ascii=False)
+    lloc_sel+='</script>\n'
+
     meteo_dash=f'''<section class="section" style="padding:clamp(28px,3.5vw,48px) 0">
   <div class="wrap">
     <div class="kicker center-k"><span class="va">Temps en directe</span><span class="es">Tiempo en directo</span></div>
@@ -647,10 +672,7 @@ def build(g):
       </div>
     </figure>
 
-    <div class="lloc-sel reveal" role="group" aria-label="Lloc">
-      <button type="button" class="lloc-sel__b" data-lloc="figuereta" aria-current="true">La Figuereta</button>
-      <button type="button" class="lloc-sel__b" data-lloc="pego">Pego</button>
-    </div>
+{lloc_sel}
     <div class="meteo-dash-grid meteo-dash-grid--una reveal" style="margin-top:clamp(14px,2vw,22px)">
       <div id="meteo-dash"></div>
     </div>

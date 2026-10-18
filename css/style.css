@@ -838,6 +838,14 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   color:var(--navy);transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
 .lloc-sel__b:hover{border-color:var(--navy)}
 .lloc-sel__b[aria-current="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
+/* Segona fila: les estacions del grup triat (nomes ix si en te mes d'una). */
+.lloc-sub{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.lloc-sub[hidden]{display:none}
+.lloc-sub__b{font-family:var(--font-body);font-size:.76rem;font-weight:600;cursor:pointer;
+  padding:5px 14px;border-radius:100px;border:1px solid transparent;background:transparent;
+  color:var(--muted);transition:background .2s var(--ease),color .2s var(--ease)}
+.lloc-sub__b:hover{color:var(--navy)}
+.lloc-sub__b[aria-current="true"]{background:var(--paper-2);border-color:var(--hair);color:var(--navy)}
 @media(max-width:860px){.meteo-dash-grid{grid-template-columns:1fr}}
 
 .meteo-dash{position:relative;background:var(--white);border:1px solid var(--hair);border-radius:var(--r-lg);

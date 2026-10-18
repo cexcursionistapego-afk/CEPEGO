@@ -4,22 +4,41 @@
   function escHtml(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
   /* ---------- LLOC TRIAT A LA PÀGINA DEL TEMPS ---------- */
-  // La pàgina del temps ensenya La Figuereta o Pego. Ací es guarda quin,
-  // perquè la targeta de l'estació i la previsió canvien alhora i cada una
-  // la pinta un fitxer distint. Per defecte, el refugi.
+  // La pàgina del temps ensenya una estació i la previsió del seu lloc. Ací
+  // es guarda quina, perquè la targeta i la previsió canvien alhora i cada
+  // una la pinta un fitxer distint. Per defecte, el refugi.
+  //
+  // Els botons van en dos files: la de dalt tria el grup (La Figuereta o
+  // Pego) i, si eixe grup té més d'una estació, baix ix la fila per a
+  // triar-la. Els grups i les estacions els escriu el generador a la
+  // pàgina, així que afegir-ne una no demana tocar este fitxer.
   (function () {
-    var LLOCS = { figuereta: 1, pego: 1 };
-    var actual = 'figuereta';
+    var grups = {};          // id d'estació -> id de grup
+    var perGrup = {};        // id de grup -> [ids d'estació]
+    try {
+      var cru = document.getElementById('lloc-grups');
+      if (cru) grups = JSON.parse(cru.textContent || '{}');
+    } catch (e) {}
+    Object.keys(grups).forEach(function (eid) {
+      var g = grups[eid];
+      if (!perGrup[g]) perGrup[g] = [];
+      perGrup[g].push(eid);
+    });
+
+    var primera = Object.keys(grups)[0] || 'figuereta';
+    var actual = primera;
     try {
       var desat = localStorage.getItem('cepego-lloc');
-      if (desat && LLOCS[desat]) actual = desat;
+      if (desat && grups[desat]) actual = desat;
     } catch (e) {}
+
     var oients = [];
     window.cepegoLloc = {
       get: function () { return actual; },
-      // Avisa qui escolte i li passa el lloc nou.
+      grup: function (v) { return grups[v || actual] || null; },
+      // Avisa qui escolte i li passa l'estació nova.
       set: function (v) {
-        if (!LLOCS[v] || v === actual) return;
+        if (!grups[v] || v === actual) return;
         actual = v;
         try { localStorage.setItem('cepego-lloc', v); } catch (e) {}
         oients.forEach(function (f) { try { f(v); } catch (e) {} });
@@ -27,23 +46,46 @@
       escolta: function (f) { oients.push(f); }
     };
 
-    // Els botons de dalt de la pàgina del temps.
-    function pintaBotons(v) {
+    function pinta(v) {
+      var g = grups[v];
       document.querySelectorAll('.lloc-sel__b').forEach(function (b) {
-        b.setAttribute('aria-current', b.getAttribute('data-lloc') === v ? 'true' : 'false');
+        b.setAttribute('aria-current', b.getAttribute('data-grup') === g ? 'true' : 'false');
+      });
+      document.querySelectorAll('.lloc-sub').forEach(function (fila) {
+        var seu = fila.getAttribute('data-grup') === g;
+        fila.hidden = !seu;
+        if (!seu) return;
+        fila.querySelectorAll('.lloc-sub__b').forEach(function (b) {
+          b.setAttribute('aria-current', b.getAttribute('data-lloc') === v ? 'true' : 'false');
+        });
       });
     }
-    function lligaBotons() {
-      var bs = document.querySelectorAll('.lloc-sel__b');
-      if (!bs.length) return;
-      bs.forEach(function (b) {
+
+    function lliga() {
+      var caps = document.querySelectorAll('.lloc-sel__b');
+      if (!caps.length) return;
+      caps.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var g = b.getAttribute('data-grup');
+          var ids = perGrup[g] || [];
+          // En tornar a un grup es recupera l'última estació que s'hi va
+          // triar; si no se n'ha triat cap, la primera.
+          var tria = ids.indexOf(actual) !== -1 ? actual : (window.cepegoLloc['ultima_' + g] || ids[0]);
+          window.cepegoLloc.set(tria);
+        });
+      });
+      document.querySelectorAll('.lloc-sub__b').forEach(function (b) {
         b.addEventListener('click', function () { window.cepegoLloc.set(b.getAttribute('data-lloc')); });
       });
-      pintaBotons(actual);
-      window.cepegoLloc.escolta(pintaBotons);
+      window.cepegoLloc.escolta(function (v) {
+        window.cepegoLloc['ultima_' + grups[v]] = v;
+        pinta(v);
+      });
+      window.cepegoLloc['ultima_' + grups[actual]] = actual;
+      pinta(actual);
     }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lligaBotons);
-    else lligaBotons();
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lliga);
+    else lliga();
   })();
 
   /* ---------- FOTOS I RESPOSTES DELS FORMULARIS ---------- */

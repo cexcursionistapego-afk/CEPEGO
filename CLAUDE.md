@@ -355,6 +355,17 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     avisar sería engañar.
   - **Si Open-Meteo no responde, la web cae a la previsión de AEMET**, como
     antes. Nada queda en blanco.
+  - **Añadir una estación al selector del tiempo** (por ejemplo otra de Pego)
+    son cuatro sitios, y el segundo nivel de botones aparece solo en cuanto
+    un grupo tiene más de una:
+    1. `build/pages.py`, lista `meteo_llocs`: añadir `("id","Etiqueta")` al
+       grupo. De ahí salen los botones y el JSON `#lloc-grups` que lee el JS.
+    2. `js/meteo-dashboard.js`, `STATIONS`: nombre, subtítulo y enlace AVAMET.
+    3. `netlify/functions/meteo.js`, `STATIONS`: la URL de AVAMET de la
+       estación (`mxo-i.php?id=...`), que es de donde se leen los datos.
+    4. `netlify/functions/pronostic.js`, `LLOCS`: latitud, longitud y altura
+       para la previsión.
+    `js/main.js` no hay que tocarlo: lee los grupos de la propia página.
   - **La página del tiempo tiene un selector arriba: La Figuereta o Pego.**
     Por defecto el refugio, y la elección se recuerda en el navegador
     (`localStorage`, clave `cepego-lloc`). Al cambiar se rehacen **las dos
