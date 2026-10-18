@@ -170,12 +170,29 @@
         '</div>' +
 
         '<div class="meteo-dash__precip">' +
-          '<div><div class="meteo-dash__precip-ic">' + ICON.cloud + '</div><div class="v">' + num(d.precip_today, 1, 'mm') + '</div><div class="l">' + bi('Hui', 'Hoy') + '</div></div>' +
-          '<div><div class="meteo-dash__precip-ic">' + ICON.cloud + '</div><div class="v">' + num(d.precip_month, 1, 'mm') + '</div><div class="l">' + bi('Este mes', 'Este mes') + '</div></div>' +
-          '<div><div class="meteo-dash__precip-ic">' + ICON.cloud + '</div><div class="v">' + num(d.precip_year, 1, 'mm') + '</div><div class="l">' + bi('Enguany', 'Este año') + '</div></div>' +
+          cella(d.precip_today, bi('Hui', 'Hoy'), PLUJA_FORTA) +
+          cella(d.precip_month, bi('Este mes', 'Este mes'), null) +
+          cella(d.precip_year, bi('Enguany', 'Este año'), null) +
         '</div>' +
 
       '</div>';
+  }
+
+  // Pluja acumulada d'un dia a partir de la qual la cel·la parpelleja. 80
+  // l/m² en un dia és una tronada de les grosses, no un dia de pluja: val
+  // la pena que es veja d'un colp d'ull.
+  //
+  // Només s'aplica al dia. Al mes i a l'any no té sentit cap llindar d'este
+  // orde: ací plouen uns 700 l/m² a l'any, així que estaria parpellejant
+  // quasi sempre i deixaria de voler dir res.
+  var PLUJA_FORTA = 80;
+
+  function cella(valor, etiqueta, llindar) {
+    var alta = llindar != null && valor != null && !isNaN(valor) && valor >= llindar;
+    return '<div' + (alta ? ' class="meteo-dash__precip--forta"' : '') + '>' +
+      '<div class="meteo-dash__precip-ic">' + ICON.cloud + '</div>' +
+      '<div class="v">' + num(valor, 1, 'mm') + '</div>' +
+      '<div class="l">' + etiqueta + '</div></div>';
   }
 
   /* ---------- muntatge ---------- */

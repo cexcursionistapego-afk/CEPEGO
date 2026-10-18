@@ -421,6 +421,17 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
     el mismo fenómeno sale en rojo y en naranja a las mismas horas, se deja
     solo el rojo, que es el que manda.
   - Para cambiar de zona o de área: `AEMET_ZONA` y `AEMET_AREA`.
+- **La celda de lluvia del día late a partir de 80 l/m²** (`PLUJA_FORTA` en
+  `js/meteo-dashboard.js`). 80 mm en un día es una tronada de las gordas y
+  conviene que se vea de un golpe de vista.
+  - **Solo se aplica al día, no al mes ni al año.** Aquí llueven unos
+    700 l/m² al año: con ese umbral la celda de "Enguany" estaría encendida
+    casi siempre y dejaría de querer decir nada. Si algún día se quieren
+    umbrales para mes o año, se le pasa uno a `cella()` y ya está.
+  - Es una **pulsación lenta (1,6 s), no un parpadeo rápido**: una luz que va
+    y viene varias veces por segundo puede provocar crisis a quien tiene
+    epilepsia fotosensible. Con `prefers-reduced-motion` se queda el color
+    fijo, sin movimiento.
 - **Cuántas visitas tiene la web (18-10-2026).** Con **Cloudflare Web
   Analytics**, gratis e ilimitado. Se mira en dash.cloudflare.com, con la
   cuenta del club: la búsqueda rápida de arriba y escribir "web analytics"
