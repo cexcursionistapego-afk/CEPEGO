@@ -33,13 +33,19 @@ CSP = "; ".join([
     "base-uri 'self'",
     "object-src 'none'",
     "form-action 'self'",
-    "script-src 'self' https://challenges.cloudflare.com https://identity.netlify.com",
+    "script-src 'self' https://challenges.cloudflare.com https://identity.netlify.com https://static.cloudflareinsights.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data:",
-    "connect-src 'self' https://identity.netlify.com",
+    "connect-src 'self' https://identity.netlify.com https://cloudflareinsights.com",
     "frame-src https://challenges.cloudflare.com https://www.google.com",
 ])
+# Cloudflare Web Analytics: compta visites sense cookies ni rastreig, així
+# que no cal cartell de consentiment. El testimoni és PÚBLIC (ix al codi de
+# la pàgina), no és cap clau secreta. Mentre estiga buit no es carrega res.
+# Es trau de Cloudflare → Analytics & Logs → Web Analytics → Add a site.
+CF_ANALYTICS = ""
+
 FEMECV="https://www.femecv.com/va"; AJPEGO="https://www.pego.org/"; PIV="https://www.pegoilesvalls.es/"
 
 ORG_JSONLD = json.dumps({
@@ -224,6 +230,9 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, t
     idw='<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>\n' if identity else ''
     ts='<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>\n' if turnstile else ''
     idredirect=('<script src="/js/identity-redirect.js"></script>\n' if identity else '')
+    # Va l'últim i amb defer: comptar visites no ha de retardar la pàgina.
+    cfa = (f'<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
+           f'data-cf-beacon=\'{{"token": "{CF_ANALYTICS}"}}\'></script>\n') if CF_ANALYTICS else ''
     extra_js_list = [extra_js] if isinstance(extra_js, str) else (extra_js or [])
     extra_js_tags = "".join(f'<script src="/{s.lstrip(chr(47))}"></script>\n' for s in extra_js_list)
     canon = SITE_URL + "/" + (path if (path and path != "index.html") else "")
@@ -260,7 +269,7 @@ def doc(title, desc, body, path="", identity=False, extra_js=None, image=None, t
 <body>
 {avis_div}{body}
 <script src="/js/main.js"></script>
-{extra_js_tags}{idredirect}</body>
+{extra_js_tags}{idredirect}{cfa}</body>
 </html>
 '''
 
