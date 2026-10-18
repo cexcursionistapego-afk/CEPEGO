@@ -34,22 +34,14 @@ const LLOCS = {
     lon: process.env.REFUGI_LON || '-0.14519',
     alt: process.env.REFUGI_ALT || '540',
   },
+  // Pego té tres estacions d'AVAMET (Verdales, la Plana i Ambra), però la
+  // previsió és una sola, la de les Verdales: estan a menys de 3 km i la
+  // quadrícula dels models és més gran que això, així que calcular-ne tres
+  // seria demanar-li el triple a un servei gratuït per a res.
   pego: {
-    lat: process.env.PEGO_LAT || '38.84339',
-    lon: process.env.PEGO_LON || '-0.11748',
+    lat: process.env.PEGO_LAT || '38.83460',
+    lon: process.env.PEGO_LON || '-0.11798',
     alt: process.env.PEGO_ALT || '89',
-  },
-  // La marjal. Sense altura: no la sabem i val més que Open-Meteo pose la
-  // del seu mapa del terreny que no ficar-ne una a ull.
-  'pego-plana': {
-    lat: process.env.PEGO_PLANA_LAT || '38.85361',
-    lon: process.env.PEGO_PLANA_LON || '-0.08639',
-    alt: process.env.PEGO_PLANA_ALT || '',
-  },
-  'pego-ambra': {
-    lat: process.env.PEGO_AMBRA_LAT || '38.83090',
-    lon: process.env.PEGO_AMBRA_LON || '-0.10340',
-    alt: process.env.PEGO_AMBRA_ALT || '81',
   },
 };
 const DIES = 7;
@@ -209,7 +201,11 @@ function etiqueta(dia) {
 
 exports.handler = async function (event) {
   const q = (event && event.queryStringParameters) || {};
-  const clau = LLOCS[String(q.lloc || '').toLowerCase()] ? String(q.lloc).toLowerCase() : 'figuereta';
+  // Les estacions d'un mateix lloc comparteixen previsió: "pego-plana" i
+  // "pego-ambra" cauen en "pego". Si no es reconeix res, el refugi.
+  var demanat = String(q.lloc || '').toLowerCase();
+  if (!LLOCS[demanat]) demanat = demanat.split('-')[0];
+  const clau = LLOCS[demanat] ? demanat : 'figuereta';
   const lloc = LLOCS[clau];
   const url = 'https://api.open-meteo.com/v1/forecast'
     + '?latitude=' + encodeURIComponent(lloc.lat)

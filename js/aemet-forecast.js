@@ -650,6 +650,23 @@
       });
   }
 
-  carrega((window.cepegoLloc && window.cepegoLloc.get()) || 'figuereta');
-  if (window.cepegoLloc) window.cepegoLloc.escolta(carrega);
+  // Es demana la previsió del GRUP (La Figuereta o Pego), no de l'estació:
+  // les tres estacions de Pego estan a un parell de quilòmetres i la
+  // previsió és la mateixa. Així només hi ha dos càlculs i no es castiga
+  // de bades un servei gratuït.
+  function carregaDe(estacio) {
+    carrega((window.cepegoLloc && window.cepegoLloc.grup(estacio)) || 'figuereta');
+  }
+  var inicial = (window.cepegoLloc && window.cepegoLloc.get()) || 'figuereta';
+  carregaDe(inicial);
+  if (window.cepegoLloc) {
+    var ultim = window.cepegoLloc.grup(inicial);
+    window.cepegoLloc.escolta(function (estacio) {
+      var g = window.cepegoLloc.grup(estacio);
+      // Canviar entre estacions del mateix lloc no toca la previsió.
+      if (g === ultim) return;
+      ultim = g;
+      carregaDe(estacio);
+    });
+  }
 })();
