@@ -448,8 +448,7 @@ def build(g):
 <section class="section rules-top">
   <div class="wrap">
     <div class="narrow center reveal" style="margin-bottom:clamp(24px,3vw,40px)">
-      <div class="kicker center-k">⚠️ <span class="va">Normes</span><span class="es">Normas</span></div>
-      <h2><span class="va">Abans de la teua estada</span><span class="es">Antes de tu estancia</span></h2>
+      <div class="kicker center-k"><span class="va">Normes</span><span class="es">Normas</span></div>
     </div>
     <ul class="rules">
 {rl}    </ul>
