@@ -31,11 +31,22 @@
     }
   };
 
-  var WIND_DEG = { N:0, NE:45, E:90, SE:135, S:180, SO:225, O:270, NO:315 };
+  // La rosa sencera de 16 rumbs. AVAMET dona també els intermedis ("OSO",
+  // "NNE"…) i, quan només teníem els 8 principals, eixos dies la direcció
+  // es quedava en "—" i la fletxa apagada, com si l'estació no enviara res.
+  var WIND_DEG = {
+    N:0, NNE:22.5, NE:45, ENE:67.5, E:90, ESE:112.5, SE:135, SSE:157.5,
+    S:180, SSO:202.5, SO:225, OSO:247.5, O:270, ONO:292.5, NO:315, NNO:337.5
+  };
   var WIND_NAME = {
-    N:{va:'Nord',es:'Norte'}, NE:{va:'Nord-est',es:'Noreste'}, E:{va:'Est',es:'Este'},
-    SE:{va:'Sud-est',es:'Sureste'}, S:{va:'Sud',es:'Sur'}, SO:{va:'Sud-oest',es:'Suroeste'},
-    O:{va:'Oest',es:'Oeste'}, NO:{va:'Nord-oest',es:'Noroeste'}
+    N:{va:'Nord',es:'Norte'}, NNE:{va:'Nord-nord-est',es:'Nornoreste'},
+    NE:{va:'Nord-est',es:'Noreste'}, ENE:{va:'Est-nord-est',es:'Estenoreste'},
+    E:{va:'Est',es:'Este'}, ESE:{va:'Est-sud-est',es:'Estesureste'},
+    SE:{va:'Sud-est',es:'Sureste'}, SSE:{va:'Sud-sud-est',es:'Sursureste'},
+    S:{va:'Sud',es:'Sur'}, SSO:{va:'Sud-sud-oest',es:'Sursuroeste'},
+    SO:{va:'Sud-oest',es:'Suroeste'}, OSO:{va:'Oest-sud-oest',es:'Oestesuroeste'},
+    O:{va:'Oest',es:'Oeste'}, ONO:{va:'Oest-nord-oest',es:'Oestenoroeste'},
+    NO:{va:'Nord-oest',es:'Noroeste'}, NNO:{va:'Nord-nord-oest',es:'Nornoroeste'}
   };
 
   /* ---------- utilitats ---------- */
