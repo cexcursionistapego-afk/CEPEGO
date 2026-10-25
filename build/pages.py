@@ -447,7 +447,7 @@ def build(g):
 
 <section class="section rules-top">
   <div class="wrap">
-    <div class="narrow center reveal" style="margin-bottom:clamp(24px,3vw,40px)">
+    <div class="narrow center reveal" style="margin-bottom:clamp(12px,1.6vw,18px)">
       <div class="kicker center-k"><span class="va">Normes</span><span class="es">Normas</span></div>
     </div>
     <ul class="rules">
