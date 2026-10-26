@@ -134,6 +134,42 @@ exports.handler = async function (event) {
   }
 };
 
+// AVAMET dona l'hora local d'ací, sense dir en quina zona està. Per a
+// convertir-la en una marca de temps de veritat cal saber si eixe dia
+// estàvem en horari d'estiu o d'hivern.
+//
+// Abans s'endevinava pel mes (d'abril a octubre, estiu). Fallava els dies
+// solts entre el canvi d'hora i el final del mes: el 25-10-2026 Espanya va
+// tornar a l'horari d'hivern i la web es va posar a dir "fa 1 h" amb dades
+// acabades d'arribar, perquè etiquetava les hores amb +02:00 quan ja eren
+// +01:00. Igual passava els últims dies de març, però al revés.
+//
+// Ara s'ho pregunta a Intl, que sí que sap en quin diumenge es canvia.
+function offsetMadrid(ms) {
+  const f = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Madrid', hour12: false,
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+  });
+  const p = {};
+  f.formatToParts(new Date(ms)).forEach((x) => { p[x.type] = x.value; });
+  // Alguns Node tornen "24" per a la mitjanit; el %24 ho deixa en 0.
+  const paret = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second);
+  return Math.round((paret - ms) / 60000); // minuts respecte a UTC
+}
+
+function isoMadrid(yyyy, mm, dd, hh, min) {
+  // L'hora que ens donen és de rellotge de paret. Es prova amb el
+  // desfasament d'eixe instant en UTC i es torna a mirar amb el resultat: així
+  // també ix bé la nit del canvi, quan una hora es repeteix.
+  const paret = Date.UTC(+yyyy, +mm - 1, +dd, +hh, +min);
+  let off = offsetMadrid(paret);
+  off = offsetMadrid(paret - off * 60000);
+  const abs = Math.abs(off);
+  const p2 = (n) => String(n).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}T${hh}:${min}:00${off < 0 ? '-' : '+'}${p2(Math.floor(abs / 60))}:${p2(abs % 60)}`;
+}
+
 function parseAvamet(rawHtml, stationName) {
   const html = decodeEntities(rawHtml);
   const out = {
@@ -157,12 +193,7 @@ function parseAvamet(rawHtml, stationName) {
     const m = /Actualitzaci[oó]\s*:\s*<b>\s*(\d{2})-(\d{2})-(\d{4})\s+(\d{2}):(\d{2})\s*<\/b>/i.exec(html);
     if (m) {
       const [, dd, mm, yyyy, hh, min] = m;
-      // Zona horària Europe/Madrid: aproximació per mes (CEST finals de març a
-      // finals d'octubre, CET la resta de l'any) — prou precís per a mostrar
-      // l'hora, no calcula el diumenge exacte de canvi d'hora.
-      const monthNum = parseInt(mm, 10);
-      const offset = (monthNum > 3 && monthNum < 11) ? '+02:00' : '+01:00';
-      out.updated = `${yyyy}-${mm}-${dd}T${hh}:${min}:00${offset}`;
+      out.updated = isoMadrid(yyyy, mm, dd, hh, min);
     }
   }
 
@@ -208,3 +239,6 @@ function parseAvamet(rawHtml, stationName) {
 
   return out;
 }
+
+// Per a les proves en Node.
+exports._intern = { isoMadrid, offsetMadrid, parseAvamet };

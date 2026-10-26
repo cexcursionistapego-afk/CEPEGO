@@ -461,6 +461,19 @@ sustituyendo `global.fetch` por un doble, sin necesidad de red.
   y mira el `error`: `fetch_failed` es que ellos nos rechazan o están
   caídos; `parse_failed` es que han cambiado el HTML. La página enseña
   "sense connexió" en los dos casos, así que desde fuera no se distinguen.
+- **La estación decía "fa 1 h" con datos recién llegados (26-10-2026).** No
+  era AVAMET ni la caché: era el cambio de hora. AVAMET da la hora local sin
+  decir la zona, y `meteo.js` adivinaba el horario de verano **por el mes**
+  (de abril a octubre). El 25-10-2026 España volvió al horario de invierno,
+  pero octubre seguía contando como verano, así que cada dato se etiquetaba
+  con `+02:00` cuando ya era `+01:00` y el navegador lo veía una hora más
+  viejo de lo que era. Los últimos días de marzo pasaba lo mismo al revés.
+  Ahora la zona se pregunta a `Intl` (`offsetMadrid`/`isoMadrid`), que sí
+  sabe en qué domingo se cambia. **La señal de que es esto y no una avería
+  de verdad**: la edad se queda clavada en una hora justa y no baja aunque
+  recargues, y el `updated` del JSON cuadra con la hora de AVAMET pero con el
+  desfase equivocado. Los dos fines de semana del cambio de hora, mirar esto
+  antes que nada.
 - **Netlify Blobs no siempre se autoconfigura.** La webcam guarda la foto ahí
   (`netlify/functions/_blobs.js`). Si la subida falla con
   `MissingBlobsEnvironmentError` / `blobs-sense-configurar`, es que Netlify no
