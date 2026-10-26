@@ -82,32 +82,6 @@ def build(g):
            ("Bodoix","539",539),("Ambra","298",298),("Xical","363",363),("Xillibre","751",751),("Mostalla","359",359)]
 
     # ============================================= HOME
-    # (href, tva, tes, pva, pes, num)
-    acts=[
-     ("calendari.html","Senderisme","Senderismo",
-      "Rutes tot l'any per Pego i les Valls, amb fitxes de track i distàncies.","Rutas todo el año por Pego y sus valles, con fichas de track y distancias.","01"),
-     ("calendari.html","Escalada","Escalada",
-      "Escola del Barranc de les Coves: 28 vies equipades per a tots els nivells, des d'iniciació fins a dificultat.","Escuela del Barranc de les Coves: 28 vías equipadas para todos los niveles, desde iniciación hasta dificultad.","02"),
-     ("calendari.html","Espeleologia","Espeleología",
-      "Avencs i coves del massís calcari de la Vall d'Ebo. Exploració subterrània en grup.","Avencos y cuevas del macizo calcáreo de la Vall d'Ebo. Exploración subterránea en grupo.","03"),
-     ("calendari.html","Barrancs","Barrancos",
-      "Descens de barrancs per la comarca. Corda i neoprè entre aiguamolls i cascades.","Descenso de barrancos por la comarca. Cuerda y neopreno entre parajes y cascadas.","04"),
-     ("calendari.html","Alta muntanya","Alta montaña",
-      "Eixides als grans cims i itineraris alpins de la temporada hivernal. Material tècnic i experiència.","Salidas a las grandes cimas e itinerarios alpinos de la temporada invernal. Material técnico y experiencia.","05"),
-     ("calendari.html","Meteorologia","Meteorología",
-      "Estació meteorològica professional al refugi, connectada en temps real a la xarxa AVAMET.","Estación meteorológica profesional en el refugio, conectada en tiempo real a la red AVAMET.","06"),
-    ]
-    act_cards=""
-    for href,tva,tes,pva,pes,num in acts:
-        act_cards+=f'''      <a class="act-row reveal" href="{href}">
-        <div class="act-row__num">{num}</div>
-        <div class="act-row__main">
-          <div class="act-row__name"><span class="va">{tva}</span><span class="es">{tes}</span></div>
-          <p class="act-row__desc"><span class="va">{pva}</span><span class="es">{pes}</span></p>
-        </div>
-        <div class="act-row__link"><span class="va">Descobrir</span><span class="es">Descubrir</span> →</div>
-      </a>\n'''
-
     home=header("inici")+f'''
 <section class="hero">
   <div class="hero__bg" style="background-image:url('{HERO}')"></div>
@@ -885,38 +859,6 @@ def build(g):
 '''+footer()
     write("escalada.html", doc("Escalada a Pego | CEPEGO",
         "Escola d'escalada del Barranc de les Coves a Pego: sectors Iniciació i Placa del Sol, 28 vies.", escalada, path="escalada.html"))
-
-    # ============================================= ESPELEO
-    espeleo=header("espeleo")+subhero(IMG+"bb9bb0_82b4e09447a84e64a0cbbb9b026159e5~mv2.jpeg",'<span class="va">Avencs i coves</span><span class="es">Avencos y cuevas</span>',
-        "Espeleologia","Espeleología",
-        "Les principals cavitats de la nostra zona, amb ressenyes i topografies.","Las principales cavidades de nuestra zona, con reseñas y topografías.")+f'''
-<section class="section">
-  <div class="wrap">
-    <div class="topos reveal">
-      <a href="{IMG}bb9bb0_855db2b521a34b89b40493f0da2e37e8~mv2.png"><img loading="lazy" src="{IMG}bb9bb0_855db2b521a34b89b40493f0da2e37e8~mv2.png" alt="Topografia"></a>
-      <a href="{IMG}bb9bb0_52ad1044d2e44fa296bdd0ee216e139b~mv2.png"><img loading="lazy" src="{IMG}bb9bb0_52ad1044d2e44fa296bdd0ee216e139b~mv2.png" alt="Topografia avenc"></a>
-      <a href="{IMG}bb9bb0_ad75be20ffaa4beda5eb4123765e797b~mv2.png"><img loading="lazy" src="{IMG}bb9bb0_ad75be20ffaa4beda5eb4123765e797b~mv2.png" alt="Topografia avenc"></a>
-    </div>
-  </div>
-</section>
-'''+footer()
-    write("espeleo.html", doc("Espeleologia a Pego | CEPEGO",
-        "Les principals cavitats i avencs de la zona de Pego, amb les seues topografies.", espeleo, path="espeleo.html"))
-
-    # ============================================= BARRANCS
-    barrancs=header("barrancs")+subhero(IMG+"bb9bb0_c7bc744c47aa43e89c657194275c9132~mv2.jpg",'<span class="va">Aigua i roca</span><span class="es">Agua y roca</span>',
-        "Barrancs","Barrancos",
-        "Els principals barrancs de la comarca, amb material i topografia.","Los principales barrancos de la comarca, con material y topografía.")+f'''
-<section class="section">
-  <div class="wrap">
-    <div class="topos reveal" style="max-width:560px;margin:0 auto">
-      <a href="{IMG}bb9bb0_71c52fbdc12e4e5780714b9d44318023~mv2.jpg"><img loading="lazy" src="{IMG}bb9bb0_71c52fbdc12e4e5780714b9d44318023~mv2.jpg" alt="Material i topografia de barrancs"></a>
-    </div>
-  </div>
-</section>
-'''+footer()
-    write("barrancs.html", doc("Barrancs de Pego i la Marina | CEPEGO",
-        "Els principals barrancs de la zona de Pego, amb material i topografia.", barrancs, path="barrancs.html"))
 
     # ============================================= CALENDARI
     calendari=header("calendari")+subhero(IMG+"calendari-grup.jpg",'<span class="va">Activitats</span><span class="es">Actividades</span>',

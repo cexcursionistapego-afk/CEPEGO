@@ -318,7 +318,7 @@ pages.build(globals())
 
 # ======================================================= robots.txt + sitemap.xml
 PAGES = ["index.html","refugi.html","reservar.html","meteo.html",
-    "rutes.html","escalada.html","espeleo.html","barrancs.html","calendari.html",
+    "rutes.html","escalada.html","calendari.html",
     "contacte.html","soci.html","avis-legal.html","privacitat.html","cookies.html"]
 
 open(os.path.join(OUT,"robots.txt"),"w",encoding="utf-8").write(
@@ -330,7 +330,6 @@ PRIORITY = {
     "index.html":("1.0","weekly"), "reservar.html":("0.9","weekly"), "refugi.html":("0.8","monthly"),
     "meteo.html":("0.8","daily"), "calendari.html":("0.7","weekly"),
     "rutes.html":("0.6","monthly"), "escalada.html":("0.6","monthly"),
-    "espeleo.html":("0.6","monthly"), "barrancs.html":("0.6","monthly"),
     "contacte.html":("0.5","yearly"), "soci.html":("0.5","monthly"),
     "avis-legal.html":("0.1","yearly"), "privacitat.html":("0.1","yearly"), "cookies.html":("0.1","yearly"),
 }
