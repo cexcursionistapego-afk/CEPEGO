@@ -91,7 +91,7 @@ def build(g):
      ("calendari.html","Espeleologia","Espeleología",
       "Avencs i coves del massís calcari de la Vall d'Ebo. Exploració subterrània en grup.","Avencos y cuevas del macizo calcáreo de la Vall d'Ebo. Exploración subterránea en grupo.","03"),
      ("calendari.html","Barrancs","Barrancos",
-      "Descens de barrancs per la comarca. Corda, neoprè i aventura entre aiguamolls i cascades.","Descenso de barrancos por la comarca. Cuerda, neopreno y aventura entre parajes y cascadas.","04"),
+      "Descens de barrancs per la comarca. Corda i neoprè entre aiguamolls i cascades.","Descenso de barrancos por la comarca. Cuerda y neopreno entre parajes y cascadas.","04"),
      ("calendari.html","Alta muntanya","Alta montaña",
       "Eixides als grans cims i itineraris alpins de la temporada hivernal. Material tècnic i experiència.","Salidas a las grandes cimas e itinerarios alpinos de la temporada invernal. Material técnico y experiencia.","05"),
      ("calendari.html","Meteorologia","Meteorología",
@@ -116,7 +116,7 @@ def build(g):
     <img class="crest" src="{CREST}" alt="Escut CEPEGO">
     <div class="kicker on-photo"><span class="va">Pego · Alacant · Des de 1973</span><span class="es">Pego · Alicante · Desde 1973</span></div>
     <h1><span class="va">Vivim la muntanya,<br><em>compartim</em> l'aventura</span><span class="es">Vivimos la montaña,<br><em>compartimos</em> la aventura</span></h1>
-    <p><span class="va">El Centre Excursionista de Pego és un club de muntanya format per gent de totes les edats unida per la natura i l'aventura.</span><span class="es">El Centro Excursionista de Pego es un club de montaña formado por gente de todas las edades unida por la naturaleza y la aventura.</span></p>
+    <p><span class="va">El Centre Excursionista de Pego és un club de muntanya format per gent de totes les edats unida per la natura i l'esport.</span><span class="es">El Centro Excursionista de Pego es un club de montaña formado por gente de todas las edades unida por la naturaleza y el deporte.</span></p>
     <div class="hero__actions">
       <a href="soci.html" class="btn btn-primary"><span class="va">Fes-te soci</span><span class="es">Hazte socio</span></a>
       <a href="refugi.html" class="btn btn-ghost"><span class="va">El refugi La Figuereta</span><span class="es">El refugio La Figuereta</span></a>
@@ -130,7 +130,7 @@ def build(g):
       <div class="prose">
         <div class="kicker"><span class="va">El club</span><span class="es">El club</span></div>
         <h2><span class="va">Amics units per la muntanya</span><span class="es">Amigos unidos por la montaña</span></h2>
-        <p><span class="va">El CEP està format per amics de diferents generacions, amants de la natura i dels esports d'aventura. Gran part dels membres som persones de diferents edats amb una gran dedicació en tot allò que fem. Hui som més de 220 socis i sòcies, tant de Pego com dels pobles dels voltants.</span><span class="es">El CEP está formado por amigos de diferentes generaciones, amantes de la naturaleza y de los deportes de aventura. Gran parte de los miembros somos personas de diferentes edades con una gran dedicación en todo lo que hacemos. Hoy somos más de 220 socios y socias, tanto de Pego como de los pueblos de alrededor.</span></p>
+        <p><span class="va">El CEP està format per amics de diferents generacions, amants de la natura i de l'esport. Gran part dels membres som persones de diferents edats amb una gran dedicació en tot allò que fem. Hui som més de 220 socis i sòcies, tant de Pego com dels pobles dels voltants.</span><span class="es">El CEP está formado por amigos de diferentes generaciones, amantes de la naturaleza y del deporte. Gran parte de los miembros somos personas de diferentes edades con una gran dedicación en todo lo que hacemos. Hoy somos más de 220 socios y socias, tanto de Pego como de los pueblos de alrededor.</span></p>
         <p><span class="va">Tenim dues seccions principals: qui fa senderisme —per la zona i per terres més llunyanes, aprofitant caps de setmana i ponts— i qui es dedica a l'escalada, majoritàriament esportiva, bloc i clàssica. També fem alta muntanya, espeleologia i barranquisme.</span><span class="es">Tenemos dos secciones principales: quien hace senderismo —por la zona y por tierras más lejanas, aprovechando fines de semana y puentes— y quien se dedica a la escalada, mayoritariamente deportiva, bloque y clásica. También hacemos alta montaña, espeleología y barranquismo.</span></p>
         <a href="calendari.html" class="link-arrow"><span class="va">Descobreix les activitats</span><span class="es">Descubre las actividades</span></a>
       </div>
