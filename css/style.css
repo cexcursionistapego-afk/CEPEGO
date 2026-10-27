@@ -97,38 +97,55 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .brand__name{font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:-.02em;line-height:1;color:var(--navy)}
 .brand__sub{font-family:var(--font-body);font-weight:600;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
 
-.nav{display:flex;align-items:center;gap:2px}
-.nav a{font-weight:500;font-size:.88rem;color:var(--ink);padding:9px 12px;border-radius:10px;white-space:nowrap;position:relative}
-.nav>a::after,.nav-parent::after{}
-.nav a:hover{color:var(--navy);background:rgba(30,46,99,.06)}
-.nav a.active{color:var(--ember)}
+.nav{display:flex;align-items:center;gap:0}
+/* Els enllacos del menu no porten pastilla de fons: en el seu lloc, una
+   ratlla fina que entra per l'esquerra. La pastilla arredonida en cada
+   element era justament el que donava l'aire de plantilla. */
+.nav>a,.nav-parent{font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.11em;
+  color:var(--ink);padding:10px 0;margin:0 13px;border-radius:0;white-space:nowrap;
+  position:relative;transition:color .2s var(--ease)}
+.nav>a:not(.soci-link)::after,.nav-parent::after{content:"";position:absolute;left:0;right:0;bottom:3px;
+  height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;
+  transition:transform .28s var(--ease)}
+.nav>a:not(.soci-link):hover::after,.nav>a:not(.soci-link).active::after,
+.nav-group:hover .nav-parent::after,.nav-parent.active::after{transform:scaleX(1);transform-origin:left}
+.nav>a:hover,.nav-parent:hover{color:var(--navy);background:none}
+.nav>a.active,.nav-parent.active{color:var(--ember)}
+.nav a:focus-visible{outline:2px solid var(--navy);outline-offset:4px}
 .nav-group{position:relative;display:flex;align-items:center}
-.nav-parent{cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-.nav-parent .caret{width:8px;height:8px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;
-  transform:rotate(45deg) translateY(-1px);opacity:.55;transition:.2s}
+.nav-parent{cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.nav-parent .caret{width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;
+  transform:rotate(45deg) translateY(-1px);opacity:.5;transition:.2s}
 .nav-group:hover .caret{transform:rotate(45deg) translateY(1px);opacity:1}
-.nav-sub{position:absolute;top:100%;left:0;display:none;flex-direction:column;
-  background:var(--white);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);
-  padding:8px;min-width:250px;z-index:120;margin-top:6px}
+.nav-sub{position:absolute;top:100%;left:-14px;display:none;flex-direction:column;
+  background:var(--white);border:1px solid var(--hair);border-radius:3px;box-shadow:var(--shadow);
+  padding:6px;min-width:250px;z-index:120;margin-top:8px}
 /* bridge invisible que cobreix el gap per a no perdre el focus hover */
-.nav-sub::after{content:"";position:absolute;top:-8px;left:0;right:0;height:10px}
-.nav-sub::before{content:"";position:absolute;top:-6px;left:24px;width:12px;height:12px;background:var(--white);
+.nav-sub::after{content:"";position:absolute;top:-10px;left:0;right:0;height:12px}
+.nav-sub::before{content:"";position:absolute;top:-6px;left:24px;width:11px;height:11px;background:var(--white);
   border-left:1px solid var(--hair);border-top:1px solid var(--hair);transform:rotate(45deg);z-index:1}
 .nav-group:hover .nav-sub,.nav-group:focus-within .nav-sub{display:flex}
-.nav-sub a{padding:11px 14px;border-radius:10px;font-size:.9rem;width:100%;color:var(--ink)}
+.nav-sub a{padding:11px 14px;border-radius:2px;font-size:.9rem;width:100%;color:var(--ink);
+  text-transform:none;letter-spacing:0;margin:0}
 .nav-sub a:hover,.nav-sub a.active{color:#fff;background:var(--navy)}
 .nav-sub a b{display:block;font-family:var(--font-body);font-weight:600;font-size:.9rem}
 .nav-sub a span.desc{display:block;font-size:.76rem;color:var(--muted);font-weight:400;margin-top:1px}
 .nav-sub a:hover span.desc,.nav-sub a.active span.desc{color:rgba(255,255,255,.75)}
 
-.soci-link{font-size:.78rem!important;padding:6px 13px!important;border:1.5px solid rgba(30,46,99,.35)!important;border-radius:100px!important;color:var(--navy)!important;margin-left:2px}
-.soci-link:hover{border-color:var(--navy)!important;background:rgba(30,46,99,.06)!important}
+/* El "Raco del soci" es l'unica accio del menu, aixi que va com un boto
+   xicotet i recte, no com una pindola. */
+.soci-link{font-size:.72rem!important;text-transform:uppercase;letter-spacing:.12em;
+  padding:9px 15px!important;border:1.5px solid var(--navy)!important;border-radius:2px!important;
+  color:var(--navy)!important;margin-left:14px!important;transition:.2s var(--ease)}
+.soci-link:hover{background:var(--navy)!important;color:#fff!important}
 .soci-link.active{border-color:var(--ember)!important;color:var(--ember)!important;background:transparent!important}
-.lang-btn{font-family:var(--font-body);font-weight:700;font-size:.72rem;letter-spacing:.06em;
-  border:1.5px solid rgba(0,0,0,.18);color:#fff;border-radius:100px;
-  padding:6px 14px;cursor:pointer;margin-left:10px;transition:filter .18s;
+.soci-link.active:hover{background:var(--ember)!important;color:#fff!important}
+.lang-btn{font-family:var(--font-body);font-weight:700;font-size:.7rem;letter-spacing:.12em;
+  border:1.5px solid rgba(0,0,0,.2);color:#fff;border-radius:2px;
+  padding:8px 13px;cursor:pointer;margin-left:11px;transition:filter .18s;
   background-size:cover;background-position:center;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 .lang-btn:hover{filter:brightness(.92)}
+.lang-btn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
 .lang-btn.flag-es{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40'%3E%3Crect width='60' height='40' fill='%23AA151B'/%3E%3Crect y='10' width='60' height='20' fill='%23F1BF00'/%3E%3C/svg%3E")}
 .lang-btn.flag-va{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40'%3E%3Crect width='60' height='40' fill='%23FFD400'/%3E%3Crect y='5.7' width='60' height='5.7' fill='%23DA121A'/%3E%3Crect y='17.1' width='60' height='5.7' fill='%23DA121A'/%3E%3Crect y='28.6' width='60' height='5.7' fill='%23DA121A'/%3E%3C/svg%3E")}
 .nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px;color:var(--ink)}
@@ -139,15 +156,20 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
     border-bottom:1px solid var(--hair);padding:10px 0 20px;box-shadow:var(--shadow);
     transform:translateY(-135%);transition:transform .34s var(--ease);max-height:calc(100vh - 74px);overflow:auto}
   .nav.open{transform:translateY(0)}
-  .nav a{width:100%;border-radius:0;padding:14px 30px;font-size:1.02rem}
+  /* En vertical la ratlla ocuparia tota l'amplaria i no diria res: aci la
+     pagina on estas es marca amb una barra roja a l'esquerra. */
+  .nav a{width:100%;border-radius:0;padding:14px 30px;font-size:.88rem;margin:0}
+  .nav>a::after,.nav-parent::after{display:none}
+  .nav>a.active,.nav-parent.active{box-shadow:inset 3px 0 0 var(--ember)}
   .nav-group{flex-direction:column;align-items:stretch;width:100%}
   .nav-parent .caret{display:none}
   .nav-sub{position:static;display:flex;box-shadow:none;border:0;border-radius:0;padding:0;background:var(--paper-2);min-width:0}
   .nav-sub::before{display:none}
   .nav-sub a{padding:12px 44px;font-size:.96rem}
   .nav-sub a span.desc{display:none}
-  .soci-link{font-size:1.02rem!important;padding:14px 30px!important;border:0!important;border-radius:0!important;
-    color:var(--ember)!important;margin:6px 0 0;border-top:1px solid var(--hair)!important}
+  .soci-link{font-size:.88rem!important;padding:16px 30px!important;border:0!important;border-radius:0!important;
+    color:var(--ember)!important;margin:6px 0 0!important;border-top:1px solid var(--hair)!important}
+  .soci-link:hover{background:rgba(30,46,99,.06)!important;color:var(--ember)!important}
   .soci-link:hover{background:rgba(30,46,99,.06)!important}
   .soci-link.active{background:transparent!important}
   .lang-btn{margin:14px 30px 0;align-self:flex-start}
@@ -188,24 +210,53 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .subhero p{color:#e9e9e9;max-width:56ch;margin-top:.5em;font-size:1.1rem}
 
 /* ================= BUTTONS ================= */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;font-family:var(--font-body);font-weight:600;font-size:.94rem;
-  padding:14px 26px;border-radius:100px;cursor:pointer;border:1.6px solid transparent;transition:.2s var(--ease);letter-spacing:.005em}
+/* Res de pindoles amb ombra difusa: eixa forma, repetida per tot arreu, es
+   la que fa que una pagina parega feta en serie. Aci els botons son blocs
+   rectes, amb la lletra en majuscula i espaiada com els rotuls dels senders,
+   i el color entra de baix cap amunt quan passes per damunt.
+   El bloc que entra es un ::before amb z-index negatiu. Dins d'un context
+   d'apilament propi (isolation) es pinta damunt del fons del boto pero per
+   sota del text, que es contingut del boto mateix. I com que un absolut es
+   col-loca respecte de la caixa de farciment, la vora no queda tapada. */
+.btn{position:relative;isolation:isolate;overflow:hidden;
+  display:inline-flex;align-items:center;justify-content:center;gap:.7em;
+  font-family:var(--font-body);font-weight:650;font-size:.78rem;
+  text-transform:uppercase;letter-spacing:.14em;
+  padding:16px 30px;border-radius:2px;cursor:pointer;border:1.5px solid transparent;
+  transition:color .25s var(--ease),border-color .25s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;
+  transform:scaleY(0);transform-origin:bottom;transition:transform .3s var(--ease)}
+.btn:hover::before,.btn:focus-visible::before{transform:scaleY(1)}
+.btn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
 .btn svg{width:17px;height:17px}
-.btn-primary{background:var(--ember);color:#fff;box-shadow:0 10px 30px -10px rgba(180,18,27,.6)}
-.btn-primary:hover{background:var(--ember-2);color:#fff;transform:translateY(-2px)}
-.btn-navy{background:var(--navy);color:#fff}
-.btn-navy:hover{background:var(--navy-2);color:#fff;transform:translateY(-2px)}
-.btn-ghost{border-color:rgba(255,255,255,.55);color:#fff;backdrop-filter:blur(4px)}
-.btn-ghost:hover{background:#fff;color:var(--navy);border-color:#fff}
+
+.btn-primary{background:var(--ember);border-color:var(--ember);color:#fff}
+.btn-primary::before{background:var(--navy)}
+.btn-primary:hover,.btn-primary:focus-visible{color:#fff;border-color:var(--navy)}
+
+.btn-navy{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn-navy::before{background:var(--ember)}
+.btn-navy:hover,.btn-navy:focus-visible{color:#fff;border-color:var(--ember)}
+
 /* Els variants "buits" han de dir background:transparent explicitament: en un
    <button> sense fons declarat el navegador en posa un de gris propi, i el
    text clar damunt d'eixe gris no es llig. */
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,.65);color:#fff;backdrop-filter:blur(4px)}
+.btn-ghost::before{background:#fff}
+.btn-ghost:hover,.btn-ghost:focus-visible{color:var(--navy);border-color:#fff}
+.btn-ghost:focus-visible{outline-color:#fff}
+
 .btn-outline{background:transparent;border-color:var(--navy);color:var(--navy)}
-.btn-outline:hover{background:var(--navy);color:#fff}
+.btn-outline::before{background:var(--navy)}
+.btn-outline:hover,.btn-outline:focus-visible{color:#fff}
+
 /* Accio secundaria en el roig de la marca, per a quan va al costat d'un
    .btn-primary i han de llegir-se com a parella (alta / baixa de soci). */
 .btn-outline-ember{background:transparent;border-color:var(--ember);color:var(--ember)}
-.btn-outline-ember:hover{background:var(--ember);color:#fff;transform:translateY(-2px)}
+.btn-outline-ember::before{background:var(--ember)}
+.btn-outline-ember:hover,.btn-outline-ember:focus-visible{color:#fff}
+.btn-outline-ember:focus-visible{outline-color:var(--ember)}
+
 .link-arrow{font-weight:600;color:var(--navy);display:inline-flex;align-items:center;gap:.4em}
 .link-arrow::after{content:"→";transition:transform .2s}
 .link-arrow:hover::after{transform:translateX(4px)}
@@ -516,7 +567,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .field{margin-bottom:16px}
 .field-error{color:var(--ember);font-size:.78rem;margin-top:4px;min-height:1em}
 .field label{display:block;font-weight:600;margin-bottom:6px;font-size:.9rem}
-.field input,.field textarea{width:100%;padding:13px 15px;border:1px solid var(--hair);border-radius:12px;font:inherit;background:var(--white)}
+.field input,.field textarea{width:100%;padding:13px 15px;border:1px solid var(--hair);border-radius:3px;font:inherit;background:var(--white)}
 .field input:focus,.field textarea:focus{outline:2px solid var(--navy);border-color:var(--navy)}
 .field input.invalid,.field textarea.invalid{border-color:var(--ember)}
 /* Widget anti-bots (Cloudflare Turnstile). Amb appearance="interaction-only"
@@ -576,7 +627,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .r-msg.err{display:block;background:#fbe6e7;color:#a1121b;border:1px solid #f0c9cb}
 .select-row{display:flex;gap:14px;flex-wrap:wrap}
 .select-row .field{flex:1;min-width:130px}
-.field select{width:100%;padding:13px 15px;border:1px solid var(--hair);border-radius:12px;font:inherit;background:var(--white)}
+.field select{width:100%;padding:13px 15px;border:1px solid var(--hair);border-radius:3px;font:inherit;background:var(--white)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* avís */
@@ -1058,7 +1109,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   margin:0 0 clamp(18px,2.4vw,26px)}
 .lang3__b{font-family:var(--font-body);font-size:.82rem;font-weight:600;
   letter-spacing:.02em;color:var(--muted);background:var(--white);
-  border:1px solid var(--hair);border-radius:999px;padding:7px 16px;
+  border:1px solid var(--hair);border-radius:2px;padding:7px 16px;
   cursor:pointer;transition:color .2s,background .2s,border-color .2s}
 /* En roig i no en blau: aixi el selector d'idioma no es confon amb la resta
    de botons del formulari, que van en el blau de la marca. */

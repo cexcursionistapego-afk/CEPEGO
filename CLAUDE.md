@@ -110,6 +110,37 @@ La lista de páginas del `sitemap.xml` es la constante `PAGES` de
 `gen.py`, escrita a mano. Una página nueva no entra sola: si debe
 indexarse, hay que añadirla ahí.
 
+## Estilo de los botones y el menú
+
+Se rehizo el 27-10-2026 **a propósito**. Lo de antes —píldoras muy
+redondeadas, relleno rojo con un halo difuso debajo y el botón saltando
+hacia arriba al pasar el ratón— es el aspecto por defecto de las páginas
+hechas en serie, y el club no quiere parecerse a eso. Si alguien "arregla"
+alguna de estas cosas volviendo a lo anterior, estará deshaciendo una
+decisión, no un descuido.
+
+- **Bloques rectos** (`border-radius:2px`), no píldoras. Los campos de los
+  formularios bajaron a `3px` para que hagan juego: si se sube uno, se sube
+  el otro.
+- **Mayúsculas con el espaciado abierto** (`letter-spacing:.14em`), como los
+  rótulos de los senderos.
+- **Sin halo y sin salto**: ningún `box-shadow` de color ni
+  `transform:translateY` en el hover. El color entra de abajo arriba con un
+  `::before`; en el botón principal, de rojo a azul. Ese `::before` lleva
+  `z-index:-1` dentro de un `isolation:isolate`, así queda por encima del
+  fondo del botón pero por debajo del texto; y como un absoluto se coloca
+  respecto de la caja de relleno, el borde no queda tapado.
+- **El menú no lleva pastilla de fondo.** Una raya fina entra por la
+  izquierda al pasar por encima, y la página en la que estás se queda con
+  la raya en rojo. En móvil esa raya ocuparía todo el ancho y no diría
+  nada: allí la página activa se marca con una barra roja a la izquierda.
+- **"Racó del soci" es un botón pequeño con borde**, no un enlace más,
+  porque es la única acción del menú.
+
+Las tarjetas y los paneles siguen con las esquinas redondeadas de antes
+(`--r:16px`). Es lo único que queda del estilo anterior y está pendiente de
+decidir si se igualan.
+
 ## Panel de administración
 
 En `cepego.com/juansa`, protegido con Netlify Identity. Escribe
