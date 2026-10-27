@@ -9,14 +9,17 @@
   --paper:#FFFFFF;
   --paper-2:#F4F4F1;
   --white:#ffffff;
-  --ink:#101013;
-  --muted:#6B6B71;
+  /* Negres NEUTRES: la primera versio portava el blau tres punts per damunt
+     del roig i del verd (#121215) i, en una superficie plena com el hover
+     del "Raco del soci", l'ull ho captava com un blauet. */
+  --ink:#161616;
+  --muted:#6B6B6E;
   --hair:#E3E3DF;
   /* marca.
      El blau de sempre ha passat a negre i el color d'acció ja no és el roig
      sinó el verd pedra de la garriga (--accent), que ja estava declarat com
      a --sage i no s'usava quasi. */
-  --navy:#121215;
+  --navy:#131313;
   --navy-2:#000000;
   --accent:#7F8A6D;
   --accent-2:#5A6449;
@@ -110,7 +113,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
    El "Raco del soci" queda fora d'esta regla: te padding propi i si li
    entrara el d'aci es quedaria sense. */
 .nav>a:not(.soci-link),.nav-parent{font-family:var(--font-display);font-weight:500;font-size:.9rem;
-  letter-spacing:.005em;color:#2A2A30;padding:10px 0;margin:0 11px;border-radius:0;
+  letter-spacing:.005em;color:#2B2B2B;padding:10px 0;margin:0 11px;border-radius:0;
   white-space:nowrap;position:relative;transition:color .2s var(--ease)}
 /* La pagina on estas no es marca amb una ratlla sino amb un punt verd a
    sota: es mes net i deixa respirar el menu. */
@@ -118,7 +121,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   width:5px;height:5px;border-radius:50%;background:var(--accent);
   transform:translateX(-50%) scale(0);transition:transform .26s var(--ease),background-color .2s}
 .nav>a:not(.soci-link):hover::after,.nav-group:hover .nav-parent::after{
-  transform:translateX(-50%) scale(.7);background:rgba(18,18,21,.3)}
+  transform:translateX(-50%) scale(.7);background:rgba(19,19,19,.3)}
 .nav>a:not(.soci-link).active::after,.nav-parent.active::after{
   transform:translateX(-50%) scale(1);background:var(--accent)}
 .nav>a:not(.soci-link):hover,.nav-parent:hover{color:#000;background:none}
@@ -148,7 +151,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
    xicotet. El flex:0 0 auto es perque no l'encongisca i es menge el padding. */
 .soci-link{font-family:var(--font-display)!important;font-weight:500;font-size:.86rem!important;
   text-transform:none!important;letter-spacing:.005em;flex:0 0 auto;white-space:nowrap;
-  padding:8px 15px!important;border:1.5px solid rgba(18,18,21,.25)!important;border-radius:10px!important;
+  padding:8px 15px!important;border:1.5px solid rgba(19,19,19,.25)!important;border-radius:10px!important;
   color:var(--navy)!important;margin-left:16px!important;transition:.2s var(--ease)}
 .soci-link:hover{background:var(--navy)!important;border-color:var(--navy)!important;color:#fff!important;
   transform:translateY(2px)}
@@ -173,6 +176,11 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   /* En vertical la ratlla ocuparia tota l'amplaria i no diria res: aci la
      pagina on estas es marca amb una barra roja a l'esquerra. */
   .nav a{width:100%;border-radius:0;padding:14px 30px;font-size:.88rem;margin:0}
+  /* Ha de repetir el selector d'escriptori: aquell es .nav>a:not(.soci-link),
+     que te mes especificitat que .nav a i li guanyava. Per aixo els enllacos
+     de primer nivell es quedaven sense sagnat, pegats a la vora esquerra,
+     mentre que "La Figuereta" i "Activitats" si que l'agafaven. */
+  .nav>a:not(.soci-link),.nav-parent{padding:14px 30px;margin:0;font-size:.88rem}
   .nav>a:not(.soci-link)::after,.nav-parent::after{display:none}
   .nav>a:not(.soci-link).active,.nav-parent.active{box-shadow:inset 3px 0 0 var(--accent)}
   .nav-group{flex-direction:column;align-items:stretch;width:100%}
@@ -183,8 +191,8 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   .nav-sub a span.desc{display:none}
   .soci-link{font-size:.88rem!important;padding:16px 30px!important;border:0!important;border-radius:0!important;
     color:var(--accent)!important;margin:6px 0 0!important;border-top:1px solid var(--hair)!important}
-  .soci-link:hover{background:rgba(18,18,21,.06)!important;color:var(--accent)!important}
-  .soci-link:hover{background:rgba(18,18,21,.06)!important}
+  .soci-link:hover{background:rgba(19,19,19,.06)!important;color:var(--accent)!important}
+  .soci-link:hover{background:rgba(19,19,19,.06)!important}
   .soci-link.active{background:transparent!important}
   .lang-btn{margin:14px 30px 0;align-self:flex-start}
   .nav-toggle{display:block}
@@ -257,7 +265,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .btn-ghost:hover{background-color:#fff;border-color:#fff;color:var(--navy)}
 .btn-ghost:focus-visible{outline-color:#fff}
 
-.btn-outline{background-color:transparent;border-color:rgba(18,18,21,.3);color:var(--navy)}
+.btn-outline{background-color:transparent;border-color:rgba(19,19,19,.3);color:var(--navy)}
 .btn-outline:hover{background-color:var(--navy);border-color:var(--navy);color:#fff}
 
 /* Accio secundaria en el verd de la marca, per a quan va al costat d'un
@@ -679,7 +687,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .fc-row{position:relative;padding-top:9px;padding-bottom:9px;
   grid-template-areas:"day periods temps" "alert alert alert"}
 .fc-row+.fc-row{border-top:1px solid rgba(228,221,206,.7)}
-.fc-row--today{background:linear-gradient(90deg,rgba(18,18,21,.055),rgba(18,18,21,.015))}
+.fc-row--today{background:linear-gradient(90deg,rgba(19,19,19,.055),rgba(19,19,19,.015))}
 
 .fc-day{grid-area:day;display:flex;align-items:baseline;gap:5px;min-width:0;overflow:hidden}
 .fc-day__dow{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
