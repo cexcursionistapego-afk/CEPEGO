@@ -144,6 +144,9 @@ Dos excepciones pensadas, no descuidos:
   línea del pie se cambió por un verde claro.
 - **El día elegido del calendario de reservas va en negro, no en verde**: en
   esa rejilla el verde ya significa "libre" y se confundirían.
+- **Los puntos de las cumbres de "El nostre territori" siguen en rojo**
+  (`.skyline-chart .sk-dot`), por decisión del club. Es el único sitio donde
+  el rojo no avisa de nada y aun así se queda.
 
 ### Los botones
 
