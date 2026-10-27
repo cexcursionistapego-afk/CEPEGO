@@ -5,20 +5,28 @@
    ============================================================ */
 
 :root{
-  /* neutres càlids */
-  --paper:#F5F1E9;
-  --paper-2:#EEE8DB;
+  /* neutres */
+  --paper:#FFFFFF;
+  --paper-2:#F4F4F1;
   --white:#ffffff;
-  --ink:#1E222A;
-  --muted:#5C6169;
-  --hair:#E4DDCE;
-  /* marca */
-  --navy:#1E2E63;
-  --navy-2:#16224b;
+  --ink:#101013;
+  --muted:#6B6B71;
+  --hair:#E3E3DF;
+  /* marca.
+     El blau de sempre ha passat a negre i el color d'acció ja no és el roig
+     sinó el verd pedra de la garriga (--accent), que ja estava declarat com
+     a --sage i no s'usava quasi. */
+  --navy:#121215;
+  --navy-2:#000000;
+  --accent:#7F8A6D;
+  --accent-2:#5A6449;
+  /* El roig es queda NOMÉS per al que avisa: errors de formulari, alertes
+     meteorològiques, rutes difícils, estació sense connexió. Si el tornes a
+     posar en un botó o en un títol, deixa de voler dir res. */
   --ember:#B4121B;
   --ember-2:#8f0d15;
   --sage:#7f8a6d;
-  --deep:#14171F;      /* fons fosc (peu / scrims) */
+  --deep:#0A0A0C;      /* fons fosc (peu / scrims) */
   /* sistema */
   --shadow-sm:0 2px 10px rgba(20,20,25,.06);
   --shadow:0 18px 50px -18px rgba(20,23,35,.28);
@@ -37,16 +45,13 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   margin:0;font-family:var(--font-body);color:var(--ink);
   background-color:var(--paper);
-  /* Organic wood-paper grain texture */
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.42' numOctaves='6' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0.55 0 0 0 0.52  0 0.44 0 0 0.40  0 0 0.32 0 0.30  0 0 0 0.11 0'/%3E%3C/filter%3E%3Crect width='800' height='800' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size:800px 800px;
+  /* La textura de fusta del paper antic embrutava damunt del blanc. */
   font-size:clamp(16px,1.05vw,17.5px);line-height:1.7;font-weight:400;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
 }
 img{max-width:100%;display:block}
 a{color:var(--navy);text-decoration:none;transition:color .2s}
-a:hover{color:var(--ember)}
+a:hover{color:var(--accent)}
 ::selection{background:var(--navy);color:#fff}
 
 h1,h2,h3,h4{font-family:var(--font-display);font-weight:560;line-height:1.04;
@@ -72,7 +77,7 @@ em{font-style:italic}
 
 /* eyebrow / kicker */
 .kicker{display:inline-flex;align-items:center;font-family:var(--font-body);
-  font-weight:600;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember)}
+  font-weight:600;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
 .kicker.on-photo{color:#f3c98a}
 .kicker.center-k{display:flex;justify-content:center}
 
@@ -87,69 +92,72 @@ html[data-lang="en"] .va,html[data-lang="en"] .es,html[data-lang="en"] .fr{displ
 html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{display:none}
 
 /* ================= HEADER ================= */
-.site-header{position:sticky;top:0;z-index:100;background:rgba(245,241,233,.82);
-  backdrop-filter:blur(14px) saturate(1.1);border-bottom:1px solid transparent;transition:.3s var(--ease)}
-.site-header.scrolled{background:rgba(245,241,233,.94);border-bottom-color:var(--hair);box-shadow:var(--shadow-sm)}
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);
+  backdrop-filter:blur(14px) saturate(1.1);border-bottom:1px solid var(--hair);transition:.3s var(--ease)}
+.site-header.scrolled{background:rgba(255,255,255,.97);box-shadow:0 1px 14px rgba(0,0,0,.05)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:86px}
 .brand{display:flex;align-items:center;gap:13px;color:var(--ink);text-decoration:none}
-.brand img{width:46px;height:46px;object-fit:contain;flex-shrink:0}
+.brand img{width:42px;height:42px;object-fit:contain;flex-shrink:0}
 .brand__text{display:flex;flex-direction:column;gap:3px}
-.brand__name{font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:-.02em;line-height:1;color:var(--navy)}
-.brand__sub{font-family:var(--font-body);font-weight:600;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.brand__name{font-family:var(--font-display);font-weight:600;font-size:.95rem;letter-spacing:-.01em;line-height:1.15;color:var(--navy)}
+.brand__sub{font-family:var(--font-body);font-weight:600;font-size:.55rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
 
 .nav{display:flex;align-items:center;gap:0}
-/* Els enllacos del menu no porten pastilla de fons: en el seu lloc, una
-   ratlla fina que entra per l'esquerra. La pastilla arredonida en cada
-   element era justament el que donava l'aire de plantilla. */
-.nav>a,.nav-parent{font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.11em;
-  color:var(--ink);padding:10px 0;margin:0 13px;border-radius:0;white-space:nowrap;
-  position:relative;transition:color .2s var(--ease)}
-.nav>a:not(.soci-link)::after,.nav-parent::after{content:"";position:absolute;left:0;right:0;bottom:3px;
-  height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;
-  transition:transform .28s var(--ease)}
-.nav>a:not(.soci-link):hover::after,.nav>a:not(.soci-link).active::after,
-.nav-group:hover .nav-parent::after,.nav-parent.active::after{transform:scaleX(1);transform-origin:left}
-.nav>a:hover,.nav-parent:hover{color:var(--navy);background:none}
-.nav>a.active,.nav-parent.active{color:var(--ember)}
+/* El menu va en la serif i en caixa normal, com la resta de la web. El cos
+   es menut perque la serif ocupa mes amplaria que una pal de sec: amb .98rem
+   el menu se n'eixia del contenidor a 1280, que es on mes gent el veu.
+   El "Raco del soci" queda fora d'esta regla: te padding propi i si li
+   entrara el d'aci es quedaria sense. */
+.nav>a:not(.soci-link),.nav-parent{font-family:var(--font-display);font-weight:500;font-size:.9rem;
+  letter-spacing:.005em;color:#2A2A30;padding:10px 0;margin:0 11px;border-radius:0;
+  white-space:nowrap;position:relative;transition:color .2s var(--ease)}
+/* La pagina on estas no es marca amb una ratlla sino amb un punt verd a
+   sota: es mes net i deixa respirar el menu. */
+.nav>a:not(.soci-link)::after,.nav-parent::after{content:"";position:absolute;left:50%;bottom:1px;
+  width:5px;height:5px;border-radius:50%;background:var(--accent);
+  transform:translateX(-50%) scale(0);transition:transform .26s var(--ease),background-color .2s}
+.nav>a:not(.soci-link):hover::after,.nav-group:hover .nav-parent::after{
+  transform:translateX(-50%) scale(.7);background:rgba(18,18,21,.3)}
+.nav>a:not(.soci-link).active::after,.nav-parent.active::after{
+  transform:translateX(-50%) scale(1);background:var(--accent)}
+.nav>a:not(.soci-link):hover,.nav-parent:hover{color:#000;background:none}
+.nav>a:not(.soci-link).active,.nav-parent.active{color:var(--navy)}
 .nav a:focus-visible{outline:2px solid var(--navy);outline-offset:4px}
 .nav-group{position:relative;display:flex;align-items:center}
 .nav-parent{cursor:pointer;display:inline-flex;align-items:center;gap:7px}
 .nav-parent .caret{width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;
-  transform:rotate(45deg) translateY(-1px);opacity:.5;transition:.2s}
+  transform:rotate(45deg) translateY(-1px);opacity:.45;transition:.2s}
 .nav-group:hover .caret{transform:rotate(45deg) translateY(1px);opacity:1}
 .nav-sub{position:absolute;top:100%;left:-14px;display:none;flex-direction:column;
-  background:var(--white);border:1px solid var(--hair);border-radius:10px;box-shadow:var(--shadow);
+  background:var(--white);border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);
   padding:6px;min-width:250px;z-index:120;margin-top:8px}
 /* bridge invisible que cobreix el gap per a no perdre el focus hover */
 .nav-sub::after{content:"";position:absolute;top:-10px;left:0;right:0;height:12px}
 .nav-sub::before{content:"";position:absolute;top:-6px;left:24px;width:11px;height:11px;background:var(--white);
   border-left:1px solid var(--hair);border-top:1px solid var(--hair);transform:rotate(45deg);z-index:1}
 .nav-group:hover .nav-sub,.nav-group:focus-within .nav-sub{display:flex}
-.nav-sub a{padding:11px 14px;border-radius:7px;font-size:.9rem;width:100%;color:var(--ink);
+.nav-sub a{padding:11px 14px;border-radius:8px;font-size:.9rem;width:100%;color:var(--ink);
   text-transform:none;letter-spacing:0;margin:0}
 .nav-sub a:hover,.nav-sub a.active{color:#fff;background:var(--navy)}
 .nav-sub a b{display:block;font-family:var(--font-body);font-weight:600;font-size:.9rem}
 .nav-sub a span.desc{display:block;font-size:.76rem;color:var(--muted);font-weight:400;margin-top:1px}
 .nav-sub a:hover span.desc,.nav-sub a.active span.desc{color:rgba(255,255,255,.75)}
 
-/* El "Raco del soci" i la bandera parlen el mateix idioma que els botons
-   grans: cantons suaus, relleu solid baix i s'enfonsen en premer-los. */
-.soci-link{font-family:var(--font-display)!important;font-weight:600;font-size:.88rem!important;
-  text-transform:none!important;letter-spacing:.005em;
-  padding:8px 16px 9px!important;border:1.5px solid var(--navy)!important;border-radius:8px!important;
-  color:var(--navy)!important;margin-left:16px!important;
-  box-shadow:0 2px 0 rgba(30,46,99,.28);transition:.18s var(--ease)}
-.soci-link:hover{background:var(--navy)!important;color:#fff!important;
-  transform:translateY(2px);box-shadow:0 0 0 transparent}
-.soci-link.active{border-color:var(--ember)!important;color:var(--ember)!important;
-  background:transparent!important;box-shadow:0 2px 0 rgba(180,18,27,.3)}
-.soci-link.active:hover{background:var(--ember)!important;color:#fff!important;box-shadow:0 0 0 transparent}
+/* El "Raco del soci" es l'unica accio del menu, aixi que va com un boto
+   xicotet. El flex:0 0 auto es perque no l'encongisca i es menge el padding. */
+.soci-link{font-family:var(--font-display)!important;font-weight:500;font-size:.86rem!important;
+  text-transform:none!important;letter-spacing:.005em;flex:0 0 auto;white-space:nowrap;
+  padding:8px 15px!important;border:1.5px solid rgba(18,18,21,.25)!important;border-radius:10px!important;
+  color:var(--navy)!important;margin-left:16px!important;transition:.2s var(--ease)}
+.soci-link:hover{background:var(--navy)!important;border-color:var(--navy)!important;color:#fff!important;
+  transform:translateY(2px)}
+.soci-link.active{border-color:var(--accent)!important;color:var(--accent-2)!important;background:transparent!important}
+.soci-link.active:hover{background:var(--accent)!important;color:#fff!important}
 .lang-btn{font-family:var(--font-body);font-weight:700;font-size:.69rem;letter-spacing:.1em;
-  border:1.5px solid rgba(0,0,0,.22);color:#fff;border-radius:8px;
-  padding:8px 13px;cursor:pointer;margin-left:11px;
-  background-size:cover;background-position:center;text-shadow:0 1px 3px rgba(0,0,0,.65);
-  box-shadow:0 2px 0 rgba(0,0,0,.22);transition:.18s var(--ease)}
-.lang-btn:hover{filter:brightness(.94);transform:translateY(2px);box-shadow:0 0 0 transparent}
+  border:1.5px solid rgba(0,0,0,.18);color:#fff;border-radius:10px;
+  padding:8px 13px;cursor:pointer;margin-left:11px;transition:.18s var(--ease);
+  background-size:cover;background-position:center;text-shadow:0 1px 3px rgba(0,0,0,.65)}
+.lang-btn:hover{filter:brightness(.94);transform:translateY(2px)}
 .lang-btn:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
 .lang-btn.flag-es{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40'%3E%3Crect width='60' height='40' fill='%23AA151B'/%3E%3Crect y='10' width='60' height='20' fill='%23F1BF00'/%3E%3C/svg%3E")}
 .lang-btn.flag-va{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40'%3E%3Crect width='60' height='40' fill='%23FFD400'/%3E%3Crect y='5.7' width='60' height='5.7' fill='%23DA121A'/%3E%3Crect y='17.1' width='60' height='5.7' fill='%23DA121A'/%3E%3Crect y='28.6' width='60' height='5.7' fill='%23DA121A'/%3E%3C/svg%3E")}
@@ -164,8 +172,8 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   /* En vertical la ratlla ocuparia tota l'amplaria i no diria res: aci la
      pagina on estas es marca amb una barra roja a l'esquerra. */
   .nav a{width:100%;border-radius:0;padding:14px 30px;font-size:.88rem;margin:0}
-  .nav>a::after,.nav-parent::after{display:none}
-  .nav>a.active,.nav-parent.active{box-shadow:inset 3px 0 0 var(--ember)}
+  .nav>a:not(.soci-link)::after,.nav-parent::after{display:none}
+  .nav>a:not(.soci-link).active,.nav-parent.active{box-shadow:inset 3px 0 0 var(--accent)}
   .nav-group{flex-direction:column;align-items:stretch;width:100%}
   .nav-parent .caret{display:none}
   .nav-sub{position:static;display:flex;box-shadow:none;border:0;border-radius:0;padding:0;background:var(--paper-2);min-width:0}
@@ -173,9 +181,9 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   .nav-sub a{padding:12px 44px;font-size:.96rem}
   .nav-sub a span.desc{display:none}
   .soci-link{font-size:.88rem!important;padding:16px 30px!important;border:0!important;border-radius:0!important;
-    color:var(--ember)!important;margin:6px 0 0!important;border-top:1px solid var(--hair)!important}
-  .soci-link:hover{background:rgba(30,46,99,.06)!important;color:var(--ember)!important}
-  .soci-link:hover{background:rgba(30,46,99,.06)!important}
+    color:var(--accent)!important;margin:6px 0 0!important;border-top:1px solid var(--hair)!important}
+  .soci-link:hover{background:rgba(18,18,21,.06)!important;color:var(--accent)!important}
+  .soci-link:hover{background:rgba(18,18,21,.06)!important}
   .soci-link.active{background:transparent!important}
   .lang-btn{margin:14px 30px 0;align-self:flex-start}
   .nav-toggle{display:block}
@@ -215,59 +223,47 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .subhero p{color:#e9e9e9;max-width:56ch;margin-top:.5em;font-size:1.1rem}
 
 /* ================= BUTTONS ================= */
-/* La fita. Ni pindola amb halo de color, que es la forma que tenen per
-   defecte les pagines fetes en serie, ni bloc quadrat, que va quedar dur i
-   fred. Un rectangle de cantons suaus amb tres coses que el fan d'aci:
-     - el relleu solid de baix, com la vora d'una fusta clavada en terra,
-     - la carena gravada al peu, la silueta que ja tanca el bloc blau final,
-     - i que en passar-hi per damunt el boto S'ENFONSA en el seu relleu en
-       comptes de botar cap amunt. Un rotul de sender no vola.
-   El relleu es una ombra solida sense difuminar: res de halos de color. */
+/* Pedra. Blocs de cant suau en el verd gris de la garriga, amb ombra
+   difuminada i no el cant solid dur, que tirava cap a joguet. El roig ja no
+   s'usa aci: es queda per al que avisa.
+   L'unic gest que es mante dels intents anteriors es el bo: en passar-hi per
+   damunt el boto S'ENFONSA en comptes de botar cap amunt. */
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.65em;
   font-family:var(--font-display);font-weight:600;font-size:1.02rem;letter-spacing:.005em;
   padding:14px 30px 15px;border-radius:10px;cursor:pointer;border:1.5px solid transparent;
-  transition:transform .18s var(--ease),box-shadow .18s var(--ease),
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),
     background-color .22s var(--ease),color .22s var(--ease),border-color .22s var(--ease)}
 .btn svg{width:17px;height:17px}
-/* S'enfonsa en el seu relleu en comptes de botar cap amunt: un rotul clavat
-   en terra no vola, i a mes el salt cap amunt es el gest de sempre. */
 .btn:hover{transform:translateY(2px)}
 .btn:active{transform:translateY(3px)}
 .btn:focus-visible{outline:2px solid var(--navy);outline-offset:4px}
-.btn-primary{background-color:var(--ember);border-color:var(--ember);color:#fff;
-  box-shadow:0 3px 0 #6f0b11,0 8px 16px -10px rgba(111,11,17,.55)}
-.btn-primary:hover{background-color:#a0101a;color:#fff;box-shadow:0 1px 0 #6f0b11,0 4px 10px -8px rgba(111,11,17,.5)}
-.btn-primary:active{box-shadow:0 0 0 #6f0b11}
+
+.btn-primary{background-color:var(--accent);border-color:var(--accent);color:#fff;
+  box-shadow:0 10px 22px -14px rgba(0,0,0,.6)}
+.btn-primary:hover{background-color:var(--accent-2);border-color:var(--accent-2);color:#fff;
+  box-shadow:0 5px 12px -11px rgba(0,0,0,.5)}
 
 .btn-navy{background-color:var(--navy);border-color:var(--navy);color:#fff;
-  box-shadow:0 3px 0 #101c40,0 8px 16px -10px rgba(16,28,64,.5)}
-.btn-navy:hover{background-color:var(--navy-2);color:#fff;box-shadow:0 1px 0 #101c40,0 4px 10px -8px rgba(16,28,64,.45)}
-.btn-navy:active{box-shadow:0 0 0 #101c40}
+  box-shadow:0 10px 22px -14px rgba(0,0,0,.6)}
+.btn-navy:hover{background-color:var(--navy-2);border-color:var(--navy-2);color:#fff;
+  box-shadow:0 5px 12px -11px rgba(0,0,0,.5)}
 
 /* Els variants "buits" han de dir background-color explicitament: en un
    <button> sense fons declarat el navegador en posa un de gris propi, i el
    text clar damunt d'eixe gris no es llig. */
-.btn-ghost{background-color:rgba(255,255,255,.08);border-color:rgba(255,255,255,.6);color:#fff;backdrop-filter:blur(5px);
-  box-shadow:0 3px 0 rgba(0,0,0,.26)}
-.btn-ghost:hover{background-color:#fff;color:var(--navy);border-color:#fff;
-  box-shadow:0 1px 0 rgba(0,0,0,.2)}
-.btn-ghost:active{box-shadow:0 0 0 rgba(0,0,0,0)}
+.btn-ghost{background-color:rgba(255,255,255,.1);border-color:rgba(255,255,255,.55);color:#fff;
+  backdrop-filter:blur(5px)}
+.btn-ghost:hover{background-color:#fff;border-color:#fff;color:var(--navy)}
 .btn-ghost:focus-visible{outline-color:#fff}
 
-.btn-outline{background-color:transparent;border-color:var(--navy);color:var(--navy);
-  box-shadow:0 3px 0 rgba(30,46,99,.3)}
-.btn-outline:hover{background-color:var(--navy);color:#fff;
-  box-shadow:0 1px 0 rgba(30,46,99,.35)}
-.btn-outline:active{box-shadow:0 0 0 transparent}
+.btn-outline{background-color:transparent;border-color:rgba(18,18,21,.3);color:var(--navy)}
+.btn-outline:hover{background-color:var(--navy);border-color:var(--navy);color:#fff}
 
-/* Accio secundaria en el roig de la marca, per a quan va al costat d'un
+/* Accio secundaria en el verd de la marca, per a quan va al costat d'un
    .btn-primary i han de llegir-se com a parella (alta / baixa de soci). */
-.btn-outline-ember{background-color:transparent;border-color:var(--ember);color:var(--ember);
-  box-shadow:0 3px 0 rgba(180,18,27,.3)}
-.btn-outline-ember:hover{background-color:var(--ember);color:#fff;
-  box-shadow:0 1px 0 rgba(180,18,27,.35)}
-.btn-outline-ember:active{box-shadow:0 0 0 transparent}
-.btn-outline-ember:focus-visible{outline-color:var(--ember)}
+.btn-outline-ember{background-color:transparent;border-color:rgba(127,138,109,.6);color:var(--accent-2)}
+.btn-outline-ember:hover{background-color:var(--accent);border-color:var(--accent);color:#fff}
+.btn-outline-ember:focus-visible{outline-color:var(--accent)}
 
 .link-arrow{font-weight:600;color:var(--navy);display:inline-flex;align-items:center;gap:.4em}
 .link-arrow::after{content:"→";transition:transform .2s}
@@ -281,7 +277,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .split__media::before{content:"";position:absolute;inset:-8px;border-radius:calc(var(--r-lg) + 8px);border:1px solid var(--hair);pointer-events:none;z-index:-1}
 .split__media .tagpin{position:absolute;left:-18px;bottom:28px;background:var(--white);color:var(--ink);
   padding:14px 20px;border-radius:16px;box-shadow:var(--shadow-lg);font-weight:600;font-size:.9rem;display:flex;gap:12px;align-items:center}
-.split__media .tagpin .n{font-family:var(--font-display);font-size:1.7rem;color:var(--ember);line-height:1}
+.split__media .tagpin .n{font-family:var(--font-display);font-size:1.7rem;color:var(--accent);line-height:1}
 .split.reverse .split__media .tagpin{left:auto;right:-18px}
 @media(max-width:820px){.split{grid-template-columns:1fr;gap:28px}.split.reverse .split__media{order:0}
   .split__media img{max-height:420px}.split__media .tagpin{left:16px;right:auto!important}
@@ -299,7 +295,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .skyline-chart .sk-ridge{stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
 .skyline-chart .sk-base{stroke:var(--ink);stroke-width:1;opacity:.18}
 .skyline-chart .sk-lead{stroke:var(--hair);stroke-width:1}
-.skyline-chart .sk-dot{fill:var(--ember)}
+.skyline-chart .sk-dot{fill:var(--accent)}
 .skyline-chart .sk-name{font:700 12px var(--font-body);letter-spacing:.06em;fill:var(--ink)}
 .skyline-chart .sk-alt{font:500 10px var(--font-body);fill:var(--muted)}
 .skyline-chart .sk-name-v{font:700 10px var(--font-body);letter-spacing:.04em;fill:var(--ink)}
@@ -325,7 +321,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 
 .card{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(24px,3vw,38px);box-shadow:var(--shadow-sm)}
 .card h3{color:var(--navy)}
-.feature-num{font-family:var(--font-display);font-size:3rem;color:var(--ember);line-height:.9}
+.feature-num{font-family:var(--font-display);font-size:3rem;color:var(--accent);line-height:.9}
 
 /* lists */
 .equip{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:2px 30px}
@@ -337,16 +333,16 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
    abans separava el titol del formulari i ara nomes hi ha el rotul. */
 .rules-top{padding-top:clamp(16px,2vw,28px)}
 @media(min-width:901px){.rules-top{padding-top:clamp(16px,2vw,28px)}}
-.rules li{background:var(--white);border:1px solid var(--hair);border-left:3px solid var(--ember);
+.rules li{background:var(--white);border:1px solid var(--hair);border-left:3px solid var(--accent);
   padding:14px 18px;border-radius:0 12px 12px 0;font-size:.96rem}
 .reunions,.noticies{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;flex:1}
 .reunions li,.noticies li{background:var(--white);border:1px solid var(--hair);flex:1;
   padding:14px 18px;border-radius:0 12px 12px 0;font-size:.96rem}
 .reunions li{border-left:3px solid var(--navy)}
-.noticies li{border-left:3px solid var(--ember)}
+.noticies li{border-left:3px solid var(--accent)}
 .reunions li b,.noticies li b{display:block;font-family:var(--font-body);font-weight:700;margin-bottom:2px}
 .reunions li b{color:var(--navy)}
-.noticies li b{color:var(--ember)}
+.noticies li b{color:var(--accent)}
 .reunions li.empty,.noticies li.empty{border-left-color:var(--hair);color:var(--muted)}
 .iban{font-family:var(--font-mono);background:var(--navy);color:#fff;display:inline-block;padding:11px 18px;border-radius:12px;letter-spacing:.06em}
 .note{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:18px 22px;color:var(--muted);font-size:.94rem}
@@ -374,7 +370,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 /* price row */
 .prices{display:flex;gap:16px;flex-wrap:wrap}
 .price{flex:1;min-width:150px;background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:26px;text-align:center}
-.price .n{font-family:var(--font-display);font-size:2.6rem;color:var(--ember);line-height:1}
+.price .n{font-family:var(--font-display);font-size:2.6rem;color:var(--accent);line-height:1}
 .price .l{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 
 /* ================= GALLERY ================= */
@@ -510,7 +506,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .viatable td{padding:11px 16px;border-bottom:1px solid var(--paper-2)}
 .viatable tr:last-child td{border-bottom:0}
 .viatable td:first-child{width:42px;color:var(--muted);font-family:var(--font-mono);font-size:.85rem}
-.viatable td:last-child{text-align:right;font-family:var(--font-mono);color:var(--ember);font-weight:600;white-space:nowrap}
+.viatable td:last-child{text-align:right;font-family:var(--font-mono);color:var(--accent);font-weight:600;white-space:nowrap}
 
 /* climbing sectors: photo + route grid, paired per sector */
 .sector-block{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,64px);align-items:center;
@@ -546,7 +542,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .rutes-filtre__n{font-size:.78rem;color:var(--muted);font-weight:600}
 .rutes-filtre__neteja{background:none;border:0;padding:0;font:inherit;font-size:.78rem;
   color:var(--navy);text-decoration:underline;cursor:pointer}
-.rutes-filtre__neteja:hover{color:var(--ember)}
+.rutes-filtre__neteja:hover{color:var(--accent)}
 .route__stats{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0;font-size:.82rem}
 .route__stats b{display:block;font-family:var(--font-display);font-size:1.3rem;color:var(--ink)}
 .route__stats span{color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:.68rem}
@@ -563,7 +559,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .map-ask{display:flex;align-items:center;justify-content:center;min-height:380px;
   background:var(--paper-2);text-align:center}
 .map-ask__in{padding:26px 22px;max-width:44ch}
-.map-ask__pin{width:34px;height:34px;color:var(--ember);opacity:.85}
+.map-ask__pin{width:34px;height:34px;color:var(--accent);opacity:.85}
 .map-ask__t{font-family:var(--font-display);font-size:1.15rem;font-weight:560;color:var(--ink);margin:8px 0 6px}
 .map-ask__d{font-size:.86rem;color:var(--muted);line-height:1.5;margin:0 0 16px}
 .map-ask__alt{display:block;margin-top:12px;font-size:.8rem;color:var(--muted);text-decoration:underline}
@@ -603,10 +599,10 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
    solid baix i s'enfonsen en premer-les. Eren els dos ultims rodons. */
 .rcal-nav button{width:38px;height:38px;border-radius:9px;border:1.5px solid var(--hair);background:var(--paper);
   font-family:var(--font-display);font-size:1.25rem;line-height:1;cursor:pointer;color:var(--navy);
-  box-shadow:0 2px 0 rgba(30,46,99,.14);
-  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
+  border-radius:10px;
+  transition:transform .18s var(--ease),background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
 .rcal-nav button:hover:not(:disabled){background:var(--navy);border-color:var(--navy);color:#fff;
-  transform:translateY(2px);box-shadow:0 0 0 transparent}
+  transform:translateY(2px)}
 .rcal-nav button:active:not(:disabled){transform:translateY(3px)}
 .rcal-nav button:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
 .rcal-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
@@ -632,13 +628,13 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .rcal-d button.busy{background:repeating-linear-gradient(45deg,#f2d9da,#f2d9da 5px,#efcccd 5px,#efcccd 10px);color:#a13;text-decoration:line-through;opacity:.9}
 .rcal-d button.busy:disabled{cursor:not-allowed}
 .rcal-d button.busy:not(:disabled){cursor:pointer;text-decoration:none}
-.rcal-d button.sel{background:var(--ember);color:#fff;font-weight:600;cursor:pointer}
+.rcal-d button.sel{background:var(--navy);color:#fff;font-weight:600;cursor:pointer}
 .rcal-d button.inrange{background:#c8d9f5;color:var(--navy)}
 .rcal-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:.8rem;color:var(--muted);align-items:center}
 .rcal-legend i.lg{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px}
 .rcal-legend i.lg.free{background:#d6ecd8;border:1px solid #b2d9b6}
 .rcal-legend i.lg.busy{background:repeating-linear-gradient(45deg,#f2d9da,#f2d9da 4px,#efcccd 4px,#efcccd 8px)}
-.rcal-legend i.lg.sel{background:var(--ember)}
+.rcal-legend i.lg.sel{background:var(--navy)}
 .rcal-load{font-style:italic;opacity:.7}
 #r-resum{background:var(--paper-2);border-radius:12px;padding:12px 16px;font-size:.92rem;margin:0 0 16px}
 .r-msg{margin-top:14px;padding:12px 16px;border-radius:12px;font-size:.92rem;display:none}
@@ -682,7 +678,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .fc-row{position:relative;padding-top:9px;padding-bottom:9px;
   grid-template-areas:"day periods temps" "alert alert alert"}
 .fc-row+.fc-row{border-top:1px solid rgba(228,221,206,.7)}
-.fc-row--today{background:linear-gradient(90deg,rgba(30,46,99,.055),rgba(30,46,99,.015))}
+.fc-row--today{background:linear-gradient(90deg,rgba(18,18,21,.055),rgba(18,18,21,.015))}
 
 .fc-day{grid-area:day;display:flex;align-items:baseline;gap:5px;min-width:0;overflow:hidden}
 .fc-day__dow{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
@@ -887,14 +883,13 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .lloc-sel{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:clamp(14px,2vw,20px)}
 .lloc-sel__b{font-family:var(--font-display);font-size:.92rem;font-weight:600;cursor:pointer;
   letter-spacing:.005em;
-  padding:8px 18px 9px;border-radius:9px;border:1.5px solid var(--hair);background-color:var(--paper-2);
-  color:var(--navy);box-shadow:0 2px 0 rgba(30,46,99,.14);
+  padding:8px 18px 9px;border-radius:10px;border:1.5px solid var(--hair);background-color:var(--paper-2);
+  color:var(--navy);
   transition:transform .18s var(--ease),box-shadow .18s var(--ease),
     background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
-.lloc-sel__b:hover{border-color:var(--navy);transform:translateY(2px);box-shadow:0 0 0 transparent}
+.lloc-sel__b:hover{border-color:var(--navy);transform:translateY(2px)}
 .lloc-sel__b[aria-current="true"]{background-color:var(--navy);
-  border-color:var(--navy);color:var(--white);box-shadow:0 2px 0 #101c40}
-.lloc-sel__b[aria-current="true"]:hover{box-shadow:0 0 0 transparent}
+  border-color:var(--navy);color:var(--white)}
 /* Segona fila: les estacions del grup triat (nomes ix si en te mes d'una).
    Va un escalo per davall, sense relleu, per a que no competisca. */
 .lloc-sub{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:9px}
@@ -909,7 +904,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .meteo-dash{position:relative;background:var(--white);border:1px solid var(--hair);border-radius:var(--r-lg);
   box-shadow:var(--shadow-sm);overflow:hidden}
 .meteo-dash::before{content:"";display:block;height:3px;
-  background:linear-gradient(90deg,var(--navy),var(--ember) 50%,var(--navy))}
+  background:linear-gradient(90deg,var(--navy),var(--accent) 50%,var(--navy))}
 
 .meteo-dash__head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
   padding:20px 24px 16px;background:var(--paper-2);border-bottom:1px solid var(--hair)}
@@ -996,19 +991,19 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .prefooter{background:var(--navy);padding:clamp(56px,7vw,100px) 0;position:relative;overflow:hidden}
 /* Subtle mountain silhouette decoration — simple, minimal skyline */
 .prefooter::after{content:"";position:absolute;bottom:0;left:0;right:0;height:80px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='rgba(0,0,0,.18)' d='M0,80 L0,62 L180,24 L340,58 L540,10 L740,54 L940,30 L1140,60 L1320,18 L1440,44 L1440,80 Z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='rgba(255,255,255,.045)' d='M0,80 L0,62 L180,24 L340,58 L540,10 L740,54 L940,30 L1140,60 L1320,18 L1440,44 L1440,80 Z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
   pointer-events:none}
 .prefooter .wrap{display:flex;align-items:center;justify-content:space-between;gap:clamp(20px,4vw,48px);flex-wrap:wrap;position:relative;z-index:1}
-.prefooter__text .kicker{color:#f3c98a}
+.prefooter__text .kicker{color:#A8B591}
 .prefooter__text h2{color:#fff;margin:.4em 0 .5em;font-size:clamp(1.8rem,3.4vw,2.8rem)}
 .prefooter__text p{color:rgba(255,255,255,.7);max-width:44ch;margin:0;font-size:1.05rem}
 .prefooter__cta{display:flex;gap:14px;flex-shrink:0;flex-wrap:wrap}
 @media(max-width:740px){.prefooter .wrap{flex-direction:column;text-align:center}.prefooter__text .kicker{justify-content:center}}
 
 /* ================= FOOTER ================= */
-.footer{background:#0b0e16;color:#888d9b;position:relative}
+.footer{background:#0A0A0C;color:#8C8C92;position:relative}
 /* Amber accent line at very top */
-.footer::before{content:"";display:block;height:3px;background:linear-gradient(90deg,transparent 0%,var(--ember) 25%,#f3c98a 50%,var(--ember) 75%,transparent 100%)}
+.footer::before{content:"";display:block;height:3px;background:linear-gradient(90deg,transparent 0%,var(--accent) 25%,#A8B591 50%,var(--accent) 75%,transparent 100%)}
 
 /* ---- Brand strip (centrat, orgànic) ---- */
 .footer__head{
@@ -1034,13 +1029,13 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .footer a:hover{color:#fff}
 .footer ul{list-style:none;padding:0;margin:0;display:grid;gap:12px;font-size:.92rem}
 .footer ul li a{display:inline-flex;align-items:center;gap:.4em}
-.footer ul li a::before{content:"";width:14px;height:1px;background:var(--ember);opacity:0;transition:.2s;flex-shrink:0}
+.footer ul li a::before{content:"";width:14px;height:1px;background:var(--accent);opacity:0;transition:.2s;flex-shrink:0}
 .footer ul li a:hover::before{opacity:1}
 
 /* ---- Social ---- */
 .social{display:flex;gap:10px}
 .social a{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:.2s}
-.social a:hover{background:var(--ember);border-color:var(--ember);transform:translateY(-2px)}
+.social a:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
 .social svg{width:17px;height:17px;fill:#fff}
 
 /* ---- Contact info ---- */
@@ -1070,7 +1065,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 }
 
 /* ---- Soci form extras ---- */
-.form-section-label{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:4px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--ember)}
+.form-section-label{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:4px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
 .check-group{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:8px}
 .chk{display:flex;align-items:center;gap:7px;font-size:.93rem;cursor:pointer}
 .chk input[type=checkbox]{width:16px;height:16px;accent-color:var(--navy);cursor:pointer}
@@ -1134,16 +1129,14 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   margin:0 0 clamp(18px,2.4vw,26px)}
 .lang3__b{font-family:var(--font-display);font-size:.88rem;font-weight:600;
   letter-spacing:.02em;color:var(--muted);background:var(--white);
-  border:1.5px solid var(--hair);border-radius:8px;padding:8px 16px;
-  box-shadow:0 2px 0 rgba(30,46,99,.12);
+  border:1.5px solid var(--hair);border-radius:10px;padding:8px 16px;
   cursor:pointer;transition:color .2s,background .2s,border-color .2s}
 /* En roig i no en blau: aixi el selector d'idioma no es confon amb la resta
    de botons del formulari, que van en el blau de la marca. */
-.lang3__b:hover{color:var(--ember);border-color:var(--ember)}
-.lang3__b:hover{transform:translateY(2px);box-shadow:0 0 0 transparent}
-.lang3__b[aria-current="true"]{background-color:var(--ember);
-  border-color:var(--ember);color:var(--white);box-shadow:0 2px 0 rgba(180,18,27,.4)}
-.lang3__b[aria-current="true"]:hover{box-shadow:0 0 0 transparent}
+.lang3__b:hover{color:var(--accent);border-color:var(--accent)}
+.lang3__b:hover{transform:translateY(2px)}
+.lang3__b[aria-current="true"]{background-color:var(--accent);
+  border-color:var(--accent);color:var(--white)}
 /* Capçalera del registre de viatgers: nomes l'escut, sense menu. El .wrap
    general reparteix marca i menu als extrems; ací, amb un sol element, es
    centra per a que no quede escorat. */
@@ -1178,7 +1171,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .dp__dia{height:38px;border:0;background:none;border-radius:9px;cursor:pointer;
   font-family:var(--font-body);font-size:.92rem;color:var(--ink)}
 .dp__dia:hover{background:var(--paper-2)}
-.dp__dia--hui{font-weight:700;color:var(--ember)}
+.dp__dia--hui{font-weight:700;color:var(--accent)}
 .dp__dia--triat,.dp__dia--triat:hover{background:var(--navy);color:var(--white);font-weight:600}
 /* En pantalla xicoteta el calendari ix centrat i ample: el dia s'ha de poder
    tocar amb el dit sense apuntar. */

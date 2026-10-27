@@ -110,54 +110,75 @@ La lista de páginas del `sitemap.xml` es la constante `PAGES` de
 `gen.py`, escrita a mano. Una página nueva no entra sola: si debe
 indexarse, hay que añadirla ahí.
 
-## Estilo de los botones y el menú
+## Paleta, botones y menú
 
-Rehecho el 27-10-2026. Hubo **dos intentos fallidos antes**, y conviene saber
-por qué fallaron para no repetirlos:
+Rehecho el 27-10-2026 tras **tres intentos fallidos**, que conviene conocer
+para no repetirlos:
 
-1. El original —píldoras muy redondeadas, relleno rojo con un halo difuso
-   debajo y el botón saltando hacia arriba al pasar el ratón— es el aspecto
-   por defecto de las páginas hechas en serie.
+1. El original —píldoras con un halo rojo difuso debajo y el botón saltando
+   hacia arriba— es el aspecto por defecto de las páginas hechas en serie.
 2. El recambio cuadrado (esquinas a 2px, todo en mayúsculas) quedó duro y
-   frío, y además dejó controles sin tocar.
+   frío, y dejó controles sin tocar.
+3. El tercero (canto sólido de madera) seguía sin convencer: una sombra
+   plana sin difuminar tira a juguete, y el rojo saturado en bloques
+   grandes hace ruido.
 
-**Lo que hay ahora: la fita, el rótulo de sendero.** No es un adorno
-caprichoso: en la cabecera de `/hostes` sale la fita de verdad que hay
-plantada en el refugio, con sus tablillas pintadas.
+### La paleta
 
-- **Tipografía Fraunces, la serif de la marca, en caja normal.** Esto es lo
-  que hace el trabajo: casi nadie pone una serif en un botón, así que deja
-  de parecerse a una plantilla al instante, y es justo como están pintados
-  los rótulos de los refugios. Si alguien lo devuelve a Inter en
-  mayúsculas, se pierde todo el carácter.
-- **Esquinas de 10px.** Ni píldora ni bloque. Los campos de los formularios
-  van a 8px para acompañar: si se cambia uno, se cambia el otro.
-- **Relieve sólido debajo** (`box-shadow:0 3px 0` en un tono más oscuro del
-  propio botón), como el canto de una tablilla de madera. Sólido, sin
-  difuminar: nada de halos de color.
-- **Al pasar por encima el botón SE HUNDE** en su relieve
-  (`translateY(2px)` y la sombra baja a 1px; al pulsar, a 0). Es el gesto
-  contrario al salto hacia arriba de siempre, y un rótulo clavado en el
-  suelo no vuela.
-- **El menú es lo único que sigue en Inter y en mayúsculas**, y a propósito:
-  navegar no es actuar. Una raya fina entra por la izquierda al pasar por
-  encima y la página en la que estás se queda con la raya en rojo; en móvil
-  esa raya ocuparía todo el ancho, así que allí se marca con una barra roja
-  a la izquierda.
-- **Todos los controles hablan el mismo idioma**, no sólo los `.btn`:
-  "Racó del soci", la bandera de idioma, el selector de estación de `/meteo`
-  (`.lloc-sel__b` / `.lloc-sub__b`) y el selector de cuatro idiomas de
-  `/hostes` (`.lang3__b`). Ese fue el fallo del segundo intento: quedaron
-  píldoras sueltas por ahí.
+| | antes | ahora |
+|---|---|---|
+| Fondo | papel cálido `#F5F1E9` con textura de madera | blanco `#FFFFFF`, sin textura |
+| Marca | azul marino `#1E2E63` | **negro** `#121215` (`--navy`) |
+| Acción | rojo `#B4121B` | **verde piedra** `#7F8A6D` (`--accent`) |
 
-**Se probó dos veces poner una silueta de montaña grabada al pie del botón**
-—la misma que cierra el bloque azul del final de cada página— y las dos
-veces se leía como una onda de agua, no como una cresta: a ese tamaño los
-picos quedan demasiado tendidos. No vuelvas a intentarlo sin mirarlo
+El verde no es invento: ya estaba declarado como `--sage` y casi no se
+usaba. **El rojo (`--ember`) se queda sólo para lo que avisa**: errores de
+formulario, alertas meteorológicas, rutas difíciles y el punto de "sin
+conexión" de la estación. Si vuelve a aparecer en un botón o en un título,
+deja de querer decir nada.
+
+Dos excepciones pensadas, no descuidos:
+- **El dorado sobre fotos se queda** (`.kicker.on-photo`, el "compartim" en
+  itálica del titular). Sobre una foto hace de luz cálida y funciona; sobre
+  el negro se peleaba con el verde, y por eso en el bloque final y en la
+  línea del pie se cambió por un verde claro.
+- **El día elegido del calendario de reservas va en negro, no en verde**: en
+  esa rejilla el verde ya significa "libre" y se confundirían.
+
+### Los botones
+
+- **Tipografía Fraunces, la serif de la marca, en caja normal.** Casi nadie
+  pone una serif en un botón: es lo que lo saca de parecer una plantilla.
+- Esquinas de **10px**; los campos de formulario, 8px.
+- **Sombra difuminada, no canto sólido** (ese fue el error del tercer
+  intento).
+- **Al pasar por encima el botón SE HUNDE** (`translateY(2px)`, y 3px al
+  pulsar). Es lo único que se salvó entero de los intentos anteriores,
+  porque es lo que más gustó.
+
+### El menú
+
+- Serif en caja normal, a `.9rem`. **No lo subas**: con `.98rem` el menú se
+  sale del contenedor a 1280px, que es el ancho donde más gente lo ve.
+- La página en la que estás se marca con **un punto verde debajo**, no con
+  una raya. En móvil el punto no sirve: allí va una barra verde a la
+  izquierda.
+- `.soci-link` **queda fuera** de la regla `.nav>a` (de ahí el
+  `:not(.soci-link)`): esa regla le comía el padding y el texto se salía de
+  la caja. Lleva además `flex:0 0 auto` para que el flex no lo encoja.
+
+### Lo que no hay que volver a intentar
+
+**Grabar una silueta de montaña al pie del botón** —la misma que cierra el
+bloque final— se probó dos veces y las dos se leía como una onda de agua:
+a ese tamaño los picos quedan demasiado tendidos. No lo repitas sin mirarlo
 renderizado.
 
-Las tarjetas y los paneles siguen con las esquinas de antes (`--r:16px`), que
-ahora pegan bien con los 10px de los botones.
+**Para comprobar que no queda ningún control descolgado** hay un script de
+auditoría: recorre las 15 páginas con Playwright y avisa de cualquier botón
+que siga siendo píldora o que no lleve la serif. Fue así como aparecieron
+las flechas del calendario y el selector de `/meteo`, que se habían
+quedado atrás.
 
 ## Panel de administración
 
