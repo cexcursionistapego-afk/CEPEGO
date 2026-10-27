@@ -112,34 +112,52 @@ indexarse, hay que añadirla ahí.
 
 ## Estilo de los botones y el menú
 
-Se rehizo el 27-10-2026 **a propósito**. Lo de antes —píldoras muy
-redondeadas, relleno rojo con un halo difuso debajo y el botón saltando
-hacia arriba al pasar el ratón— es el aspecto por defecto de las páginas
-hechas en serie, y el club no quiere parecerse a eso. Si alguien "arregla"
-alguna de estas cosas volviendo a lo anterior, estará deshaciendo una
-decisión, no un descuido.
+Rehecho el 27-10-2026. Hubo **dos intentos fallidos antes**, y conviene saber
+por qué fallaron para no repetirlos:
 
-- **Bloques rectos** (`border-radius:2px`), no píldoras. Los campos de los
-  formularios bajaron a `3px` para que hagan juego: si se sube uno, se sube
-  el otro.
-- **Mayúsculas con el espaciado abierto** (`letter-spacing:.14em`), como los
-  rótulos de los senderos.
-- **Sin halo y sin salto**: ningún `box-shadow` de color ni
-  `transform:translateY` en el hover. El color entra de abajo arriba con un
-  `::before`; en el botón principal, de rojo a azul. Ese `::before` lleva
-  `z-index:-1` dentro de un `isolation:isolate`, así queda por encima del
-  fondo del botón pero por debajo del texto; y como un absoluto se coloca
-  respecto de la caja de relleno, el borde no queda tapado.
-- **El menú no lleva pastilla de fondo.** Una raya fina entra por la
-  izquierda al pasar por encima, y la página en la que estás se queda con
-  la raya en rojo. En móvil esa raya ocuparía todo el ancho y no diría
-  nada: allí la página activa se marca con una barra roja a la izquierda.
-- **"Racó del soci" es un botón pequeño con borde**, no un enlace más,
-  porque es la única acción del menú.
+1. El original —píldoras muy redondeadas, relleno rojo con un halo difuso
+   debajo y el botón saltando hacia arriba al pasar el ratón— es el aspecto
+   por defecto de las páginas hechas en serie.
+2. El recambio cuadrado (esquinas a 2px, todo en mayúsculas) quedó duro y
+   frío, y además dejó controles sin tocar.
 
-Las tarjetas y los paneles siguen con las esquinas redondeadas de antes
-(`--r:16px`). Es lo único que queda del estilo anterior y está pendiente de
-decidir si se igualan.
+**Lo que hay ahora: la fita, el rótulo de sendero.** No es un adorno
+caprichoso: en la cabecera de `/hostes` sale la fita de verdad que hay
+plantada en el refugio, con sus tablillas pintadas.
+
+- **Tipografía Fraunces, la serif de la marca, en caja normal.** Esto es lo
+  que hace el trabajo: casi nadie pone una serif en un botón, así que deja
+  de parecerse a una plantilla al instante, y es justo como están pintados
+  los rótulos de los refugios. Si alguien lo devuelve a Inter en
+  mayúsculas, se pierde todo el carácter.
+- **Esquinas de 10px.** Ni píldora ni bloque. Los campos de los formularios
+  van a 8px para acompañar: si se cambia uno, se cambia el otro.
+- **Relieve sólido debajo** (`box-shadow:0 3px 0` en un tono más oscuro del
+  propio botón), como el canto de una tablilla de madera. Sólido, sin
+  difuminar: nada de halos de color.
+- **Al pasar por encima el botón SE HUNDE** en su relieve
+  (`translateY(2px)` y la sombra baja a 1px; al pulsar, a 0). Es el gesto
+  contrario al salto hacia arriba de siempre, y un rótulo clavado en el
+  suelo no vuela.
+- **El menú es lo único que sigue en Inter y en mayúsculas**, y a propósito:
+  navegar no es actuar. Una raya fina entra por la izquierda al pasar por
+  encima y la página en la que estás se queda con la raya en rojo; en móvil
+  esa raya ocuparía todo el ancho, así que allí se marca con una barra roja
+  a la izquierda.
+- **Todos los controles hablan el mismo idioma**, no sólo los `.btn`:
+  "Racó del soci", la bandera de idioma, el selector de estación de `/meteo`
+  (`.lloc-sel__b` / `.lloc-sub__b`) y el selector de cuatro idiomas de
+  `/hostes` (`.lang3__b`). Ese fue el fallo del segundo intento: quedaron
+  píldoras sueltas por ahí.
+
+**Se probó dos veces poner una silueta de montaña grabada al pie del botón**
+—la misma que cierra el bloque azul del final de cada página— y las dos
+veces se leía como una onda de agua, no como una cresta: a ese tamaño los
+picos quedan demasiado tendidos. No vuelvas a intentarlo sin mirarlo
+renderizado.
+
+Las tarjetas y los paneles siguen con las esquinas de antes (`--r:16px`), que
+ahora pegan bien con los 10px de los botones.
 
 ## Panel de administración
 
