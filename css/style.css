@@ -599,9 +599,16 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .rcal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .rcal-grid+.rcal-nav{display:none}
 @media(max-width:560px){.rcal-grid+.rcal-nav{display:flex;margin-bottom:0;margin-top:14px}}
-.rcal-nav button{width:38px;height:38px;border-radius:50%;border:1px solid var(--hair);background:var(--paper);font-size:1.3rem;line-height:1;cursor:pointer;color:var(--navy)}
-.rcal-nav button:hover:not(:disabled){background:var(--navy);color:#fff}
-.rcal-nav button:disabled{opacity:.35;cursor:not-allowed}
+/* Les fletxes de mes, en el mateix idioma que la resta de controls: cant
+   solid baix i s'enfonsen en premer-les. Eren els dos ultims rodons. */
+.rcal-nav button{width:38px;height:38px;border-radius:9px;border:1.5px solid var(--hair);background:var(--paper);
+  font-family:var(--font-display);font-size:1.25rem;line-height:1;cursor:pointer;color:var(--navy);
+  box-shadow:0 2px 0 rgba(30,46,99,.14);
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
+.rcal-nav button:hover:not(:disabled){background:var(--navy);border-color:var(--navy);color:#fff;
+  transform:translateY(2px);box-shadow:0 0 0 transparent}
+.rcal-nav button:active:not(:disabled){transform:translateY(3px)}
+.rcal-nav button:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
 .rcal-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
 @media(max-width:560px){.rcal-grid{grid-template-columns:1fr}.rcal-grid>.rcal-m:last-child{display:none}}
 .rcal-nav-months{display:flex;flex:1;gap:26px;padding:0 6px}
