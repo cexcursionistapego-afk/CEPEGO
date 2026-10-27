@@ -33,6 +33,7 @@
   --shadow-lg:0 40px 90px -30px rgba(20,23,35,.4);
   --r:16px; --r-lg:26px;
   --maxw:1200px; --prose:66ch;
+  --meteo-ample:560px;  /* targeta de l'estacio i barra del logo d'AVAMET */
   --pad:clamp(64px,9vw,140px);
   --font-display:'Fraunces',Georgia,'Times New Roman',serif;
   --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -878,7 +879,13 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 /* ================= METEO DASHBOARD ================= */
 .meteo-dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px);align-items:start}
 /* Amb una sola estacio (nomes la Figuereta) no te sentit mitja amplaria. */
-.meteo-dash-grid--una{grid-template-columns:minmax(0,560px);justify-content:center}
+.meteo-dash-grid--una{grid-template-columns:minmax(0,var(--meteo-ample));justify-content:center}
+/* La barra del logo va just davall de la targeta: ha de mesurar igual.
+   Per davall de 860px la targeta passa a ocupar tot l'ample, aixi que
+   alli el limit sobra. */
+@media(min-width:861px){
+  .avamet-credit--estacio{max-width:var(--meteo-ample);margin-left:auto;margin-right:auto}
+}
 /* Selector de lloc (La Figuereta / Pego) de la pagina del temps. */
 .lloc-sel{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:clamp(14px,2vw,20px)}
 .lloc-sel__b{font-family:var(--font-display);font-size:.92rem;font-weight:600;cursor:pointer;

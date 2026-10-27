@@ -649,7 +649,7 @@ def build(g):
     <div class="meteo-dash-grid meteo-dash-grid--una reveal" style="margin-top:clamp(14px,2vw,22px)">
       <div id="meteo-dash"></div>
     </div>
-    <p class="note center avamet-credit" style="margin-top:14px">
+    <p class="note center avamet-credit avamet-credit--estacio" style="margin-top:14px">
       <a href="https://www.avamet.org/" target="_blank" rel="noopener"><img src="{IMG}avamet-logo.jpg" alt="AVAMET" class="avamet-credit__logo avamet-credit__logo--avamet"></a>
     </p>
   </div>
