@@ -216,7 +216,8 @@ def build(g):
      ("No proporcionem tovalloles: porta la teua.","No proporcionamos toallas: trae la tuya."),
      ("Dispensador de gel de bany a la dutxa, apte també com a xampú.","Dispensador de gel de baño en la ducha, apto también como champú."),
      ("Deixem un transformador amb dos cables USB-C per a carregar, i li queda una presa USB-A lliure per si vols endollar-hi un altre cable.","Dejamos un transformador con dos cables USB-C para cargar, y le queda una toma USB-A libre por si quieres enchufar otro cable."),
-     ("Les dues claus de pas de l'aigua estan als banys: cal obrir-les en arribar i tancar-les en acabar l'estada.","Las dos llaves de paso del agua están en los baños: hay que abrirlas al llegar y cerrarlas al terminar la estancia.")]
+     ("Les dues claus de pas de l'aigua estan als banys: cal obrir-les en arribar i tancar-les en acabar l'estada.","Las dos llaves de paso del agua están en los baños: hay que abrirlas al llegar y cerrarlas al terminar la estancia."),
+     ("Fregalls i sabó per a netejar els utensilis i la taula després de menjar.","Estropajos y jabón para limpiar los utensilios y la mesa después de comer.")]
     def eq_li(idxs):
         return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
     refugi=header("refugi")+subhero(IMG+"refugi-nit.jpg",'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
@@ -279,7 +280,7 @@ def build(g):
         <span class="equip-tag"><span class="va">Cuina i àpats</span><span class="es">Cocina y comidas</span></span>
         <h3 style="margin-top:.5em"><span class="va">Cuina equipada per a tothom</span><span class="es">Cocina equipada para todos</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([1,2,3,8])}        </ul>
+{eq_li([1,2,3,8,19])}        </ul>
       </div>
     </div>
 
