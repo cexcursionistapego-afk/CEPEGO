@@ -290,6 +290,8 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   font-size:clamp(1.15rem,2vw,1.45rem);line-height:1.25;color:var(--navy)}
 .avis-sender__p{margin:0 0 10px;color:var(--muted);font-size:.95rem;line-height:1.65;max-width:76ch}
 .avis-sender__p strong{color:var(--ink);font-weight:600}
+.avis-sender__p a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
+.avis-sender__p a:hover{color:var(--accent-2)}
 .avis-sender__p:last-of-type{margin-bottom:14px}
 /* El tram concret no ix a la noticia de la FEMECV: el sap el club de primera
    ma. Es el dato que de veres li serveix a qui vaja a caminar, aixi que es
