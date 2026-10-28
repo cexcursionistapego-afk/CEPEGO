@@ -214,7 +214,8 @@ def build(g):
      ("Eixides d'emergència senyalitzades (norma UNE 23034).","Salidas de emergencia señalizadas (norma UNE 23034)."),
      ("Cal pujar sense calçat a la zona de dormir.","Hay que subir sin calzado a la zona de dormir."),
      ("No proporcionem tovalloles: porta la teua.","No proporcionamos toallas: trae la tuya."),
-     ("Dispensador de gel de bany a la dutxa, apte també com a xampú.","Dispensador de gel de baño en la ducha, apto también como champú.")]
+     ("Dispensador de gel de bany a la dutxa, apte també com a xampú.","Dispensador de gel de baño en la ducha, apto tambén como champú."),
+     ("Deixem un transformador amb dos cables USB-C per a carregar, i li queda una presa USB-A lliure per si vols endollar-hi un altre cable.","Dejamos un transformador con dos cables USB-C para cargar, y le queda una toma USB-A libre por si quieres enchufar otro cable.")]
     def eq_li(idxs):
         return "".join(f'          <li><span class="va">{equip[i][0]}</span><span class="es">{equip[i][1]}</span></li>\n' for i in idxs)
     refugi=header("refugi")+subhero(IMG+"refugi-nit.jpg",'<span class="va">Vall d\'Ebo · 540 m</span><span class="es">Vall d\'Ebo · 540 m</span>',
@@ -287,7 +288,7 @@ def build(g):
         <span class="equip-tag"><span class="va">Sala d'estar</span><span class="es">Sala de estar</span></span>
         <h3 style="margin-top:.5em"><span class="va">Una sala d'estar gran</span><span class="es">Una sala de estar grande</span></h3>
         <ul class="equip equip-1col" style="margin-top:18px">
-{eq_li([0,7,4,10])}        </ul>
+{eq_li([0,7,4,17,10])}        </ul>
       </div>
       <div class="equip-block__media">
         <img loading="lazy" src="{REFUGI[6]}" alt="Sala d'estar del refugi">
