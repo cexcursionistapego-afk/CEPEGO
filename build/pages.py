@@ -100,12 +100,15 @@ def build(g):
 
 <section class="section" style="padding-top:clamp(36px,5vw,58px);padding-bottom:0">
   <div class="wrap">
-    <a class="avis-sender" href="https://www.femecv.com/noticias/la-dana-adam-deja-danos-en-el-pr-cv-58-de-pego" target="_blank" rel="noopener">
-      <span class="avis-sender__et"><span class="va">Estat dels senders</span><span class="es">Estado de los senderos</span></span>
-      <span class="avis-sender__t"><span class="va">La DANA Adam ha fet malbé part del PR-CV 58 de Pego</span><span class="es">La DANA Adam ha dañado parte del PR-CV 58 de Pego</span></span>
-      <span class="avis-sender__p"><span class="va">Les pluges d'estos dies han malmés el sender. Si tens pensat fer-lo, informa't abans d'eixir: la FEMECV n'ha publicat els detalls.</span><span class="es">Las lluvias de estos días han dañado el sendero. Si piensas hacerlo, infórmate antes de salir: la FEMECV ha publicado los detalles.</span></span>
-      <span class="avis-sender__l"><span class="va">Llegir l'avís a la FEMECV</span><span class="es">Leer el aviso en la FEMECV</span> &rarr;</span>
-    </a>
+    <div class="avis-sender">
+      <p class="avis-sender__et"><span class="va">Estat dels senders &middot; 27 d'octubre</span><span class="es">Estado de los senderos &middot; 27 de octubre</span></p>
+      <p class="avis-sender__t"><span class="va">La DANA Adam ha fet malb&eacute; el PR-CV 58</span><span class="es">La DANA Adam ha da&ntilde;ado el PR-CV 58</span></p>
+      <p class="avis-sender__p"><span class="va">El sender que travessa Tormos, la Vall d'Ebo, l'Atz&uacute;bia i Pego ha patit arrossegaments de materials, desperfectes als camins i danys a la senyalitzaci&oacute;. Al refugi de la Figuereta es van arreplegar prop de <strong>400 l/m&sup2; en una sola jornada</strong>.</span><span class="es">El sendero que atraviesa Tormos, la Vall d'Ebo, l'Atz&uacute;bia y Pego ha sufrido arrastres de materiales, desperfectos en los caminos y da&ntilde;os en la se&ntilde;alizaci&oacute;n. En el refugio de La Figuereta se recogieron cerca de <strong>400 l/m&sup2; en una sola jornada</strong>.</span></p>
+      <p class="avis-sender__tram"><span class="va">El tram m&eacute;s afectat &eacute;s el que va de la Figuereta al Xical.</span><span class="es">El tramo m&aacute;s afectado es el que va de La Figuereta al Xical.</span></p>
+      <p class="avis-sender__p"><span class="va">Com a entitat promotora del sender, el club ja est&agrave; treballant en la recuperaci&oacute; dels trams afectats. Mentrestant, comprova l'estat del recorregut abans d'eixir i evita els trams malmesos.</span><span class="es">Como entidad promotora del sendero, el club ya est&aacute; trabajando en la recuperaci&oacute;n de los tramos afectados. Mientras tanto, comprueba el estado del recorrido antes de salir y evita los tramos da&ntilde;ados.</span></p>
+      <a class="avis-sender__l va" href="https://www.femecv.com/va/noticias/la-dana-adam-deixa-danys-en-el-pr-cv-58-de-pego" target="_blank" rel="noopener">Llegir l'av&iacute;s a la FEMECV &rarr;</a>
+      <a class="avis-sender__l es" href="https://www.femecv.com/noticias/la-dana-adam-deja-danos-en-el-pr-cv-58-de-pego" target="_blank" rel="noopener">Leer el aviso en la FEMECV &rarr;</a>
+    </div>
   </div>
 </section>
 
