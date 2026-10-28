@@ -283,7 +283,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
    URL distintes, una per idioma: el sistema de spans de sempre ensenya la
    que toca. */
 .avis-sender{background:var(--white);border:1px solid var(--hair);
-  border-left:4px solid var(--ember);border-radius:12px;
+  border-left:4px solid var(--ember);border-radius:0 12px 12px 0;
   padding:clamp(18px,2.4vw,26px) clamp(20px,2.6vw,30px);box-shadow:var(--shadow-sm)}
 .avis-sender__et{margin:0 0 9px;font-family:var(--font-body);font-weight:600;font-size:.69rem;
   letter-spacing:.2em;text-transform:uppercase;color:var(--ember)}

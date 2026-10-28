@@ -183,6 +183,27 @@ que siga siendo píldora o que no lleve la serif. Fue así como aparecieron
 las flechas del calendario y el selector de `/meteo`, que se habían
 quedado atrás.
 
+## Notícias en la portada
+
+Entre el hero y el bloque del club hay una sección **Notícies** con dos
+niveles, y están montados de forma distinta a propósito:
+
+1. **Arriba, la destacada**: el aviso del PR-CV 58 (`.avis-sender`). Va
+   escrita en `build/pages.py` porque lleva título, enlace externo y un tramo
+   resaltado, y el JSON del panel no tiene campos para eso. Borde rojo.
+2. **Debajo, las demás**: salen de `data/noticies.json`, **las mismas que ya
+   salían en la página del calendario**. No hay nada duplicado: basta con
+   poner un `<ul class="noticies" id="noticies-list">` en la página, y
+   `renderInfoList()` de `js/main.js` lo rellena solo. Borde verde, para que
+   se lea como segundo plano.
+
+O sea: **el club puede añadir y quitar notícias desde /juansa y salen solas
+en la portada**; lo único que hay que pedir a quien toque el código es
+cambiar o retirar la destacada.
+
+Cuando el PR-CV 58 esté recuperado, se quita ese bloque de `pages.py` y la
+sección sigue funcionando con las del panel.
+
 ## Panel de administración
 
 En `cepego.com/juansa`, protegido con Netlify Identity. Escribe

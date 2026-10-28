@@ -84,8 +84,11 @@
   </div>
 </section>
 
-<section class="section" style="padding-top:clamp(36px,5vw,58px);padding-bottom:0">
+<section class="section" id="noticies" style="padding-top:clamp(36px,5vw,58px);padding-bottom:0">
   <div class="wrap">
+    <div class="center" style="margin-bottom:clamp(16px,2.2vw,24px)">
+      <div class="kicker center-k"><span class="va">Not&iacute;cies</span><span class="es">Noticias</span></div>
+    </div>
     <div class="avis-sender">
       <p class="avis-sender__et"><span class="va">Estat dels senders &middot; 27 d'octubre</span><span class="es">Estado de los senderos &middot; 27 de octubre</span></p>
       <p class="avis-sender__t"><span class="va">La DANA Adam ha fet malb&eacute; el PR-CV 58</span><span class="es">La DANA Adam ha da&ntilde;ado el PR-CV 58</span></p>
@@ -95,6 +98,10 @@
       <a class="avis-sender__l va" href="https://www.femecv.com/va/noticias/la-dana-adam-deixa-danys-en-el-pr-cv-58-de-pego" target="_blank" rel="noopener">Llegir l'av&iacute;s a la FEMECV &rarr;</a>
       <a class="avis-sender__l es" href="https://www.femecv.com/noticias/la-dana-adam-deja-danos-en-el-pr-cv-58-de-pego" target="_blank" rel="noopener">Leer el aviso en la FEMECV &rarr;</a>
     </div>
+    <!-- La resta de notícies ixen de data/noticies.json: el club les edita des
+         de /juansa sense tocar codi. Les pinta renderInfoList() de main.js, que
+         busca este mateix id. -->
+    <ul class="noticies" id="noticies-list" style="margin-top:clamp(14px,1.8vw,20px)"></ul>
   </div>
 </section>
 
