@@ -37,6 +37,7 @@
   --r:16px; --r-lg:26px;
   --maxw:1200px; --prose:66ch;
   --meteo-ample:560px;  /* targeta de l'estacio i barra del logo d'AVAMET */
+  --fc-ample:760px;     /* taula de la previsio i la nota que la presenta */
   --pad:clamp(64px,9vw,140px);
   --font-display:'Fraunces',Georgia,'Times New Roman',serif;
   --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -410,7 +411,7 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
   text-decoration:none;transition:background .2s var(--ease)}
 .fonts a:hover{background:#fff}
 /* Avis de quan la previsio no es la nostra sino la d'AEMET de recanvi. */
-.fc-font{max-width:760px;margin:10px auto 0;text-align:center;font-size:.72rem;color:var(--muted)}
+.fc-font{max-width:var(--fc-ample);margin:10px auto 0;text-align:center;font-size:.72rem;color:var(--muted)}
 
 /* price row */
 .prices{display:flex;gap:16px;flex-wrap:wrap}
@@ -703,9 +704,12 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
    AEMET no done tots els trams, aixi els dies amb menys detall no
    desquadren la resta. Vore js/aemet-forecast.js. */
 .aemet-fc{margin-top:clamp(16px,2.5vw,28px)}
+/* La nota que presenta la previsio ha de mesurar igual que la taula que
+   ve davall: les dues ixen de --fc-ample per a que no es separen. */
+.fc-intro{max-width:var(--fc-ample);margin-inline:auto}
 .fc-msg{text-align:center;color:var(--muted);padding:26px 0}
 
-.fc-card{max-width:760px;margin:0 auto;background:var(--white);border:1px solid var(--hair);
+.fc-card{max-width:var(--fc-ample);margin:0 auto;background:var(--white);border:1px solid var(--hair);
   border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden}
 
 /* Graella compartida per la capcalera i cada fila: dia | trams | temperatura.
