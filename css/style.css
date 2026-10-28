@@ -367,6 +367,8 @@ html[data-lang="fr"] .va,html[data-lang="fr"] .es,html[data-lang="fr"] .en{displ
 .equip{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:2px 30px}
 .equip li{padding:12px 0 12px 30px;position:relative;border-bottom:1px solid var(--hair)}
 .equip li::before{content:"";position:absolute;left:2px;top:19px;width:9px;height:9px;border-radius:50%;background:var(--sage)}
+.equip li a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
+.equip li a:hover{color:var(--accent-2)}
 @media(max-width:640px){.equip{grid-template-columns:1fr}}
 .rules{list-style:none;padding:0;margin:0;display:grid;gap:12px}
 /* Sense titol, la seccio de normes no necessita tant d'aire per damunt:
