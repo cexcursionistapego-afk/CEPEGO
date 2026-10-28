@@ -208,7 +208,7 @@ def build(g):
      ("Internet de banda ampla (cal reservar-lo).","Internet de banda ancha (hay que reservarlo)."),
      ("No hi ha utensilis de cuina: porta el que necessites.","No hay utensilios de cocina: trae lo que necesites."),
      ("Lliteres amb matalàs i coixí: només cal el sac de dormir.","Literas con colchón y cojín: solo hace falta el saco de dormir."),
-     ("Pantalla amb informació meteorològica de l'interior i l'exterior, i pronòstic del temps per a les pròximes hores. Per a planificar l'eixida, millor mira <a href='meteo.html'>la previsió que fem nosaltres per al refugi</a>.","Pantalla con información meteorológica del interior y el exterior, y pronóstico del tiempo para las próximas horas. Para planificar la salida, mejor mira <a href='meteo.html'>la previsión que hacemos nosotros para el refugio</a>."),
+     ("Pantalla amb informació meteorològica de l'interior i l'exterior, i pronòstic del temps per a les pròximes hores. Per a planificar l'eixida, millor mira <a href='meteo.html#previsio'>la previsió que fem nosaltres per al refugi</a>.","Pantalla con información meteorológica del interior y el exterior, y pronóstico del tiempo para las próximas horas. Para planificar la salida, mejor mira <a href='meteo.html#previsio'>la previsión que hacemos nosotros para el refugio</a>."),
      ("Detectors de fum i de monòxid de carboni amb alarma i avís directe al guarda del refugi (normes UNE-EN 14604 i UNE-EN 50291).","Detectores de humo y de monóxido de carbono con alarma y aviso directo al guarda del refugio (normas UNE-EN 14604 y UNE-EN 50291)."),
      ("Extintors homologats (UNE-EN 3) distribuïts pel refugi.","Extintores homologados (UNE-EN 3) distribuidos por el refugio."),
      ("Eixides d'emergència senyalitzades (norma UNE 23034).","Salidas de emergencia señalizadas (norma UNE 23034)."),
@@ -671,7 +671,7 @@ def build(g):
   </div>
 </section>
 
-<section class="section" style="padding:0 0 clamp(28px,3.5vw,48px)">
+<section class="section" id="previsio" style="padding:0 0 clamp(28px,3.5vw,48px)">
   <div class="wrap">
     <div class="narrow center reveal" style="margin-bottom:clamp(14px,2vw,22px)">
       <div class="kicker center-k"><span class="va">La nostra previsió</span><span class="es">Nuestra previsión</span></div>
